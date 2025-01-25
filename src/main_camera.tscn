@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkue1bq4ffn1r"]
+
+[ext_resource type="Script" path="res://src/main_camera.gd" id="1_cck8j"]
+
+[node name="MainCamera" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.827516)
+fov = 90.0
+script = ExtResource("1_cck8j")
+
+[node name="ShakeTimer" type="Timer" parent="."]
+one_shot = true
