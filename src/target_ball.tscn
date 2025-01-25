@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccb8dq5qk5vev"]
+
+[ext_resource type="Script" path="res://src/target_ball.gd" id="1_rhyst"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyjgv"]
+radius = 0.05
+height = 0.2
+
+[node name="TargetBall" type="Node3D"]
+script = ExtResource("1_rhyst")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("CapsuleMesh_vyjgv")
