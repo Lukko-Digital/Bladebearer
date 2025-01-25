@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccb8dq5qk5vev"]
 
-[ext_resource type="Script" path="res://src/target_ball.gd" id="1_rhyst"]
+[ext_resource type="Script" path="res://src/target.gd" id="1_rhyst"]
 [ext_resource type="PackedScene" uid="uid://b404ka4awh3r" path="res://src/sword_mesh.tscn" id="2_mukhp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vyjgv"]
@@ -11,7 +11,7 @@ height = 0.2
 transparency = 1
 albedo_color = Color(0.788235, 1, 1, 0.466667)
 
-[node name="TargetBall" type="Node3D"]
+[node name="Target" type="Node3D"]
 script = ExtResource("1_rhyst")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

@@ -1,4 +1,5 @@
 extends Node3D
+class_name Target
 
 const ROTATION_LERP_SPEED = 0.15
 

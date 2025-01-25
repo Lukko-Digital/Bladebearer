@@ -1,4 +1,5 @@
 extends Node3D
+class_name Sword
 
 const ROTATION_LERP_SPEED = 0.2
 
