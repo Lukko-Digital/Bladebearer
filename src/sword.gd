@@ -3,14 +3,15 @@ class_name Sword
 
 const ROTATION_LERP_SPEED = 0.2
 
-@export var target_ball: Node3D
+@export var target: Target
+@export var camera: MainCamera
 
 @onready var sword_mesh: MeshInstance3D = $SwordMesh
 
 var target_rotation = Vector3()
 
 func _ready() -> void:
-	target_ball.move()
+	target.move()
 
 func _process(_delta: float) -> void:
 	handle_rotation()
@@ -33,5 +34,6 @@ func handle_rotation():
 	sword_mesh.rotation_degrees.y = lerp(sword_mesh.rotation_degrees.y, yaw, ROTATION_LERP_SPEED)
 	
 func check_correct_rotation():
-	if round(rotation_degrees) == round(target_ball.rotation_degrees):
-		target_ball.move()
+	if round(rotation_degrees) == round(target.rotation_degrees):
+		target.move()
+		camera.shake(0.1, 5)
