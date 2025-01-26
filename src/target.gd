@@ -3,8 +3,6 @@ class_name Target
 
 @export var swing_arm: SwingArm
 
-@onready var swing_arm_aligner: Node3D = %SwingArmAligner
-
 const ROTATION_LERP_SPEED = 0.15
 
 var target_rot: Vector3

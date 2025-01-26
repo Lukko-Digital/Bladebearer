@@ -97,8 +97,4 @@ mesh = SubResource("ArrayMesh_jnwxc")
 material_override = ExtResource("3_c2dso")
 mesh = SubResource("ArrayMesh_c21tf")
 
-[node name="SwingArmAligner" type="Node3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
-
 [editable path="Hologram"]
