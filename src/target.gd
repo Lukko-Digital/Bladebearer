@@ -27,5 +27,4 @@ func move():
 	print(target_rot)
 
 	swing_arm.move_to_swing_position(target_rot)
-	await get_tree().create_timer(1).timeout
 	sword.swing_sequence()

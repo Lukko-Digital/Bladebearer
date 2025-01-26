@@ -18,12 +18,12 @@ emission_shape = 3
 emission_box_extents = Vector3(3, 3, 3)
 gravity = Vector3(0, -0.1, 0)
 scale_min = 0.2
-scale_max = 0.7
+scale_max = 0.5
 scale_curve = SubResource("CurveTexture_i5kd1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.360784)
+albedo_color = Color(1, 1, 1, 0.172549)
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 4.2
 
@@ -52,11 +52,12 @@ camera = NodePath("../MainCamera")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SwordOrigin/Sword"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
+light_energy = 0.25
 
 [node name="MainCamera" parent="SwordOrigin" instance=ExtResource("2_vb7ep")]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SwordOrigin"]
-amount = 5000
+amount = 10200
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_ivxod")
 draw_pass_1 = SubResource("SphereMesh_2egrx")

@@ -27,8 +27,8 @@ func windup() -> Tween:
 	windup_tween.tween_property(
 		self,
 		"rotation_degrees",
-		rotation_degrees - Vector3(0, 0, 20),
-		3
+		rotation_degrees - Vector3(0, 0, 15),
+		2
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	return windup_tween
 
@@ -46,8 +46,8 @@ func swing(hit: bool) -> Tween:
 		swing_tween.tween_property(
 			self,
 			"rotation_degrees",
-			rotation_degrees + Vector3(0, 0, 60),
-			1
+			rotation_degrees + Vector3(0, 0, 120),
+			0.6
 		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 	return swing_tween
