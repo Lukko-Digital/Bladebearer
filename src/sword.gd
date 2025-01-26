@@ -46,7 +46,7 @@ func swing_sequence():
 	var is_hit = check_correct_rotation()
 	await swing_arm.swing(is_hit).finished
 	if is_hit:
-		camera.shake(0.1, 8)
+		camera.shake(0.1, 10)
 	target.global_position = global_position
 	target.move()
 
