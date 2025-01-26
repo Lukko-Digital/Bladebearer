@@ -3,12 +3,15 @@ class_name Sword
 
 const ROTATION_LERP_SPEED = 0.2
 
+@export var swing_arm: SwingArm
+
 @onready var sword_mesh: Node3D = $Sword
 
 var target_rotation = Vector3()
 
 func _process(_delta: float) -> void:
 	handle_rotation()
+	handle_arm_swing()
 
 func handle_rotation():
 	# Handles WASD and Shift
@@ -29,3 +32,8 @@ func handle_rotation():
 	if Input.is_action_pressed("space"):
 		yaw = 90.0
 	sword_mesh.rotation_degrees.y = lerp(sword_mesh.rotation_degrees.y, yaw, ROTATION_LERP_SPEED)
+
+func handle_arm_swing():
+	if swing_arm.repositioning:
+		return
+	get_parent().global_position = swing_arm.arm.global_position
