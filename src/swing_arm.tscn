@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://xcrmvdctjdpk"]
+[gd_scene load_steps=6 format=3 uid="uid://xcrmvdctjdpk"]
+
+[ext_resource type="Script" path="res://src/swing_arm.gd" id="1_kwg84"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fi17x"]
+radius = 0.3
+height = 0.6
 
 [sub_resource type="Animation" id="Animation_c7np0"]
 resource_name = "pendulum"
@@ -40,9 +44,11 @@ _data = {
 }
 
 [node name="SwingArm" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_kwg84")
 
 [node name="Arm" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arm"]
 mesh = SubResource("SphereMesh_fi17x")
@@ -51,5 +57,4 @@ mesh = SubResource("SphereMesh_fi17x")
 libraries = {
 "": SubResource("AnimationLibrary_3sgwu")
 }
-autoplay = "pendulum"
 speed_scale = 0.3
