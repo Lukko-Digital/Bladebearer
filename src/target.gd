@@ -20,7 +20,8 @@ func move():
 	)
 	new_rot *= 45
 	if randi() % 2:
-		new_rot.x *= 3
+		# see sword.gd for why max is set to 181
+		new_rot.x = wrapf(180 - new_rot.x, -180, 181)
 	
 	target_rot = new_rot
 	print(target_rot)
