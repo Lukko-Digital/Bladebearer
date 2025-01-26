@@ -1,6 +1,8 @@
 extends Node3D
 class_name Target
 
+@export var swing_arm: SwingArm
+
 const ROTATION_LERP_SPEED = 0.15
 
 var target_rot: Vector3
@@ -21,3 +23,5 @@ func move():
 	
 	target_rot = new_rot
 	print(target_rot)
+
+	swing_arm.move_to_swing_position(target_rot)

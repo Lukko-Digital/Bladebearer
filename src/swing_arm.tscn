@@ -1,55 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://xcrmvdctjdpk"]
+[gd_scene load_steps=3 format=3 uid="uid://xcrmvdctjdpk"]
+
+[ext_resource type="Script" path="res://src/swing_arm.gd" id="1_kwg84"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fi17x"]
-
-[sub_resource type="Animation" id="Animation_c7np0"]
-resource_name = "pendulum"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
-}
-
-[sub_resource type="Animation" id="Animation_g78ij"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sgwu"]
-_data = {
-"RESET": SubResource("Animation_g78ij"),
-"pendulum": SubResource("Animation_c7np0")
-}
+radius = 0.3
+height = 0.6
 
 [node name="SwingArm" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_kwg84")
 
 [node name="Arm" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arm"]
 mesh = SubResource("SphereMesh_fi17x")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_3sgwu")
-}
-autoplay = "pendulum"
-speed_scale = 0.3
