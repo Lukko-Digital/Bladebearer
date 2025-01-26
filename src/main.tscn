@@ -39,10 +39,7 @@ transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.43
 visible = false
 shadow_enabled = true
 
-[node name="UI" parent="." node_paths=PackedStringArray("sword", "target", "camera") instance=ExtResource("4_on2nd")]
-sword = NodePath("../SwordOrigin/Sword")
-target = NodePath("../SwordOrigin/Target")
-camera = NodePath("../SwordOrigin/MainCamera")
+[node name="UI" parent="." instance=ExtResource("4_on2nd")]
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
