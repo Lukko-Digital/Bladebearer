@@ -5,9 +5,6 @@ class_name SwingArm
 
 var repositioning = false
 
-func _ready() -> void:
-	swing()
-
 func move_to_swing_position(target_rotation: Vector3):
 	repositioning = true
 	# order matters, rotate z, then x
@@ -24,23 +21,33 @@ func move_to_swing_position(target_rotation: Vector3):
 	)
 	repositioning = false
 
-func swing():
+func windup() -> Tween:
 	# windup -40 degrees
 	var windup_tween = create_tween()
 	windup_tween.tween_property(
 		self,
 		"rotation_degrees",
 		rotation_degrees - Vector3(0, 0, 40),
-		1
+		4
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	return windup_tween
 
-	await windup_tween.finished
-
-	# swing +120 degrees
+func swing(hit: bool) -> Tween:
 	var swing_tween = create_tween()
-	swing_tween.tween_property(
-		self,
-		"rotation_degrees",
-		rotation_degrees + Vector3(0, 0, 270),
-		0.7
-	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+
+	if hit:
+		swing_tween.tween_property(
+			self,
+			"rotation_degrees",
+			rotation_degrees + Vector3(0, 0, 40),
+			0.3
+		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	else:
+		swing_tween.tween_property(
+			self,
+			"rotation_degrees",
+			rotation_degrees + Vector3(0, 0, 120),
+			1
+		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+
+	return swing_tween

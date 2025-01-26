@@ -1,6 +1,7 @@
 extends Node3D
 class_name Target
 
+@export var sword: Sword
 @export var swing_arm: SwingArm
 
 const ROTATION_LERP_SPEED = 0.15
@@ -25,3 +26,5 @@ func move():
 	print(target_rot)
 
 	swing_arm.move_to_swing_position(target_rot)
+	await get_tree().create_timer(1).timeout
+	sword.swing_sequence()
