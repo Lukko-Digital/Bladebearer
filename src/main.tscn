@@ -16,7 +16,7 @@ curve = SubResource("Curve_firy1")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ivxod"]
 emission_shape = 3
 emission_box_extents = Vector3(3, 3, 3)
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, -0.1, 0)
 scale_min = 0.2
 scale_max = 0.7
 scale_curve = SubResource("CurveTexture_i5kd1")
@@ -43,21 +43,24 @@ shadow_enabled = true
 swing_arm = NodePath("../SwingArm")
 
 [node name="UI" parent="." node_paths=PackedStringArray("sword", "target", "camera") instance=ExtResource("4_on2nd")]
-sword = NodePath("../Sword")
+sword = NodePath("../SwordOrigin/Sword")
 target = NodePath("../Target")
-camera = NodePath("../MainCamera")
+camera = NodePath("../SwordOrigin/MainCamera")
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
-[node name="Sword" parent="." instance=ExtResource("1_bdv3j")]
+[node name="SwordOrigin" type="Node3D" parent="."]
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Sword"]
+[node name="Sword" parent="SwordOrigin" node_paths=PackedStringArray("swing_arm") instance=ExtResource("1_bdv3j")]
+swing_arm = NodePath("../../SwingArm")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SwordOrigin/Sword"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
+
+[node name="MainCamera" parent="SwordOrigin" instance=ExtResource("2_vb7ep")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SwordOrigin"]
 amount = 5000
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_ivxod")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Sword"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
-
-[node name="MainCamera" parent="." instance=ExtResource("2_vb7ep")]
