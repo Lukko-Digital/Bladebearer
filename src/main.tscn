@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=10 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
-[ext_resource type="PackedScene" uid="uid://lecqsa17yh3d" path="res://src/ui.tscn" id="4_on2nd"]
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 
 [sub_resource type="Curve" id="Curve_firy1"]
@@ -38,8 +37,6 @@ height = 0.02
 transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, 0, 0, 0)
 visible = false
 shadow_enabled = true
-
-[node name="UI" parent="." instance=ExtResource("4_on2nd")]
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
