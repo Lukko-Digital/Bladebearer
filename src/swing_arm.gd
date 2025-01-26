@@ -5,13 +5,10 @@ const SWING_ARM_LENGTH = 4
 
 @onready var arm: Node3D = %Arm
 
-var repositioning = false
-
 func _ready() -> void:
 	arm.position.y = SWING_ARM_LENGTH
 
 func move_to_swing_position(target_rotation: Vector3):
-	repositioning = true
 	# order matters, rotate z, then x
 	global_position = Vector3.UP.rotated(
 		Vector3.BACK, deg_to_rad(target_rotation.z)
@@ -19,7 +16,6 @@ func move_to_swing_position(target_rotation: Vector3):
 		Vector3.RIGHT, deg_to_rad(target_rotation.x)
 	) * -SWING_ARM_LENGTH
 	rotation_degrees = target_rotation
-	repositioning = false
 
 func windup() -> Tween:
 	# windup -40 degrees
