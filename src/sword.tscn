@@ -1,14 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctoxk5ywvn75r"]
+[gd_scene load_steps=3 format=3 uid="uid://ctoxk5ywvn75r"]
 
 [ext_resource type="Script" path="res://src/sword.gd" id="1_a5gxo"]
-[ext_resource type="PackedScene" uid="uid://b404ka4awh3r" path="res://src/sword_mesh.tscn" id="2_dj4ne"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_mq21s"]
 
 [node name="Sword" type="Node3D"]
 script = ExtResource("1_a5gxo")
-
-[node name="SwordMesh" parent="." instance=ExtResource("2_dj4ne")]
-visible = false
 
 [node name="Sword" parent="." instance=ExtResource("3_mq21s")]
 transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
