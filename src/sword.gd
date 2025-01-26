@@ -8,6 +8,8 @@ const ROTATION_LERP_SPEED = 0.2
 @export var camera: MainCamera
 
 @onready var sword_mesh: Node3D = $Sword
+@onready var sword_origin: Node3D = get_parent()
+@onready var main: Node3D = get_tree().current_scene
 
 var target_rotation = Vector3()
 
@@ -36,13 +38,32 @@ func handle_rotation():
 	sword_mesh.rotation_degrees.y = lerp(sword_mesh.rotation_degrees.y, yaw, ROTATION_LERP_SPEED)
 
 func swing_sequence():
+	attach_to_arm()
 	await swing_arm.windup().finished
 	var is_hit = check_correct_rotation()
 	await swing_arm.swing(is_hit).finished
 	if is_hit:
 		camera.shake(0.1, 10)
-	target.global_position = global_position
+	detach_from_arm()
 	target.move()
 
+func attach_to_arm():
+	# Preserve global position and rotation
+	var pos = sword_origin.global_position
+	var rot = sword_origin.global_rotation
+	sword_origin.get_parent().remove_child(sword_origin)
+	swing_arm.arm.add_child(sword_origin)
+	sword_origin.global_position = pos
+	sword_origin.global_rotation = rot
+
+
+func detach_from_arm():
+	# Reset global position to zero
+	swing_arm.arm.remove_child(sword_origin)
+	main.add_child(sword_origin)
+	sword_origin.global_position = Vector3.ZERO
+	sword_origin.global_rotation = Vector3.ZERO
+
+	
 func check_correct_rotation():
 	return round(rotation_degrees) == round(target.rotation_degrees)

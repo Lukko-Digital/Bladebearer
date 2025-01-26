@@ -50,7 +50,11 @@ swing_arm = NodePath("../../SwingArm")
 target = NodePath("../Target")
 camera = NodePath("../MainCamera")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="SwordOrigin/Sword"]
+[node name="Target" parent="SwordOrigin" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
+sword = NodePath("../Sword")
+swing_arm = NodePath("../../SwingArm")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SwordOrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
 light_energy = 0.25
 
@@ -58,10 +62,6 @@ light_energy = 0.25
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SwordOrigin"]
 amount = 10200
-lifetime = 4.0
+lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_ivxod")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
-
-[node name="Target" parent="SwordOrigin" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
-sword = NodePath("../Sword")
-swing_arm = NodePath("../../SwingArm")
