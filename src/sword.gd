@@ -3,7 +3,7 @@ class_name Sword
 
 const ROTATION_LERP_SPEED = 0.2
 
-@onready var sword_mesh: MeshInstance3D = $SwordMesh
+@onready var sword_mesh: Node3D = $Sword
 
 var target_rotation = Vector3()
 
