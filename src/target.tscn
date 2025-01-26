@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccb8dq5qk5vev"]
+[gd_scene load_steps=6 format=3 uid="uid://ccb8dq5qk5vev"]
 
 [ext_resource type="Script" path="res://src/target.gd" id="1_rhyst"]
 [ext_resource type="PackedScene" uid="uid://b404ka4awh3r" path="res://src/sword_mesh.tscn" id="2_mukhp"]
+[ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_7grqd"]
+[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://src/hologram.tres" id="3_c2dso"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vyjgv"]
 radius = 0.05
 height = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbrmi"]
-transparency = 1
-albedo_color = Color(0.788235, 1, 1, 0.466667)
 
 [node name="Target" type="Node3D"]
 script = ExtResource("1_rhyst")
@@ -19,5 +17,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_vyjgv")
 
-[node name="Hologram" parent="." instance=ExtResource("2_mukhp")]
-material_override = SubResource("StandardMaterial3D_bbrmi")
+[node name="HologramOLD" parent="." instance=ExtResource("2_mukhp")]
+visible = false
+material_override = ExtResource("3_c2dso")
+
+[node name="Hologram" parent="." instance=ExtResource("3_7grqd")]
+transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
+
+[node name="Blade" parent="Hologram" index="0"]
+material_override = ExtResource("3_c2dso")
+
+[node name="Handle" parent="Hologram" index="1"]
+material_override = ExtResource("3_c2dso")
+
+[editable path="Hologram"]
