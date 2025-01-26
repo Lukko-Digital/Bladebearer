@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=11 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
 [ext_resource type="PackedScene" uid="uid://lecqsa17yh3d" path="res://src/ui.tscn" id="4_on2nd"]
+[ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 
 [sub_resource type="Curve" id="Curve_firy1"]
-_data = [Vector2(0.0289855, 0.032967), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.985507, 0.043956), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0967742, 1), 0.0, 0.0, 0, 0, Vector2(0.985507, 0.043956), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_i5kd1"]
@@ -14,7 +15,7 @@ curve = SubResource("Curve_firy1")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ivxod"]
 emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
+emission_box_extents = Vector3(3, 3, 1)
 gravity = Vector3(0, 0, 0)
 scale_min = 0.2
 scale_max = 0.7
@@ -38,22 +39,29 @@ transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.43
 visible = false
 shadow_enabled = true
 
-[node name="Sword" parent="." instance=ExtResource("1_bdv3j")]
-
-[node name="MainCamera" parent="." instance=ExtResource("2_vb7ep")]
-
 [node name="Target" parent="." instance=ExtResource("2_54gg4")]
 
 [node name="UI" parent="." node_paths=PackedStringArray("sword", "target", "camera") instance=ExtResource("4_on2nd")]
-sword = NodePath("../Sword")
+sword = NodePath("../SwingArm/Arm/Sword")
 target = NodePath("../Target")
-camera = NodePath("../MainCamera")
+camera = NodePath("../SwingArm/Arm/Sword/MainCamera")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 400
+[node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
+
+[node name="Sword" parent="SwingArm/Arm" index="0" instance=ExtResource("1_bdv3j")]
+
+[node name="MainCamera" parent="SwingArm/Arm/Sword" instance=ExtResource("2_vb7ep")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SwingArm/Arm/Sword"]
+amount = 5000
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_ivxod")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="SwingArm/Arm/Sword"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
+
+[node name="MeshInstance3D" parent="SwingArm/Arm" index="1"]
+visible = false
+
+[editable path="SwingArm"]
