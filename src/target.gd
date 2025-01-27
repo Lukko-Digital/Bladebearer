@@ -30,8 +30,6 @@ func move():
 			# Break when I see new rotation
 			target_rot = new_rot
 			break
-			
 	print(target_rot)
 
 	swing_arm.move_to_swing_position(target_rot)
-	sword.swing_sequence()

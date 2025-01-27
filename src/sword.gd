@@ -9,15 +9,18 @@ const ROTATION_LERP_SPEED = 0.2
 
 @onready var sword_mesh: Node3D = $Sword
 @onready var screen_color_animation: AnimationPlayer = %ScreenColorAnimation
+@onready var game_sequence_handler: GameSequenceHandler = %GameSequenceHandler
 @onready var sword_origin: Node3D = get_parent()
 @onready var main: Node3D = get_tree().current_scene
+
+signal sequence_finished
 
 var target_rotation = Vector3()
 var previously_correct_rotation = false
 var blocking = false
 
-func _ready() -> void:
-	target.move.call_deferred()
+# func _ready() -> void:
+# 	target.move.call_deferred()
 
 
 func _process(_delta: float) -> void:
@@ -74,7 +77,7 @@ func swing_sequence():
 		await swing_arm.swing_animation_player.animation_finished
 
 	detach_from_arm()
-	target.move()
+	sequence_finished.emit()
 
 
 func block_sequence():
@@ -92,7 +95,7 @@ func block_sequence():
 		screen_color_animation.play("red_flash")
 	
 	detach_from_arm()
-	target.move()
+	sequence_finished.emit()
 
 
 func fast_forward_swing():
