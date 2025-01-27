@@ -2,6 +2,8 @@ extends Node3D
 class_name Sword
 
 const ROTATION_LERP_SPEED = 0.2
+## Threshold for determining correct sword angle. In degrees.
+const CORRECT_ROTATION_THRESHOLD = 2
 
 @export var swing_arm: SwingArm
 @export var target: Target
@@ -25,7 +27,6 @@ var previously_correct_rotation = false
 var blocking = false
 var swinging = false
 
-
 func _process(_delta: float) -> void:
 	handle_rotation()
 	handle_check_rotation()
@@ -43,10 +44,9 @@ func handle_rotation():
 	target_rotation.z = Input.get_axis("right", "left")
 	target_rotation *= 45
 	if Input.is_action_pressed("shift"):
-		# the max is set to 181 to the blade turns forward when w or s aren't pressed
-		# surely this causes no side effects
-		target_rotation.x = wrapf(180 - target_rotation.x, -180, 181)
-	rotation_degrees = rotation_degrees.lerp(target_rotation, ROTATION_LERP_SPEED)
+		target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
+	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED), -PI, PI)
+	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED), -PI, PI)
 
 
 ## Check if sword is just placed into correct rotation
@@ -61,7 +61,9 @@ func handle_check_rotation():
 
 
 func is_correct_rotation():
-	return (rotation_degrees - target.target_rot).length_squared() < 1
+	var xdiff = angle_difference(rotation.x, deg_to_rad(target.target_rot.x))
+	var zdiff = angle_difference(rotation.z, deg_to_rad(target.target_rot.z))
+	return (abs(xdiff) + abs(zdiff)) < deg_to_rad(CORRECT_ROTATION_THRESHOLD)
 
 
 func swing_sequence():
@@ -94,7 +96,6 @@ func block_sequence():
 
 	swing_arm.play_animation("block")
 	await swing_arm.swing_animation_player.animation_finished
-
 	if is_correct_rotation():
 		camera.shake(0.2, 15)
 	else:
