@@ -54,3 +54,6 @@ func play_animation(animation_name: String):
 	
 	starting_z_rotation = rotation_degrees.z
 	swing_animation_player.play(animation_name)
+
+func is_animation_playing(animation_name: String):
+	return swing_animation_player.current_animation == animation_name
