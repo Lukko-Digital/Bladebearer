@@ -1,9 +1,90 @@
-[gd_scene load_steps=2 format=3 uid="uid://xcrmvdctjdpk"]
+[gd_scene load_steps=8 format=3 uid="uid://xcrmvdctjdpk"]
 
 [ext_resource type="Script" path="res://src/swing_arm.gd" id="1_kwg84"]
+[ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="2_ikwlq"]
+
+[sub_resource type="Animation" id="Animation_valgk"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:swing_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_177o3"]
+resource_name = "swing"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:swing_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.133333, -1.79712, 40, -0.0666667, -21.0925, 0.15, 0),
+"times": PackedFloat32Array(0.0333333, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_p4nl4"]
+resource_name = "whiff"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:swing_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.328487, -0.25, 0, 0, 21.9354, 40.0336, -0.2, -0.844795, 0.15, 0),
+"times": PackedFloat32Array(0, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_dhnie"]
+resource_name = "windup"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:swing_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -15, -0.966667, 0.0433092, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t16x2"]
+_data = {
+"RESET": SubResource("Animation_valgk"),
+"swing": SubResource("Animation_177o3"),
+"whiff": SubResource("Animation_p4nl4"),
+"windup": SubResource("Animation_dhnie")
+}
 
 [node name="SwingArm" type="Node3D"]
+transform = Transform3D(0.765668, -0.643236, 0, 0.643236, 0.765668, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_kwg84")
 
 [node name="Arm" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="TestingSword" parent="Arm" instance=ExtResource("2_ikwlq")]
+unique_name_in_owner = true
+editor_description = "Will hide itself during actual gameplay. Just for visualizing swing patterns."
+transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
+
+[node name="SwingAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_t16x2")
+}

@@ -39,11 +39,20 @@ func handle_rotation():
 
 func swing_sequence():
 	attach_to_arm()
-	await swing_arm.windup().finished
+
+	swing_arm.windup()
+	await swing_arm.swing_animation_player.animation_finished
+
+	swing_arm.swing()
+	await swing_arm.swing_animation_player.animation_finished
 	var is_hit = check_correct_rotation()
-	await swing_arm.swing(is_hit).finished
+
 	if is_hit:
 		camera.shake(0.1, 10)
+	else:
+		swing_arm.whiff()
+		await swing_arm.swing_animation_player.animation_finished
+
 	detach_from_arm()
 	target.move()
 

@@ -1,13 +1,37 @@
+@tool
+
 extends Node3D
 class_name SwingArm
 
 const SWING_ARM_LENGTH = 4
+## In degrees. To be animated by animation player.
+## Value is an offset that is added onto `rotation_degrees.z`.
+@export var swing_rotation: float
 
 @onready var arm: Node3D = %Arm
+@onready var swing_animation_player: AnimationPlayer = %SwingAnimationPlayer
+
+## In degrees. Stores the starting z rotation before each section of the swing.
+## While a swing section is animating, z rotation is set equal to `starting_z_rotation + swing_rotation`
+var starting_z_rotation: float
 
 func _ready() -> void:
 	arm.position.y = SWING_ARM_LENGTH
 
+	# Hide test sword during actual gameplay
+	if not Engine.is_editor_hint():
+		%TestingSword.hide()
+
+func _process(_delta: float) -> void:
+	# Match z rotation to `swing_rotation` export when editing scene
+	if Engine.is_editor_hint():
+		rotation_degrees.z = swing_rotation
+
+	# Set z rotation to `starting_z_rotation + swing_rotation` during swing animation
+	if swing_animation_player.is_playing():
+		rotation_degrees.z = starting_z_rotation + swing_rotation
+
+## Place arm behind and in line with hologram sword
 func move_to_swing_position(target_rotation: Vector3):
 	# order matters, rotate z, then x
 	global_position = Vector3.UP.rotated(
@@ -17,33 +41,14 @@ func move_to_swing_position(target_rotation: Vector3):
 	) * -SWING_ARM_LENGTH
 	rotation_degrees = target_rotation
 
-func windup() -> Tween:
-	# windup -40 degrees
-	var windup_tween = create_tween()
-	windup_tween.tween_property(
-		self,
-		"rotation_degrees",
-		rotation_degrees - Vector3(0, 0, 15),
-		2
-	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	return windup_tween
+func windup():
+	starting_z_rotation = rotation_degrees.z
+	swing_animation_player.play("windup")
+	
+func swing():
+	starting_z_rotation = rotation_degrees.z
+	swing_animation_player.play("swing")
 
-func swing(hit: bool) -> Tween:
-	var swing_tween = create_tween()
-
-	if hit:
-		swing_tween.tween_property(
-			self,
-			"rotation_degrees",
-			rotation_degrees + Vector3(0, 0, 40),
-			0.3
-		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	else:
-		swing_tween.tween_property(
-			self,
-			"rotation_degrees",
-			rotation_degrees + Vector3(0, 0, 120),
-			0.6
-		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
-	return swing_tween
+func whiff():
+	starting_z_rotation = rotation_degrees.z
+	swing_animation_player.play("whiff")
