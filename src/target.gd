@@ -4,7 +4,7 @@ class_name Target
 @export var sword: Sword
 @export var swing_arm: SwingArm
 
-const ROTATION_LERP_SPEED = 0.15
+const ROTATION_LERP_SPEED = 0.07
 
 var target_rot: Vector3
 
