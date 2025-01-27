@@ -49,22 +49,11 @@ func randomize_swing_direction():
 	if randi() % 2:
 		swing_direction *= -1
 
-func windup():
-	starting_z_rotation = rotation_degrees.z
-	swing_animation_player.play("windup")
+func play_animation(animation_name: String):
+	assert(swing_animation_player.has_animation(animation_name))
 	
-func swing():
 	starting_z_rotation = rotation_degrees.z
-	swing_animation_player.play("swing")
+	swing_animation_player.play(animation_name)
 
-func whiff():
-	starting_z_rotation = rotation_degrees.z
-	swing_animation_player.play("whiff")
-
-func block():
-	starting_z_rotation = rotation_degrees.z
-	swing_animation_player.play("block")
-
-func falter():
-	starting_z_rotation = rotation_degrees.z
-	swing_animation_player.play("falter_swing")
+func is_animation_playing(animation_name: String):
+	return swing_animation_player.current_animation == animation_name

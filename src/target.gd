@@ -31,8 +31,7 @@ func move():
 		)
 		new_rot *= 45
 		if randi() % 2:
-			# see sword.gd for why max is set to 181
-			new_rot.x = wrapf(180 - new_rot.x, -180, 181)
+			new_rot.x = wrapf(180 - new_rot.x, -180, 180)
 
 		if new_rot != target_rot:
 			# Break when I see new rotation

@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctoxk5ywvn75r"]
+[gd_scene load_steps=7 format=3 uid="uid://ctoxk5ywvn75r"]
 
 [ext_resource type="Script" path="res://src/sword.gd" id="1_a5gxo"]
-[ext_resource type="Script" path="res://src/game_sequence_handler.gd" id="3_21x8v"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_mq21s"]
 
 [sub_resource type="Animation" id="Animation_nbqwa"]
@@ -175,9 +174,5 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_e3fsf")
 }
-
-[node name="GameSequenceHandler" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_21x8v")
 
 [editable path="Sword"]
