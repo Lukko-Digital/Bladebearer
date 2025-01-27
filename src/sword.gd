@@ -37,6 +37,11 @@ func handle_rotation():
 		yaw = 90.0
 	sword_mesh.rotation_degrees.y = lerp(sword_mesh.rotation_degrees.y, yaw, ROTATION_LERP_SPEED)
 
+	
+func is_correct_rotation():
+	return round(rotation_degrees) == round(target.rotation_degrees)
+
+
 func swing_sequence():
 	attach_to_arm()
 	
@@ -47,9 +52,8 @@ func swing_sequence():
 
 	swing_arm.swing()
 	await swing_arm.swing_animation_player.animation_finished
-	var is_hit = check_correct_rotation()
 
-	if is_hit:
+	if is_correct_rotation():
 		camera.shake(0.1, 10)
 	else:
 		swing_arm.whiff()
@@ -74,7 +78,3 @@ func detach_from_arm():
 	main.add_child(sword_origin)
 	sword_origin.global_position = Vector3.ZERO
 	sword_origin.global_rotation = Vector3.ZERO
-
-	
-func check_correct_rotation():
-	return round(rotation_degrees) == round(target.rotation_degrees)
