@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://ccb8dq5qk5vev"]
+[gd_scene load_steps=11 format=4 uid="uid://ccb8dq5qk5vev"]
 
 [ext_resource type="Script" path="res://src/target.gd" id="1_rhyst"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_7grqd"]
-[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram.tres" id="3_c2dso"]
+[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram_blue.tres" id="3_c2dso"]
+[ext_resource type="Material" uid="uid://bem5q58rwh8x4" path="res://assets/materials/hologram_red.tres" id="4_11lmb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mp8lv"]
 resource_name = "Material.001"
@@ -86,27 +87,28 @@ shadow_mesh = SubResource("ArrayMesh_opjhm")
 [node name="Target" type="Node3D"]
 script = ExtResource("1_rhyst")
 
-[node name="Hologram" parent="." instance=ExtResource("3_7grqd")]
+[node name="HologramBlue" parent="." instance=ExtResource("3_7grqd")]
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
 
-[node name="Blade" parent="Hologram" index="0"]
+[node name="Blade" parent="HologramBlue" index="0"]
 material_override = ExtResource("3_c2dso")
 mesh = SubResource("ArrayMesh_jnwxc")
 
-[node name="Handle" parent="Hologram" index="1"]
+[node name="Handle" parent="HologramBlue" index="1"]
 material_override = ExtResource("3_c2dso")
 mesh = SubResource("ArrayMesh_c21tf")
 
-[node name="Hologram2" parent="." instance=ExtResource("3_7grqd")]
+[node name="HologramRed" parent="." instance=ExtResource("3_7grqd")]
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
+visible = false
 
-[node name="Blade" parent="Hologram2" index="0"]
-material_override = ExtResource("3_c2dso")
+[node name="Blade" parent="HologramRed" index="0"]
+material_override = ExtResource("4_11lmb")
 mesh = SubResource("ArrayMesh_jnwxc")
 
-[node name="Handle" parent="Hologram2" index="1"]
-material_override = ExtResource("3_c2dso")
+[node name="Handle" parent="HologramRed" index="1"]
+material_override = ExtResource("4_11lmb")
 mesh = SubResource("ArrayMesh_c21tf")
 
-[editable path="Hologram"]
-[editable path="Hologram2"]
+[editable path="HologramBlue"]
+[editable path="HologramRed"]
