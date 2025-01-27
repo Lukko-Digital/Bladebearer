@@ -18,6 +18,7 @@ signal sequence_finished
 var target_rotation = Vector3()
 var previously_correct_rotation = false
 var blocking = false
+var correct_swing = false
 
 # func _ready() -> void:
 # 	target.move.call_deferred()
@@ -30,7 +31,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("space"):
-		fast_forward_swing()
+		lock_swing()
 
 
 func handle_rotation():
@@ -69,17 +70,17 @@ func swing_sequence():
 
 	swing_arm.windup()
 	await swing_arm.swing_animation_player.animation_finished
-
-	swing_arm.swing()
-	await swing_arm.swing_animation_player.animation_finished
-
-	if is_correct_rotation():
+	
+	if correct_swing:
+		swing_arm.swing()
+		await swing_arm.swing_animation_player.animation_finished
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
 	else:
-		swing_arm.whiff()
+		swing_arm.falter()
 		await swing_arm.swing_animation_player.animation_finished
 
+	correct_swing = false
 	detach_from_arm()
 	sequence_finished.emit()
 
@@ -101,12 +102,12 @@ func block_sequence():
 	detach_from_arm()
 	sequence_finished.emit()
 
-func fast_forward_swing():
-	if not is_correct_rotation():
-		return
+
+func lock_swing():
 	if swing_arm.swing_animation_player.current_animation != "windup":
 		return
 	# Skip windup animation
+	correct_swing = is_correct_rotation()
 	swing_arm.swing_animation_player.advance(INF)
 
 

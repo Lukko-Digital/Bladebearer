@@ -64,3 +64,7 @@ func whiff():
 func block():
 	starting_z_rotation = rotation_degrees.z
 	swing_animation_player.play("block")
+
+func falter():
+	starting_z_rotation = rotation_degrees.z
+	swing_animation_player.play("falter_swing")
