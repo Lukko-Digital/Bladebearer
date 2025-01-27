@@ -15,13 +15,15 @@ const ROTATION_LERP_SPEED = 0.2
 
 signal sequence_finished
 
-var target_rotation = Vector3()
+var target_rotation: Vector3:
+	set(value):
+		if swinging:
+			return
+		target_rotation = value
+
 var previously_correct_rotation = false
 var blocking = false
-var correct_swing = false
-
-# func _ready() -> void:
-# 	target.move.call_deferred()
+var swinging = false
 
 
 func _process(_delta: float) -> void:
@@ -47,7 +49,7 @@ func handle_rotation():
 	rotation_degrees = rotation_degrees.lerp(target_rotation, ROTATION_LERP_SPEED)
 
 
-## If sword is just placed into correct rotation, flash screen
+## Check if sword is just placed into correct rotation
 func handle_check_rotation():
 	if is_correct_rotation() and not previously_correct_rotation:
 		if blocking:
@@ -71,16 +73,16 @@ func swing_sequence():
 	swing_arm.play_animation("windup")
 	await swing_arm.swing_animation_player.animation_finished
 	
-	if correct_swing:
+	if swinging:
 		swing_arm.play_animation("swing")
 		await swing_arm.swing_animation_player.animation_finished
+		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
 	else:
-		swing_arm.play_animation("falter")
+		swing_arm.play_animation("falter_swing")
 		await swing_arm.swing_animation_player.animation_finished
-
-	correct_swing = false
+	
 	detach_from_arm()
 	sequence_finished.emit()
 
@@ -106,8 +108,9 @@ func block_sequence():
 func lock_swing():
 	if swing_arm.swing_animation_player.current_animation != "windup":
 		return
+	# Check if inputs are correct
+	swinging = target_rotation == target.target_rot
 	# Skip windup animation
-	correct_swing = is_correct_rotation()
 	swing_arm.swing_animation_player.advance(INF)
 
 
