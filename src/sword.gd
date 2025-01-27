@@ -68,16 +68,16 @@ func swing_sequence():
 	
 	swing_arm.randomize_swing_direction()
 
-	swing_arm.windup()
+	swing_arm.play_animation("windup")
 	await swing_arm.swing_animation_player.animation_finished
 	
 	if correct_swing:
-		swing_arm.swing()
+		swing_arm.play_animation("swing")
 		await swing_arm.swing_animation_player.animation_finished
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
 	else:
-		swing_arm.falter()
+		swing_arm.play_animation("falter")
 		await swing_arm.swing_animation_player.animation_finished
 
 	correct_swing = false
@@ -90,7 +90,7 @@ func block_sequence():
 	swing_arm.randomize_swing_direction()
 	blocking = true
 
-	swing_arm.block()
+	swing_arm.play_animation("block")
 	await swing_arm.swing_animation_player.animation_finished
 
 	if is_correct_rotation():
