@@ -27,21 +27,30 @@ func game_loop():
 		if randi() % 2:
 			target.red()
 			for _i in range(randi_range(1, 1)):
-				target.move()
 				swing_sequence()
 				await sequence_finished
 		else:
 			target.blue()
 			for _i in range(randi_range(1, 2)):
-				target.move()
 				block_sequence()
 				await sequence_finished
 
 
-func swing_sequence():
+## Common actions that are done at the start of both swing and block sequences
+func pre_sequence():
+	target.move()
 	attach_to_arm()
 	swing_arm.randomize_swing_direction()
 
+
+## Common actions that are done at the end of both swing and block sequences
+func post_sequence():
+	detach_from_arm()
+	sequence_finished.emit()
+
+
+func swing_sequence():
+	pre_sequence()
 	swing_arm.play_animation("windup")
 	await swing_arm.swing_animation_player.animation_finished
 	
@@ -54,9 +63,7 @@ func swing_sequence():
 	else:
 		swing_arm.play_animation("falter_swing")
 		await swing_arm.swing_animation_player.animation_finished
-	
-	detach_from_arm()
-	sequence_finished.emit()
+	post_sequence()
 
 
 func lock_swing():
@@ -69,9 +76,7 @@ func lock_swing():
 
 
 func block_sequence():
-	attach_to_arm()
-	swing_arm.randomize_swing_direction()
-
+	pre_sequence()
 	swing_arm.play_animation("block")
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
@@ -79,9 +84,7 @@ func block_sequence():
 	else:
 		camera.shake(0.1, 6)
 		sword.screen_color_animation.play("red_flash")
-	
-	detach_from_arm()
-	sequence_finished.emit()
+	post_sequence()
 
 
 ## Called when the sword first enters correct rotation. If blocking, complete
