@@ -18,9 +18,16 @@ var previously_correct_rotation = false
 func _ready() -> void:
 	target.move.call_deferred()
 
+
 func _process(_delta: float) -> void:
 	handle_rotation()
 	handle_check_rotation()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("space"):
+		fast_forward_swing()
+
 
 func handle_rotation():
 	# Handles WASD and Shift
@@ -33,12 +40,6 @@ func handle_rotation():
 		# surely this causes no side effects
 		target_rotation.x = wrapf(180 - target_rotation.x, -180, 181)
 	rotation_degrees = rotation_degrees.lerp(target_rotation, ROTATION_LERP_SPEED)
-	
-	# Handles Spacebar
-	var yaw = 0.0
-	if Input.is_action_pressed("space"):
-		yaw = 90.0
-	sword_mesh.rotation_degrees.y = lerp(sword_mesh.rotation_degrees.y, yaw, ROTATION_LERP_SPEED)
 
 
 ## If sword is just placed into correct rotation, flash screen
@@ -71,6 +72,16 @@ func swing_sequence():
 
 	detach_from_arm()
 	target.move()
+
+
+func fast_forward_swing():
+	if not is_correct_rotation():
+		return
+	if swing_arm.swing_animation_player.current_animation != "windup":
+		return
+	# Skip windup animation
+	swing_arm.swing_animation_player.advance(INF)
+
 
 func attach_to_arm():
 	# Preserve global position and rotation
