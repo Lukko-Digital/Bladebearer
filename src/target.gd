@@ -4,6 +4,9 @@ class_name Target
 @export var sword: Sword
 @export var swing_arm: SwingArm
 
+@onready var holo_blue: Node3D = %HologramBlue
+@onready var holo_red: Node3D = %HologramRed
+
 const ROTATION_LERP_SPEED = 0.07
 
 var target_rot: Vector3
@@ -33,3 +36,11 @@ func move():
 	print(target_rot)
 
 	swing_arm.move_to_swing_position(target_rot)
+
+func red():
+	holo_red.show()
+	holo_blue.hide()
+
+func blue():
+	holo_blue.show()
+	holo_red.hide()

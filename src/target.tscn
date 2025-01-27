@@ -88,6 +88,7 @@ shadow_mesh = SubResource("ArrayMesh_opjhm")
 script = ExtResource("1_rhyst")
 
 [node name="HologramBlue" parent="." instance=ExtResource("3_7grqd")]
+unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
 
 [node name="Blade" parent="HologramBlue" index="0"]
@@ -99,6 +100,7 @@ material_override = ExtResource("3_c2dso")
 mesh = SubResource("ArrayMesh_c21tf")
 
 [node name="HologramRed" parent="." instance=ExtResource("3_7grqd")]
+unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
 visible = false
 

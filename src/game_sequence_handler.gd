@@ -12,12 +12,14 @@ func game_loop():
 	while true:
 		# 50/50 block or attack
 		if randi() % 2:
-			for _i in range(randi_range(1, 3)):
+			target.red()
+			for _i in range(randi_range(1, 1)):
 				target.move()
 				sword.swing_sequence()
 				await sword.sequence_finished
 		else:
-			for _i in range(randi_range(2, 5)):
+			target.blue()
+			for _i in range(randi_range(1, 2)):
 				target.move()
 				sword.block_sequence()
 				await sword.sequence_finished
