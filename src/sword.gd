@@ -14,6 +14,7 @@ const ROTATION_LERP_SPEED = 0.2
 
 var target_rotation = Vector3()
 var previously_correct_rotation = false
+var blocking = false
 
 func _ready() -> void:
 	target.move.call_deferred()
@@ -46,6 +47,8 @@ func handle_rotation():
 func handle_check_rotation():
 	if is_correct_rotation() and not previously_correct_rotation:
 		screen_color_animation.play("flash")
+		if blocking:
+			swing_arm.swing_animation_player.advance(INF)
 	previously_correct_rotation = is_correct_rotation()
 
 
@@ -70,6 +73,24 @@ func swing_sequence():
 		swing_arm.whiff()
 		await swing_arm.swing_animation_player.animation_finished
 
+	detach_from_arm()
+	target.move()
+
+
+func block_sequence():
+	attach_to_arm()
+	swing_arm.randomize_swing_direction()
+	blocking = true
+
+	swing_arm.block()
+	await swing_arm.swing_animation_player.animation_finished
+
+	if is_correct_rotation():
+		camera.shake(0.2, 15)
+	else:
+		camera.shake(0.1, 6)
+		screen_color_animation.play("red_flash")
+	
 	detach_from_arm()
 	target.move()
 
