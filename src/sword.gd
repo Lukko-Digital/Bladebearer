@@ -8,16 +8,19 @@ const ROTATION_LERP_SPEED = 0.2
 @export var camera: MainCamera
 
 @onready var sword_mesh: Node3D = $Sword
+@onready var screen_color_animation: AnimationPlayer = %ScreenColorAnimation
 @onready var sword_origin: Node3D = get_parent()
 @onready var main: Node3D = get_tree().current_scene
 
 var target_rotation = Vector3()
+var previously_correct_rotation = false
 
 func _ready() -> void:
 	target.move.call_deferred()
 
 func _process(_delta: float) -> void:
 	handle_rotation()
+	handle_check_rotation()
 
 func handle_rotation():
 	# Handles WASD and Shift
@@ -37,9 +40,16 @@ func handle_rotation():
 		yaw = 90.0
 	sword_mesh.rotation_degrees.y = lerp(sword_mesh.rotation_degrees.y, yaw, ROTATION_LERP_SPEED)
 
-	
+
+## If sword is just placed into correct rotation, flash screen
+func handle_check_rotation():
+	if is_correct_rotation() and not previously_correct_rotation:
+		screen_color_animation.play("flash")
+	previously_correct_rotation = is_correct_rotation()
+
+
 func is_correct_rotation():
-	return round(rotation_degrees) == round(target.rotation_degrees)
+	return (rotation_degrees - target.target_rot).length_squared() < 1
 
 
 func swing_sequence():
