@@ -15,6 +15,9 @@ const SWING_ARM_LENGTH = 4
 ## While a swing section is animating, z rotation is set equal to `starting_z_rotation + swing_rotation`
 var starting_z_rotation: float
 
+## Either 1 or -1
+var swing_direction: int = 1
+
 func _ready() -> void:
 	arm.position.y = SWING_ARM_LENGTH
 
@@ -29,7 +32,7 @@ func _process(_delta: float) -> void:
 
 	# Set z rotation to `starting_z_rotation + swing_rotation` during swing animation
 	if swing_animation_player.is_playing():
-		rotation_degrees.z = starting_z_rotation + swing_rotation
+		rotation_degrees.z = starting_z_rotation + (swing_rotation * swing_direction)
 
 ## Place arm behind and in line with hologram sword
 func move_to_swing_position(target_rotation: Vector3):
@@ -40,6 +43,11 @@ func move_to_swing_position(target_rotation: Vector3):
 		Vector3.RIGHT, deg_to_rad(target_rotation.x)
 	) * -SWING_ARM_LENGTH
 	rotation_degrees = target_rotation
+
+## 50/50 to flip the swing direction
+func randomize_swing_direction():
+	if randi() % 2:
+		swing_direction *= -1
 
 func windup():
 	starting_z_rotation = rotation_degrees.z

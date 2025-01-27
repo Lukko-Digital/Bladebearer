@@ -39,6 +39,8 @@ func handle_rotation():
 
 func swing_sequence():
 	attach_to_arm()
+	
+	swing_arm.randomize_swing_direction()
 
 	swing_arm.windup()
 	await swing_arm.swing_animation_player.animation_finished
