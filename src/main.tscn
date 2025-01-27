@@ -1,51 +1,46 @@
-[gd_scene load_steps=11 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=10 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
-
-[sub_resource type="Curve" id="Curve_firy1"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0967742, 1), 0.0, 0.0, 0, 0, Vector2(0.985507, 0.043956), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_i5kd1"]
-curve = SubResource("Curve_firy1")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ivxod"]
-emission_shape = 3
-emission_box_extents = Vector3(3, 3, 3)
-gravity = Vector3(0, -0.1, 0)
-scale_min = 0.2
-scale_max = 0.5
-scale_curve = SubResource("CurveTexture_i5kd1")
+[ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.172549)
+depth_draw_mode = 1
+albedo_color = Color(1, 1, 1, 0.0745098)
+emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 4.2
+emission_energy_multiplier = 1.19
+disable_receive_shadows = true
+distance_fade_max_distance = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_2egrx"]
 material = SubResource("StandardMaterial3D_tsayv")
 radius = 0.01
 height = 0.02
+radial_segments = 4
+rings = 1
 
 [sub_resource type="Environment" id="Environment_hpooo"]
 ambient_light_source = 1
 glow_enabled = true
 glow_normalized = true
-glow_intensity = 3.4
-glow_strength = 0.5
+glow_intensity = 6.85
+glow_strength = 1.05
 glow_blend_mode = 0
 fog_light_color = Color(0, 0, 0, 1)
 fog_density = 0.1095
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.472
+volumetric_fog_density = 1.8855
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_length = 6.79
 volumetric_fog_detail_spread = 5.79562
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
+dof_blur_far_distance = 4.23
 
 [node name="Main" type="Node3D"]
 
@@ -75,9 +70,11 @@ light_energy = 0.25
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SwordOrigin"]
 amount = 10200
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_ivxod")
+lifetime = 4.35
+trail_lifetime = 1.75
+process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SwordOrigin"]
 environment = SubResource("Environment_hpooo")
+camera_attributes = SubResource("CameraAttributesPractical_y77hc")
