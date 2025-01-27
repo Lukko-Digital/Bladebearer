@@ -7,6 +7,11 @@ class_name Target
 @onready var holo_blue: Node3D = %HologramBlue
 @onready var holo_red: Node3D = %HologramRed
 
+@onready var block_effect: Node3D = %BlockEffect
+@onready var hit_effect: Node3D = %HitEffect
+@onready var align_effect: AnimationPlayer = %AlignEffect
+
+
 const ROTATION_LERP_SPEED = 0.07
 
 var target_rot: Vector3

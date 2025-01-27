@@ -46,7 +46,6 @@ dof_blur_far_distance = 4.23
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, 0, 0, 0)
-visible = false
 shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
@@ -69,7 +68,8 @@ light_energy = 0.25
 [node name="MainCamera" parent="SwordOrigin" instance=ExtResource("2_vb7ep")]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SwordOrigin"]
-amount = 10200
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+amount = 20200
 lifetime = 4.35
 trail_lifetime = 1.75
 process_material = ExtResource("5_tv00s")

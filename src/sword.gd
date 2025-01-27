@@ -49,9 +49,11 @@ func handle_rotation():
 ## If sword is just placed into correct rotation, flash screen
 func handle_check_rotation():
 	if is_correct_rotation() and not previously_correct_rotation:
-		screen_color_animation.play("flash")
 		if blocking:
 			swing_arm.swing_animation_player.advance(INF)
+			target.block_effect.restart()
+		else:
+			target.align_effect.play("Sword_Aligned")
 	previously_correct_rotation = is_correct_rotation()
 
 
@@ -60,6 +62,7 @@ func is_correct_rotation():
 
 
 func swing_sequence():
+	blocking = false # IAN THIS MIGHT BE THE WRONG PLACE TO PUT THIS
 	attach_to_arm()
 	
 	swing_arm.randomize_swing_direction()
@@ -71,7 +74,8 @@ func swing_sequence():
 	await swing_arm.swing_animation_player.animation_finished
 
 	if is_correct_rotation():
-		camera.shake(0.1, 10)
+		camera.shake(0.2, 15)
+		target.hit_effect.restart()
 	else:
 		swing_arm.whiff()
 		await swing_arm.swing_animation_player.animation_finished
@@ -96,7 +100,6 @@ func block_sequence():
 	
 	detach_from_arm()
 	sequence_finished.emit()
-
 
 func fast_forward_swing():
 	if not is_correct_rotation():
