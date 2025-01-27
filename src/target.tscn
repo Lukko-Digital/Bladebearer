@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/target.gd" id="1_rhyst"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_7grqd"]
-[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://src/hologram.tres" id="3_c2dso"]
+[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram.tres" id="3_c2dso"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mp8lv"]
 resource_name = "Material.001"
@@ -97,4 +97,16 @@ mesh = SubResource("ArrayMesh_jnwxc")
 material_override = ExtResource("3_c2dso")
 mesh = SubResource("ArrayMesh_c21tf")
 
+[node name="Hologram2" parent="." instance=ExtResource("3_7grqd")]
+transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
+
+[node name="Blade" parent="Hologram2" index="0"]
+material_override = ExtResource("3_c2dso")
+mesh = SubResource("ArrayMesh_jnwxc")
+
+[node name="Handle" parent="Hologram2" index="1"]
+material_override = ExtResource("3_c2dso")
+mesh = SubResource("ArrayMesh_c21tf")
+
 [editable path="Hologram"]
+[editable path="Hologram2"]
