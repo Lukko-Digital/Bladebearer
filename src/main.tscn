@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=16 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
-[ext_resource type="PackedScene" uid="uid://cf3rsn4b4p51p" path="res://assets/models/Health.glb" id="8_80j21"]
+[ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="Texture2D" uid="uid://dpsevlwm67lxa" path="res://assets/ui/testwide.png" id="9_53wid"]
-[ext_resource type="Material" uid="uid://b41aj2lbe8gx3" path="res://assets/materials/health.tres" id="9_66pdg"]
 [ext_resource type="Texture2D" uid="uid://d4d2146d1g2lj" path="res://assets/ui/knight_healthbar.png" id="11_o5jo7"]
 [ext_resource type="Texture2D" uid="uid://bj0p1725ho312" path="res://assets/ui/peasant_healthbar.png" id="12_v8oh0"]
 
@@ -51,42 +50,6 @@ volumetric_fog_detail_spread = 6.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
 dof_blur_far_distance = 4.23
-
-[sub_resource type="Animation" id="Animation_okqp0"]
-resource_name = "Break"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cube_cell_015:transparency")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.0358968, 4.59479),
-"update": 0,
-"values": [0.0, 0.99]
-}
-
-[sub_resource type="Animation" id="Animation_l8v15"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cube_cell_015:transparency")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pindp"]
-_data = {
-"Break": SubResource("Animation_okqp0"),
-"RESET": SubResource("Animation_l8v15")
-}
 
 [node name="Main" type="Node3D"]
 
@@ -146,136 +109,7 @@ text = "walk away"
 font = ExtResource("7_d73xt")
 outline_size = 0
 
-[node name="Player" type="Node3D" parent="GameSequenceHandler"]
-transform = Transform3D(0.0669312, 0, 0, 0, 0.0669312, 0, 0, 0, 0.0669312, -0.00330901, -0.910407, -0.0706007)
-
-[node name="Health" parent="GameSequenceHandler/Player" instance=ExtResource("8_80j21")]
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Player/Health" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Player/Health" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Player/Health"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health2" parent="GameSequenceHandler/Player" instance=ExtResource("8_80j21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41993, 0, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Player/Health2" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Player/Health2" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Player/Health2"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health3" parent="GameSequenceHandler/Player" instance=ExtResource("8_80j21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47672, 0, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Player/Health3" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Player/Health3" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Player/Health3"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Enemy" type="Node3D" parent="GameSequenceHandler"]
-transform = Transform3D(0.847367, 0, 0, 0, 0.847367, 0, 0, 0, 0.847367, 0.00992727, 0.290054, -0.0706007)
-
-[node name="Health4" parent="GameSequenceHandler/Enemy" instance=ExtResource("8_80j21")]
-transform = Transform3D(0.0856471, 0, 0, 0, 0.0856471, 0, 0, 0, 0.0856471, 0.174924, 0.754013, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Enemy/Health4" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health4" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health4"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health5" parent="GameSequenceHandler/Enemy" instance=ExtResource("8_80j21")]
-transform = Transform3D(0.0856471, 0, 0, 0, 0.0856471, 0, 0, 0, 0.0856471, 0.0533112, 0.754013, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Enemy/Health5" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health5" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health5"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health6" parent="GameSequenceHandler/Enemy" instance=ExtResource("8_80j21")]
-transform = Transform3D(0.0856471, 0, 0, 0, 0.0856471, 0, 0, 0, 0.0856471, 0.301401, 0.754013, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Enemy/Health6" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health6" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health6"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health7" parent="GameSequenceHandler/Enemy" instance=ExtResource("8_80j21")]
-transform = Transform3D(0.0856471, 0, 0, 0, 0.0856471, 0, 0, 0, 0.0856471, -0.192148, 0.754013, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Enemy/Health7" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health7" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health7"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health8" parent="GameSequenceHandler/Enemy" instance=ExtResource("8_80j21")]
-transform = Transform3D(0.0856471, 0, 0, 0, 0.0856471, 0, 0, 0, 0.0856471, -0.313761, 0.754013, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Enemy/Health8" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health8" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health8"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
-
-[node name="Health9" parent="GameSequenceHandler/Enemy" instance=ExtResource("8_80j21")]
-transform = Transform3D(0.0856471, 0, 0, 0, 0.0856471, 0, 0, 0, 0.0856471, -0.0656712, 0.754013, 0)
-
-[node name="Cube_cell_015" parent="GameSequenceHandler/Enemy/Health9" index="0"]
-material_override = ExtResource("9_66pdg")
-
-[node name="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health9" index="1"]
-autoplay = "Oscillate"
-
-[node name="HealthEmissionAnimator" type="AnimationPlayer" parent="GameSequenceHandler/Enemy/Health9"]
-libraries = {
-"": SubResource("AnimationLibrary_pindp")
-}
+[node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.486275)
@@ -307,6 +141,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect3" type="TextureRect" parent="Control"]
+layout_mode = 0
 offset_left = 42.0
 offset_top = 49.0
 offset_right = 418.0
@@ -314,13 +149,3 @@ offset_bottom = 307.0
 texture = ExtResource("12_v8oh0")
 expand_mode = 1
 stretch_mode = 4
-
-[editable path="GameSequenceHandler/Player/Health"]
-[editable path="GameSequenceHandler/Player/Health2"]
-[editable path="GameSequenceHandler/Player/Health3"]
-[editable path="GameSequenceHandler/Enemy/Health4"]
-[editable path="GameSequenceHandler/Enemy/Health5"]
-[editable path="GameSequenceHandler/Enemy/Health6"]
-[editable path="GameSequenceHandler/Enemy/Health7"]
-[editable path="GameSequenceHandler/Enemy/Health8"]
-[editable path="GameSequenceHandler/Enemy/Health9"]
