@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=14 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 [ext_resource type="FontFile" uid="uid://12lul10wlfah" path="res://assets/fonts/CrimsonText-Regular.ttf" id="7_w83ar"]
+[ext_resource type="PackedScene" uid="uid://cf3rsn4b4p51p" path="res://assets/models/Health.glb" id="8_80j21"]
+[ext_resource type="Texture2D" uid="uid://b6yc1vgnegmql" path="res://assets/ui/test3.png" id="8_fjl1q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -33,7 +35,7 @@ ambient_light_source = 1
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 5.7
-glow_strength = 0.6
+glow_strength = 0.65
 glow_blend_mode = 0
 fog_light_color = Color(0, 0, 0, 1)
 fog_density = 0.1095
@@ -55,7 +57,8 @@ shadow_enabled = true
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Snow" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 amount = 42045
 lifetime = 4.35
@@ -82,15 +85,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
 light_energy = 0.25
 
 [node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01981)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.112927, 1.07589)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="GameSequenceHandler"]
 environment = SubResource("Environment_hpooo")
 camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
-[node name="SwordOrigin#Label3D" type="Label3D" parent="."]
-transform = Transform3D(0.605301, 0, -0.468218, 0, 0.765257, 0, 0.468218, 0, 0.605301, 0.492339, 0.0370455, -0.0267003)
+[node name="3DText" type="Label3D" parent="GameSequenceHandler"]
+transform = Transform3D(0.765253, 0, 0.00220383, 0, 0.765257, 0, -0.00220383, 0, 0.765253, 0.0126821, -0.704754, -0.0267003)
+visible = false
 texture_filter = 0
 text = "Holy shit 3d text"
 font = ExtResource("7_w83ar")
 outline_size = 0
+
+[node name="Health" parent="GameSequenceHandler" instance=ExtResource("8_80j21")]
+transform = Transform3D(0.0798235, 0, 0, 0, 0.0798235, 0, 0, 0, 0.0798235, -0.00302031, -0.860665, -0.0061295)
+
+[node name="Health2" parent="GameSequenceHandler" instance=ExtResource("8_80j21")]
+transform = Transform3D(0.0798235, 0, 0, 0, 0.0798235, 0, 0, 0, 0.0798235, 0.160987, -0.860665, -0.0061295)
+
+[node name="AnimationPlayer" parent="GameSequenceHandler/Health2" index="4"]
+autoplay = "Explode"
+
+[node name="Health3" parent="GameSequenceHandler" instance=ExtResource("8_80j21")]
+transform = Transform3D(0.0798235, 0, 0, 0, 0.0798235, 0, 0, 0, 0.0798235, -0.167577, -0.860665, -0.0061295)
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 0
+offset_left = -26.0
+offset_right = 486.0
+offset_bottom = 288.0
+texture = ExtResource("8_fjl1q")
+
+[editable path="GameSequenceHandler/Health"]
+[editable path="GameSequenceHandler/Health2"]
