@@ -54,6 +54,7 @@ func swing_sequence():
 	swing_arm.play_animation("windup")
 	await swing_arm.swing_animation_player.animation_finished
 	
+	sword.lock_input()
 	if swinging:
 		swing_arm.play_animation("swing")
 		await swing_arm.swing_animation_player.animation_finished
@@ -61,8 +62,11 @@ func swing_sequence():
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
 	else:
+		target.hide()
 		swing_arm.play_animation("falter_swing")
 		await swing_arm.swing_animation_player.animation_finished
+		target.show()
+	sword.unlock_input()
 	post_sequence()
 
 
