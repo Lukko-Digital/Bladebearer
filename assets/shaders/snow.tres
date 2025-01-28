@@ -10,12 +10,12 @@ curve = SubResource("Curve_oiwi7")
 [resource]
 emission_shape = 3
 emission_box_extents = Vector3(3, 3, 3)
-gravity = Vector3(0, -0.15, 0)
+gravity = Vector3(0, -0.405, 0)
 scale_min = 0.7
 scale_max = 0.7
 scale_curve = SubResource("CurveTexture_03pvo")
 turbulence_enabled = true
-turbulence_noise_strength = 0.08
+turbulence_noise_strength = 0.03
 turbulence_noise_scale = 9.11
 turbulence_influence_min = 0.03
 turbulence_influence_max = 0.141
