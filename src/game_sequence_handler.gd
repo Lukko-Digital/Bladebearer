@@ -63,17 +63,17 @@ var opp_hp = OPPONENT_MAX_HP:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_loop.call_deferred()
-	sword_hp_bar.value = SWORD_MAX_HP
 	sword_hp_bar.max_value = SWORD_MAX_HP
-	bearer_hp_bar.value = BEARER_MAX_HP
 	bearer_hp_bar.max_value = BEARER_MAX_HP
-	opp_hp_bar.value = OPPONENT_MAX_HP
 	opp_hp_bar.max_value = OPPONENT_MAX_HP
-	%BearerName.text = NAMES.pick_random()
-	%OpponentName.text = NAMES.pick_random()
 
 
 func game_loop():
+	%BearerName.text = NAMES.pick_random()
+	%OpponentName.text = NAMES.pick_random()
+	sword_hp_bar.value = SWORD_MAX_HP
+	bearer_hp_bar.value = BEARER_MAX_HP
+	opp_hp_bar.value = OPPONENT_MAX_HP
 	while true:
 		swing_sequence()
 		await sequence_finished
@@ -90,9 +90,9 @@ func game_loop():
 		for _i in range(randi_range(1, 2)):
 			block_sequence()
 			await sequence_finished
-			if bearer_hp <= 0:
+			if sword_hp <= 0:
 				break
-		if bearer_hp <= 0:
+		if sword_hp <= 0:
 			break
 	%DeathScreen.show()
 
@@ -188,6 +188,4 @@ func detach_from_arm():
 
 func _on_respawn_button_pressed() -> void:
 	%DeathScreen.hide()
-	bearer_hp = BEARER_MAX_HP
-	opp_hp = OPPONENT_MAX_HP
 	game_loop.call_deferred()

@@ -68,7 +68,7 @@ offset_left = 224.0
 offset_top = 122.0
 offset_right = 277.0
 offset_bottom = 145.0
-text = "dead :("
+text = "sword broke :("
 
 [node name="RespawnButton" type="Button" parent="UI/DeathScreen"]
 layout_mode = 0
@@ -76,7 +76,7 @@ offset_left = 211.0
 offset_top = 161.0
 offset_right = 286.0
 offset_bottom = 192.0
-text = "respawn"
+text = "play again"
 
 [node name="NewChallenger" type="Label" parent="UI"]
 unique_name_in_owner = true
