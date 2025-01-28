@@ -27,9 +27,9 @@ var opponent_rank: CombatantRank
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	game_loop.call_deferred()
 	bearer_rank = PEASANT
-	opponent_rank = KNIGHT
+	opponent_rank = PEASANT
+	game_loop.call_deferred()
 
 func game_loop():
 	construct_action_queue()
@@ -68,7 +68,7 @@ func post_sequence():
 func swing_sequence():
 	target.red()
 	pre_sequence()
-	swing_arm.play_animation("windup")
+	swing_arm.play_animation("windup", opponent_rank.time_to_react)
 	await swing_arm.swing_animation_player.animation_finished
 	
 	sword.lock_input()
@@ -99,7 +99,7 @@ func lock_swing():
 func block_sequence():
 	target.blue()
 	pre_sequence()
-	swing_arm.play_animation("block")
+	swing_arm.play_animation("block", opponent_rank.time_to_react)
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
 		camera.shake(0.2, 15)

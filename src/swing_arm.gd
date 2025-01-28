@@ -49,9 +49,17 @@ func randomize_swing_direction():
 	if randi() % 2:
 		swing_direction *= -1
 
-func play_animation(animation_name: String):
+## `animation_duration` in seconds, if <=0, animation will play at default speed
+## otherwise, speed scale will be adjusted such that the animation will play in
+## `animation_duration` seconds
+func play_animation(animation_name: String, animation_duration: float = 0):
 	assert(swing_animation_player.has_animation(animation_name))
 	
+	if animation_duration > 0:
+		swing_animation_player.speed_scale = swing_animation_player.get_animation(animation_name).length / animation_duration
+	else:
+		swing_animation_player.speed_scale = 1
+
 	starting_z_rotation = rotation_degrees.z
 	swing_animation_player.play(animation_name)
 
