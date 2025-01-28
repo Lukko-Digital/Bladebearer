@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
-[ext_resource type="Script" path="res://src/game_sequence_handler.gd" id="2_ngyv0"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
+[ext_resource type="PackedScene" uid="uid://dlcu4tusgjw0h" path="res://src/game_sequence_handler.tscn" id="2_wxisq"]
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 
@@ -52,8 +52,7 @@ shadow_enabled = true
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "target", "camera", "sword")]
-script = ExtResource("2_ngyv0")
+[node name="GameSequenceHandler" parent="." node_paths=PackedStringArray("swing_arm", "target", "camera", "sword") instance=ExtResource("2_wxisq")]
 swing_arm = NodePath("../SwingArm")
 target = NodePath("Target")
 camera = NodePath("MainCamera")

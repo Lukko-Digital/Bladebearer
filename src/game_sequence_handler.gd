@@ -5,6 +5,10 @@
 extends Node3D
 class_name GameSequenceHandler
 
+const SWORD_MAX_HP = 5
+const BEARER_MAX_HP = 5
+const OPPONENT_MAX_HP = 5
+
 @export var swing_arm: SwingArm
 @export var sword: Sword
 @export var target: Target
@@ -12,28 +16,43 @@ class_name GameSequenceHandler
 
 @onready var main: Node3D = get_tree().current_scene
 
+@onready var sword_hp_bar: ProgressBar = %SwordHealth
+@onready var bearer_hp_bar: ProgressBar = %BearerHealth
+@onready var opp_hp_bar: ProgressBar = %OpponentHealth
+
 signal sequence_finished
 
 var swinging = false
+var sword_hp = SWORD_MAX_HP:
+	set(value):
+		sword_hp_bar.value = value
+		sword_hp = value
+var bearer_hp = BEARER_MAX_HP:
+	set(value):
+		bearer_hp_bar.value = value
+		bearer_hp = value
+var opp_hp = OPPONENT_MAX_HP:
+	set(value):
+		opp_hp_bar.value = value
+		opp_hp = value
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_loop.call_deferred()
+	sword_hp_bar.value = SWORD_MAX_HP
+	bearer_hp_bar.value = BEARER_MAX_HP
+	opp_hp_bar.value = OPPONENT_MAX_HP
 
 
 func game_loop():
 	while true:
-		# 50/50 block or attack
-		if randi() % 2:
-			target.red()
-			for _i in range(randi_range(1, 1)):
-				swing_sequence()
-				await sequence_finished
-		else:
-			target.blue()
-			for _i in range(randi_range(1, 2)):
-				block_sequence()
-				await sequence_finished
+		swing_sequence()
+		await sequence_finished
+
+		for _i in range(randi_range(1, 2)):
+			block_sequence()
+			await sequence_finished
 
 
 ## Common actions that are done at the start of both swing and block sequences
@@ -50,17 +69,22 @@ func post_sequence():
 
 
 func swing_sequence():
+	target.red()
 	pre_sequence()
 	swing_arm.play_animation("windup")
 	await swing_arm.swing_animation_player.animation_finished
 	
 	if swinging:
+		# Successful hit
 		swing_arm.play_animation("swing")
 		await swing_arm.swing_animation_player.animation_finished
 		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
+		opp_hp -= 1
+		sword_hp = SWORD_MAX_HP
 	else:
+		# Whiff
 		swing_arm.play_animation("falter_swing")
 		await swing_arm.swing_animation_player.animation_finished
 	post_sequence()
@@ -76,14 +100,20 @@ func lock_swing():
 
 
 func block_sequence():
+	target.blue()
 	pre_sequence()
 	swing_arm.play_animation("block")
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
+		# Successful block
 		camera.shake(0.2, 15)
+		sword_hp -= 1
+		print(sword_hp)
 	else:
+		# Failed block
 		camera.shake(0.1, 6)
 		sword.screen_color_animation.play("red_flash")
+		bearer_hp -= 1
 	post_sequence()
 
 
