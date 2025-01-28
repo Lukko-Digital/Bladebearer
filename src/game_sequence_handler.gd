@@ -12,28 +12,44 @@ class_name GameSequenceHandler
 
 @onready var main: Node3D = get_tree().current_scene
 
+enum ACTION {SWING, BLOCK}
+
 signal sequence_finished
 
+var PEASANT = CombatantRank.new(1, 2, 6)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 5)
+var KNIGHT = CombatantRank.new(4, 8, 3)
+
 var swinging = false
+var action_queue: Array[ACTION]
+var bearer_rank: CombatantRank
+var opponent_rank: CombatantRank
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_loop.call_deferred()
-
+	bearer_rank = PEASANT
+	opponent_rank = KNIGHT
 
 func game_loop():
+	construct_action_queue()
 	while true:
-		# 50/50 block or attack
-		if randi() % 2:
-			target.red()
-			for _i in range(randi_range(1, 1)):
+		var curr_action = action_queue.pop_front()
+		match curr_action:
+			ACTION.SWING:
 				swing_sequence()
-				await sequence_finished
-		else:
-			target.blue()
-			for _i in range(randi_range(1, 2)):
+			ACTION.BLOCK:
 				block_sequence()
-				await sequence_finished
+		await sequence_finished
+		action_queue.append(curr_action)
+
+
+func construct_action_queue():
+	action_queue.clear()
+	for _i in range(bearer_rank.num_attacks):
+		action_queue.append(ACTION.SWING)
+	for _i in range(opponent_rank.num_attacks):
+		action_queue.append(ACTION.BLOCK)
 
 
 ## Common actions that are done at the start of both swing and block sequences
@@ -50,6 +66,7 @@ func post_sequence():
 
 
 func swing_sequence():
+	target.red()
 	pre_sequence()
 	swing_arm.play_animation("windup")
 	await swing_arm.swing_animation_player.animation_finished
@@ -80,6 +97,7 @@ func lock_swing():
 
 
 func block_sequence():
+	target.blue()
 	pre_sequence()
 	swing_arm.play_animation("block")
 	await swing_arm.swing_animation_player.animation_finished
