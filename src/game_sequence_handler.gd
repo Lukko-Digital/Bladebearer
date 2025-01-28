@@ -10,7 +10,7 @@ class_name GameSequenceHandler
 @export var target: Target
 @export var camera: MainCamera
 
-@onready var main: Node3D = get_tree().current_scene
+@onready var main: Node3D = get_owner()
 
 signal sequence_finished
 
