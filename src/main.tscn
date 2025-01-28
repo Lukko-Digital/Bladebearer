@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=13 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
-[ext_resource type="FontFile" uid="uid://12lul10wlfah" path="res://assets/fonts/CrimsonText-Regular.ttf" id="7_w83ar"]
+[ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
 [ext_resource type="PackedScene" uid="uid://cf3rsn4b4p51p" path="res://assets/models/Health.glb" id="8_80j21"]
-[ext_resource type="Texture2D" uid="uid://b6yc1vgnegmql" path="res://assets/ui/test3.png" id="8_fjl1q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -35,7 +34,7 @@ ambient_light_source = 1
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 5.7
-glow_strength = 0.65
+glow_strength = 0.47
 glow_blend_mode = 0
 fog_light_color = Color(0, 0, 0, 1)
 fog_density = 0.1095
@@ -92,11 +91,17 @@ environment = SubResource("Environment_hpooo")
 camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
 [node name="3DText" type="Label3D" parent="GameSequenceHandler"]
-transform = Transform3D(0.765253, 0, 0.00220383, 0, 0.765257, 0, -0.00220383, 0, 0.765253, 0.0126821, -0.704754, -0.0267003)
-visible = false
+transform = Transform3D(0.669895, 0, 0.592194, 0, 0.894122, 0, -0.592194, 0, 0.669895, -0.556893, -0.0761958, 0.0703852)
 texture_filter = 0
-text = "Holy shit 3d text"
-font = ExtResource("7_w83ar")
+text = "kill him"
+font = ExtResource("7_d73xt")
+outline_size = 0
+
+[node name="3DText2" type="Label3D" parent="GameSequenceHandler"]
+transform = Transform3D(0.566283, 0, -0.691936, 0, 0.894122, 0, 0.691936, 0, 0.566283, 0.54288, -0.0761958, 0.0519675)
+texture_filter = 0
+text = "walk away"
+font = ExtResource("7_d73xt")
 outline_size = 0
 
 [node name="Health" parent="GameSequenceHandler" instance=ExtResource("8_80j21")]
@@ -112,7 +117,6 @@ autoplay = "Explode"
 transform = Transform3D(0.0798235, 0, 0, 0, 0.0798235, 0, 0, 0, 0.0798235, -0.167577, -0.860665, -0.0061295)
 
 [node name="Control" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,12 +125,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0.498039)
 layout_mode = 0
-offset_left = -26.0
-offset_right = 486.0
-offset_bottom = 288.0
-texture = ExtResource("8_fjl1q")
+offset_left = 36.0
+offset_top = -64.0
+offset_right = 163.0
+offset_bottom = 198.0
+expand_mode = 1
 
 [editable path="GameSequenceHandler/Health"]
 [editable path="GameSequenceHandler/Health2"]
