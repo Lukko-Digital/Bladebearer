@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=12 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -55,12 +55,21 @@ shadow_enabled = true
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "target", "camera", "sword")]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+amount = 42045
+lifetime = 4.35
+local_coords = true
+trail_lifetime = 1.75
+process_material = ExtResource("5_tv00s")
+draw_pass_1 = SubResource("SphereMesh_2egrx")
+
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera")]
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
+sword = NodePath("Sword")
 target = NodePath("Target")
 camera = NodePath("MainCamera")
-sword = NodePath("Sword")
 
 [node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
 
@@ -75,19 +84,11 @@ light_energy = 0.25
 [node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01981)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="GameSequenceHandler"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-amount = 42045
-lifetime = 4.35
-trail_lifetime = 1.75
-process_material = ExtResource("5_tv00s")
-draw_pass_1 = SubResource("SphereMesh_2egrx")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="GameSequenceHandler"]
 environment = SubResource("Environment_hpooo")
 camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
-[node name="Label3D" type="Label3D" parent="SwordOrigin"]
+[node name="SwordOrigin#Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.605301, 0, -0.468218, 0, 0.765257, 0, 0.468218, 0, 0.605301, 0.492339, 0.0370455, -0.0267003)
 texture_filter = 0
 text = "Holy shit 3d text"
