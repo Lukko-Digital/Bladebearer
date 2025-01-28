@@ -90,8 +90,20 @@ func game_loop():
 		for _i in range(randi_range(1, 2)):
 			block_sequence()
 			await sequence_finished
-			if sword_hp <= 0:
+			if sword_hp <= 0 or bearer_hp <= 0:
 				break
+
+		if bearer_hp <= 0:
+			await get_tree().create_timer(0.5).timeout
+			%SwordClaimed.text = %OpponentName.text + " has claimed the sword."
+			%SwordClaimed.show()
+			await get_tree().create_timer(2).timeout
+			%SwordClaimed.hide()
+
+			bearer_hp = opp_hp
+			opp_hp = OPPONENT_MAX_HP
+			%BearerName.text = %OpponentName.text
+			%OpponentName.text = NAMES.pick_random()
 		if sword_hp <= 0:
 			break
 	%DeathScreen.show()

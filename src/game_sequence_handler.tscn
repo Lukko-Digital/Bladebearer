@@ -87,6 +87,16 @@ offset_right = 384.0
 offset_bottom = 153.0
 text = "a new challenger approaches..."
 
+[node name="SwordClaimed" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+offset_left = 99.0
+offset_top = 131.0
+offset_right = 417.0
+offset_bottom = 154.0
+text = "Attwell Haddock claims the sword"
+horizontal_alignment = 1
+
 [node name="BearerName" type="Label" parent="UI"]
 unique_name_in_owner = true
 offset_left = 24.0
