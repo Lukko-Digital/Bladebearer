@@ -6,8 +6,8 @@ extends Node3D
 class_name GameSequenceHandler
 
 const SWORD_MAX_HP = 5
-const BEARER_MAX_HP = 5
-const OPPONENT_MAX_HP = 5
+const BEARER_MAX_HP = 3
+const OPPONENT_MAX_HP = 3
 
 @export var swing_arm: SwingArm
 @export var sword: Sword
@@ -41,8 +41,11 @@ var opp_hp = OPPONENT_MAX_HP:
 func _ready() -> void:
 	game_loop.call_deferred()
 	sword_hp_bar.value = SWORD_MAX_HP
+	sword_hp_bar.max_value = SWORD_MAX_HP
 	bearer_hp_bar.value = BEARER_MAX_HP
+	bearer_hp_bar.max_value = BEARER_MAX_HP
 	opp_hp_bar.value = OPPONENT_MAX_HP
+	opp_hp_bar.max_value = OPPONENT_MAX_HP
 
 
 func game_loop():
@@ -53,6 +56,11 @@ func game_loop():
 		for _i in range(randi_range(1, 2)):
 			block_sequence()
 			await sequence_finished
+			if bearer_hp <= 0:
+				break
+		if bearer_hp <= 0:
+			break
+	%DeathScreen.show()
 
 
 ## Common actions that are done at the start of both swing and block sequences
@@ -143,3 +151,9 @@ func detach_from_arm():
 	main.add_child(self)
 	global_position = Vector3.ZERO
 	global_rotation = Vector3.ZERO
+
+func _on_respawn_button_pressed() -> void:
+	%DeathScreen.hide()
+	bearer_hp = BEARER_MAX_HP
+	opp_hp = OPPONENT_MAX_HP
+	game_loop.call_deferred()

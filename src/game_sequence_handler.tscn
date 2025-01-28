@@ -50,3 +50,41 @@ rotation = -1.5708
 max_value = 5.0
 value = 5.0
 show_percentage = false
+
+[node name="DeathScreen" type="ColorRect" parent="UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.431373)
+
+[node name="Label" type="Label" parent="UI/DeathScreen"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 122.0
+offset_right = 277.0
+offset_bottom = 145.0
+text = "dead :("
+
+[node name="RespawnButton" type="Button" parent="UI/DeathScreen"]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 161.0
+offset_right = 286.0
+offset_bottom = 192.0
+text = "respawn"
+
+[node name="NewChallenger" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+offset_left = 145.0
+offset_top = 130.0
+offset_right = 384.0
+offset_bottom = 153.0
+text = "a new challenger approaches..."
+
+[connection signal="pressed" from="UI/DeathScreen/RespawnButton" to="." method="_on_respawn_button_pressed"]
