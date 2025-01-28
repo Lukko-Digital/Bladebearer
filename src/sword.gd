@@ -13,12 +13,13 @@ const CORRECT_ROTATION_THRESHOLD = 2
 
 var target_rotation: Vector3:
 	set(value):
-		if game_sequence_handler.swinging:
+		if input_locked:
 			return
 		target_rotation = value
 
 var previously_correct_rotation = false
 var blocking = false
+var input_locked = false
 
 func _process(_delta: float) -> void:
 	handle_rotation()
@@ -53,3 +54,9 @@ func is_correct_rotation():
 	var xdiff = angle_difference(rotation.x, deg_to_rad(target.target_rot.x))
 	var zdiff = angle_difference(rotation.z, deg_to_rad(target.target_rot.z))
 	return (abs(xdiff) + abs(zdiff)) < deg_to_rad(CORRECT_ROTATION_THRESHOLD)
+
+func lock_input():
+	input_locked = true
+
+func unlock_input():
+	input_locked = false
