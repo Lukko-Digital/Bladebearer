@@ -52,11 +52,11 @@ shadow_enabled = true
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GameSequenceHandler" parent="." node_paths=PackedStringArray("swing_arm", "target", "camera", "sword") instance=ExtResource("2_wxisq")]
+[node name="GameSequenceHandler" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera") instance=ExtResource("2_wxisq")]
 swing_arm = NodePath("../SwingArm")
+sword = NodePath("Sword")
 target = NodePath("Target")
 camera = NodePath("MainCamera")
-sword = NodePath("Sword")
 
 [node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
 
