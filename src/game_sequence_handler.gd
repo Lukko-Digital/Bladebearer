@@ -53,6 +53,13 @@ func game_loop():
 		swing_sequence()
 		await sequence_finished
 
+		if opp_hp <= 0:
+			await get_tree().create_timer(0.5).timeout
+			%NewChallenger.show()
+			await get_tree().create_timer(2).timeout
+			opp_hp = OPPONENT_MAX_HP
+			%NewChallenger.hide()
+
 		for _i in range(randi_range(1, 2)):
 			block_sequence()
 			await sequence_finished
