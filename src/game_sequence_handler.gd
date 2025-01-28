@@ -9,6 +9,29 @@ const SWORD_MAX_HP = 5
 const BEARER_MAX_HP = 3
 const OPPONENT_MAX_HP = 3
 
+const NAMES = [
+	"Attwell Haddock",
+	"Siward Tothyll",
+	"Humphrey Denys",
+	"Odo Wensley",
+	"Algar Leighlin",
+	"Sewel Ballard",
+	"Osgood Baker",
+	"Bartholomew Westbrook",
+	"Rollo Deryngton",
+	"Thomas Sheffeld",
+	"Margery Goodwyn",
+	"Ragenhild Waldeley",
+	"Ediva Cosworth",
+	"Bridget Clement",
+	"Godusa Theobauld",
+	"Stanilde Redman",
+	"Golde Playters",
+	"Maud Fleet",
+	"Charity Hungate",
+	"Sarah Codington",
+]
+
 @export var swing_arm: SwingArm
 @export var sword: Sword
 @export var target: Target
@@ -46,6 +69,8 @@ func _ready() -> void:
 	bearer_hp_bar.max_value = BEARER_MAX_HP
 	opp_hp_bar.value = OPPONENT_MAX_HP
 	opp_hp_bar.max_value = OPPONENT_MAX_HP
+	%BearerName.text = NAMES.pick_random()
+	%OpponentName.text = NAMES.pick_random()
 
 
 func game_loop():
@@ -54,11 +79,13 @@ func game_loop():
 		await sequence_finished
 
 		if opp_hp <= 0:
+			%OpponentName.text = ""
 			await get_tree().create_timer(0.5).timeout
 			%NewChallenger.show()
 			await get_tree().create_timer(2).timeout
 			opp_hp = OPPONENT_MAX_HP
 			%NewChallenger.hide()
+			%OpponentName.text = NAMES.pick_random()
 
 		for _i in range(randi_range(1, 2)):
 			block_sequence()
