@@ -1,17 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://bedv3wcguauho"]
 
-[ext_resource type="PackedScene" uid="uid://bjuk5l5oyq03l" path="res://src/ui/heart.tscn" id="1_yrbxn"]
+[ext_resource type="Script" path="res://src/ui/heart_holder.gd" id="1_r3n0a"]
 
 [node name="HeartHolder" type="Node3D"]
 editor_description = "scale: 0.067
 z: -0.071
 y: plus or minus 0.91"
-transform = Transform3D(0.0669312, 0, 0, 0, 0.0669312, 0, 0, 0, 0.0669312, 0, 0, -0.071)
-
-[node name="Heart" parent="." instance=ExtResource("1_yrbxn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 0)
-
-[node name="Heart2" parent="." instance=ExtResource("1_yrbxn")]
-
-[node name="Heart3" parent="." instance=ExtResource("1_yrbxn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, 0)
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0, -0.071)
+script = ExtResource("1_r3n0a")
