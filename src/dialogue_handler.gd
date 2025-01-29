@@ -2,6 +2,9 @@ extends Node3D
 class_name DialogueHandler
 
 @onready var sword: Sword = get_parent().find_child("Sword")
+# @onready var top_label: Label3D = $TopLabel
+# @onready var center_label: Label3D = $CenterLabel
+@onready var bottom_label: Label3D = $BottomLabel
 
 var dialogue_option_scene: PackedScene = preload("res://src/dialogue_option.tscn")
 var dialogue_options: Array[DialogueOption]
@@ -10,7 +13,6 @@ var active_option = false
 signal dialogue_finished
 signal option_selected(option: DialogueOption)
 
-enum TEXT_ALIGNMENTS {TOP, CENTER, BOTTOM}
 
 func _process(_delta: float) -> void:
 	var option = alligned_option()
@@ -22,11 +24,11 @@ func _process(_delta: float) -> void:
 
 func start_dialogue(options: Array[String]) -> Signal:
 	await option_sequence(options)
-	end_dialogue()
+	await text_sequence("test", 1, bottom_label)
 
 	return dialogue_finished
 
-func option_sequence(options: Array[String]) -> Signal:
+func option_sequence(options: Array[String]) -> void:
 	active_option = true
 
 	var option_rotation = Vector3(0, 0, 45)
@@ -43,19 +45,25 @@ func option_sequence(options: Array[String]) -> Signal:
 		if node is DialogueOption:
 			dialogue_options.append(node)
 
-	return option_selected
+	await option_selected
+	end_sequence()
 
 
-func text_sequence(text: String, duration: float, allignment: TEXT_ALIGNMENTS = TEXT_ALIGNMENTS.TOP) -> void:
-	pass
+func text_sequence(text: String, duration: float, allignment: Label3D) -> void:
+	allignment.show() # Make this a fade in
+	allignment.text = text
+	await get_tree().create_timer(duration).timeout
+	end_sequence()
 
 
-func end_dialogue() -> void:
+func end_sequence() -> void:
 	for option in dialogue_options:
 		option.queue_free()
 
 	dialogue_options = []
 	active_option = false
+
+	bottom_label.hide() # Make this a fade out
 	# dialogue_finished.emit()
 
 

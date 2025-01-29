@@ -78,7 +78,7 @@ target = NodePath("Target")
 camera = NodePath("MainCamera")
 bearer_heart_holder = NodePath("BothHeartHolders/BearerHeartHolder")
 opponent_heart_holder = NodePath("BothHeartHolders/OpponentHeartHolder")
-dialogue_handler = NodePath("")
+dialogue_handler = NodePath("DialogueHandler")
 
 [node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
 
@@ -117,6 +117,12 @@ outline_size = 0
 
 [node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler"]
 script = ExtResource("9_5pvxm")
+
+[node name="BottomLabel" type="Label3D" parent="GameSequenceHandler/DialogueHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.69842, 0)
+text = "Bottom text"
+font = ExtResource("7_d73xt")
+outline_size = 0
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.486275)
