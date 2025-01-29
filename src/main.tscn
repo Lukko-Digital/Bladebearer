@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=17 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
 [ext_resource type="Texture2D" uid="uid://dpsevlwm67lxa" path="res://assets/ui/testwide.png" id="9_53wid"]
-[ext_resource type="PackedScene" uid="uid://blogor52w0717" path="res://src/dialogue_option.tscn" id="10_0d0d3"]
 [ext_resource type="Texture2D" uid="uid://d4d2146d1g2lj" path="res://assets/ui/knight_healthbar.png" id="11_o5jo7"]
 [ext_resource type="Texture2D" uid="uid://bj0p1725ho312" path="res://assets/ui/peasant_healthbar.png" id="12_v8oh0"]
 
@@ -71,7 +70,7 @@ trail_lifetime = 1.75
 process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder")]
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "dialogue_handler")]
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
 sword = NodePath("Sword")
@@ -79,6 +78,7 @@ target = NodePath("Target")
 camera = NodePath("MainCamera")
 bearer_heart_holder = NodePath("BothHeartHolders/BearerHeartHolder")
 opponent_heart_holder = NodePath("BothHeartHolders/OpponentHeartHolder")
+dialogue_handler = NodePath("DialogueHandler")
 
 [node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
 
@@ -117,9 +117,6 @@ outline_size = 0
 
 [node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler"]
 script = ExtResource("9_5pvxm")
-
-[node name="DialogueOption" parent="GameSequenceHandler/DialogueHandler" instance=ExtResource("10_0d0d3")]
-visible = false
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.486275)

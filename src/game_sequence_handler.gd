@@ -11,6 +11,7 @@ class_name GameSequenceHandler
 @export var camera: MainCamera
 @export var bearer_heart_holder: HeartHolder
 @export var opponent_heart_holder: HeartHolder
+@export var dialogue_handler: DialogueHandler
 
 @onready var main: Node3D = get_tree().current_scene
 
@@ -36,7 +37,8 @@ var opponent_health: int
 func _ready() -> void:
 	bearer_rank = KNIGHT
 	opponent_rank = KNIGHT
-	game_loop.call_deferred()
+	start_dialogue()
+	# game_loop.call_deferred()
 
 func game_loop():
 	init_fight()
@@ -166,3 +168,7 @@ func detach_from_arm():
 	main.add_child(self)
 	global_position = Vector3.ZERO
 	global_rotation = Vector3.ZERO
+
+func start_dialogue():
+	target.hide()
+	dialogue_handler.start_dialogue(["aasd", "bfds", "cgre"])
