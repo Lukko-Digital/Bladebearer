@@ -11,6 +11,7 @@ class_name GameSequenceHandler
 @export var camera: MainCamera
 @export var bearer_heart_holder: HeartHolder
 @export var opponent_heart_holder: HeartHolder
+@export var heart_border_ui: HeartBorderUI
 
 @onready var main: Node3D = get_tree().current_scene
 
@@ -18,9 +19,11 @@ enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 6)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 5)
-var KNIGHT = CombatantRank.new(4, 8, 3)
+# Spelling of name is important! Used to show correct border in heart_border_ui.tscn
+var PEASANT = CombatantRank.new(1, 2, 6, "Peasant")
+var FOOTSOLDIER = CombatantRank.new(2, 4, 5, "Footsoldier")
+var KNIGHT = CombatantRank.new(4, 8, 3, "Knight")
+var KINGSGUARD = CombatantRank.new(6, 12, 2, "Kingsguard")
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
@@ -34,7 +37,7 @@ var opponent_health: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bearer_rank = KNIGHT
+	bearer_rank = PEASANT
 	opponent_rank = KNIGHT
 	game_loop.call_deferred()
 
@@ -56,6 +59,8 @@ func init_fight():
 	opponent_health = opponent_rank.health
 	bearer_heart_holder.set_hearts(bearer_health)
 	opponent_heart_holder.set_hearts(opponent_health)
+	heart_border_ui.set_bearer_border(bearer_rank)
+	heart_border_ui.set_opponent_border(opponent_rank)
 	construct_action_queue()
 
 
