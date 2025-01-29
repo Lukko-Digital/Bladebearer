@@ -19,11 +19,10 @@ enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-# Spelling of name is important! Used to show correct border in heart_border_ui.tscn
-var PEASANT = CombatantRank.new(1, 2, 6, "Peasant")
-var FOOTSOLDIER = CombatantRank.new(2, 4, 5, "Footsoldier")
-var KNIGHT = CombatantRank.new(4, 8, 3, "Knight")
-var KINGSGUARD = CombatantRank.new(6, 12, 2, "Kingsguard")
+var PEASANT = CombatantRank.new(1, 2, 6, CombatantRank.RankName.PEASANT)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 5, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
