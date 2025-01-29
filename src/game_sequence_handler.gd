@@ -20,7 +20,7 @@ signal sequence_finished
 
 var PEASANT = CombatantRank.new(1, 2, 6)
 var FOOTSOLDIER = CombatantRank.new(2, 4, 5)
-var KNIGHT = CombatantRank.new(4, 8, 3)
+var KNIGHT = CombatantRank.new(4, 6, 3)
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
@@ -34,7 +34,7 @@ var opponent_health: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bearer_rank = KNIGHT
+	bearer_rank = PEASANT
 	opponent_rank = KNIGHT
 	game_loop.call_deferred()
 
