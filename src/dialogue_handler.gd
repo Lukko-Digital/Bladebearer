@@ -17,14 +17,14 @@ func _process(_delta: float) -> void:
 func start_dialogue(options: Array[String]) -> void:
 	active = true
 
-	var option_rotation = Vector3(-45, 0, 45)
+	var option_rotation = Vector3(0, 0, 45)
 	for option in options:
 		var option_instance = dialogue_option_scene.instantiate()
 		add_child(option_instance)
 		option_instance.set_text(option)
 		option_instance.set_target_rot(option_rotation)
 
-		option_rotation += Vector3(45, 0, -45)
+		option_rotation += Vector3(0, 0, -45)
 
 	dialogue_options = []
 	for node in get_children():
@@ -44,3 +44,6 @@ func alligned_option() -> DialogueOption:
 			return option
 
 	return null
+
+func parse_dialogue_file(file_path: String) -> void:
+	pass

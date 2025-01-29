@@ -1,0 +1,37 @@
+alignment[top, center, bottom] "text" duration[in seconds]
+
+options
+- "option text" (rotation[sequence of actions, _^WASD]) !result[set_arg, heal, upgrade, etc.] args //mapped to functions via a dict or something, set_arg just appends to list of choices you picked (idk if this is useful outside of opening scene)
+
+wait duration
+
+other_custom_thing[wheel, chest, shining, ...] //probably names of animations
+
+end
+
+example:
+    wheel
+    bottom "reach the king"
+    bottom "use whomever it takes"
+    chest
+    top "The hell's that"
+    bottom "She's bloody shining"
+    top "Well don't go touching it"
+    shining
+    top "are you algight?" -1
+    options
+    - "I'm okay" A !set_arg START_BLOCKING
+    - "Kill him" D !set_arg START_ATTACKING
+    end
+
+
+    wheel
+    options
+    - "Heal" A !heal
+    - "Power" SD !upgrade
+    - "Rush" ^D !advance
+    end
+
+
+    center "A man in rags approaches you" 3
+    end

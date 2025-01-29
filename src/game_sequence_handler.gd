@@ -37,8 +37,8 @@ var opponent_health: int
 func _ready() -> void:
 	bearer_rank = KNIGHT
 	opponent_rank = KNIGHT
-	# start_dialogue()
-	game_loop.call_deferred()
+	start_dialogue()
+	# game_loop.call_deferred()
 
 func game_loop():
 	init_fight()

@@ -8,8 +8,8 @@
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
-[ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
 [ext_resource type="Texture2D" uid="uid://dpsevlwm67lxa" path="res://assets/ui/testwide.png" id="9_53wid"]
+[ext_resource type="PackedScene" uid="uid://d2ujxvhj1utpe" path="res://src/dialogue_handler.tscn" id="9_wp4ov"]
 [ext_resource type="Texture2D" uid="uid://d4d2146d1g2lj" path="res://assets/ui/knight_healthbar.png" id="11_o5jo7"]
 [ext_resource type="Texture2D" uid="uid://bj0p1725ho312" path="res://assets/ui/peasant_healthbar.png" id="12_v8oh0"]
 
@@ -115,8 +115,7 @@ outline_size = 0
 
 [node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
 
-[node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler" node_paths=PackedStringArray("sword")]
-script = ExtResource("9_5pvxm")
+[node name="DialogueHandler" parent="GameSequenceHandler" node_paths=PackedStringArray("sword") instance=ExtResource("9_wp4ov")]
 sword = NodePath("../Sword")
 
 [node name="Control" type="Control" parent="."]
