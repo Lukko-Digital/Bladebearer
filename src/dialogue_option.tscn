@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://blogor52w0717"]
+
+[ext_resource type="Script" path="res://src/dialogue_option.gd" id="1_6khdy"]
+[ext_resource type="PackedScene" uid="uid://bvgn8m4a5hhy8" path="res://assets/models/Pointer.glb" id="2_fataf"]
+
+[node name="DialogueOption" type="Node3D"]
+script = ExtResource("1_6khdy")
+
+[node name="Pointer2" parent="." instance=ExtResource("2_fataf")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.524205, 0)
+
+[node name="AnimationPlayer" parent="Pointer2" index="1"]
+autoplay = "Pointer_Idle"
+
+[editable path="Pointer2"]
