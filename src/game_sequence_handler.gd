@@ -137,6 +137,7 @@ func block_sequence():
 	if sword.is_correct_rotation():
 		# Successful block
 		camera.shake(0.2, 15)
+		Global.sfx_player.play("Test")
 	else:
 		# Failed block
 		camera.shake(0.1, 6)
