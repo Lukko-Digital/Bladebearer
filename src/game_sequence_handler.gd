@@ -24,6 +24,23 @@ var FOOTSOLDIER = CombatantRank.new(2, 4, 5, CombatantRank.RankName.FOOTSOLDIER)
 var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
 
+# P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard
+# Space separated list of combatants in the location
+# If multiple letters are adjacent, it is a randomized selection between them
+const locations = {
+    "Royal Tent": "G G",
+    "Kingsguard": "KG K G",
+    "Central Field": "FK FK FK K",
+    "Rear Guard": "PF PF F K",
+    "Straggler's Field": "F PF PF",
+    "Outer Woods": "P P",
+    "Deep Woods": "P P",
+}
+
+# Variables that control progress outsie of a single combat
+var combatants: Array[CombatantRank]
+var needed_wins: int
+
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
 var bearer_rank: CombatantRank
@@ -34,13 +51,16 @@ var swinging = false
 var bearer_health: int
 var opponent_health: int
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bearer_rank = PEASANT
 	opponent_rank = KNIGHT
-	game_loop.call_deferred()
+	enter_location("Rear Guard")
+	enter_combat.call_deferred()
 
-func game_loop():
+
+func enter_combat():
 	init_fight()
 	while true:
 		var curr_action = action_queue.pop_front()
@@ -52,14 +72,55 @@ func game_loop():
 		await sequence_finished
 		action_queue.append(curr_action)
 
+		if opponent_health <= 0:
+			opponent_defeated()
+			break
+		if bearer_health <= 0:
+			break
+
+
+## ----------------- LOCATION LOGIC -----------------
+
+
+func enter_location(location_name: String):
+	create_combatant_list(locations[location_name])
+	needed_wins = combatants.size()
+
+
+## last_n is used when the player changes bearer and is set back one combat,
+## so the combatants are re-randomized
+func create_combatant_list(combatant_string: String, last_n: int = 0):
+	combatants.clear()
+	for char_set in combatant_string.split(" ").slice(-last_n):
+		var combatant_char = char_set[randi() % char_set.length()]
+		match combatant_char:
+			"P":
+				combatants.append(PEASANT)
+			"F":
+				combatants.append(FOOTSOLDIER)
+			"K":
+				combatants.append(KNIGHT)
+			"G":
+				combatants.append(KINGSGUARD)
+
+
+func current_wins() -> int:
+	return needed_wins - combatants.size()
+
+
+## ----------------- SINGLE COMBAT LOGIC -----------------
+
 
 func init_fight():
 	bearer_health = bearer_rank.health
-	opponent_health = opponent_rank.health
 	bearer_heart_holder.set_hearts(bearer_health)
-	opponent_heart_holder.set_hearts(opponent_health)
 	heart_border_ui.set_bearer_border(bearer_rank)
+
+	opponent_rank = combatants.pop_front()
+	opponent_health = opponent_rank.health
+	opponent_heart_holder.set_hearts(opponent_health)
 	heart_border_ui.set_opponent_border(opponent_rank)
+
 	construct_action_queue()
 
 
@@ -69,6 +130,50 @@ func construct_action_queue():
 		action_queue.append(ACTION.SWING)
 	for _i in range(opponent_rank.num_attacks):
 		action_queue.append(ACTION.BLOCK)
+
+
+func bearer_loses_health():
+	bearer_health -= 1
+	bearer_heart_holder.break_heart_at_idx(bearer_health)
+
+
+func opponent_loses_health():
+	opponent_health -= 1
+	opponent_heart_holder.break_heart_at_idx(opponent_health)
+
+
+func opponent_defeated():
+	if combatants.is_empty():
+		# Move to next location
+		print("you win")
+	else:
+		# Move to next combatant
+		enter_combat()
+
+
+## ----------------- PLAYER INPUT -----------------
+
+
+func lock_swing():
+	if not swing_arm.is_animation_playing("windup"):
+		return
+	# Check if inputs are correct
+	swinging = sword.target_rotation == target.target_rot
+	# Skip windup animation
+	swing_arm.swing_animation_player.advance(INF)
+
+
+## Called when the sword first enters correct rotation. If blocking, complete
+## the block. If attacking, play alignment animation.
+func sword_entered_correct_rotation():
+	if swing_arm.is_animation_playing("block"):
+		swing_arm.swing_animation_player.advance(INF)
+		target.block_effect.restart()
+	else:
+		target.align_effect.play("Sword_Aligned")
+
+
+## ----------------- SEQUENCES -----------------
 
 
 ## Common actions that are done at the start of both swing and block sequences
@@ -82,16 +187,6 @@ func pre_sequence():
 func post_sequence():
 	detach_from_arm()
 	sequence_finished.emit()
-
-
-func bearer_loses_health():
-	bearer_health -= 1
-	bearer_heart_holder.break_heart_at_idx(bearer_health)
-
-
-func opponent_loses_health():
-	opponent_health -= 1
-	opponent_heart_holder.break_heart_at_idx(opponent_health)
 
 
 func swing_sequence():
@@ -124,15 +219,6 @@ func swing_sequence():
 	post_sequence()
 
 
-func lock_swing():
-	if not swing_arm.is_animation_playing("windup"):
-		return
-	# Check if inputs are correct
-	swinging = sword.target_rotation == target.target_rot
-	# Skip windup animation
-	swing_arm.swing_animation_player.advance(INF)
-
-
 func block_sequence():
 	target.blue()
 	pre_sequence()
@@ -151,14 +237,7 @@ func block_sequence():
 	post_sequence()
 
 
-## Called when the sword first enters correct rotation. If blocking, complete
-## the block. If attacking, play alignment animation.
-func sword_entered_correct_rotation():
-	if swing_arm.is_animation_playing("block"):
-		swing_arm.swing_animation_player.advance(INF)
-		target.block_effect.restart()
-	else:
-		target.align_effect.play("Sword_Aligned")
+## ----------------- ARM INTERACTION -----------------
 
 
 func attach_to_arm():
