@@ -50,9 +50,9 @@ func handle_check_rotation():
 	previously_correct_rotation = is_correct_rotation()
 
 
-func is_correct_rotation():
-	var xdiff = angle_difference(rotation.x, deg_to_rad(target.target_rot.x))
-	var zdiff = angle_difference(rotation.z, deg_to_rad(target.target_rot.z))
+func is_correct_rotation(to: Node3D = target):
+	var xdiff = angle_difference(rotation.x, deg_to_rad(to.target_rot.x))
+	var zdiff = angle_difference(rotation.z, deg_to_rad(to.target_rot.z))
 	return (abs(xdiff) + abs(zdiff)) < deg_to_rad(CORRECT_ROTATION_THRESHOLD)
 
 func lock_input():

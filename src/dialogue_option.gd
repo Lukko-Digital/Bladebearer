@@ -27,3 +27,6 @@ func set_target_rot(rot: Vector3):
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if _anim_name == "Pointer_Idle":
 		animation_player.play("Pointer_Idle")
+
+func get_text() -> String:
+	return label.text

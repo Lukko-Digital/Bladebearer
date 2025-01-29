@@ -115,8 +115,9 @@ outline_size = 0
 
 [node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
 
-[node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler"]
+[node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler" node_paths=PackedStringArray("sword")]
 script = ExtResource("9_5pvxm")
+sword = NodePath("../Sword")
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.486275)
