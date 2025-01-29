@@ -366,7 +366,6 @@ _data = {
 }
 
 [node name="SwingArm" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_kwg84")
 
 [node name="Arm" type="Node3D" parent="."]
@@ -377,6 +376,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 unique_name_in_owner = true
 editor_description = "Will hide itself during actual gameplay. Just for visualizing swing patterns."
 transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
+visible = false
 
 [node name="SwingAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

@@ -1,10 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk7m3yrxa5o8b"]
+[gd_scene load_steps=13 format=3 uid="uid://bn1h8mr7sagxh"]
 
-[ext_resource type="AudioStream" uid="uid://bgvg4j1w04avh" path="res://assets/audio/test.mp3" id="1_pmi8v"]
 [ext_resource type="Script" path="res://src/sfx_player.gd" id="1_w3uqv"]
+[ext_resource type="AudioStream" uid="uid://n2j8f8tqvv5t" path="res://assets/music/Alpha_Theme.wav" id="3_h65a2"]
+[ext_resource type="AudioStream" uid="uid://gvv8j33xymil" path="res://assets/sfx/Nature_Ambience.WAV" id="3_rt8ug"]
+[ext_resource type="AudioStream" uid="uid://ba5pwnlcqf681" path="res://assets/sfx/Battle_Ambience.wav" id="4_7panh"]
+[ext_resource type="AudioStream" uid="uid://dtwnottcescoo" path="res://assets/sfx/Sword_Hit_1.wav" id="5_dpyls"]
+[ext_resource type="AudioStream" uid="uid://yln2eiebcge1" path="res://assets/sfx/Woosh_1.wav" id="6_hvck8"]
+[ext_resource type="AudioStream" uid="uid://yubd88bi0a7f" path="res://assets/sfx/Swing_Yell_2.wav" id="7_af5y6"]
+[ext_resource type="AudioStream" uid="uid://ckmi44hoqaiqk" path="res://assets/sfx/Breath_Josh_1.wav" id="8_c16o2"]
+[ext_resource type="AudioStream" uid="uid://brab1j6ybrd28" path="res://assets/sfx/Breath_Josh_2.wav" id="9_kn5em"]
+[ext_resource type="AudioStream" uid="uid://c3j5ec5mrwcr3" path="res://assets/sfx/Breath_Josh_3.wav" id="10_y1tfg"]
+[ext_resource type="AudioStream" uid="uid://dvnsqdcqmhmfv" path="res://assets/sfx/Breath_Josh_4.wav" id="11_xttyo"]
+[ext_resource type="AudioStream" uid="uid://c4lnaftsgjhg2" path="res://assets/sfx/Breath_Josh_5.wav" id="12_jieu4"]
 
 [node name="SfxPlayer" type="Node"]
 script = ExtResource("1_w3uqv")
 
-[node name="Test" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_pmi8v")
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h65a2")
+volume_db = 4.855
+autoplay = true
+
+[node name="Nature_Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rt8ug")
+volume_db = 21.464
+autoplay = true
+
+[node name="Battle_Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7panh")
+volume_db = -2.72
+autoplay = true
+
+[node name="Sword_Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_dpyls")
+
+[node name="Woosh" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hvck8")
+volume_db = 8.432
+
+[node name="Yell" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_af5y6")
+
+[node name="Breathing" type="Node" parent="."]
+
+[node name="Breath_1" type="AudioStreamPlayer" parent="Breathing"]
+stream = ExtResource("8_c16o2")
+
+[node name="Breath_2" type="AudioStreamPlayer" parent="Breathing"]
+stream = ExtResource("9_kn5em")
+
+[node name="Breath_3" type="AudioStreamPlayer" parent="Breathing"]
+stream = ExtResource("10_y1tfg")
+
+[node name="Breath_4" type="AudioStreamPlayer" parent="Breathing"]
+stream = ExtResource("11_xttyo")
+
+[node name="Breath_5" type="AudioStreamPlayer" parent="Breathing"]
+stream = ExtResource("12_jieu4")
