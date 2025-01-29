@@ -34,9 +34,5 @@ func set_hearts(num_hearts: int):
 func break_heart_at_idx(idx: int):
 	if idx < 0 or idx >= heart_array.size():
 		push_error("Invalid heart index ", str(idx), " on ", self)
-<<<<<<< HEAD
-	heart_array[idx].break_heart()
-=======
 		return
 	heart_array[idx].break_heart()
->>>>>>> 4a10c3c192de07ee6e712560ff0f3bda6a95388c
