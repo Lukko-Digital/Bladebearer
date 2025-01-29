@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
-[ext_resource type="PackedScene" path="res://src/sfx_player.tscn" id="10_gaf0o"]
+[ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -36,7 +36,7 @@ ambient_light_source = 1
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 8.0
-glow_strength = 0.49
+glow_strength = 0.37
 glow_blend_mode = 0
 glow_map_strength = 1.0
 fog_light_color = Color(0, 0, 0, 1)
@@ -46,6 +46,8 @@ volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_length = 20.96
 volumetric_fog_detail_spread = 6.0
+adjustment_brightness = 1.54
+adjustment_contrast = 1.44
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
 dof_blur_far_distance = 4.23
@@ -57,6 +59,7 @@ transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.43
 shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Snow" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
@@ -88,6 +91,14 @@ swing_arm = NodePath("../../SwingArm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
 light_energy = 0.25
 
+[node name="OmniLight3D2" type="OmniLight3D" parent="GameSequenceHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.489056, 0.32441, -0.444855)
+light_energy = 0.25
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="GameSequenceHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.333432, 0.0608484, 0.262614)
+light_energy = 0.25
+
 [node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0194353, 1.00529)
 
@@ -115,6 +126,10 @@ outline_size = 0
 
 [node name="HeartBorderUI" parent="GameSequenceHandler" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
 camera = NodePath("../MainCamera")
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="GameSequenceHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489963, 0.32441, -0.444855)
+light_energy = 0.25
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
