@@ -225,7 +225,6 @@ surface_material_override/0 = ExtResource("4_11lmb")
 [node name="HologramRedFX" parent="." instance=ExtResource("4_3bsy8")]
 unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
-visible = false
 
 [node name="Blade" parent="HologramRedFX" index="0"]
 surface_material_override/0 = ExtResource("4_11lmb")
@@ -235,7 +234,6 @@ surface_material_override/0 = ExtResource("4_11lmb")
 
 [node name="AlignEffect" type="AnimationPlayer" parent="HologramRedFX"]
 unique_name_in_owner = true
-root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_a8cii")
 }

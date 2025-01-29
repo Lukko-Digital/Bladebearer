@@ -35,8 +35,10 @@ rings = 1
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
 dof_blur_far_distance = 4.23
 
-[sub_resource type="Animation" id="Animation_1q5g8"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_8ka2i"]
+resource_name = "Chest Open"
+length = 4.0
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,10 +46,10 @@ tracks/0/path = NodePath("%DirectionalLights:brightness")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(33.1285, 1),
 "update": 0,
-"values": [1.0]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -56,10 +58,10 @@ tracks/1/path = NodePath("%OmniLights:brightness")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(33.1285, 1),
 "update": 0,
-"values": [0.6]
+"values": [0.1, 0.6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -68,10 +70,10 @@ tracks/2/path = NodePath("ChestLight:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(4.75684, 1),
 "update": 0,
-"values": [1.0]
+"values": [1.0, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -80,10 +82,10 @@ tracks/3/path = NodePath("ChestLight:spot_angle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(4.75684, 1),
 "update": 0,
-"values": [45.0]
+"values": [45.0, 101.3]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -92,10 +94,10 @@ tracks/4/path = NodePath("%Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -104,15 +106,14 @@ tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 1.2, 1.6, 2, 2.6, 3.4),
+"transitions": PackedFloat32Array(68.5938, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [1.0, 0.999998, 0.36, 0.91, 0.41, 0.74, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_uom86"]
-resource_name = "Main"
-length = 0.1
+[sub_resource type="Animation" id="Animation_5pdrl"]
+resource_name = "Chest Peek"
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -122,9 +123,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(33.1285),
 "update": 0,
-"values": [1.0]
+"values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -134,9 +135,9 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(33.1285),
 "update": 0,
-"values": [0.6]
+"values": [0.1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -146,9 +147,9 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(4.75684),
 "update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -157,10 +158,10 @@ tracks/3/path = NodePath("ChestLight:spot_angle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(17.7531, 1, 0.233259),
 "update": 0,
-"values": [101.3]
+"values": [0.0, 59.38, 45.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -172,7 +173,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -182,9 +183,9 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(68.5938),
 "update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_tts51"]
@@ -264,8 +265,9 @@ tracks/5/keys = {
 "values": [1.0]
 }
 
-[sub_resource type="Animation" id="Animation_5pdrl"]
-resource_name = "Chest Peek"
+[sub_resource type="Animation" id="Animation_uom86"]
+resource_name = "Main"
+length = 0.1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -275,9 +277,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(33.1285),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -287,9 +289,9 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(33.1285),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.1]
+"values": [0.6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -299,9 +301,9 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(4.75684),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -310,10 +312,10 @@ tracks/3/path = NodePath("ChestLight:spot_angle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8, 1),
-"transitions": PackedFloat32Array(17.7531, 1, 0.233259),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0, 59.38, 45.0]
+"values": [101.3]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -325,7 +327,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -335,15 +337,13 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(68.5938),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_8ka2i"]
-resource_name = "Chest Open"
-length = 4.0
-step = 0.1
+[sub_resource type="Animation" id="Animation_1q5g8"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -351,10 +351,10 @@ tracks/0/path = NodePath("%DirectionalLights:brightness")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(33.1285, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0, 1.0]
+"values": [1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -363,10 +363,10 @@ tracks/1/path = NodePath("%OmniLights:brightness")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(33.1285, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.1, 0.6]
+"values": [0.6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -375,10 +375,10 @@ tracks/2/path = NodePath("ChestLight:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(4.75684, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -387,10 +387,10 @@ tracks/3/path = NodePath("ChestLight:spot_angle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(4.75684, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [45.0, 101.3]
+"values": [45.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -399,10 +399,10 @@ tracks/4/path = NodePath("%Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -411,10 +411,10 @@ tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 1.6, 2, 2.6, 3.4),
-"transitions": PackedFloat32Array(68.5938, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0, 0.999998, 0.36, 0.91, 0.41, 0.74, 0.0]
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
@@ -443,7 +443,6 @@ transform = Transform3D(-0.545418, -0.438655, -0.714214, -0.0509404, -0.833193, 
 shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Snow" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
