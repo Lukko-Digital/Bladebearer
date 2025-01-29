@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjuk5l5oyq03l"]
+[gd_scene load_steps=6 format=3 uid="uid://bjuk5l5oyq03l"]
 
 [ext_resource type="PackedScene" uid="uid://cf3rsn4b4p51p" path="res://assets/models/Health.glb" id="1_heeaa"]
+[ext_resource type="Script" path="res://src/ui/heart.gd" id="2_hrxq7"]
 
 [sub_resource type="Animation" id="Animation_okqp0"]
 resource_name = "Break"
@@ -39,6 +40,7 @@ _data = {
 }
 
 [node name="Heart" instance=ExtResource("1_heeaa")]
+script = ExtResource("2_hrxq7")
 
 [node name="AnimationPlayer" parent="." index="1"]
 unique_name_in_owner = true

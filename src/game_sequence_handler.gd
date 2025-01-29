@@ -9,6 +9,8 @@ class_name GameSequenceHandler
 @export var sword: Sword
 @export var target: Target
 @export var camera: MainCamera
+@export var bearer_heart_holder: HeartHolder
+@export var opponent_heart_holder: HeartHolder
 
 @onready var main: Node3D = get_tree().current_scene
 
@@ -20,19 +22,24 @@ var PEASANT = CombatantRank.new(1, 2, 6)
 var FOOTSOLDIER = CombatantRank.new(2, 4, 5)
 var KNIGHT = CombatantRank.new(4, 8, 3)
 
-var swinging = false
+# Variables that control top level of combat
 var action_queue: Array[ACTION]
 var bearer_rank: CombatantRank
 var opponent_rank: CombatantRank
 
+# Variables that actively change during combat
+var swinging = false
+var bearer_health: int
+var opponent_health: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bearer_rank = PEASANT
-	opponent_rank = PEASANT
+	bearer_rank = KNIGHT
+	opponent_rank = KNIGHT
 	game_loop.call_deferred()
 
 func game_loop():
-	construct_action_queue()
+	init_fight()
 	while true:
 		var curr_action = action_queue.pop_front()
 		match curr_action:
@@ -42,6 +49,14 @@ func game_loop():
 				block_sequence()
 		await sequence_finished
 		action_queue.append(curr_action)
+
+
+func init_fight():
+	bearer_health = bearer_rank.health
+	opponent_health = opponent_rank.health
+	bearer_heart_holder.set_hearts(bearer_health)
+	opponent_heart_holder.set_hearts(opponent_health)
+	construct_action_queue()
 
 
 func construct_action_queue():
@@ -65,6 +80,16 @@ func post_sequence():
 	sequence_finished.emit()
 
 
+func bearer_loses_health():
+	bearer_health -= 1
+	bearer_heart_holder.break_heart_at_idx(bearer_health)
+
+
+func opponent_loses_health():
+	opponent_health -= 1
+	opponent_heart_holder.break_heart_at_idx(opponent_health)
+
+
 func swing_sequence():
 	target.red()
 	pre_sequence()
@@ -73,12 +98,15 @@ func swing_sequence():
 	
 	sword.lock_input()
 	if swinging:
+		# Successful swing
 		swing_arm.play_animation("swing")
 		await swing_arm.swing_animation_player.animation_finished
 		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
+		opponent_loses_health()
 	else:
+		# No swing
 		target.hide()
 		swing_arm.play_animation("falter_swing")
 		await swing_arm.swing_animation_player.animation_finished
@@ -102,10 +130,13 @@ func block_sequence():
 	swing_arm.play_animation("block", opponent_rank.time_to_react)
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
+		# Successful block
 		camera.shake(0.2, 15)
 	else:
+		# Failed block
 		camera.shake(0.1, 6)
 		sword.screen_color_animation.play("red_flash")
+		bearer_loses_health()
 	post_sequence()
 
 

@@ -18,16 +18,20 @@ func _ready():
 	scale = SCALE
 
 func clear_hearts():
-	for child in get_children():
-		remove_child(child)
-		child.queue_free()
+	while heart_array.size() > 0:
+		var heart_instance = heart_array.pop_back()
+		remove_child(heart_instance)
+		heart_instance.queue_free()
 
 func set_hearts(num_hearts: int):
 	var start_x = -HEART_OFFSET * (num_hearts - 1) / 2
 	for i in range(num_hearts):
-		var heart_instance = heart_scene.instantiate()
+		var heart_instance: Heart = heart_scene.instantiate()
 		heart_instance.position.x = start_x + i * HEART_OFFSET
 		add_child(heart_instance)
+		heart_array.append(heart_instance)
 
-func lose_health(current_health: int):
-	heart_array[current_health].break_heart()
+func break_heart_at_idx(idx: int):
+	if idx < 0 or idx >= heart_array.size():
+		push_error("Invalid heart index ", str(idx), " on ", self)
+	heart_array[idx].break_heart()

@@ -69,12 +69,14 @@ trail_lifetime = 1.75
 process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera")]
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder")]
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
 sword = NodePath("Sword")
 target = NodePath("Target")
 camera = NodePath("MainCamera")
+bearer_heart_holder = NodePath("BothHeartHolders/BearerHeartHolder")
+opponent_heart_holder = NodePath("BothHeartHolders/OpponentHeartHolder")
 
 [node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
 
@@ -110,6 +112,12 @@ font = ExtResource("7_d73xt")
 outline_size = 0
 
 [node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
+
+[node name="BearerHeartHolder" parent="GameSequenceHandler/BothHeartHolders" index="0"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.91, -0.071)
+
+[node name="OpponentHeartHolder" parent="GameSequenceHandler/BothHeartHolders" index="1"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0.91, -0.071)
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.486275)
@@ -149,3 +157,5 @@ offset_bottom = 307.0
 texture = ExtResource("12_v8oh0")
 expand_mode = 1
 stretch_mode = 4
+
+[editable path="GameSequenceHandler/BothHeartHolders"]
