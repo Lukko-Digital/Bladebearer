@@ -71,6 +71,7 @@ func blue():
 	holo_red.hide()
 
 func play_animation(animation_name: String, animation_duration: float = 0):
+	target_animation_player.stop()
 	assert(target_animation_player.has_animation(animation_name))
 
 	if animation_duration > 0:

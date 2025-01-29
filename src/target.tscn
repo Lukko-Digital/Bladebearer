@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccb8dq5qk5vev"]
+[gd_scene load_steps=21 format=3 uid="uid://ccb8dq5qk5vev"]
 
 [ext_resource type="Script" path="res://src/target.gd" id="1_rhyst"]
 [ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram_blue.tres" id="3_c2dso"]
@@ -173,8 +173,46 @@ _data = {
 "Sword_Aligned": SubResource("Animation_kit2k")
 }
 
-[node name="Target" type="Node3D"]
+[sub_resource type="Animation" id="Animation_msgln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qa78l"]
+resource_name = "Blink"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.118507, 0.236292, 0.348982, 0.43516, 0.525245, 0.602769, 0.678269, 0.749063, 0.800481, 0.85259, 0.894157, 0.929509, 0.952337, 0.970628, 0.985518, 0.993387, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.492, 0.0, 0.492, 0.0, 0.73, 0.0, 0.73, 0.0, 0.785, 0.0, 0.785, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_06wim"]
+_data = {
+"Blink": SubResource("Animation_qa78l"),
+"RESET": SubResource("Animation_msgln")
+}
+
+[node name="Target" type="Node3D" node_paths=PackedStringArray("meshes")]
 script = ExtResource("1_rhyst")
+meshes = [NodePath("HologramBlue/Blade"), NodePath("HologramBlue/Handle"), NodePath("HologramRed/Blade"), NodePath("HologramRed/Handle")]
 
 [node name="BlockEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
@@ -238,6 +276,12 @@ libraries = {
 "": SubResource("AnimationLibrary_a8cii")
 }
 autoplay = "DEFAULT"
+
+[node name="TargetAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_06wim")
+}
 
 [editable path="HologramBlue"]
 [editable path="HologramRed"]
