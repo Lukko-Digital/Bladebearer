@@ -2,8 +2,8 @@ extends Node3D
 class_name DialogueHandler
 
 @onready var sword: Sword = get_parent().find_child("Sword")
-# @onready var top_label: Label3D = $TopLabel
-# @onready var center_label: Label3D = $CenterLabel
+@onready var top_label: Label3D = $TopLabel
+@onready var center_label: Label3D = $CenterLabel
 @onready var bottom_label: Label3D = $BottomLabel
 
 var dialogue_option_scene: PackedScene = preload("res://src/dialogue_option.tscn")
@@ -63,7 +63,9 @@ func end_sequence() -> void:
 	dialogue_options = []
 	active_option = false
 
-	bottom_label.hide() # Make this a fade out
+	top_label.hide() # Make this a fade out
+	center_label.hide()
+	bottom_label.hide()
 	# dialogue_finished.emit()
 
 
