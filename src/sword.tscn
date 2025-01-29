@@ -157,7 +157,7 @@ _data = {
 script = ExtResource("1_a5gxo")
 
 [node name="Sword" parent="." instance=ExtResource("3_mq21s")]
-transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

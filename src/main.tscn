@@ -15,7 +15,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
 depth_draw_mode = 1
-albedo_color = Color(1, 1, 1, 0.0745098)
+albedo_color = Color(1, 1, 1, 0.0156863)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.19
@@ -62,6 +62,7 @@ shadow_enabled = true
 [node name="Snow" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1.03642, 0, 0, 0, 1.03642, 0, 0, 0, 1.03642, 0, 0, 0)
+visible = false
 amount = 42045
 lifetime = 4.35
 local_coords = true

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6gs4fh7e46qt"
-path.s3tc="res://.godot/imported/Sword_Sword_Emit_2_Dither.png-78e0cb113b3c84f0e177ff47df4552d7.s3tc.ctex"
+uid="uid://b6xdav8jfnvnj"
+path.s3tc="res://.godot/imported/SwordHologram_Handle_Tex_Dither.png-6c31fe9f5ef7ed066a1f5b93b70bc33f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "e227f2b86e1c91181762bfdda42c8a98"
+"md5": "6299f17d40626e993419632b14600e7a"
 }
 
 [deps]
 
-source_file="res://assets/models/Sword_Sword_Emit_2_Dither.png"
-dest_files=["res://.godot/imported/Sword_Sword_Emit_2_Dither.png-78e0cb113b3c84f0e177ff47df4552d7.s3tc.ctex"]
+source_file="res://assets/models/SwordHologram_Handle_Tex_Dither.png"
+dest_files=["res://.godot/imported/SwordHologram_Handle_Tex_Dither.png-6c31fe9f5ef7ed066a1f5b93b70bc33f.s3tc.ctex"]
 
 [params]
 
