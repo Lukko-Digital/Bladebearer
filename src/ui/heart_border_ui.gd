@@ -21,7 +21,18 @@ func set_opponent_border(opponent_rank: CombatantRank):
 
 func set_border(rank: CombatantRank, border_parent: Control):
 	hide_all(border_parent)
-	border_parent.get_node(rank.name).show()
+	# String must correspond to the name of a border node in the scene.
+	var rank_name: String
+	match rank.name:
+		CombatantRank.RankName.PEASANT:
+			rank_name = "Peasant"
+		CombatantRank.RankName.FOOTSOLDIER:
+			rank_name = "Footsoldier"
+		CombatantRank.RankName.KNIGHT:
+			rank_name = "Knight"
+		CombatantRank.RankName.KINGSGUARD:
+			rank_name = "Kingsguard"
+	border_parent.get_node(rank_name).show()
 
 func hide_all(border_parent: Control):
 	for border in border_parent.get_children():
