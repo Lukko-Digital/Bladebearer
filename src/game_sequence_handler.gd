@@ -105,7 +105,12 @@ func swing_sequence():
 	if swinging:
 		# Successful swing
 		swing_arm.play_animation("swing")
+		
+		Global.sfx_player.play("Yell")
+		Global.sfx_player.play_timed("Woosh", 0.1)
+
 		await swing_arm.swing_animation_player.animation_finished
+		Global.sfx_player.play("Sword_Hit")
 		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
@@ -136,8 +141,9 @@ func block_sequence():
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
 		# Successful block
+		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
-		Global.sfx_player.play("Test")
+		# Global.sfx_player.play("Test")
 	else:
 		# Failed block
 		camera.shake(0.1, 6)
