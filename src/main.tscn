@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=18 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
+[ext_resource type="Environment" uid="uid://cos2fdybsuq2b" path="res://assets/environments/main.tres" id="7_knhja"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
@@ -31,31 +32,30 @@ height = 0.02
 radial_segments = 4
 rings = 1
 
-[sub_resource type="Environment" id="Environment_hpooo"]
-ambient_light_source = 1
-glow_enabled = true
-glow_normalized = true
-glow_intensity = 8.0
-glow_strength = 0.37
-glow_blend_mode = 0
-glow_map_strength = 1.0
-fog_light_color = Color(0, 0, 0, 1)
-fog_density = 0.1095
-volumetric_fog_density = 1.0
-volumetric_fog_albedo = Color(0, 0, 0, 1)
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_length = 20.96
-volumetric_fog_detail_spread = 6.0
-adjustment_brightness = 1.54
-adjustment_contrast = 1.44
-
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
 dof_blur_far_distance = 4.23
+
+[sub_resource type="Animation" id="Animation_8ka2i"]
+resource_name = "Chest Open"
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_1q5g8"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
+_data = {
+"Chest Open": SubResource("Animation_8ka2i"),
+"RESET": SubResource("Animation_1q5g8")
+}
 
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, 0, 0, 0)
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.596769, 0.551365, -0.582978, -0.75, -0.125, 0.649519, 0.28525, 0.824846, 0.48812, 0, 0, 0)
 shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
@@ -95,15 +95,26 @@ light_energy = 0.25
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.489056, 0.32441, -0.444855)
 light_energy = 0.25
 
+[node name="SpotLight3D" type="SpotLight3D" parent="GameSequenceHandler"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0.0481981, 0.12538, 0.0859773)
+visible = false
+spot_range = 0.765
+spot_attenuation = 1.25
+spot_angle_attenuation = 1.36604e-05
+
 [node name="OmniLight3D3" type="OmniLight3D" parent="GameSequenceHandler"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.333432, 0.0608484, 0.262614)
+light_energy = 0.25
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="GameSequenceHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489963, 0.32441, -0.444855)
 light_energy = 0.25
 
 [node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0194353, 1.00529)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="GameSequenceHandler"]
-environment = SubResource("Environment_hpooo")
+environment = ExtResource("7_knhja")
 camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
 [node name="3DText" type="Label3D" parent="GameSequenceHandler"]
@@ -127,10 +138,13 @@ outline_size = 0
 [node name="HeartBorderUI" parent="GameSequenceHandler" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
 camera = NodePath("../MainCamera")
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="GameSequenceHandler"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489963, 0.32441, -0.444855)
-light_energy = 0.25
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameSequenceHandler"]
+libraries = {
+"": SubResource("AnimationLibrary_4m25b")
+}
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
+[editable path="GameSequenceHandler/Sword"]
+[editable path="GameSequenceHandler/Sword/Sword"]
 [editable path="GameSequenceHandler/BothHeartHolders"]

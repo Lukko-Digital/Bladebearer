@@ -174,5 +174,3 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_e3fsf")
 }
-
-[editable path="Sword"]
