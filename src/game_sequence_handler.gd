@@ -216,6 +216,7 @@ func swing_sequence():
 	target.red()
 	pre_sequence()
 	swing_arm.play_animation("windup", opponent_rank.time_to_react)
+	target.play_animation("Blink", opponent_rank.time_to_react)
 	await swing_arm.swing_animation_player.animation_finished
 	
 	sword.lock_input()
@@ -246,6 +247,7 @@ func block_sequence():
 	target.blue()
 	pre_sequence()
 	swing_arm.play_animation("block", opponent_rank.time_to_react)
+	target.play_animation("Blink", opponent_rank.time_to_react)
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
 		# Successful block

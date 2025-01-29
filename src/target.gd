@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 class_name Target
 
@@ -11,6 +12,14 @@ class_name Target
 @onready var hit_effect: Node3D = %HitEffect
 @onready var align_effect: AnimationPlayer = %AlignEffect
 
+@export var meshes: Array[GeometryInstance3D]
+@export_range (0, 1) var transparency: float = 0.0 :
+	set(value):
+		transparency = value
+		for mesh in meshes:
+			mesh.transparency = value
+
+@onready var target_animation_player: AnimationPlayer = %TargetAnimationPlayer
 
 const ROTATION_LERP_SPEED = 0.07
 
@@ -60,3 +69,14 @@ func red():
 func blue():
 	holo_blue.show()
 	holo_red.hide()
+
+func play_animation(animation_name: String, animation_duration: float = 0):
+	target_animation_player.stop()
+	assert(target_animation_player.has_animation(animation_name))
+
+	if animation_duration > 0:
+		target_animation_player.speed_scale = target_animation_player.get_animation(animation_name).length / animation_duration
+	else:
+		target_animation_player.speed_scale = 1
+
+	target_animation_player.play(animation_name)
