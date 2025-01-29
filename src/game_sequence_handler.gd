@@ -37,8 +37,10 @@ var opponent_health: int
 func _ready() -> void:
 	bearer_rank = KNIGHT
 	opponent_rank = KNIGHT
-	start_dialogue()
-	# game_loop.call_deferred()
+
+	await start_dialogue()
+
+	game_loop.call_deferred()
 
 func game_loop():
 	init_fight()
@@ -54,6 +56,7 @@ func game_loop():
 
 
 func init_fight():
+	target.show()
 	bearer_health = bearer_rank.health
 	opponent_health = opponent_rank.health
 	bearer_heart_holder.set_hearts(bearer_health)
@@ -169,6 +172,6 @@ func detach_from_arm():
 	global_position = Vector3.ZERO
 	global_rotation = Vector3.ZERO
 
-func start_dialogue():
+func start_dialogue() -> Signal:
 	target.hide()
-	dialogue_handler.start_dialogue(["aasd", "bfds", "cgre"])
+	return await dialogue_handler.start_dialogue(["aasd", "bfds", "cgre"])
