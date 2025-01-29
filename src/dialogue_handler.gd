@@ -1,7 +1,7 @@
 extends Node3D
 class_name DialogueHandler
 
-@export var sword: Sword
+@onready var sword: Sword = get_parent().find_child("Sword")
 
 var dialogue_option_scene: PackedScene = preload("res://src/dialogue_option.tscn")
 var dialogue_options: Array[DialogueOption]
@@ -44,6 +44,3 @@ func alligned_option() -> DialogueOption:
 			return option
 
 	return null
-
-func parse_dialogue_file(file_path: String) -> void:
-	pass
