@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk7m3yrxa5o8b"]
+[gd_scene load_steps=3 format=3 uid="uid://bn1h8mr7sagxh"]
 
-[ext_resource type="AudioStream" uid="uid://bgvg4j1w04avh" path="res://assets/audio/test.mp3" id="1_pmi8v"]
 [ext_resource type="Script" path="res://src/sfx_player.gd" id="1_w3uqv"]
+[ext_resource type="AudioStream" uid="uid://n2j8f8tqvv5t" path="res://assets/music/Alpha_Theme.wav" id="3_h65a2"]
 
 [node name="SfxPlayer" type="Node"]
 script = ExtResource("1_w3uqv")
 
-[node name="Test" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_pmi8v")
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h65a2")
+autoplay = true
