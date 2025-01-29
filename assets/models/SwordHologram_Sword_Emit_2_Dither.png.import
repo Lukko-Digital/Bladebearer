@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6gs4fh7e46qt"
-path.s3tc="res://.godot/imported/Sword_Sword_Emit_2_Dither.png-78e0cb113b3c84f0e177ff47df4552d7.s3tc.ctex"
+uid="uid://rx4uc724h27q"
+path.s3tc="res://.godot/imported/SwordHologram_Sword_Emit_2_Dither.png-ca97a1fa603c1de1a6c62a3479e231f2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/models/Sword_Sword_Emit_2_Dither.png"
-dest_files=["res://.godot/imported/Sword_Sword_Emit_2_Dither.png-78e0cb113b3c84f0e177ff47df4552d7.s3tc.ctex"]
+source_file="res://assets/models/SwordHologram_Sword_Emit_2_Dither.png"
+dest_files=["res://.godot/imported/SwordHologram_Sword_Emit_2_Dither.png-ca97a1fa603c1de1a6c62a3479e231f2.s3tc.ctex"]
 
 [params]
 

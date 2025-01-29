@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjuk5l5oyq03l"]
+[gd_scene load_steps=7 format=3 uid="uid://bjuk5l5oyq03l"]
 
 [ext_resource type="PackedScene" uid="uid://cf3rsn4b4p51p" path="res://assets/models/Health.glb" id="1_heeaa"]
 [ext_resource type="Script" path="res://src/ui/heart.gd" id="2_hrxq7"]
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.0358968, 4.59479),
 "update": 0,
-"values": [0.0, 0.99]
+"values": [0.92, 0.99]
 }
 
 [sub_resource type="Animation" id="Animation_l8v15"]
@@ -33,10 +33,26 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_n861v"]
+resource_name = "Start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_cell_015:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.0358968),
+"update": 0,
+"values": [0.92]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pindp"]
 _data = {
 "Break": SubResource("Animation_okqp0"),
-"RESET": SubResource("Animation_l8v15")
+"RESET": SubResource("Animation_l8v15"),
+"Start": SubResource("Animation_n861v")
 }
 
 [node name="Heart" instance=ExtResource("1_heeaa")]
@@ -50,3 +66,4 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_pindp")
 }
+autoplay = "Start"
