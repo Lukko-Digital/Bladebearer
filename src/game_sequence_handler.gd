@@ -54,6 +54,7 @@ var opponent_health: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$WinCount.modulate = Color(Color.WHITE, 0)
 	bearer_rank = PEASANT
 	opponent_rank = KNIGHT
 	enter_location("Rear Guard")
@@ -147,7 +148,29 @@ func opponent_defeated():
 		# Move to next location
 		print("you win")
 	else:
-		# Move to next combatant
+		# Slide out camera then fight next opponent
+		var count_label = $WinCount
+
+		camera.slide(true)
+		await camera.slide_finished
+
+		var tween_in = create_tween()
+		tween_in.tween_property(count_label, "modulate", Color(Color.WHITE, 1), 2)
+		await tween_in.finished
+		
+		await get_tree().create_timer(1).timeout
+		count_label.text = str(current_wins()) + "/" + str(needed_wins)
+		await get_tree().create_timer(1).timeout
+
+		var tween_out = create_tween()
+		tween_out.tween_property(count_label, "modulate", Color(Color.WHITE, 0), 2)
+		await tween_out.finished
+		
+		camera.slide(false)
+		await camera.slide_finished
+
+		await get_tree().create_timer(1).timeout
+
 		enter_combat()
 
 
