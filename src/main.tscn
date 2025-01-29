@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=16 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -9,14 +9,13 @@
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
-[ext_resource type="Texture2D" uid="uid://dpsevlwm67lxa" path="res://assets/ui/testwide.png" id="9_53wid"]
-[ext_resource type="Texture2D" uid="uid://d4d2146d1g2lj" path="res://assets/ui/knight_healthbar.png" id="11_o5jo7"]
-[ext_resource type="Texture2D" uid="uid://bj0p1725ho312" path="res://assets/ui/peasant_healthbar.png" id="12_v8oh0"]
+[ext_resource type="PackedScene" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
+[ext_resource type="PackedScene" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
 depth_draw_mode = 1
-albedo_color = Color(1, 1, 1, 0.0745098)
+albedo_color = Color(1, 1, 1, 0.0156863)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.19
@@ -70,7 +69,7 @@ trail_lifetime = 1.75
 process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "dialogue_handler")]
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler")]
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
 sword = NodePath("Sword")
@@ -78,6 +77,7 @@ target = NodePath("Target")
 camera = NodePath("MainCamera")
 bearer_heart_holder = NodePath("BothHeartHolders/BearerHeartHolder")
 opponent_heart_holder = NodePath("BothHeartHolders/OpponentHeartHolder")
+heart_border_ui = NodePath("HeartBorderUI")
 dialogue_handler = NodePath("DialogueHandler")
 
 [node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
@@ -124,6 +124,9 @@ text = "Bottom text"
 font = ExtResource("7_d73xt")
 outline_size = 0
 
+[node name="HeartBorderUI" parent="GameSequenceHandler" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
+camera = NodePath("../MainCamera")
+
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.486275)
 layout_mode = 3
@@ -133,34 +136,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
-visible = false
-modulate = Color(1, 1, 1, 0.309804)
-layout_mode = 0
-offset_left = 7.0
-offset_top = 5.0
-offset_right = 452.0
-offset_bottom = 252.0
-texture = ExtResource("9_53wid")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = 61.0
-offset_right = 399.0
-offset_bottom = 258.0
-texture = ExtResource("11_o5jo7")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="TextureRect3" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = 42.0
-offset_top = 49.0
-offset_right = 418.0
-offset_bottom = 307.0
-texture = ExtResource("12_v8oh0")
-expand_mode = 1
-stretch_mode = 4
+[node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
 [editable path="GameSequenceHandler/BothHeartHolders"]

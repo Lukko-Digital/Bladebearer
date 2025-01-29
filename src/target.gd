@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 func move():
 	var new_rot: Vector3
 	while true:
-		# Don't allow the same target twice, loop until new rotation is generated
+		# Loop until rotation satisfies `is_valid_new_rotation`.
 		new_rot = Vector3(
 			randi_range(-1, 1),
 			0,
@@ -33,13 +33,25 @@ func move():
 		if randi() % 2:
 			new_rot.x = wrapf(180 - new_rot.x, -180, 180)
 
-		if new_rot != target_rot:
+		if is_valid_new_rotation(new_rot):
 			# Break when I see new rotation
 			target_rot = new_rot
 			break
 	print(target_rot)
 
 	swing_arm.move_to_swing_position(target_rot)
+
+
+# Invalid rotations:
+# 	- (0,0,0)
+# 	- the same target twice in a row
+# 	- 0 z rotation twice in a row
+func is_valid_new_rotation(new_rot: Vector3) -> bool:
+	return (
+		new_rot != target_rot and
+		new_rot != Vector3.ZERO and
+		(target_rot.z != 0 or new_rot.z != 0)
+	)
 
 func red():
 	holo_red.show()

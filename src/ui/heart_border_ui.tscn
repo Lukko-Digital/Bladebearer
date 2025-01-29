@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://bral7ar8pm8mf"]
+
+[ext_resource type="Script" path="res://src/ui/heart_border_ui.gd" id="1_51r5n"]
+[ext_resource type="Texture2D" uid="uid://d4d2146d1g2lj" path="res://assets/ui/knight_healthbar.png" id="2_aw3sc"]
+[ext_resource type="Texture2D" uid="uid://bj0p1725ho312" path="res://assets/ui/peasant_healthbar.png" id="3_de3vb"]
+
+[node name="HeartBorderUI" type="CanvasLayer"]
+script = ExtResource("1_51r5n")
+
+[node name="ShakeOrigin" type="Control" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.486275)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OpponentBorders" type="Control" parent="ShakeOrigin"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Kingsguard" type="TextureRect" parent="ShakeOrigin/OpponentBorders"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 61.0
+offset_right = 399.0
+offset_bottom = 258.0
+texture = ExtResource("2_aw3sc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Knight" type="TextureRect" parent="ShakeOrigin/OpponentBorders"]
+layout_mode = 0
+offset_left = 61.0
+offset_right = 399.0
+offset_bottom = 258.0
+texture = ExtResource("2_aw3sc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Footsoldier" type="TextureRect" parent="ShakeOrigin/OpponentBorders"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 210.0
+offset_right = 418.0
+offset_bottom = 468.0
+scale = Vector2(1, -1)
+texture = ExtResource("3_de3vb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Peasant" type="TextureRect" parent="ShakeOrigin/OpponentBorders"]
+visible = false
+layout_mode = 0
+offset_left = 42.0
+offset_top = 210.0
+offset_right = 418.0
+offset_bottom = 468.0
+scale = Vector2(1, -1)
+texture = ExtResource("3_de3vb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BearerBorders" type="Control" parent="ShakeOrigin"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Kingsguard" type="TextureRect" parent="ShakeOrigin/BearerBorders"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 259.0
+offset_right = 399.0
+offset_bottom = 517.0
+scale = Vector2(1, -1)
+texture = ExtResource("2_aw3sc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Knight" type="TextureRect" parent="ShakeOrigin/BearerBorders"]
+visible = false
+layout_mode = 0
+offset_left = 61.0
+offset_top = 259.0
+offset_right = 399.0
+offset_bottom = 517.0
+scale = Vector2(1, -1)
+texture = ExtResource("2_aw3sc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Footsoldier" type="TextureRect" parent="ShakeOrigin/BearerBorders"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 49.0
+offset_right = 418.0
+offset_bottom = 307.0
+texture = ExtResource("3_de3vb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Peasant" type="TextureRect" parent="ShakeOrigin/BearerBorders"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 49.0
+offset_right = 418.0
+offset_bottom = 307.0
+texture = ExtResource("3_de3vb")
+expand_mode = 1
+stretch_mode = 4

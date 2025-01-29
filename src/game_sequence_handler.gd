@@ -11,6 +11,7 @@ class_name GameSequenceHandler
 @export var camera: MainCamera
 @export var bearer_heart_holder: HeartHolder
 @export var opponent_heart_holder: HeartHolder
+@export var heart_border_ui: HeartBorderUI
 @export var dialogue_handler: DialogueHandler
 
 @onready var main: Node3D = get_tree().current_scene
@@ -19,9 +20,10 @@ enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 6)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 5)
-var KNIGHT = CombatantRank.new(4, 8, 3)
+var PEASANT = CombatantRank.new(1, 2, 6, CombatantRank.RankName.PEASANT)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 5, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
@@ -61,6 +63,8 @@ func init_fight():
 	opponent_health = opponent_rank.health
 	bearer_heart_holder.set_hearts(bearer_health)
 	opponent_heart_holder.set_hearts(opponent_health)
+	heart_border_ui.set_bearer_border(bearer_rank)
+	heart_border_ui.set_opponent_border(opponent_rank)
 	construct_action_queue()
 
 
@@ -105,7 +109,12 @@ func swing_sequence():
 	if swinging:
 		# Successful swing
 		swing_arm.play_animation("swing")
+		
+		Global.sfx_player.play("Yell")
+		Global.sfx_player.play_timed("Woosh", 0.1)
+
 		await swing_arm.swing_animation_player.animation_finished
+		Global.sfx_player.play("Sword_Hit")
 		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
@@ -136,7 +145,9 @@ func block_sequence():
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
 		# Successful block
+		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
+		# Global.sfx_player.play("Test")
 	else:
 		# Failed block
 		camera.shake(0.1, 6)
