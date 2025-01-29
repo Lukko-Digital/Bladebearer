@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk7m3yrxa5o8b"]
+
+[ext_resource type="AudioStream" uid="uid://bgvg4j1w04avh" path="res://assets/audio/test.mp3" id="1_pmi8v"]
+[ext_resource type="Script" path="res://src/sfx_player.gd" id="1_w3uqv"]
+
+[node name="SfxPlayer" type="Node"]
+script = ExtResource("1_w3uqv")
+
+[node name="Test" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_pmi8v")
