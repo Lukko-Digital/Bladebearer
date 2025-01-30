@@ -64,9 +64,10 @@ func _ready() -> void:
 
 
 func enter_combat():
-	while true:
+	for i in range(25):
 		block_sequence()
 		await sequence_finished
+	get_tree().quit()
 
 	# init_opponent()
 	# construct_action_queue()
