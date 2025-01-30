@@ -10,6 +10,7 @@ const SWING_ARM_LENGTH = 4
 
 @onready var arm: Node3D = %Arm
 @onready var swing_animation_player: AnimationPlayer = %SwingAnimationPlayer
+@onready var swing_position_animation_player: AnimationPlayer = %SwingPositionAnimationPlayer
 
 ## In degrees. Stores the starting z rotation before each section of the swing.
 ## While a swing section is animating, z rotation is set equal to `starting_z_rotation + swing_rotation`
@@ -52,16 +53,20 @@ func randomize_swing_direction():
 ## `animation_duration` in seconds, if <=0, animation will play at default speed
 ## otherwise, speed scale will be adjusted such that the animation will play in
 ## `animation_duration` seconds
-func play_animation(animation_name: String, animation_duration: float = 0):
-	assert(swing_animation_player.has_animation(animation_name))
+func play_animation(animation_name: String, animation_duration: float = 0, animating_position: bool = 0):
+	
+	var animator = swing_animation_player if !animating_position else swing_position_animation_player
+	animator.stop()
+	
+	assert(animator.has_animation(animation_name))
 	
 	if animation_duration > 0:
-		swing_animation_player.speed_scale = swing_animation_player.get_animation(animation_name).length / animation_duration
+		animator.speed_scale = animator.get_animation(animation_name).length / animation_duration
 	else:
-		swing_animation_player.speed_scale = 1
+		animator.speed_scale = 1
 
 	starting_z_rotation = rotation_degrees.z
-	swing_animation_player.play(animation_name)
+	animator.play(animation_name)
 
-func is_animation_playing(animation_name: String):
-	return swing_animation_player.current_animation == animation_name
+func is_animation_playing(animation_name: String, animator: AnimationPlayer = swing_animation_player):
+	return animator.current_animation == animation_name
