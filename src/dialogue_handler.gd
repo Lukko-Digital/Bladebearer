@@ -36,39 +36,39 @@ func _process(_delta: float) -> void:
 			
 func tutorial() -> void:
 	
-	# await option_sequence([
-	# 	{"text": "a", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0)},
-	# 	], 
-	# 	"stick", true)
+	await option_sequence([
+		{"text": "a", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0)},
+		], 
+		"stick", true)
 	
-	# await option_sequence([
-	# 	{"text": "d", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45)}
-	# 	],
-	# 	"stick", true)
+	await option_sequence([
+		{"text": "d", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45)}
+		],
+		"stick", true)
 	
-	# await option_sequence([
-	# 	{"text": "s", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0)},
-	# 	],
-	# 	"stick", true)
+	await option_sequence([
+		{"text": "s", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0)},
+		],
+		"stick", true)
 
-	# await option_sequence([
-	# 	{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1, 0)},
-	# 	],
-	# 	"stick", true)
+	await option_sequence([
+		{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1, 0)},
+		],
+		"stick", true)
 	
-	# breaks_left = 2
-	# await option_sequence([
-	# 	{"text": "a+s", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45)},
-	# 	{"text": "w+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45)}
-	# 	],
-	# 	"stick", true)
+	breaks_left = 2
+	await option_sequence([
+		{"text": "a+s", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45)},
+		{"text": "w+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45)}
+		],
+		"stick", true)
 
-	# breaks_left = 2
-	# await option_sequence([
-	# 	{"text": "a+w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
-	# 	{"text": "s+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
-	# 	],
-	# 	"stick", true)
+	breaks_left = 2
+	await option_sequence([
+		{"text": "a+w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
+		{"text": "s+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
+		],
+		"stick", true)
 	
 	await option_sequence([
 		{"text": "", "match_effect": func(): alligned_option().break_sword(), "rotation": Vector3(0, 0, -45)},

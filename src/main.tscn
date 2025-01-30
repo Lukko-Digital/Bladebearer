@@ -201,10 +201,10 @@ tracks/2/path = NodePath("ChestLight:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(9.9, 10.1),
-"transitions": PackedFloat32Array(4.75684, 1),
+"times": PackedFloat32Array(6.04314, 6.07492, 9.9, 10.1),
+"transitions": PackedFloat32Array(1, 1, 4.75684, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [0.0, 1.0, 1.0, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -364,6 +364,18 @@ tracks/15/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("%Sword/Sword/Blade:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_tts51"]
@@ -676,6 +688,18 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("%Sword/Sword/Blade:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
