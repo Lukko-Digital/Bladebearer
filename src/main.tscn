@@ -541,6 +541,7 @@ font_size = 80
 
 [node name="NewBearer" type="Label3D" parent="GameSequenceHandler"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07)
+visible = false
 text = "a new bearer claims the sword"
 font = ExtResource("7_d73xt")
 
