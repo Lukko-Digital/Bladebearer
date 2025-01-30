@@ -56,7 +56,10 @@ var opponent_health: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await start_dialogue()
+	target.hide()
+	await dialogue_handler.start_menu()
+	
+	await dialogue_handler.intro()
 
 	$WinCount.modulate = Color(Color.WHITE, 0)
 	$NewBearer.modulate = Color(Color.WHITE, 0)
@@ -67,6 +70,7 @@ func _ready() -> void:
 
 
 func enter_combat():
+	target.show()
 	init_opponent()
 	construct_action_queue()
 	while true:
@@ -337,7 +341,3 @@ func detach_from_arm():
 	main.add_child(self)
 	global_position = Vector3.ZERO
 	global_rotation = Vector3.ZERO
-
-func start_dialogue() -> Signal:
-	target.hide()
-	return await dialogue_handler.start_dialogue(["aasd", "bfds", "cgre"])

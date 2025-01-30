@@ -7,6 +7,7 @@ class_name DialogueOption
 const ROTATION_LERP_SPEED = 0.07
 
 var target_rot: Vector3
+var effect: Callable
 
 func _process(_delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
@@ -14,6 +15,9 @@ func _process(_delta: float) -> void:
 
 func set_text(text: String):
 	label.text = text
+
+func set_effect(_effect: Callable):
+	effect = _effect
 
 func set_target_rot(rot: Vector3):
 	target_rot = rot
