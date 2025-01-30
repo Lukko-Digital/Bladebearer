@@ -5,7 +5,7 @@ const ROTATION_LERP_SPEED = 0.2
 ## Threshold for determining correct sword angle. In degrees.
 const CORRECT_ROTATION_THRESHOLD = 2
 
-@onready var game_sequence_handler: GameSequenceHandler = get_parent()
+@onready var game_sequence_handler: GameSequenceHandler = %GameSequenceHandler
 @onready var target: Target = game_sequence_handler.target
 @onready var swing_arm: SwingArm = game_sequence_handler.swing_arm
 
