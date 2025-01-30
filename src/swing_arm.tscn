@@ -167,6 +167,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_5xnr2"]
 resource_name = "land_block"
+length = 1.5
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -174,9 +175,9 @@ tracks/0/path = NodePath(".:position:z")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0, 0.411513, 0.607792, -0.09, 0, 0.125, -0.002, 0, -0.38, 0.001, 0.25, 0),
-"times": PackedFloat32Array(0, 0.1834, 1)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 1.48551, 1, -0.412, 0.011, 0.125, -0.002),
+"times": PackedFloat32Array(0, 0.5)
 }
 
 [sub_resource type="Animation" id="Animation_dhnie"]
@@ -515,9 +516,9 @@ libraries = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ScreenColor" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
