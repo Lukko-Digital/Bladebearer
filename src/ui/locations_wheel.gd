@@ -1,0 +1,71 @@
+@tool
+extends Node3D
+class_name LocationsWheel
+
+const Y_COEFF1 = -0.01
+const Y_COEFF2 = 0.21
+
+const MAX_HEART_SPACE = 0.5
+
+@export var play_spindown: bool = false:
+	set(value):
+		if value:
+			initial_spindown()
+			play_spindown = false
+
+@export var play_advance_location: bool = false:
+	set(value):
+		if value:
+			advance_location()
+			play_advance_location = false
+
+@export_range(0, 6) var focused_location: float = 0:
+	set(value):
+		focused_location = value
+		update_labels()
+
+@onready var labels_node: Node3D = %Labels
+
+var heart_space: float = 0.5
+var animating = false
+
+func _process(_delta: float) -> void:
+	if animating:
+		update_labels()
+
+func update_labels():
+	var labels = labels_node.get_children()
+	for i in range(labels.size()):
+		var label = labels[i]
+		label.position.y = calculate_y_pos(i - focused_location)
+		label.update_wheel_visuals()
+
+func calculate_y_pos(dist_from_center: float) -> float:
+	var x = abs(dist_from_center)
+	if dist_from_center > 0:
+		x += heart_space
+	return -sign(dist_from_center) * (Y_COEFF1 * x * x + Y_COEFF2 * x) # https://www.desmos.com/calculator/yk5petpy6j
+
+# ---------- SPECIFIC ANIMATIONS ----------
+
+func initial_spindown():
+	heart_space = 0.0
+	focused_location = 0
+	animating = true
+
+	var tween = create_tween()
+	tween.tween_property(self, "focused_location", 6, 1)
+
+	animating = false
+
+func advance_location():
+	var tween_time = 0.7
+	heart_space = 0.0
+	animating = true
+
+	var location_tween = create_tween()
+	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time)
+	var heart_space_tween = create_tween()
+	heart_space_tween.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time)
+
+	animating = false
