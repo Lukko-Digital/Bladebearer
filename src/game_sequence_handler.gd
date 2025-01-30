@@ -64,7 +64,7 @@ func _ready() -> void:
 
 
 func enter_combat():
-	for i in range(25):
+	for i in range(30):
 		block_sequence()
 		await sequence_finished
 	get_tree().quit()
