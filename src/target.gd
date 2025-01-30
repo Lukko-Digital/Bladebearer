@@ -13,7 +13,7 @@ class_name Target
 @onready var align_effect: AnimationPlayer = %AlignEffect
 
 @export var meshes: Array[GeometryInstance3D]
-@export_range (0, 1) var transparency: float = 0.0 :
+@export_range(0, 1) var transparency: float = 0.0:
 	set(value):
 		transparency = value
 		for mesh in meshes:
@@ -46,7 +46,7 @@ func move():
 			# Break when I see new rotation
 			target_rot = new_rot
 			break
-	print(target_rot)
+	# print(target_rot)
 
 	swing_arm.move_to_swing_position(target_rot)
 

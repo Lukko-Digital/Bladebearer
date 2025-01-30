@@ -57,31 +57,35 @@ var opponent_health: int
 func _ready() -> void:
 	$WinCount.modulate = Color(Color.WHITE, 0)
 	$NewBearer.modulate = Color(Color.WHITE, 0)
-	bearer_rank = PEASANT
-	init_bearer_health()
-	enter_location("Rear Guard")
+	# bearer_rank = PEASANT
+	# init_bearer_health()
+	# enter_location("Rear Guard")
 	enter_combat.call_deferred()
 
 
 func enter_combat():
-	init_opponent()
-	construct_action_queue()
 	while true:
-		var curr_action = action_queue.pop_front()
-		match curr_action:
-			ACTION.SWING:
-				swing_sequence()
-			ACTION.BLOCK:
-				block_sequence()
+		block_sequence()
 		await sequence_finished
-		action_queue.append(curr_action)
 
-		if opponent_health <= 0:
-			opponent_defeated()
-			break
-		if bearer_health <= 0:
-			bearer_defeated()
-			break
+	# init_opponent()
+	# construct_action_queue()
+	# while true:
+	# 	var curr_action = action_queue.pop_front()
+	# 	match curr_action:
+	# 		ACTION.SWING:
+	# 			swing_sequence()
+	# 		ACTION.BLOCK:
+	# 			block_sequence()
+	# 	await sequence_finished
+	# 	action_queue.append(curr_action)
+
+	# 	if opponent_health <= 0:
+	# 		opponent_defeated()
+	# 		break
+	# 	if bearer_health <= 0:
+	# 		bearer_defeated()
+	# 		break
 
 
 ## ----------------- LOCATION LOGIC -----------------
@@ -299,13 +303,15 @@ func swing_sequence():
 func block_sequence():
 	target.blue()
 	pre_sequence()
-	swing_arm.play_animation("block", opponent_rank.time_to_react)
-	target.play_animation("Blink", opponent_rank.time_to_react)
+	var start_time = Time.get_ticks_msec()
+	swing_arm.play_animation("block", 1000)
+	target.play_animation("Blink", 1000)
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
 		# Successful block
 		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
+		print(Time.get_ticks_msec() - start_time)
 		# Global.sfx_player.play("Test")
 	else:
 		# Failed block

@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://src/light_container.gd" id="7_pcbq2"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
-[ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
+[ext_resource type="PackedScene" uid="uid://b5wupy7vivd82" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -523,8 +523,10 @@ environment = ExtResource("7_knhja")
 camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
 [node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
+visible = false
 
 [node name="HeartBorderUI" parent="GameSequenceHandler" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
+visible = false
 camera = NodePath("../MainCamera")
 
 [node name="LightingAnimator" type="AnimationPlayer" parent="GameSequenceHandler"]
