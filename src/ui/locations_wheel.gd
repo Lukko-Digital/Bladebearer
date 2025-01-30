@@ -5,7 +5,7 @@ class_name LocationsWheel
 const Y_COEFF1 = -0.01
 const Y_COEFF2 = 0.21
 
-const MAX_HEART_SPACE = 0.5
+const MAX_HEART_SPACE = 0.7
 
 @export var play_spindown: bool = false:
 	set(value):
@@ -19,10 +19,10 @@ const MAX_HEART_SPACE = 0.5
 			advance_location()
 			play_advance_location = false
 
-@export_range(0, 6) var focused_location: float = 0:
+@export_range(0, 6) var focused_location: float:
 	set(value):
 		focused_location = value
-		update_labels()
+		update_labels.call_deferred()
 
 @onready var labels_node: Node3D = %Labels
 
@@ -45,6 +45,19 @@ func calculate_y_pos(dist_from_center: float) -> float:
 	if dist_from_center > 0:
 		x += heart_space
 	return -sign(dist_from_center) * (Y_COEFF1 * x * x + Y_COEFF2 * x) # https://www.desmos.com/calculator/yk5petpy6j
+
+func set_location(location: int):
+	focused_location = location
+
+# ---------- FADE ----------
+
+func fade_in(time: float):
+	for label: LocationLabel in labels_node.get_children():
+		label.fade_in(time)
+
+func fade_out(time: float):
+	for label: LocationLabel in labels_node.get_children():
+		label.fade_out(time)
 
 # ---------- SPECIFIC ANIMATIONS ----------
 

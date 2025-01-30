@@ -12,6 +12,8 @@ class_name GameSequenceHandler
 @export var bearer_heart_holder: HeartHolder
 @export var opponent_heart_holder: HeartHolder
 @export var heart_border_ui: HeartBorderUI
+@export var locations_wheel: LocationsWheel
+@export var location_hearts: HeartHolder
 
 @onready var main: Node3D = get_tree().current_scene
 
@@ -57,7 +59,7 @@ var opponent_health: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$WinCount.modulate = Color(Color.WHITE, 0)
+	locations_wheel.hide()
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
 	bearer_rank = PEASANT
@@ -196,18 +198,18 @@ func opponent_defeated():
 
 		# Animation sequence
 		await get_tree().create_timer(1).timeout
-		var count_label = $WinCount
 
 		camera.slide(true)
 		await camera.slide_finished
 
-		var tween_in = create_tween()
-		tween_in.tween_property(count_label, "modulate", Color(Color.WHITE, 1), 2)
-		await tween_in.finished
+		# FADE IN
+		locations_wheel.show()
+		var fade_in_time = 2
+		locations_wheel.fade_in(fade_in_time)
+		await get_tree().create_timer(fade_in_time).timeout
 		
 		## LOCATION PROGRESSION
 		await get_tree().create_timer(1).timeout
-		count_label.text = str(needed_wins - combatants.size()) + "/" + str(needed_wins)
 		await get_tree().create_timer(1).timeout
 
 		## SPAWN IN UPGRADE CHOICE
@@ -216,9 +218,11 @@ func opponent_defeated():
 		## ON PICK UPGRADE
 		sword.clear_blood()
 
-		var tween_out = create_tween()
-		tween_out.tween_property(count_label, "modulate", Color(Color.WHITE, 0), 2)
-		await tween_out.finished
+		# FADE OUT
+		var fade_out_time = 2
+		locations_wheel.fade_out(fade_out_time)
+		await get_tree().create_timer(fade_out_time).timeout
+		locations_wheel.hide()
 		
 		camera.slide(false)
 		await camera.slide_finished
