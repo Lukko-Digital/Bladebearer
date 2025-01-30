@@ -489,9 +489,9 @@ swing_arm = NodePath("../SwingArm")
 sword = NodePath("SwordGroup/Sword")
 target = NodePath("SwordGroup/Target")
 camera = NodePath("MainCamera")
-bearer_heart_holder = NodePath("BothHeartHolders/BearerHeartHolder")
-opponent_heart_holder = NodePath("BothHeartHolders/OpponentHeartHolder")
-heart_border_ui = NodePath("HeartBorderUI")
+bearer_heart_holder = NodePath("HeartUI/BothHeartHolders/BearerHeartHolder")
+opponent_heart_holder = NodePath("HeartUI/BothHeartHolders/OpponentHeartHolder")
+heart_border_ui = NodePath("HeartUI/HeartBorderUI")
 locations_wheel = NodePath("LocationsWheel")
 location_hearts = NodePath("LocationsWheel/LocationHearts")
 
@@ -504,9 +504,10 @@ trail_lifetime = 1.75
 process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
-[node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
+[node name="MainCamera" parent="GameSequenceHandler" node_paths=PackedStringArray("heart_ui") instance=ExtResource("2_vb7ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.005)
 h_offset = 0.7
+heart_ui = NodePath("../HeartUI")
 
 [node name="SwordGroup" type="Node3D" parent="GameSequenceHandler"]
 
@@ -537,6 +538,20 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_0016m")
 }
+
+[node name="HeartUI" type="Node3D" parent="GameSequenceHandler"]
+
+[node name="HeartBorderUI" parent="GameSequenceHandler/HeartUI" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
+transform = Transform3D(0.187, 0, 0, 0, 0.187, 0, 0, 0, 0.187, 0, 0, 0)
+camera = NodePath("../../MainCamera")
+
+[node name="BothHeartHolders" parent="GameSequenceHandler/HeartUI" instance=ExtResource("8_c1nmu")]
+
+[node name="BearerHeartHolder" parent="GameSequenceHandler/HeartUI/BothHeartHolders" index="0"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.819453, 0)
+
+[node name="OpponentHeartHolder" parent="GameSequenceHandler/HeartUI/BothHeartHolders" index="1"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0.830613, 0)
 
 [node name="OmniLights" type="Node3D" parent="GameSequenceHandler" node_paths=PackedStringArray("lights")]
 unique_name_in_owner = true
@@ -570,14 +585,6 @@ spot_angle_attenuation = 1.36604e-05
 environment = ExtResource("7_knhja")
 camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
-[node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
-
-[node name="BearerHeartHolder" parent="GameSequenceHandler/BothHeartHolders" index="0"]
-transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.819453, 0)
-
-[node name="OpponentHeartHolder" parent="GameSequenceHandler/BothHeartHolders" index="1"]
-transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0.830613, 0)
-
 [node name="LightingAnimator" type="AnimationPlayer" parent="GameSequenceHandler"]
 libraries = {
 "": SubResource("AnimationLibrary_4m25b")
@@ -590,20 +597,17 @@ visible = false
 text = "a new bearer claims the sword"
 font = ExtResource("7_d73xt")
 
-[node name="LocationsWheel" parent="GameSequenceHandler" instance=ExtResource("12_or6h2")]
+[node name="LocationsWheel" parent="GameSequenceHandler" node_paths=PackedStringArray("location_hearts") instance=ExtResource("12_or6h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
-focused_location = 1.0
+focused_location = 4.0
+location_hearts = NodePath("LocationHearts")
 
 [node name="LocationHearts" parent="GameSequenceHandler/LocationsWheel" instance=ExtResource("13_ja52v")]
 transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.16, 0)
 num_hearts = 4
 
-[node name="HeartBorderUI" parent="GameSequenceHandler" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
-transform = Transform3D(0.187, 0, 0, 0, 0.187, 0, 0, 0, 0.187, 0, 0, 0)
-camera = NodePath("../MainCamera")
-
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]
-[editable path="GameSequenceHandler/BothHeartHolders"]
+[editable path="GameSequenceHandler/HeartUI/BothHeartHolders"]
