@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctoxk5ywvn75r"]
+[gd_scene load_steps=10 format=3 uid="uid://ctoxk5ywvn75r"]
 
 [ext_resource type="Script" path="res://src/sword.gd" id="1_a5gxo"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_mq21s"]
 [ext_resource type="PackedScene" uid="uid://bwt5h2gm6ccag" path="res://assets/models/Stick.glb" id="3_uc5po"]
+[ext_resource type="Material" uid="uid://dymacf1sgawmm" path="res://assets/shaders/sword_transform.tres" id="4_ebh02"]
+[ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="5_7ok2n"]
 
 [sub_resource type="Animation" id="Animation_nbqwa"]
 length = 0.001
@@ -158,6 +160,7 @@ _data = {
 script = ExtResource("1_a5gxo")
 
 [node name="Sword" parent="." instance=ExtResource("3_mq21s")]
+unique_name_in_owner = true
 transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -177,4 +180,18 @@ libraries = {
 }
 
 [node name="Stick" parent="." instance=ExtResource("3_uc5po")]
+unique_name_in_owner = true
 transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
+
+[node name="TransformEffect" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+emitting = false
+amount = 1311
+lifetime = 1.72
+one_shot = true
+speed_scale = 1.48
+explosiveness = 0.92
+local_coords = true
+process_material = ExtResource("4_ebh02")
+draw_pass_1 = ExtResource("5_7ok2n")

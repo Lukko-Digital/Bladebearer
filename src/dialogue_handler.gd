@@ -30,7 +30,8 @@ func _process(_delta: float) -> void:
 		breaks_left = -1
 
 			
-func start_menu() -> void:
+func tutorial() -> void:
+	
 	await option_sequence([
 		{"text": "a", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0)},
 		], 
@@ -47,7 +48,7 @@ func start_menu() -> void:
 		"stick", true)
 
 	await option_sequence([
-		{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 0.3, 0)},
+		{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1, 0)},
 		],
 		"stick", true)
 	
@@ -60,16 +61,17 @@ func start_menu() -> void:
 
 	breaks_left = 2
 	await option_sequence([
-		{"text": "s+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
-		{"text": "a+w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
+		{"text": "a+w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
+		{"text": "s+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
 		],
 		"stick", true)
 	
 	await option_sequence([
 		{"text": "", "match_effect": func(): alligned_option().break_sword(), "rotation": Vector3(0, 0, -45)},
 		],
-		"sword_holo_shake", true)
-	
+		"sword_holo_shake", false)
+
+func menu() -> void:
 	await option_sequence([
 		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 0)},
 		{"text": "sound down", "effect": func(): print("sound down"), "rotation": Vector3(0, 0, 45)},
@@ -77,7 +79,6 @@ func start_menu() -> void:
 		])
 
 	sword.hide()
-
 
 func intro() -> void:
 	await text_sequence("Reach the king", 2.0, bottom_label)

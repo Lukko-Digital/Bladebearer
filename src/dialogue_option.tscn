@@ -71,6 +71,18 @@ local_coords = true
 process_material = ExtResource("6_8ejul")
 draw_pass_1 = ExtResource("7_h4535")
 
+[node name="TransformEffect" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+emitting = false
+amount = 496
+one_shot = true
+speed_scale = 1.48
+explosiveness = 0.61
+local_coords = true
+process_material = ExtResource("6_8ejul")
+draw_pass_1 = ExtResource("7_h4535")
+
 [node name="SwordHolo" parent="." instance=ExtResource("8_y3d0x")]
 unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
