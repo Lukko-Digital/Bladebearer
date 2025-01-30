@@ -272,6 +272,7 @@ func block_sequence():
 		# Successful block
 		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
+		swing_arm.play_animation("land_block", 0, true)
 		# Global.sfx_player.play("Test")
 	else:
 		# Failed block
