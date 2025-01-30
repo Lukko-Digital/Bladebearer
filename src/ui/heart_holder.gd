@@ -1,5 +1,11 @@
+@tool
 extends Node3D
 class_name HeartHolder
+
+@export var num_hearts: int = 0:
+	set(value):
+		num_hearts = value
+		set_hearts(value)
 
 # Y position should be set to plus or minus 0.91
 const Z_POSITION = 0
