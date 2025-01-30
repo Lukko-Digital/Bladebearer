@@ -11,6 +11,8 @@ const CORRECT_ROTATION_THRESHOLD = 2
 
 @onready var screen_color_animation: AnimationPlayer = %ScreenColorAnimation
 
+@export var blood_array : Array[MeshInstance3D]
+
 var target_rotation: Vector3:
 	set(value):
 		if input_locked:
@@ -60,3 +62,25 @@ func lock_input():
 
 func unlock_input():
 	input_locked = false
+
+## Handling adding blood to sword on impact
+func add_blood():
+
+	var keep_going : bool = true
+	var blood_index : int = 0
+
+	while keep_going:
+
+		if !blood_array[blood_index].visible:
+			blood_array[blood_index].visible = true
+			keep_going = false;
+
+		else:
+			blood_index += 1
+			if blood_index == blood_array.size():
+				keep_going = false;
+
+func clear_blood() {
+	for blood in blood_array:
+		blood.visible = false
+}

@@ -210,6 +210,7 @@ func swing_sequence():
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
 		opponent_loses_health()
+		sword.add_blood()
 	else:
 		# No swing
 		target.hide()
