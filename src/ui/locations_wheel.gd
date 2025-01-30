@@ -73,12 +73,19 @@ func initial_spindown():
 
 func advance_location():
 	var tween_time = 0.7
-	heart_space = 0.0
 	animating = true
+
+
+	var heart_space_tween_close = create_tween()
+	heart_space_tween_close.tween_property(self, "heart_space", 0, tween_time)
+	await heart_space_tween_close.finished
 
 	var location_tween = create_tween()
 	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time)
-	var heart_space_tween = create_tween()
-	heart_space_tween.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time)
+	await location_tween.finished
+
+	var heart_space_tween_open = create_tween()
+	heart_space_tween_open.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time)
+	await heart_space_tween_open.finished
 
 	animating = false
