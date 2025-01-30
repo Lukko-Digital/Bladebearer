@@ -80,7 +80,6 @@ func add_blood():
 			if blood_index == blood_array.size():
 				keep_going = false;
 
-func clear_blood() {
+func clear_blood():
 	for blood in blood_array:
 		blood.visible = false
-}
