@@ -19,17 +19,14 @@ script = ExtResource("1_w3uqv")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h65a2")
 volume_db = 4.855
-autoplay = true
 
 [node name="Nature_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rt8ug")
 volume_db = 21.464
-autoplay = true
 
 [node name="Battle_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7panh")
 volume_db = -2.72
-autoplay = true
 
 [node name="Sword_Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dpyls")
