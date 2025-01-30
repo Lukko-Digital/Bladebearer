@@ -467,7 +467,11 @@ heart_border_ui = NodePath("HeartBorderUI")
 [node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0194353, 1.00529)
 
-[node name="Sword" parent="GameSequenceHandler" instance=ExtResource("1_bdv3j")]
+[node name="Sword" parent="GameSequenceHandler" node_paths=PackedStringArray("blood_array") instance=ExtResource("1_bdv3j")]
+blood_array = [NodePath("Sword/Blood1")]
+
+[node name="Blood1" parent="GameSequenceHandler/Sword/Sword" index="2"]
+visible = false
 
 [node name="Target" parent="GameSequenceHandler" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
 sword = NodePath("../Sword")
