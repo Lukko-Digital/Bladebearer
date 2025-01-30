@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=26 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
+[ext_resource type="PackedScene" uid="uid://dp1fkp3wyiu7k" path="res://src/ui/locations_wheel.tscn" id="12_or6h2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -33,6 +34,20 @@ height = 0.02
 radial_segments = 4
 rings = 1
 
+[sub_resource type="Animation" id="Animation_yb54g"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_a12m2"]
 resource_name = "land_block"
 length = 0.8
@@ -46,20 +61,6 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0, 0.13744, 0.181258, -0.0333333, 0, 0.233333, -0.0309222, 0, -0.425, 0.012, 0.25, 0),
 "times": PackedFloat32Array(0, 0.0666667, 0.8)
-}
-
-[sub_resource type="Animation" id="Animation_yb54g"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:z")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0016m"]
@@ -585,6 +586,7 @@ autoplay = "Main"
 
 [node name="WinCount" type="Label3D" parent="GameSequenceHandler"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, 0)
+visible = false
 text = "0/4"
 font = ExtResource("7_d73xt")
 font_size = 80
@@ -594,6 +596,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07)
 visible = false
 text = "a new bearer claims the sword"
 font = ExtResource("7_d73xt")
+
+[node name="LocationsWheel" parent="GameSequenceHandler" instance=ExtResource("12_or6h2")]
+visible = false
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
