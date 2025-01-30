@@ -173,21 +173,6 @@ _data = {
 "Sword_Aligned": SubResource("Animation_kit2k")
 }
 
-[sub_resource type="Animation" id="Animation_msgln"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:transparency")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="Animation" id="Animation_qa78l"]
 resource_name = "Blink"
 step = 0.05
@@ -202,6 +187,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.492, 0.0, 0.492, 0.0, 0.73, 0.0, 0.73, 0.0, 0.785, 0.0, 0.785, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_msgln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_06wim"]
