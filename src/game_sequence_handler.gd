@@ -210,6 +210,9 @@ func opponent_defeated():
 	location_hearts.break_heart_at_idx(combatants.size())
 	if combatants.is_empty():
 		# Location completed, go next
+		if current_location == 0:
+			# WIN GAME
+			pass
 		await locations_wheel.advance_location()
 		enter_location(current_location - 1)
 		location_hearts.fade_in(1)
