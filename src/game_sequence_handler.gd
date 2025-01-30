@@ -64,8 +64,8 @@ func _ready() -> void:
 	$NewBearer.hide()
 	bearer_rank = KINGSGUARD
 	init_bearer_health()
-	enter_location(3)
-	locations_wheel.set_location(locations.keys().find("Rear Guard"))
+	enter_location(6)
+	locations_wheel.set_location(6)
 	enter_combat.call_deferred()
 
 
@@ -196,8 +196,7 @@ func opponent_defeated():
 
 	# SLIDE OUT
 	await get_tree().create_timer(1).timeout
-	camera.slide(true)
-	await camera.slide_finished
+	await camera.slide(true)
 
 	# FADE IN
 	locations_wheel.show()
@@ -231,9 +230,8 @@ func opponent_defeated():
 	await get_tree().create_timer(fade_out_time).timeout
 	locations_wheel.hide()
 	
-	camera.slide(false)
-	await camera.slide_finished
-
+	# SLIDE IN
+	await camera.slide(false)
 	await get_tree().create_timer(1).timeout
 
 	# Show combat stuff

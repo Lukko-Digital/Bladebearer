@@ -4,8 +4,6 @@ class_name MainCamera
 const SHAKE_RANGE = 0.01
 const SLIDE_POSITION = 0.7
 
-signal slide_finished
-
 @onready var shake_timer: Timer = $ShakeTimer
 
 var default_h_offset = h_offset
@@ -42,7 +40,5 @@ func slide(slide_out: bool):
 	var tween = create_tween()
 	tween.tween_property(self, "h_offset", end_pos, 1).set_trans(tween.TRANS_CUBIC).set_ease(tween.EASE_IN_OUT)
 	await tween.finished
-
-	slide_finished.emit()
 	
 	if not slide_out: slid = false
