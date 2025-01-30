@@ -146,9 +146,17 @@ func opponent_loses_health():
 func opponent_defeated():
 	if combatants.is_empty():
 		# Move to next location
-		print("you win")
+		print("next location")
 	else:
-		# Slide out camera then fight next opponent
+		# Slide out camera, update kill count, slide camera back, enter next combat
+
+		# Hide combat stuff
+		target.holo_red.hide() # Holo red will be showing because you have to win on a hit
+		opponent_heart_holder.hide()
+		heart_border_ui.opponent_borders.hide()
+
+		# Animation sequence
+		await get_tree().create_timer(1).timeout
 		var count_label = $WinCount
 
 		camera.slide(true)
@@ -171,6 +179,9 @@ func opponent_defeated():
 
 		await get_tree().create_timer(1).timeout
 
+		# Show combat stuff
+		opponent_heart_holder.show()
+		heart_border_ui.opponent_borders.show()
 		enter_combat()
 
 
