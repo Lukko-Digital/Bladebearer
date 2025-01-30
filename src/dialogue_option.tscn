@@ -10,11 +10,14 @@ script = ExtResource("1_6khdy")
 [node name="Pointer2" parent="." instance=ExtResource("2_fataf")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.524205, 0)
 
+[node name="Pointer" parent="Pointer2" index="0"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
+
 [node name="AnimationPlayer" parent="Pointer2" index="1"]
 autoplay = "Pointer_Idle"
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.686863, 0)
+[node name="Label3D" type="Label3D" parent="Pointer2"]
+transform = Transform3D(-4.37114e-07, -10, 0, 10, -4.37114e-07, 0, 0, 0, 10, 0, 1.62658, 0)
 fixed_size = true
 texture_filter = 0
 text = "Test"

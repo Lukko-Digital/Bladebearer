@@ -28,7 +28,8 @@ func start_menu() -> void:
 		{"text": "a", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 45)},
 		{"text": "s", "effect": func(): option_selected.emit(), "rotation": Vector3(45, 0, 0)},
 		{"text": "d", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, -45)}
-		])
+		],
+		true)
 	
 	await option_sequence([
 		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 0)},
@@ -63,12 +64,22 @@ func intro() -> void:
 		])
 
 	
-func option_sequence(options: Array[Dictionary]) -> void:
+func option_sequence(options: Array[Dictionary], tutorial: bool = false) -> void:
 	active_option = true
 
 	for option in options:
 		var option_instance = dialogue_option_scene.instantiate()
 		add_child(option_instance)
+
+		if tutorial:
+			if option.rotation.x == 0:
+				option_instance.get_child(0).position /= 1.5
+			elif option.rotation.x > 0:
+				option_instance.get_child(0).position /= 3
+			else:
+				option_instance.label.position += Vector3(0, 1, 1)
+			option_instance.label.billboard = 1
+			
 		option_instance.set_text(option["text"])
 		option_instance.set_effect(option["effect"])
 		option_instance.set_target_rot(option["rotation"])
