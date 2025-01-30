@@ -44,7 +44,7 @@ const locations = {
 # Variables that control progress outsie of a single combat
 var combatants: Array[CombatantRank]
 var needed_wins: int
-var current_location: String
+var current_location: int
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
@@ -64,7 +64,7 @@ func _ready() -> void:
 	$NewBearer.hide()
 	bearer_rank = KINGSGUARD
 	init_bearer_health()
-	enter_location("Rear Guard")
+	enter_location(3)
 	locations_wheel.set_location(locations.keys().find("Rear Guard"))
 	enter_combat.call_deferred()
 
@@ -93,9 +93,9 @@ func enter_combat():
 ## ----------------- LOCATION LOGIC -----------------
 
 
-func enter_location(location_name: String):
-	current_location = location_name
-	create_combatant_list(locations[location_name])
+func enter_location(location_idx: int):
+	current_location = location_idx
+	create_combatant_list(locations[locations.keys()[location_idx]])
 	needed_wins = combatants.size()
 	location_hearts.set_hearts(needed_wins)
 
@@ -187,57 +187,59 @@ func bearer_defeated():
 
 
 func opponent_defeated():
+	# Slide out camera, update location wheel and hearts, slide camera back, enter next combat
+
+	# Hide combat stuff
+	target.holo_red.hide() # Holo red will be showing because you have to win on a hit
+	opponent_heart_holder.hide()
+	heart_border_ui.opponent_borders.hide()
+
+	# SLIDE OUT
+	await get_tree().create_timer(1).timeout
+	camera.slide(true)
+	await camera.slide_finished
+
+	# FADE IN
+	locations_wheel.show()
+	var fade_in_time = 1
+	locations_wheel.fade_in(fade_in_time)
+	location_hearts.fade_in(fade_in_time)
+	await get_tree().create_timer(fade_in_time).timeout
+	
+	## LOCATION PROGRESSION
+	await get_tree().create_timer(1).timeout
+	location_hearts.break_heart_at_idx(combatants.size())
 	if combatants.is_empty():
-		# Move to next location
-		print("next location")
-	else:
-		# Slide out camera, update kill count, slide camera back, enter next combat
-
-		# Hide combat stuff
-		target.holo_red.hide() # Holo red will be showing because you have to win on a hit
-		opponent_heart_holder.hide()
-		heart_border_ui.opponent_borders.hide()
-
-		# Animation sequence
+		# Location completed, go next
+		await locations_wheel.advance_location()
+		enter_location(current_location - 1)
+		location_hearts.fade_in(1)
 		await get_tree().create_timer(1).timeout
 
-		camera.slide(true)
-		await camera.slide_finished
+	await get_tree().create_timer(1).timeout
 
-		# FADE IN
-		locations_wheel.show()
-		var fade_in_time = 1
-		locations_wheel.fade_in(fade_in_time)
-		location_hearts.fade_in(fade_in_time)
-		await get_tree().create_timer(fade_in_time).timeout
-		
-		## LOCATION PROGRESSION
-		await get_tree().create_timer(1).timeout
-		location_hearts.break_heart_at_idx(combatants.size())
-		await get_tree().create_timer(1).timeout
+	## SPAWN IN UPGRADE CHOICE
+	## tbd
 
-		## SPAWN IN UPGRADE CHOICE
-		## tbd
+	## ON PICK UPGRADE
+	sword.clear_blood()
 
-		## ON PICK UPGRADE
-		sword.clear_blood()
+	# FADE OUT
+	var fade_out_time = 1
+	locations_wheel.fade_out(fade_out_time)
+	location_hearts.fade_out(fade_out_time)
+	await get_tree().create_timer(fade_out_time).timeout
+	locations_wheel.hide()
+	
+	camera.slide(false)
+	await camera.slide_finished
 
-		# FADE OUT
-		var fade_out_time = 1
-		locations_wheel.fade_out(fade_out_time)
-		location_hearts.fade_out(fade_out_time)
-		await get_tree().create_timer(fade_out_time).timeout
-		locations_wheel.hide()
-		
-		camera.slide(false)
-		await camera.slide_finished
+	await get_tree().create_timer(1).timeout
 
-		await get_tree().create_timer(1).timeout
-
-		# Show combat stuff
-		opponent_heart_holder.show()
-		heart_border_ui.opponent_borders.show()
-		enter_combat()
+	# Show combat stuff
+	opponent_heart_holder.show()
+	heart_border_ui.opponent_borders.show()
+	enter_combat()
 
 
 ## ----------------- PLAYER INPUT -----------------

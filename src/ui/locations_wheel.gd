@@ -92,7 +92,4 @@ func advance_location():
 	heart_space_tween_open.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time)
 	await heart_space_tween_open.finished
 
-	location_hearts.fade_in(1)
-	await get_tree().create_timer(1).timeout
-
 	animating = false
