@@ -19,8 +19,8 @@ enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 6, CombatantRank.RankName.PEASANT)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 5, CombatantRank.RankName.FOOTSOLDIER)
+var PEASANT = CombatantRank.new(1, 2, 2, CombatantRank.RankName.PEASANT)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
 var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
 
@@ -40,6 +40,7 @@ const locations = {
 # Variables that control progress outsie of a single combat
 var combatants: Array[CombatantRank]
 var needed_wins: int
+var current_location: String
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
@@ -55,14 +56,16 @@ var opponent_health: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$WinCount.modulate = Color(Color.WHITE, 0)
+	$NewBearer.modulate = Color(Color.WHITE, 0)
 	bearer_rank = PEASANT
-	opponent_rank = KNIGHT
+	init_bearer_health()
 	enter_location("Rear Guard")
 	enter_combat.call_deferred()
 
 
 func enter_combat():
-	init_fight()
+	init_opponent()
+	construct_action_queue()
 	while true:
 		var curr_action = action_queue.pop_front()
 		match curr_action:
@@ -77,6 +80,7 @@ func enter_combat():
 			opponent_defeated()
 			break
 		if bearer_health <= 0:
+			bearer_defeated()
 			break
 
 
@@ -84,6 +88,7 @@ func enter_combat():
 
 
 func enter_location(location_name: String):
+	current_location = location_name
 	create_combatant_list(locations[location_name])
 	needed_wins = combatants.size()
 
@@ -105,24 +110,23 @@ func create_combatant_list(combatant_string: String, last_n: int = 0):
 				combatants.append(KINGSGUARD)
 
 
-func current_wins() -> int:
-	return needed_wins - combatants.size()
-
-
 ## ----------------- SINGLE COMBAT LOGIC -----------------
 
 
-func init_fight():
+func init_bearer_health(starting_health: int = -1):
+	if starting_health == -1:
+		starting_health = bearer_rank.health
+
 	bearer_health = bearer_rank.health
-	bearer_heart_holder.set_hearts(bearer_health)
+	bearer_heart_holder.set_hearts(bearer_health, starting_health)
 	heart_border_ui.set_bearer_border(bearer_rank)
 
+
+func init_opponent():
 	opponent_rank = combatants.pop_front()
 	opponent_health = opponent_rank.health
 	opponent_heart_holder.set_hearts(opponent_health)
 	heart_border_ui.set_opponent_border(opponent_rank)
-
-	construct_action_queue()
 
 
 func construct_action_queue():
@@ -141,6 +145,36 @@ func bearer_loses_health():
 func opponent_loses_health():
 	opponent_health -= 1
 	opponent_heart_holder.break_heart_at_idx(opponent_health)
+
+
+func bearer_defeated():
+	# Change hands, lose one location win, regen combatants
+	var label = $NewBearer
+
+	var tween_in = create_tween()
+	tween_in.tween_property(label, "modulate", Color(Color.WHITE, 1), 2)
+	await tween_in.finished
+	
+	await get_tree().create_timer(1).timeout
+
+	var tween_out = create_tween()
+	tween_out.tween_property(label, "modulate", Color(Color.WHITE, 0), 2)
+	await tween_out.finished
+
+
+	bearer_rank = opponent_rank
+	init_bearer_health(opponent_health)
+	create_combatant_list(
+		locations[current_location],
+		max( # Make sure it doesn't go negative
+			# -2 because the size of combatants is one less that the number
+			# of remaining fights, as combantants is popped at the start of
+			# combat. Then we subtract 1 more because of the bearer defeat.
+			needed_wins - combatants.size() - 2,
+			0
+		)
+	)
+	enter_combat()
 
 
 func opponent_defeated():
@@ -167,7 +201,7 @@ func opponent_defeated():
 		await tween_in.finished
 		
 		await get_tree().create_timer(1).timeout
-		count_label.text = str(current_wins()) + "/" + str(needed_wins)
+		count_label.text = str(needed_wins - combatants.size()) + "/" + str(needed_wins)
 		await get_tree().create_timer(1).timeout
 
 		var tween_out = create_tween()
