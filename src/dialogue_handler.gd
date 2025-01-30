@@ -72,15 +72,13 @@ func option_sequence(options: Array[Dictionary], tutorial: bool = false) -> void
 		add_child(option_instance)
 
 		if tutorial:
-			if option.rotation.x == 0:
-				option_instance.get_child(0).position /= 1.5
-			elif option.rotation.x > 0:
-				option_instance.get_child(0).position /= 3
-			else:
-				option_instance.label.position += Vector3(0, 1, 0.5)
-			if option.rotation.z == 0:
-				option_instance.label.position += Vector3(-0.25, 0, 0)
-			option_instance.label.billboard = 1
+			option_instance.set_tutorial()
+			if option.text == "s":
+				# option_instance.find_child("Tutorial_Pointer").position *= 0.75
+				option_instance.tutorial_label.position += Vector3(0, -1.3, 1)
+				option_instance.tutorial_label.modulate = Color.BLACK
+			elif option.text == "w":
+				option_instance.tutorial_label.position += Vector3(0, 2, 0)
 			
 		option_instance.set_text(option["text"])
 		option_instance.set_effect(option["effect"])
