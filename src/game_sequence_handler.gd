@@ -15,6 +15,8 @@ class_name GameSequenceHandler
 
 @onready var main: Node3D = get_tree().current_scene
 
+@onready var sword_animator: AnimationPlayer = %SwordAnimator
+
 enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
@@ -307,6 +309,8 @@ func block_sequence():
 		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
 		swing_arm.play_animation("land_block", 0, true)
+		sword_animator.stop()
+		sword_animator.play("land_block")
 		# Global.sfx_player.play("Test")
 	else:
 		# Failed block
