@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=34 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -10,10 +10,16 @@
 [ext_resource type="Environment" uid="uid://cos2fdybsuq2b" path="res://assets/environments/main.tres" id="7_knhja"]
 [ext_resource type="Script" path="res://src/light_container.gd" id="7_pcbq2"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
+[ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 [ext_resource type="PackedScene" uid="uid://dp1fkp3wyiu7k" path="res://src/ui/locations_wheel.tscn" id="12_or6h2"]
+[ext_resource type="AudioStream" uid="uid://274cldych6hc" path="res://assets/intro_sounds/pre_intro_ambience.wav" id="13_1xs1o"]
+[ext_resource type="AudioStream" uid="uid://bplrxdq1vcurf" path="res://assets/intro_sounds/intro_start.wav" id="13_fudk4"]
 [ext_resource type="PackedScene" uid="uid://bedv3wcguauho" path="res://src/ui/heart_holder.tscn" id="13_ja52v"]
+[ext_resource type="AudioStream" uid="uid://dxqkas3vbfxxc" path="res://assets/intro_sounds/intro_ambience.wav" id="16_nwkfw"]
+[ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="17_t3opm"]
+[ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="18_372qn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -48,6 +54,54 @@ tracks/0/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_g124h"]
+resource_name = "come_forward"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.3, -2.43333, 0.00930664, 0.25, 0, 0, -0.25, 0, 0, 0.13744),
+"times": PackedFloat32Array(0, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.1, -2.1, 0.0160091, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4)
+}
 
 [sub_resource type="Animation" id="Animation_a12m2"]
 resource_name = "land_block"
@@ -64,10 +118,49 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0666667, 0.8)
 }
 
+[sub_resource type="Animation" id="Animation_lg101"]
+resource_name = "transform"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0.13744, 0.240399, -0.0333333, 0, 0.9, -0.039476, -0.3, -2.43333, 0.00930664, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0666667, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.1, 6.2803, 6.283, -1.8, -0.295142, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.1, -2.1, 0.0160091, 0.25, 0),
+"times": PackedFloat32Array(0, 3)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0016m"]
 _data = {
 "RESET": SubResource("Animation_yb54g"),
-"land_block": SubResource("Animation_a12m2")
+"come_forward": SubResource("Animation_g124h"),
+"land_block": SubResource("Animation_a12m2"),
+"transform": SubResource("Animation_lg101")
 }
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
@@ -75,8 +168,8 @@ dof_blur_far_distance = 4.23
 
 [sub_resource type="Animation" id="Animation_8ka2i"]
 resource_name = "Chest Open"
-length = 4.0
-step = 0.1
+length = 16.0
+step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,7 +177,7 @@ tracks/0/path = NodePath("%DirectionalLights:brightness")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(9.90837, 10.1192),
 "transitions": PackedFloat32Array(33.1285, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -96,10 +189,10 @@ tracks/1/path = NodePath("%OmniLights:brightness")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(33.1285, 1),
+"times": PackedFloat32Array(5.99144, 6.2319, 9.9, 10.1),
+"transitions": PackedFloat32Array(1, 33.1285, 33.1285, 1),
 "update": 0,
-"values": [0.1, 0.6]
+"values": [0.0, 0.1, 0.1, 0.6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -108,7 +201,7 @@ tracks/2/path = NodePath("ChestLight:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(9.9, 10.1),
 "transitions": PackedFloat32Array(4.75684, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -120,10 +213,10 @@ tracks/3/path = NodePath("ChestLight:spot_angle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(4.75684, 1),
+"times": PackedFloat32Array(6.05113, 6.07224, 6.10502, 9.9, 10.1),
+"transitions": PackedFloat32Array(1.36604, 0.90125, 1, 4.75684, 1),
 "update": 0,
-"values": [45.0, 101.3]
+"values": [0.0, 55.0, 45.0, 45.0, 101.3]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -132,7 +225,7 @@ tracks/4/path = NodePath("Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -144,86 +237,133 @@ tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 1.6, 2, 2.6, 3.4),
-"transitions": PackedFloat32Array(68.5938, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(11.0263, 11.2536, 11.5425, 11.7702, 11.9885, 12.2371, 12.3909, 12.4869, 12.5679, 12.705, 12.7901, 12.8503, 12.8991),
+"transitions": PackedFloat32Array(1.23115, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [1.0, 0.999998, 0.36, 0.91, 0.41, 0.74, 0.0]
+"values": [1.0, 0.999998, 0.36, 0.91, 0.16, 0.74, 0.0, 0.74, 0.0, 0.74, 0.0, 0.74, 0.0]
 }
-
-[sub_resource type="Animation" id="Animation_5pdrl"]
-resource_name = "Chest Peek"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%DirectionalLights:brightness")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(33.1285),
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("13_fudk4")
+}],
+"times": PackedFloat32Array(1.9)
+}
+tracks/6/use_blend = true
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "animation"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%SwordAnimator")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": PackedStringArray(),
+"times": PackedFloat32Array()
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SwordGroup:position:z")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.8, 0, 0.25, 0, 0.200923, -0.08, 0, 0.169318, 0.00186218, -0.000192588, -0.627, 0, 0.065, 0),
+"times": PackedFloat32Array(11.1224, 12.6027, 13.1076)
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%Snow:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("%MainCamera:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(6, 6.01823, 6.04213, 6.06532, 9.97144, 9.98968, 10.0136, 10.0368),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 1.005), Vector3(0.02, 0.02, 1.005), Vector3(-0.02, -0.02, 1.005), Vector3(0, 0, 1.005), Vector3(0, 0, 1.005), Vector3(0.06, 0.02, 1.005), Vector3(-0.06, -0.02, 1.005), Vector3(0, 0, 1.005)]
+}
+tracks/12/type = "audio"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"clips": [{
+"end_offset": 13.9282,
+"start_offset": 0.0,
+"stream": ExtResource("13_1xs1o")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/12/use_blend = true
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volume_db")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-20.0, -16.7626]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience:volume_db")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-16.0, -20.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%OmniLights:brightness")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(33.1285),
-"update": 0,
-"values": [0.1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ChestLight:light_energy")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(4.75684),
-"update": 0,
-"values": [1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ChestLight:spot_angle")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8, 1),
-"transitions": PackedFloat32Array(17.7531, 1, 0.233259),
-"update": 0,
-"values": [0.0, 59.38, 45.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Snow:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(68.5938),
-"update": 0,
-"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_tts51"]
@@ -428,7 +568,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [45.0]
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -454,11 +594,93 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SwordGroup:position:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Snow:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%MainCamera:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1.005)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volume_db")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-16.7626]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience:volume_db")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
 _data = {
 "Chest Open": SubResource("Animation_8ka2i"),
-"Chest Peek": SubResource("Animation_5pdrl"),
 "In The Dark": SubResource("Animation_tts51"),
 "Main": SubResource("Animation_uom86"),
 "RESET": SubResource("Animation_1q5g8")
@@ -482,7 +704,7 @@ shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "locations_wheel", "location_hearts")]
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts")]
 unique_name_in_owner = true
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
@@ -492,6 +714,7 @@ camera = NodePath("MainCamera")
 bearer_heart_holder = NodePath("HeartUI/BothHeartHolders/BearerHeartHolder")
 opponent_heart_holder = NodePath("HeartUI/BothHeartHolders/OpponentHeartHolder")
 heart_border_ui = NodePath("HeartUI/HeartBorderUI")
+dialogue_handler = NodePath("SwordGroup/DialogueHandler")
 locations_wheel = NodePath("LocationsWheel")
 location_hearts = NodePath("LocationsWheel/LocationHearts")
 
@@ -505,6 +728,7 @@ process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
 [node name="MainCamera" parent="GameSequenceHandler" node_paths=PackedStringArray("heart_ui") instance=ExtResource("2_vb7ep")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.005)
 h_offset = 0.7
 heart_ui = NodePath("../HeartUI")
@@ -512,6 +736,8 @@ heart_ui = NodePath("../HeartUI")
 [node name="SwordGroup" type="Node3D" parent="GameSequenceHandler"]
 
 [node name="Sword" parent="GameSequenceHandler/SwordGroup" node_paths=PackedStringArray("blood_array") instance=ExtResource("1_bdv3j")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.6149e-11)
 blood_array = [NodePath("Sword/Blood1"), NodePath("Sword/Blood1_001"), NodePath("Sword/Blood1_002"), NodePath("Sword/Blood1_003")]
 
 [node name="Blood1" parent="GameSequenceHandler/SwordGroup/Sword/Sword" index="2"]
@@ -538,6 +764,32 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_0016m")
 }
+
+[node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler/SwordGroup" node_paths=PackedStringArray("light_animation_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00411851)
+script = ExtResource("9_5pvxm")
+light_animation_player = NodePath("../../LightingAnimator")
+
+[node name="TopLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0.58, 0.2)
+visible = false
+text = "Top text"
+font = ExtResource("7_d73xt")
+outline_size = 0
+
+[node name="CenterLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, 0.2)
+visible = false
+text = "Center text"
+font = ExtResource("7_d73xt")
+outline_size = 0
+
+[node name="BottomLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, -0.579735, 0.2)
+visible = false
+text = "Bottom text"
+font = ExtResource("7_d73xt")
+outline_size = 0
 
 [node name="HeartUI" type="Node3D" parent="GameSequenceHandler"]
 
@@ -579,6 +831,7 @@ light_energy = 0.6
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0.0481981, 0.12538, 0.0859773)
 spot_range = 0.765
 spot_attenuation = 1.25
+spot_angle = 0.0
 spot_angle_attenuation = 1.36604e-05
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="GameSequenceHandler"]
@@ -589,7 +842,7 @@ camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 libraries = {
 "": SubResource("AnimationLibrary_4m25b")
 }
-autoplay = "Main"
+autoplay = "RESET"
 
 [node name="NewBearer" type="Label3D" parent="GameSequenceHandler"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07)
@@ -607,6 +860,28 @@ transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.16, 0)
 num_hearts = 4
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
+
+[node name="IntroAudio" type="Node" parent="."]
+
+[node name="IntroStart" type="AudioStreamPlayer" parent="IntroAudio"]
+
+[node name="IntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
+stream = ExtResource("16_nwkfw")
+volume_db = -16.7626
+
+[node name="PreIntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
+
+[node name="TransformEffect" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+emitting = false
+amount = 496
+one_shot = true
+speed_scale = 1.48
+explosiveness = 0.61
+local_coords = true
+process_material = ExtResource("17_t3opm")
+draw_pass_1 = ExtResource("18_372qn")
 
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]

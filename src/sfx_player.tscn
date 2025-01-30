@@ -1,38 +1,52 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn1h8mr7sagxh"]
+[gd_scene load_steps=17 format=3 uid="uid://bn1h8mr7sagxh"]
 
 [ext_resource type="Script" path="res://src/sfx_player.gd" id="1_w3uqv"]
-[ext_resource type="AudioStream" uid="uid://n2j8f8tqvv5t" path="res://assets/music/Alpha_Theme.wav" id="3_h65a2"]
+[ext_resource type="AudioStream" uid="uid://cw2tncm7rcw6l" path="res://assets/music/music_base.wav" id="2_3phsl"]
+[ext_resource type="AudioStream" uid="uid://wyk6131emlv0" path="res://assets/intro_sounds/stick_hit.wav" id="3_12ndr"]
+[ext_resource type="AudioStream" uid="uid://k51smt5ts8ch" path="res://assets/music/music_bassonly.wav" id="3_j68kw"]
 [ext_resource type="AudioStream" uid="uid://gvv8j33xymil" path="res://assets/sfx/Nature_Ambience.WAV" id="3_rt8ug"]
+[ext_resource type="AudioStream" uid="uid://4hxjq5mugmvj" path="res://assets/music/music_fight.wav" id="4_6npx3"]
 [ext_resource type="AudioStream" uid="uid://ba5pwnlcqf681" path="res://assets/sfx/Battle_Ambience.wav" id="4_7panh"]
 [ext_resource type="AudioStream" uid="uid://dtwnottcescoo" path="res://assets/sfx/Sword_Hit_1.wav" id="5_dpyls"]
 [ext_resource type="AudioStream" uid="uid://yln2eiebcge1" path="res://assets/sfx/Woosh_1.wav" id="6_hvck8"]
 [ext_resource type="AudioStream" uid="uid://yubd88bi0a7f" path="res://assets/sfx/Swing_Yell_2.wav" id="7_af5y6"]
+[ext_resource type="AudioStream" uid="uid://xbo4f006w7xa" path="res://assets/sfx/Sword_Hit_Special.wav" id="7_yots1"]
 [ext_resource type="AudioStream" uid="uid://ckmi44hoqaiqk" path="res://assets/sfx/Breath_Josh_1.wav" id="8_c16o2"]
 [ext_resource type="AudioStream" uid="uid://brab1j6ybrd28" path="res://assets/sfx/Breath_Josh_2.wav" id="9_kn5em"]
 [ext_resource type="AudioStream" uid="uid://c3j5ec5mrwcr3" path="res://assets/sfx/Breath_Josh_3.wav" id="10_y1tfg"]
 [ext_resource type="AudioStream" uid="uid://dvnsqdcqmhmfv" path="res://assets/sfx/Breath_Josh_4.wav" id="11_xttyo"]
 [ext_resource type="AudioStream" uid="uid://c4lnaftsgjhg2" path="res://assets/sfx/Breath_Josh_5.wav" id="12_jieu4"]
 
-[node name="SfxPlayer" type="Node"]
+[node name="SfxPlayer" type="Node" node_paths=PackedStringArray("music_players")]
 script = ExtResource("1_w3uqv")
+music_players = [NodePath("Music_Calm"), NodePath("Music_BassOnly"), NodePath("Music_Fight")]
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_h65a2")
-volume_db = 4.855
-autoplay = true
+[node name="Music_Calm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3phsl")
+
+[node name="Music_BassOnly" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_j68kw")
+
+[node name="Music_Fight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6npx3")
+
+[node name="Stick_Break" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_12ndr")
+max_polyphony = 5
 
 [node name="Nature_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rt8ug")
 volume_db = 21.464
-autoplay = true
 
 [node name="Battle_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7panh")
 volume_db = -2.72
-autoplay = true
 
 [node name="Sword_Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dpyls")
+
+[node name="Sword_Hit_Special" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_yots1")
 
 [node name="Woosh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hvck8")

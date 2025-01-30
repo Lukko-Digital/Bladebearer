@@ -11,7 +11,14 @@ const CORRECT_ROTATION_THRESHOLD = 2
 
 @onready var screen_color_animation: AnimationPlayer = %ScreenColorAnimation
 
+@onready var transform_effect : GPUParticles3D = %TransformEffect
+
 @export var blood_array: Array[MeshInstance3D]
+
+@onready var sword_model: Node3D = %Sword
+@onready var stick_model: Node3D = %Stick
+
+@onready var sword_animator: AnimationPlayer = %SwordAnimator
 
 var target_rotation: Vector3:
 	set(value):
@@ -22,6 +29,21 @@ var target_rotation: Vector3:
 var previously_correct_rotation = false
 var blocking = false
 var input_locked = false
+
+var handling_inputs: bool = true
+
+func _ready():
+	sword_model.hide()
+	stick_model.show()
+
+func transform_to_sword():
+	sword_model.show()
+	stick_model.hide()
+	transform_effect.restart()
+	sword_animator.play("transform")
+	handling_inputs = false
+	await get_tree().create_timer(1.5).timeout
+	handling_inputs = true
 
 func _process(delta: float) -> void:
 	handle_rotation(delta)
@@ -34,13 +56,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func handle_rotation(delta: float):
-	# Handles WASD and Shift
-	target_rotation = Vector3()
-	target_rotation.x = Input.get_axis("forward", "backward")
-	target_rotation.z = Input.get_axis("right", "left")
-	target_rotation *= 45
-	if Input.is_action_pressed("shift"):
-		target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
+	if !handling_inputs:
+		target_rotation = Vector3(0,0,0)
+	else:
+		# Handles WASD and Shift
+		target_rotation = Vector3()
+		target_rotation.x = Input.get_axis("forward", "backward")
+		target_rotation.z = Input.get_axis("right", "left")
+		target_rotation *= 45
+		if Input.is_action_pressed("shift"):
+			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
 	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * delta), -PI, PI)
 	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * delta), -PI, PI)
 
@@ -52,9 +77,9 @@ func handle_check_rotation():
 	previously_correct_rotation = is_correct_rotation()
 
 
-func is_correct_rotation():
-	var xdiff = angle_difference(rotation.x, deg_to_rad(target.target_rot.x))
-	var zdiff = angle_difference(rotation.z, deg_to_rad(target.target_rot.z))
+func is_correct_rotation(to: Node3D = target):
+	var xdiff = angle_difference(rotation.x, deg_to_rad(to.target_rot.x))
+	var zdiff = angle_difference(rotation.z, deg_to_rad(to.target_rot.z))
 	return (abs(xdiff) + abs(zdiff)) < deg_to_rad(CORRECT_ROTATION_THRESHOLD)
 
 func lock_input():

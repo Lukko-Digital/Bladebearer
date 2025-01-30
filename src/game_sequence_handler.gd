@@ -12,6 +12,7 @@ class_name GameSequenceHandler
 @export var bearer_heart_holder: HeartHolder
 @export var opponent_heart_holder: HeartHolder
 @export var heart_border_ui: HeartBorderUI
+@export var dialogue_handler: DialogueHandler
 @export var locations_wheel: LocationsWheel
 @export var location_hearts: HeartHolder
 
@@ -60,6 +61,16 @@ var opponent_health: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	locations_wheel.hide()
+	target.hide()
+
+	await dialogue_handler.tutorial()
+
+	await get_tree().create_timer(1).timeout
+	
+	await dialogue_handler.menu()
+	
+	await dialogue_handler.intro()
+
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
 	bearer_rank = KINGSGUARD
@@ -70,6 +81,7 @@ func _ready() -> void:
 
 
 func enter_combat():
+	target.show()
 	init_opponent()
 	construct_action_queue()
 	while true:
