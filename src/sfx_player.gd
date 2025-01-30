@@ -2,8 +2,8 @@ extends Node
 class_name SfxPlayer
 
 # Music volumes in decibels
-const music_off_db: float = -45.0
-const music_on_db: float = 0.0
+const music_off_db: float = -80.0
+const music_on_db: float = -15
 
 @export var music_players: Array[AudioStreamPlayer]
 
@@ -14,7 +14,9 @@ func _ready() -> void:
 		player.volume_db = music_off_db
 
 	start_music()
-	pick_music(false,false,true,0.5,-20)
+	pick_music(false,false,true,0.5,-30)
+
+	transition_volume_db("Nature_Ambience", -80, 0)
 
 ## [audio_player_name] must exactly match the name of a child
 ## [AudioStreamPlayer] or [AudioStreamPlayer3D] node.

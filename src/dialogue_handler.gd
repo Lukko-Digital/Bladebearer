@@ -21,6 +21,12 @@ signal option_selected()
 
 var breaks_left = -1
 
+func _ready():
+	top_label.modulate = Color(1,1,1,0)
+	bottom_label.modulate = Color(1,1,1,0)
+	center_label.modulate = Color(1,1,1,0)
+	menu_label.modulate = Color(1,1,1,0)
+
 func _process(_delta: float) -> void:
 	if active_option:
 		var option = alligned_option()
@@ -52,21 +58,21 @@ func tutorial() -> void:
 		"stick", true)
 
 	await option_sequence([
-		{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1, 0)},
+		{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1.5, 0)},
 		],
 		"stick", true)
 	
 	breaks_left = 2
 	await option_sequence([
-		{"text": "a+s", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45)},
-		{"text": "w+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45)}
+		{"text": "a s", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45)},
+		{"text": "w d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45)}
 		],
 		"stick", true)
 
 	breaks_left = 2
 	await option_sequence([
-		{"text": "a+w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
-		{"text": "s+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
+		{"text": "a w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
+		{"text": "s d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
 		],
 		"stick", true)
 	
@@ -86,15 +92,15 @@ func menu() -> void:
 
 func intro() -> void:
 
-	Global.sfx_player.pick_music(false,false,false,0)
-	Global.sfx_player.play("Sword_Hit_Special")
+	# Global.sfx_player.pick_music(false,false,false,0)
+	# Global.sfx_player.play("Sword_Hit_Special")
 	
-	light_animation_player.play("Chest Open")
-	await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
+	# light_animation_player.play("Chest Open")
+	# await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
 
 	await option_sequence([
-		{"text": "I'm okay", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, -45)},
-		{"text": "Kill him", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 45)}
+		{"text": "\"i'm okay\"", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, -45)},
+		{"text": "kill him", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 45)}
 		])
 
 	
@@ -111,7 +117,11 @@ func option_sequence(options: Array[Dictionary], model : String = "pointer", _tu
 			if option.has("alignment"): option_instance.label.position += option.alignment
 			option_instance.label.position += Vector3(-0.04, 0, 0)
 			option_instance.label.billboard = 1
-			
+			option_instance.label.font_size = 35
+			if option["text"] == "w":
+				option_instance.label.font_size = 55
+				option_instance.label.scale = Vector3.ONE * 1.3
+
 		option_instance.set_text(option["text"])
 		if option.has("effect"):
 			option_instance.set_effect(option["effect"])
@@ -140,16 +150,25 @@ func option_sequence(options: Array[Dictionary], model : String = "pointer", _tu
 
 
 
-func show_text_sequence(text: String, allignment: Label3D, dur: float = 0.5) -> void:
-	allignment.transparency = 0
-	allignment.text = text
-	allignment.show()
+func show_text_sequence(text: String, allignment: int, dur: float = 0.2) -> void:
+	var _label: Label3D
+	if allignment == 1: _label = top_label
+	elif allignment == 2: _label = center_label
+	elif allignment == 3: _label = bottom_label
+	_label.modulate = Color(0,0,0,0)
+	_label.text = text
+	_label.show()
 	var text_tween = create_tween()
-	text_tween.tween_property(allignment, "transparency", 1, dur)
+	text_tween.tween_property(_label, "modulate", Color(1,1,1,1), dur)
+	print("labelling")
 
-func end_text_sequence(allignment: Label3D, dur: float = 0.5) -> void:
+func end_text_sequence(allignment: int, dur: float = 0.6) -> void:
+	var _label: Label3D
+	if allignment == 1: _label = top_label
+	elif allignment == 2: _label = center_label
+	elif allignment == 3: _label = bottom_label
 	var text_tween = create_tween()
-	text_tween.tween_property(allignment, "transparency", 1, dur)
+	text_tween.tween_property(_label, "modulate", Color(0,0,0,0), dur)
 
 
 

@@ -169,7 +169,7 @@ dof_blur_far_distance = 4.23
 [sub_resource type="Animation" id="Animation_8ka2i"]
 resource_name = "Chest Open"
 length = 16.0
-step = 1.0
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -259,15 +259,15 @@ tracks/6/keys = {
 tracks/6/use_blend = true
 tracks/7/type = "value"
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:playing")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.9, 1.9),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 tracks/8/type = "animation"
 tracks/8/imported = false
@@ -336,10 +336,10 @@ tracks/13/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volu
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(2, 4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(2, 4, 9.9, 10.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [-20.0, -16.7626]
+"values": [-20.0, -16.7626, -16.7626, -80.0]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -360,10 +360,10 @@ tracks/15/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(2, 3.7, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [-10.0, -10.0, 0.0]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
@@ -376,6 +376,101 @@ tracks/16/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("SwordGroup/DialogueHandler")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(2.3, 4.67, 7.08, 8.89),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["fionn... check this out.", 3, 0.5],
+"method": &"show_text_sequence"
+}, {
+"args": [3, 0.2],
+"method": &"end_text_sequence"
+}, {
+"args": ["it's glowing!", 3, 0.5],
+"method": &"show_text_sequence"
+}, {
+"args": [3, 0.2],
+"method": &"end_text_sequence"
+}]
+}
+tracks/18/type = "method"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("SwordGroup/DialogueHandler")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(4.2, 6.13, 8.02751, 9.56751, 13.6966, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["hm? what is it?", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.2],
+"method": &"end_text_sequence"
+}, {
+"args": ["i wouldn't touch that...", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.2],
+"method": &"end_text_sequence"
+}, {
+"args": ["hey, are you okay?", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.2],
+"method": &"end_text_sequence"
+}]
+}
+tracks/19/type = "bezier"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("SwordGroup:position:y")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/20/type = "audio"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("16_nwkfw")
+}],
+"times": PackedFloat32Array(1.9)
+}
+tracks/20/use_blend = true
+tracks/21/type = "method"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("%GameSequenceHandler/../SfxPlayer")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(9.9, 11),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["Nature_Ambience", 0.0, 0.2],
+"method": &"transition_volume_db"
+}, {
+"args": [true, false, false, 8.0, 0.0],
+"method": &"pick_music"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_tts51"]
@@ -618,57 +713,58 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/7/type = "bezier"
+tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SwordGroup:position:z")
+tracks/7/path = NodePath("%Snow:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("%Snow:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%MainCamera:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1.005)]
+}
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("%MainCamera:position")
+tracks/9/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volume_db")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 1.005)]
+"values": [-16.7626]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volume_db")
+tracks/10/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience:volume_db")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-16.7626]
+"values": [0.0]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience:volume_db")
+tracks/11/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -680,26 +776,25 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/12/path = NodePath("%Sword/Sword/Blade:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
-tracks/13/type = "value"
+tracks/13/type = "bezier"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("%Sword/Sword/Blade:visible")
+tracks/13/path = NodePath("SwordGroup:position:y")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
@@ -796,30 +891,30 @@ light_animation_player = NodePath("../../LightingAnimator")
 
 [node name="TopLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
 transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0.58, 0.2)
-visible = false
 text = "Top text"
 font = ExtResource("7_d73xt")
+font_size = 26
 outline_size = 0
 
 [node name="CenterLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
 transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, 0.2)
-visible = false
 text = "Center text"
 font = ExtResource("7_d73xt")
+font_size = 26
 outline_size = 0
 
 [node name="BottomLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
 transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, -0.579735, 0.2)
-visible = false
 text = "Bottom text"
 font = ExtResource("7_d73xt")
+font_size = 26
 outline_size = 0
 
 [node name="MenuLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
-transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, -0.579735, 0.2)
-transparency = 1.0
+transform = Transform3D(0.667017, 0, 0, 0, 0.667017, 0, 0, 0, 0.667017, 0, -0.579735, 0.2)
 text = "press space to select"
 font = ExtResource("7_d73xt")
+font_size = 35
 outline_size = 0
 
 [node name="HeartUI" type="Node3D" parent="GameSequenceHandler"]
@@ -897,7 +992,6 @@ num_hearts = 4
 [node name="IntroStart" type="AudioStreamPlayer" parent="IntroAudio"]
 
 [node name="IntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
-stream = ExtResource("16_nwkfw")
 volume_db = -16.7626
 
 [node name="PreIntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]

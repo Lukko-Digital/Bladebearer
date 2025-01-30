@@ -32,11 +32,13 @@ stream = ExtResource("4_6npx3")
 
 [node name="Stick_Break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_12ndr")
+volume_db = -10.824
 max_polyphony = 5
 
 [node name="Nature_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rt8ug")
-volume_db = 21.464
+volume_db = -80.0
+autoplay = true
 
 [node name="Battle_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7panh")
@@ -44,13 +46,15 @@ volume_db = -2.72
 
 [node name="Sword_Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dpyls")
+volume_db = -7.175
 
 [node name="Sword_Hit_Special" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_yots1")
+volume_db = -13.198
 
 [node name="Woosh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hvck8")
-volume_db = 8.432
+volume_db = -8.509
 
 [node name="Yell" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_af5y6")

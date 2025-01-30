@@ -32,7 +32,7 @@ var shaking: bool = false
 
 var original_position: Vector3
 
-var target_menu_label_transparency: float = 1.0
+var target_menu_label_transparency: Color = Color(1,1,1,0)
 
 func _ready():
 	original_position = position
@@ -69,14 +69,14 @@ func _process(_delta: float) -> void:
 	scale = scale.lerp(target_scale, ROTATION_LERP_SPEED*2)
 	target_scale = target_scale.lerp(Vector3.ONE, ROTATION_LERP_SPEED)
 
-	dialogue_handler.menu_label.transparency = lerp(dialogue_handler.menu_label.transparency, target_menu_label_transparency, ROTATION_LERP_SPEED)
-	target_menu_label_transparency = lerp(target_menu_label_transparency, 1.0, ROTATION_LERP_SPEED)
+	dialogue_handler.menu_label.modulate = lerp(dialogue_handler.menu_label.modulate, target_menu_label_transparency, ROTATION_LERP_SPEED)
+	target_menu_label_transparency = lerp(target_menu_label_transparency, Color(1,1,1,0), ROTATION_LERP_SPEED)
 
 
 
 func select():
 	target_scale = lerp(target_scale, Vector3.ONE * 1.1, ROTATION_LERP_SPEED*3)
-	target_menu_label_transparency = 0.0
+	target_menu_label_transparency = Color(1,1,1,1)
 
 func menu_option(opt: String):
 	target_scale = Vector3.ONE * 1.6
