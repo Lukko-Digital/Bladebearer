@@ -13,7 +13,7 @@ class_name Target
 @onready var align_effect: AnimationPlayer = %AlignEffect
 
 @export var meshes: Array[GeometryInstance3D]
-@export_range (0, 1) var transparency: float = 0.0 :
+@export_range(0, 1) var transparency: float = 0.0:
 	set(value):
 		transparency = value
 		for mesh in meshes:
@@ -21,13 +21,13 @@ class_name Target
 
 @onready var target_animation_player: AnimationPlayer = %TargetAnimationPlayer
 
-const ROTATION_LERP_SPEED = 0.07
+const ROTATION_LERP_SPEED = 4
 
 var target_rot: Vector3
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
-		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED)
+		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED * delta)
 	
 func move():
 	var new_rot: Vector3
