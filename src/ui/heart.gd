@@ -22,5 +22,6 @@ func fade_in(time: float):
 	tween.tween_property(mesh, "transparency", 0.0 if not broken else 0.99, time)
 
 func fade_out(time: float):
+	%HealthEmissionAnimator.stop()
 	var tween = create_tween()
 	tween.tween_property(mesh, "transparency", 1, time)
