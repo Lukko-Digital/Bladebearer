@@ -24,6 +24,8 @@ const MAX_HEART_SPACE = 0.7
 		focused_location = value
 		update_labels.call_deferred()
 
+@export var location_hearts: HeartHolder
+
 @onready var labels_node: Node3D = %Labels
 
 var heart_space: float = 0.5
@@ -75,6 +77,8 @@ func advance_location():
 	var tween_time = 0.7
 	animating = true
 
+	location_hearts.fade_out(0.3)
+	await get_tree().create_timer(0.3).timeout
 
 	var heart_space_tween_close = create_tween()
 	heart_space_tween_close.tween_property(self, "heart_space", 0, tween_time)
@@ -87,5 +91,8 @@ func advance_location():
 	var heart_space_tween_open = create_tween()
 	heart_space_tween_open.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time)
 	await heart_space_tween_open.finished
+
+	location_hearts.fade_in(1)
+	await get_tree().create_timer(1).timeout
 
 	animating = false
