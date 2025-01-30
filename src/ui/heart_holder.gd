@@ -52,3 +52,13 @@ func break_heart_at_idx(idx: int):
 		push_error("Invalid heart index ", str(idx), " on ", self)
 		return
 	heart_array[idx].break_heart()
+
+# ---------- FADE ----------
+
+func fade_in(time: float):
+	for heart: Heart in heart_array:
+		heart.fade_in(time)
+
+func fade_out(time: float):
+	for heart: Heart in heart_array:
+		heart.fade_out(time)

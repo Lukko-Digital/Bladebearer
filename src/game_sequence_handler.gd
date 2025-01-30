@@ -62,7 +62,7 @@ func _ready() -> void:
 	locations_wheel.hide()
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
-	bearer_rank = PEASANT
+	bearer_rank = KINGSGUARD
 	init_bearer_health()
 	enter_location("Rear Guard")
 	enter_combat.call_deferred()
@@ -96,6 +96,7 @@ func enter_location(location_name: String):
 	current_location = location_name
 	create_combatant_list(locations[location_name])
 	needed_wins = combatants.size()
+	location_hearts.set_hearts(needed_wins)
 
 
 ## last_n is used when the player changes bearer and is set back one combat,
@@ -206,6 +207,7 @@ func opponent_defeated():
 		locations_wheel.show()
 		var fade_in_time = 2
 		locations_wheel.fade_in(fade_in_time)
+		location_hearts.fade_in(fade_in_time)
 		await get_tree().create_timer(fade_in_time).timeout
 		
 		## LOCATION PROGRESSION
@@ -221,6 +223,7 @@ func opponent_defeated():
 		# FADE OUT
 		var fade_out_time = 2
 		locations_wheel.fade_out(fade_out_time)
+		location_hearts.fade_out(fade_out_time)
 		await get_tree().create_timer(fade_out_time).timeout
 		locations_wheel.hide()
 		
