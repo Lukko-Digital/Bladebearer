@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=26 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -33,6 +33,41 @@ radius = 0.01
 height = 0.02
 radial_segments = 4
 rings = 1
+
+[sub_resource type="Animation" id="Animation_yb54g"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_a12m2"]
+resource_name = "land_block"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0.13744, 0.181258, -0.0333333, 0, 0.233333, -0.0309222, 0, -0.425, 0.012, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0666667, 0.8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0016m"]
+_data = {
+"RESET": SubResource("Animation_yb54g"),
+"land_block": SubResource("Animation_a12m2")
+}
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
 dof_blur_far_distance = 4.23
@@ -92,7 +127,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Snow:emitting")
+tracks/4/path = NodePath("Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -104,7 +139,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
+tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -168,7 +203,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Snow:emitting")
+tracks/4/path = NodePath("Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -180,7 +215,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
+tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -245,7 +280,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Snow:emitting")
+tracks/4/path = NodePath("Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -257,7 +292,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
+tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -322,7 +357,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Snow:emitting")
+tracks/4/path = NodePath("Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -334,7 +369,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
+tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -397,7 +432,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Snow:emitting")
+tracks/4/path = NodePath("Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -409,7 +444,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/Sword/Blade:transparency")
+tracks/5/path = NodePath("SwordGroup/Sword/Sword/Blade:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -446,51 +481,58 @@ shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
-[node name="Snow" type="GPUParticles3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1.03642, 0, 0, 0, 1.03642, 0, 0, 0, 1.03642, 0, 0, 0)
-amount = 42045
-lifetime = 4.35
-local_coords = true
-trail_lifetime = 1.75
-process_material = ExtResource("5_tv00s")
-draw_pass_1 = SubResource("SphereMesh_2egrx")
-
 [node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui")]
+unique_name_in_owner = true
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
-sword = NodePath("Sword")
-target = NodePath("Target")
+sword = NodePath("SwordGroup/Sword")
+target = NodePath("SwordGroup/Target")
 camera = NodePath("MainCamera")
 bearer_heart_holder = NodePath("BothHeartHolders/BearerHeartHolder")
 opponent_heart_holder = NodePath("BothHeartHolders/OpponentHeartHolder")
 heart_border_ui = NodePath("HeartBorderUI")
 
-[node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0194353, 1.00529)
-h_offset = 0.7
+[node name="Snow" type="GPUParticles3D" parent="GameSequenceHandler"]
+unique_name_in_owner = true
+transform = Transform3D(1.03642, 0, 0, 0, 1.03642, 0, 0, 0, 1.03642, 0, 0, 0)
+amount = 42045
+lifetime = 4.35
+trail_lifetime = 1.75
+process_material = ExtResource("5_tv00s")
+draw_pass_1 = SubResource("SphereMesh_2egrx")
 
-[node name="Sword" parent="GameSequenceHandler" node_paths=PackedStringArray("blood_array") instance=ExtResource("1_bdv3j")]
+[node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.005)
+
+[node name="SwordGroup" type="Node3D" parent="GameSequenceHandler"]
+
+[node name="Sword" parent="GameSequenceHandler/SwordGroup" node_paths=PackedStringArray("blood_array") instance=ExtResource("1_bdv3j")]
 blood_array = [NodePath("Sword/Blood1"), NodePath("Sword/Blood1_001"), NodePath("Sword/Blood1_002"), NodePath("Sword/Blood1_003")]
 
-[node name="Blood1" parent="GameSequenceHandler/Sword/Sword" index="2"]
+[node name="Blood1" parent="GameSequenceHandler/SwordGroup/Sword/Sword" index="2"]
 visible = false
 
-[node name="Blood1_001" parent="GameSequenceHandler/Sword/Sword" index="4"]
+[node name="Blood1_001" parent="GameSequenceHandler/SwordGroup/Sword/Sword" index="4"]
 visible = false
 
-[node name="Blood1_002" parent="GameSequenceHandler/Sword/Sword" index="5"]
+[node name="Blood1_002" parent="GameSequenceHandler/SwordGroup/Sword/Sword" index="5"]
 visible = false
 
-[node name="Blood1_003" parent="GameSequenceHandler/Sword/Sword" index="6"]
+[node name="Blood1_003" parent="GameSequenceHandler/SwordGroup/Sword/Sword" index="6"]
 visible = false
 
-[node name="Stick" parent="GameSequenceHandler/Sword" index="2"]
+[node name="Stick" parent="GameSequenceHandler/SwordGroup/Sword" index="2"]
 visible = false
 
-[node name="Target" parent="GameSequenceHandler" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
+[node name="Target" parent="GameSequenceHandler/SwordGroup" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
 sword = NodePath("../Sword")
-swing_arm = NodePath("../../SwingArm")
+swing_arm = NodePath("../../../SwingArm")
+
+[node name="SwordAnimator" type="AnimationPlayer" parent="GameSequenceHandler/SwordGroup"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_0016m")
+}
 
 [node name="OmniLights" type="Node3D" parent="GameSequenceHandler" node_paths=PackedStringArray("lights")]
 unique_name_in_owner = true
@@ -526,7 +568,14 @@ camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
 [node name="BothHeartHolders" parent="GameSequenceHandler" instance=ExtResource("8_c1nmu")]
 
+[node name="BearerHeartHolder" parent="GameSequenceHandler/BothHeartHolders" index="0"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.819453, 0)
+
+[node name="OpponentHeartHolder" parent="GameSequenceHandler/BothHeartHolders" index="1"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0.830613, 0)
+
 [node name="HeartBorderUI" parent="GameSequenceHandler" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
+transform = Transform3D(0.187, 0, 0, 0, 0.187, 0, 0, 0, 0.187, 0, 0, 0)
 camera = NodePath("../MainCamera")
 
 [node name="LightingAnimator" type="AnimationPlayer" parent="GameSequenceHandler"]
@@ -553,6 +602,6 @@ visible = false
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
-[editable path="GameSequenceHandler/Sword"]
-[editable path="GameSequenceHandler/Sword/Sword"]
+[editable path="GameSequenceHandler/SwordGroup/Sword"]
+[editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]
 [editable path="GameSequenceHandler/BothHeartHolders"]
