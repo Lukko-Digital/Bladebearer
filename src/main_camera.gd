@@ -4,6 +4,8 @@ class_name MainCamera
 const SHAKE_RANGE = 0.01
 const SLIDE_POSITION = 0.7
 
+@export var heart_ui: Node3D
+
 @onready var shake_timer: Timer = $ShakeTimer
 
 var default_h_offset = h_offset
@@ -14,7 +16,11 @@ var shake_amount: float
 var slid = false
 
 func _process(_delta: float) -> void:
-	if not slid:
+	if slid:
+		# When sliding, drag heart UI with camera
+		heart_ui.position.x = h_offset
+	else:
+		# When in combat, handle shake
 		h_offset = default_h_offset
 		v_offset = default_v_offset
 		handle_shake()
