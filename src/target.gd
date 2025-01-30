@@ -39,8 +39,11 @@ func move():
 			randi_range(-1, 1)
 		)
 		new_rot *= 45
+
+		# ---- comment out this block to get rid of shift ----
 		if randi() % 2:
 			new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+		# ----------------------------------------------------
 
 		if is_valid_new_rotation(new_rot):
 			# Break when I see new rotation
