@@ -8,28 +8,67 @@ class_name DialogueHandler
 @onready var center_label: Label3D = $CenterLabel
 @onready var bottom_label: Label3D = $BottomLabel
 
+@onready var camera: Camera3D = %MainCamera
+
 var dialogue_option_scene: PackedScene = preload("res://src/dialogue_option.tscn")
 var dialogue_options: Array[DialogueOption]
 var active_option = false
 
 signal option_selected()
 
+var breaks_left = -1
 
 func _process(_delta: float) -> void:
 	if active_option:
 		var option = alligned_option()
-		if Input.is_action_just_pressed("space") and option != null:
-			option.effect.call()
-			
+		if option != null:
+			if option.match_effect or Input.is_action_just_pressed("space"):
+				option.effect.call()
+	
+	if breaks_left == 0:
+		option_selected.emit()
+		breaks_left = -1
+
 			
 func start_menu() -> void:
+	# await option_sequence([
+	# 	{"text": "a", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0)},
+	# 	], 
+	# 	"stick", true)
+	
+	# await option_sequence([
+	# 	{"text": "d", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45)}
+	# 	],
+	# 	"stick", true)
+	
+	# await option_sequence([
+	# 	{"text": "s", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0)},
+	# 	],
+	# 	"stick", true)
+
+	# await option_sequence([
+	# 	{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 0.3, 0)},
+	# 	],
+	# 	"stick", true)
+	
+	# breaks_left = 2
+	# await option_sequence([
+	# 	{"text": "a+s", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45)},
+	# 	{"text": "w+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45)}
+	# 	],
+	# 	"stick", true)
+
+	# breaks_left = 2
+	# await option_sequence([
+	# 	{"text": "s+d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
+	# 	{"text": "a+w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
+	# 	],
+	# 	"stick", true)
+	
 	await option_sequence([
-		{"text": "w", "effect": func(): option_selected.emit(), "rotation": Vector3(-45, 0, 0)},
-		{"text": "a", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 45)},
-		{"text": "s", "effect": func(): option_selected.emit(), "rotation": Vector3(45, 0, 0)},
-		{"text": "d", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, -45)}
+		{"text": "", "match_effect": func(): alligned_option().break_sword(), "rotation": Vector3(0, 0, -45)},
 		],
-		true)
+		"sword_holo_shake", true)
 	
 	await option_sequence([
 		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 0)},
@@ -64,26 +103,25 @@ func intro() -> void:
 		])
 
 	
-func option_sequence(options: Array[Dictionary], tutorial: bool = false) -> void:
+func option_sequence(options: Array[Dictionary], model : String = "pointer", tutorial: bool = false) -> void:
 	active_option = true
 
 	for option in options:
 		var option_instance = dialogue_option_scene.instantiate()
+		option_instance.dialogue_handler = self
+		option_instance.model = model
 		add_child(option_instance)
 
 		if tutorial:
-			if option.rotation.x == 0:
-				option_instance.get_child(0).position /= 1.5
-			elif option.rotation.x > 0:
-				option_instance.get_child(0).position /= 3
-			else:
-				option_instance.label.position += Vector3(0, 1, 0.5)
-			if option.rotation.z == 0:
-				option_instance.label.position += Vector3(-0.25, 0, 0)
+			if option.has("alignment"): option_instance.label.position += option.alignment
+			option_instance.label.position += Vector3(-0.04, 0, 0)
 			option_instance.label.billboard = 1
 			
 		option_instance.set_text(option["text"])
-		option_instance.set_effect(option["effect"])
+		if option.has("effect"):
+			option_instance.set_effect(option["effect"])
+		if option.has("match_effect"):
+				option_instance.set_effect(option["match_effect"], true)
 		option_instance.set_target_rot(option["rotation"])
 
 	dialogue_options = []
@@ -94,7 +132,6 @@ func option_sequence(options: Array[Dictionary], tutorial: bool = false) -> void
 	await option_selected
 	end_option_sequence()
 	await get_tree().create_timer(0.1).timeout
-
 
 func text_sequence(text: String, duration: float, allignment: Label3D) -> void:
 	allignment.show() # Make this a fade in

@@ -1,23 +1,56 @@
 extends Node3D
 class_name DialogueOption
 
-@onready var animation_player: AnimationPlayer = $Pointer2/AnimationPlayer
-@onready var label: Label3D = $Pointer2/Label3D
+var dialogue_handler : DialogueHandler
+
+@onready var animation_player: AnimationPlayer = %Pointer/AnimationPlayer
+@onready var label: Label3D = %Label
+
+@onready var stick_block_effect : GPUParticles3D = %StickBlockEffect
+@onready var stick : Node3D = %Stick
+
+@onready var sword_holo : Node3D = %SwordHolo
+@onready var pointer : Node3D = %Pointer
+
 
 const ROTATION_LERP_SPEED = 0.07
 
 var target_rot: Vector3
 var effect: Callable
 
+var match_effect: bool = false
+
+var broken: bool = false
+
+var model: String = "pointer"
+var shaking: bool = false
+
+var original_position: Vector3
+
+func _ready():
+	pointer.hide()
+	stick.hide()
+	sword_holo.hide()
+	if model == "pointer": pointer.show()
+	if model == "stick": stick.show()
+	if model == "sword_holo": sword_holo.show()
+	if model == "sword_holo_shake":
+		sword_holo.show()
+		shaking = true
+	original_position = position
+
 func _process(_delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
 		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED)
+	if shaking == true:
+		position = original_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
 
 func set_text(text: String):
 	label.text = text
 
-func set_effect(_effect: Callable):
+func set_effect(_effect: Callable, match : bool = false):
 	effect = _effect
+	if match: match_effect = true
 
 func set_target_rot(rot: Vector3):
 	target_rot = rot
@@ -35,3 +68,37 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 
 func get_text() -> String:
 	return label.text
+
+func break_stick(emit_next: bool = true):
+	if broken:
+		return
+	broken = true
+	stick.hide()
+	sword_holo.hide()
+	pointer.hide()
+	label.hide()
+	stick_block_effect.restart()
+	Global.sfx_player.play("Stick_Break")
+	dialogue_handler.camera.shake(0.1, 10)
+	await get_tree().create_timer(0.5).timeout
+
+	if emit_next:
+		dialogue_handler.option_selected.emit()
+	else:
+		dialogue_handler.breaks_left -= 1
+
+func break_sword(emit_next: bool = true):
+	if broken:
+		return
+	broken = true
+	sword_holo.hide()
+	label.hide()
+	stick_block_effect.restart()
+	Global.sfx_player.play("Sword_Hit_Special")
+	dialogue_handler.camera.shake(0.1, 10)
+	await get_tree().create_timer(0.5).timeout
+
+	if emit_next:
+		dialogue_handler.option_selected.emit()
+	else:
+		dialogue_handler.breaks_left -= 1

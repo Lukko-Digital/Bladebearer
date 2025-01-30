@@ -1,30 +1,88 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc5bbradac3vl"]
+[gd_scene load_steps=10 format=3 uid="uid://cc5bbradac3vl"]
 
 [ext_resource type="Script" path="res://src/dialogue_option.gd" id="1_6khdy"]
 [ext_resource type="PackedScene" uid="uid://bvgn8m4a5hhy8" path="res://assets/models/Pointer.glb" id="2_fataf"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="3_wy3sw"]
+[ext_resource type="PackedScene" uid="uid://bwt5h2gm6ccag" path="res://assets/models/Stick.glb" id="4_5dcfl"]
+[ext_resource type="Material" uid="uid://cvfu2jx85io8p" path="res://assets/materials/hologram_stick.tres" id="5_bo0up"]
+[ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="6_8ejul"]
+[ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="7_h4535"]
+[ext_resource type="PackedScene" uid="uid://dim435f67rted" path="res://assets/models/SwordHologram.glb" id="8_y3d0x"]
+[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram_blue.tres" id="9_hj4re"]
 
 [node name="DialogueOption" type="Node3D"]
 script = ExtResource("1_6khdy")
 
-[node name="Pointer2" parent="." instance=ExtResource("2_fataf")]
+[node name="Pointer" parent="." instance=ExtResource("2_fataf")]
+unique_name_in_owner = true
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.524205, 0)
+visible = false
 
-[node name="Pointer" parent="Pointer2" index="0"]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
-
-[node name="AnimationPlayer" parent="Pointer2" index="1"]
+[node name="AnimationPlayer" parent="Pointer" index="1"]
 autoplay = "Pointer_Idle"
 
-[node name="Label3D" type="Label3D" parent="Pointer2"]
-transform = Transform3D(-4.37114e-07, -10, 0, 10, -4.37114e-07, 0, 0, 0, 10, 0, 1.62658, 0)
-fixed_size = true
+[node name="Label" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.572274, 0)
 texture_filter = 0
 text = "Test"
 font = ExtResource("3_wy3sw")
 outline_size = 0
 horizontal_alignment = 0
 
-[connection signal="animation_finished" from="Pointer2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="Stick" parent="." instance=ExtResource("4_5dcfl")]
+unique_name_in_owner = true
+transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
 
-[editable path="Pointer2"]
+[node name="Band1_001" parent="Stick" index="0"]
+material_override = ExtResource("5_bo0up")
+
+[node name="Band2_001" parent="Stick" index="1"]
+material_override = ExtResource("5_bo0up")
+
+[node name="StickReal" parent="Stick" index="2"]
+material_override = ExtResource("5_bo0up")
+
+[node name="Band2" parent="Stick" index="3"]
+material_override = ExtResource("5_bo0up")
+
+[node name="Band3" parent="Stick" index="4"]
+material_override = ExtResource("5_bo0up")
+
+[node name="Band5" parent="Stick" index="5"]
+material_override = ExtResource("5_bo0up")
+
+[node name="Band1" parent="Stick" index="6"]
+material_override = ExtResource("5_bo0up")
+
+[node name="Band4" parent="Stick" index="7"]
+material_override = ExtResource("5_bo0up")
+
+[node name="StickBlockEffect" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+emitting = false
+amount = 91
+lifetime = 0.7
+one_shot = true
+speed_scale = 1.48
+explosiveness = 0.99
+local_coords = true
+process_material = ExtResource("6_8ejul")
+draw_pass_1 = ExtResource("7_h4535")
+
+[node name="SwordHolo" parent="." instance=ExtResource("8_y3d0x")]
+unique_name_in_owner = true
+transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
+
+[node name="Blade" parent="SwordHolo" index="0"]
+surface_material_override/0 = ExtResource("9_hj4re")
+
+[node name="Handle" parent="SwordHolo" index="1"]
+surface_material_override/0 = ExtResource("9_hj4re")
+
+[connection signal="animation_finished" from="Pointer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Pointer"]
+[editable path="Stick"]
+[editable path="SwordHolo"]

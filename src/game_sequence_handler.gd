@@ -59,6 +59,7 @@ var opponent_health: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	target.hide()
+	
 	await dialogue_handler.start_menu()
 	
 	await dialogue_handler.intro()

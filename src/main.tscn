@@ -468,6 +468,7 @@ process_material = ExtResource("5_tv00s")
 draw_pass_1 = SubResource("SphereMesh_2egrx")
 
 [node name="MainCamera" parent="GameSequenceHandler" instance=ExtResource("2_vb7ep")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.005)
 
 [node name="SwordGroup" type="Node3D" parent="GameSequenceHandler"]
