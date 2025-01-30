@@ -16,6 +16,8 @@ class_name GameSequenceHandler
 
 @onready var main: Node3D = get_tree().current_scene
 
+@onready var sword_animator: AnimationPlayer = %SwordAnimator
+
 enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
@@ -63,6 +65,7 @@ func _ready() -> void:
 
 	$WinCount.modulate = Color(Color.WHITE, 0)
 	$NewBearer.modulate = Color(Color.WHITE, 0)
+	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
 	enter_location("Rear Guard")
@@ -158,6 +161,7 @@ func bearer_defeated():
 	# Change hands, lose one location win, regen combatants
 	var label = $NewBearer
 
+	label.show()
 	var tween_in = create_tween()
 	tween_in.tween_property(label, "modulate", Color(Color.WHITE, 1), 2)
 	await tween_in.finished
@@ -167,6 +171,7 @@ func bearer_defeated():
 	var tween_out = create_tween()
 	tween_out.tween_property(label, "modulate", Color(Color.WHITE, 0), 2)
 	await tween_out.finished
+	label.hide()
 
 
 	bearer_rank = opponent_rank
@@ -313,6 +318,9 @@ func block_sequence():
 		# Successful block
 		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
+		swing_arm.play_animation("land_block", 0, true)
+		sword_animator.stop()
+		sword_animator.play("land_block")
 		# Global.sfx_player.play("Test")
 	else:
 		# Failed block

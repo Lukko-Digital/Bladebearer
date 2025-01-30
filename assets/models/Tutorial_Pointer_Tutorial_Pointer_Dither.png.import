@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4d2146d1g2lj"
-path.s3tc="res://.godot/imported/knight_healthbar.png-4392fb740b89438514794b1334d34a33.s3tc.ctex"
+uid="uid://dm50geoacusjj"
+path.s3tc="res://.godot/imported/Tutorial_Pointer_Tutorial_Pointer_Dither.png-0bfb66d5a973e388fbf0c3074e5ed107.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "02cd67dc0d40f253c64cc4ef45ee8509"
+}
 
 [deps]
 
-source_file="res://assets/ui/knight_healthbar.png"
-dest_files=["res://.godot/imported/knight_healthbar.png-4392fb740b89438514794b1334d34a33.s3tc.ctex"]
+source_file="res://assets/models/Tutorial_Pointer_Tutorial_Pointer_Dither.png"
+dest_files=["res://.godot/imported/Tutorial_Pointer_Tutorial_Pointer_Dither.png-0bfb66d5a973e388fbf0c3074e5ed107.s3tc.ctex"]
 
 [params]
 

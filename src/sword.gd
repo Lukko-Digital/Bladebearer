@@ -1,17 +1,17 @@
 extends Node3D
 class_name Sword
 
-const ROTATION_LERP_SPEED = 0.2
+const ROTATION_LERP_SPEED = 10
 ## Threshold for determining correct sword angle. In degrees.
 const CORRECT_ROTATION_THRESHOLD = 2
 
-@onready var game_sequence_handler: GameSequenceHandler = get_parent()
+@onready var game_sequence_handler: GameSequenceHandler = %GameSequenceHandler
 @onready var target: Target = game_sequence_handler.target
 @onready var swing_arm: SwingArm = game_sequence_handler.swing_arm
 
 @onready var screen_color_animation: AnimationPlayer = %ScreenColorAnimation
 
-@export var blood_array : Array[MeshInstance3D]
+@export var blood_array: Array[MeshInstance3D]
 
 var target_rotation: Vector3:
 	set(value):
@@ -23,8 +23,8 @@ var previously_correct_rotation = false
 var blocking = false
 var input_locked = false
 
-func _process(_delta: float) -> void:
-	handle_rotation()
+func _process(delta: float) -> void:
+	handle_rotation(delta)
 	handle_check_rotation()
 
 
@@ -33,7 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		game_sequence_handler.lock_swing()
 
 
-func handle_rotation():
+func handle_rotation(delta: float):
 	# Handles WASD and Shift
 	target_rotation = Vector3()
 	target_rotation.x = Input.get_axis("forward", "backward")
@@ -41,8 +41,8 @@ func handle_rotation():
 	target_rotation *= 45
 	if Input.is_action_pressed("shift"):
 		target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
-	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED), -PI, PI)
-	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED), -PI, PI)
+	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * delta), -PI, PI)
+	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * delta), -PI, PI)
 
 
 ## Check if sword is just placed into correct rotation
@@ -66,8 +66,8 @@ func unlock_input():
 ## Handling adding blood to sword on impact
 func add_blood():
 
-	var keep_going : bool = true
-	var blood_index : int = 0
+	var keep_going: bool = true
+	var blood_index: int = 0
 
 	while keep_going:
 
@@ -82,7 +82,7 @@ func add_blood():
 
 func clear_blood():
 
-	var fade_duration : float = 1
+	var fade_duration: float = 1
 
 	for blood in blood_array:
 		var tween_fade = create_tween()

@@ -6,5 +6,5 @@
 editor_description = "scale: 0.067
 z: -0.071
 y: plus or minus 0.91"
-transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0, -0.071)
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0, 0)
 script = ExtResource("1_r3n0a")
