@@ -12,13 +12,18 @@ var dialogue_handler : DialogueHandler
 @onready var sword_holo : Node3D = %SwordHolo
 @onready var pointer : Node3D = %Pointer
 
+@onready var volume_up : Node3D = %VolumeUp
+@onready var volume_down : Node3D = %VolumeDown
+@onready var start : Node3D = %Start
+
 
 const ROTATION_LERP_SPEED = 0.07
+const SELECTION_OFFSET = 0.1
 
 var target_rot: Vector3
+var target_scale: Vector3
 var effect: Callable
-
-var match_effect: bool = false
+var match_effect: Callable
 
 var broken: bool = false
 
@@ -27,9 +32,12 @@ var shaking: bool = false
 
 var original_position: Vector3
 
+var target_menu_label_transparency: float = 1.0
 
 func _ready():
 	original_position = position
+	target_scale = Vector3.ONE
+	dialogue_handler.menu_label.transparency = 1.0
 
 # WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! 
 # JOSH MAEK SURE TO ADD ANY NEW MODELS TWICE IN BOTH THES E FUCKEARS !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!
@@ -37,9 +45,15 @@ func set_model(_model: String):
 	pointer.hide()
 	stick.hide()
 	sword_holo.hide()
+	volume_up.hide()
+	volume_down.hide()
+	start.hide()
 	if _model == "pointer": pointer.show()
 	if _model == "stick": stick.show()
 	if _model == "sword_holo": sword_holo.show()
+	if _model == "volume_up": volume_up.show()
+	if _model == "volume_down": volume_down.show()
+	if _model == "start": start.show()
 	if _model == "sword_holo_shake":
 		sword_holo.show()
 		shaking = true
@@ -51,13 +65,43 @@ func _process(_delta: float) -> void:
 		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED)
 	if shaking == true:
 		position = original_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
+	
+	scale = scale.lerp(target_scale, ROTATION_LERP_SPEED*2)
+	target_scale = target_scale.lerp(Vector3.ONE, ROTATION_LERP_SPEED)
+
+	dialogue_handler.menu_label.transparency = lerp(dialogue_handler.menu_label.transparency, target_menu_label_transparency, ROTATION_LERP_SPEED)
+	target_menu_label_transparency = lerp(target_menu_label_transparency, 1.0, ROTATION_LERP_SPEED)
+
+
+
+func select():
+	target_scale = lerp(target_scale, Vector3.ONE * 1.1, ROTATION_LERP_SPEED*3)
+	target_menu_label_transparency = 0.0
+
+func menu_option(opt: String):
+	target_scale = Vector3.ONE * 1.6
+	if opt == "play":
+		dialogue_handler.option_selected.emit()
+		dialogue_handler.menu_label.hide() # TO NEVEAR BE SEEN AGAIN!!! (UNTIL MAYBE ONE DAY)
+	elif opt == "volume_up":
+		# add volume sound effect
+		# decrease volume
+		print("vol down")
+	elif opt == "volume_down":
+		# add volume sound effect
+		# increase volume
+		print("vol up")
+
+
 
 func set_text(text: String):
 	label.text = text
 
-func set_effect(_effect: Callable, match : bool = false):
+func set_effect(_effect: Callable):
 	effect = _effect
-	if match: match_effect = true
+
+func set_match_effect(_effect: Callable):
+	match_effect = _effect
 
 func set_target_rot(rot: Vector3):
 	target_rot = rot

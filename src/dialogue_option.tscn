@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cc5bbradac3vl"]
+[gd_scene load_steps=13 format=3 uid="uid://cc5bbradac3vl"]
 
 [ext_resource type="Script" path="res://src/dialogue_option.gd" id="1_6khdy"]
 [ext_resource type="PackedScene" uid="uid://bvgn8m4a5hhy8" path="res://assets/models/Pointer.glb" id="2_fataf"]
@@ -9,14 +9,16 @@
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="7_h4535"]
 [ext_resource type="PackedScene" uid="uid://dim435f67rted" path="res://assets/models/SwordHologram.glb" id="8_y3d0x"]
 [ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram_blue.tres" id="9_hj4re"]
+[ext_resource type="PackedScene" uid="uid://ck0hexebmoy8g" path="res://assets/models/VolumeDown.glb" id="10_y5qae"]
+[ext_resource type="PackedScene" uid="uid://doqx8wqgxbv5h" path="res://assets/models/VolumeUp.glb" id="11_kiyr2"]
+[ext_resource type="PackedScene" uid="uid://g43h16cfbsb" path="res://assets/models/Tutorial_Pointer.glb" id="12_6qhue"]
 
 [node name="DialogueOption" type="Node3D"]
 script = ExtResource("1_6khdy")
 
 [node name="Pointer" parent="." instance=ExtResource("2_fataf")]
 unique_name_in_owner = true
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.524205, 0)
-visible = false
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.596997, 0)
 
 [node name="AnimationPlayer" parent="Pointer" index="1"]
 autoplay = "Pointer_Idle"
@@ -93,8 +95,28 @@ surface_material_override/0 = ExtResource("9_hj4re")
 [node name="Handle" parent="SwordHolo" index="1"]
 surface_material_override/0 = ExtResource("9_hj4re")
 
+[node name="VolumeDown" parent="." instance=ExtResource("10_y5qae")]
+unique_name_in_owner = true
+transform = Transform3D(0.108885, 0, 0, 0, 0.0825243, -0.0710322, 0, 0.0710322, 0.0825243, 0, 0.58517, 0)
+
+[node name="AnimationPlayer" parent="VolumeDown" index="1"]
+autoplay = "Pulse"
+
+[node name="VolumeUp" parent="." instance=ExtResource("11_kiyr2")]
+unique_name_in_owner = true
+transform = Transform3D(0.108885, 0, 0, 0, 0.0825243, -0.0710322, 0, 0.0710322, 0.0825243, 0, 0.58517, 0)
+
+[node name="AnimationPlayer" parent="VolumeUp" index="1"]
+autoplay = "Pulse"
+
+[node name="Start" parent="." instance=ExtResource("12_6qhue")]
+unique_name_in_owner = true
+transform = Transform3D(0.0951817, 0, 0, 0, 0.0678068, -0.0667966, 0, 0.0667966, 0.0678068, 0, 0.534555, 0.304163)
+
 [connection signal="animation_finished" from="Pointer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
 [editable path="Pointer"]
 [editable path="Stick"]
 [editable path="SwordHolo"]
+[editable path="VolumeDown"]
+[editable path="VolumeUp"]

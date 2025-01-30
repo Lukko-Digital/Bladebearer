@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm50geoacusjj"
-path.s3tc="res://.godot/imported/Tutorial_Pointer_Tutorial_Pointer_Dither.png-0bfb66d5a973e388fbf0c3074e5ed107.s3tc.ctex"
+uid="uid://byd0xaxaqai82"
+path.s3tc="res://.godot/imported/Tutorial_Pointer_Play_Button_Base_Dither.png-a2c961a786f92dea9f187a720dbc21b9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "f28592a4a5f3f6e72756e37c306c27d8"
+"md5": "70aea3f285f7736fa425a0e33b16b5ec"
 }
 
 [deps]
 
-source_file="res://assets/models/Tutorial_Pointer_Tutorial_Pointer_Dither.png"
-dest_files=["res://.godot/imported/Tutorial_Pointer_Tutorial_Pointer_Dither.png-0bfb66d5a973e388fbf0c3074e5ed107.s3tc.ctex"]
+source_file="res://assets/models/Tutorial_Pointer_Play_Button_Base_Dither.png"
+dest_files=["res://.godot/imported/Tutorial_Pointer_Play_Button_Base_Dither.png-a2c961a786f92dea9f187a720dbc21b9.s3tc.ctex"]
 
 [params]
 

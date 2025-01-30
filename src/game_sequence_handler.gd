@@ -33,13 +33,13 @@ var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
 # Space separated list of combatants in the location
 # If multiple letters are adjacent, it is a randomized selection between them
 const locations = {
-    "Royal Tent": "G G",
-    "Kingsguard": "KG K G",
-    "Central Field": "FK FK FK K",
-    "Rear Guard": "PF PF F K",
-    "Straggler's Field": "F PF PF",
-    "Outer Woods": "P P",
-    "Deep Woods": "P P",
+	"Royal Tent": "G G",
+	"Kingsguard": "KG K G",
+	"Central Field": "FK FK FK K",
+	"Rear Guard": "PF PF F K",
+	"Straggler's Field": "F PF PF",
+	"Outer Woods": "P P",
+	"Deep Woods": "P P",
 }
 
 # Variables that control progress outsie of a single combat

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm50geoacusjj"
-path.s3tc="res://.godot/imported/Tutorial_Pointer_Tutorial_Pointer_Dither.png-0bfb66d5a973e388fbf0c3074e5ed107.s3tc.ctex"
+uid="uid://c12dsr6i4k2xa"
+path.s3tc="res://.godot/imported/VolumeDown_Speaker_Base_Dither.png-4407ffd4332e1fff86884e508bfa1030.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "f28592a4a5f3f6e72756e37c306c27d8"
+"md5": "bd82d44d4c2076a1cf207ef17072a2fd"
 }
 
 [deps]
 
-source_file="res://assets/models/Tutorial_Pointer_Tutorial_Pointer_Dither.png"
-dest_files=["res://.godot/imported/Tutorial_Pointer_Tutorial_Pointer_Dither.png-0bfb66d5a973e388fbf0c3074e5ed107.s3tc.ctex"]
+source_file="res://assets/models/VolumeDown_Speaker_Base_Dither.png"
+dest_files=["res://.godot/imported/VolumeDown_Speaker_Base_Dither.png-4407ffd4332e1fff86884e508bfa1030.s3tc.ctex"]
 
 [params]
 

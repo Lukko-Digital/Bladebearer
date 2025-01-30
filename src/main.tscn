@@ -791,6 +791,13 @@ text = "Bottom text"
 font = ExtResource("7_d73xt")
 outline_size = 0
 
+[node name="MenuLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, -0.579735, 0.2)
+transparency = 1.0
+text = "press space to select"
+font = ExtResource("7_d73xt")
+outline_size = 0
+
 [node name="HeartUI" type="Node3D" parent="GameSequenceHandler"]
 
 [node name="HeartBorderUI" parent="GameSequenceHandler/HeartUI" node_paths=PackedStringArray("camera") instance=ExtResource("9_41gh3")]
