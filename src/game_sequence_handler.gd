@@ -13,6 +13,8 @@ class_name GameSequenceHandler
 @export var opponent_heart_holder: HeartHolder
 @export var heart_border_ui: HeartBorderUI
 @export var dialogue_handler: DialogueHandler
+@export var locations_wheel: LocationsWheel
+@export var location_hearts: HeartHolder
 
 @onready var main: Node3D = get_tree().current_scene
 
@@ -43,7 +45,7 @@ const locations = {
 # Variables that control progress outsie of a single combat
 var combatants: Array[CombatantRank]
 var needed_wins: int
-var current_location: String
+var current_location: int
 
 # Variables that control top level of combat
 var action_queue: Array[ACTION]
@@ -58,6 +60,7 @@ var opponent_health: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	locations_wheel.hide()
 	target.hide()
 
 	await dialogue_handler.tutorial()
@@ -68,12 +71,12 @@ func _ready() -> void:
 	
 	await dialogue_handler.intro()
 
-	$WinCount.modulate = Color(Color.WHITE, 0)
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
-	bearer_rank = PEASANT
+	bearer_rank = KINGSGUARD
 	init_bearer_health()
-	enter_location("Rear Guard")
+	enter_location(6)
+	locations_wheel.set_location(6)
 	enter_combat.call_deferred()
 
 
@@ -102,10 +105,11 @@ func enter_combat():
 ## ----------------- LOCATION LOGIC -----------------
 
 
-func enter_location(location_name: String):
-	current_location = location_name
-	create_combatant_list(locations[location_name])
+func enter_location(location_idx: int):
+	current_location = location_idx
+	create_combatant_list(locations[locations.keys()[location_idx]])
 	needed_wins = combatants.size()
+	location_hearts.set_hearts(needed_wins)
 
 
 ## last_n is used when the player changes bearer and is set back one combat,
@@ -195,52 +199,60 @@ func bearer_defeated():
 
 
 func opponent_defeated():
+	# Slide out camera, update location wheel and hearts, slide camera back, enter next combat
+
+	# Hide combat stuff
+	target.holo_red.hide() # Holo red will be showing because you have to win on a hit
+	opponent_heart_holder.hide()
+	heart_border_ui.opponent_borders.hide()
+
+	# SLIDE OUT
+	await get_tree().create_timer(1).timeout
+	await camera.slide(true)
+
+	# FADE IN
+	locations_wheel.show()
+	var fade_in_time = 1
+	locations_wheel.fade_in(fade_in_time)
+	location_hearts.fade_in(fade_in_time)
+	await get_tree().create_timer(fade_in_time).timeout
+	
+	## LOCATION PROGRESSION
+	await get_tree().create_timer(1).timeout
+	location_hearts.break_heart_at_idx(combatants.size())
 	if combatants.is_empty():
-		# Move to next location
-		print("next location")
-	else:
-		# Slide out camera, update kill count, slide camera back, enter next combat
-
-		# Hide combat stuff
-		target.holo_red.hide() # Holo red will be showing because you have to win on a hit
-		opponent_heart_holder.hide()
-		heart_border_ui.opponent_borders.hide()
-
-		# Animation sequence
-		await get_tree().create_timer(1).timeout
-		var count_label = $WinCount
-
-		camera.slide(true)
-		await camera.slide_finished
-
-		var tween_in = create_tween()
-		tween_in.tween_property(count_label, "modulate", Color(Color.WHITE, 1), 2)
-		await tween_in.finished
-		
-		## LOCATION PROGRESSION
-		await get_tree().create_timer(1).timeout
-		count_label.text = str(needed_wins - combatants.size()) + "/" + str(needed_wins)
+		# Location completed, go next
+		if current_location == 0:
+			# WIN GAME
+			pass
+		await locations_wheel.advance_location()
+		enter_location(current_location - 1)
+		location_hearts.fade_in(1)
 		await get_tree().create_timer(1).timeout
 
-		## SPAWN IN UPGRADE CHOICE
-		## tbd
+	await get_tree().create_timer(1).timeout
 
-		## ON PICK UPGRADE
-		sword.clear_blood()
+	## SPAWN IN UPGRADE CHOICE
+	## tbd
 
-		var tween_out = create_tween()
-		tween_out.tween_property(count_label, "modulate", Color(Color.WHITE, 0), 2)
-		await tween_out.finished
-		
-		camera.slide(false)
-		await camera.slide_finished
+	## ON PICK UPGRADE
+	sword.clear_blood()
 
-		await get_tree().create_timer(1).timeout
+	# FADE OUT
+	var fade_out_time = 1
+	locations_wheel.fade_out(fade_out_time)
+	location_hearts.fade_out(fade_out_time)
+	await get_tree().create_timer(fade_out_time).timeout
+	locations_wheel.hide()
+	
+	# SLIDE IN
+	await camera.slide(false)
+	await get_tree().create_timer(1).timeout
 
-		# Show combat stuff
-		opponent_heart_holder.show()
-		heart_border_ui.opponent_borders.show()
-		enter_combat()
+	# Show combat stuff
+	opponent_heart_holder.show()
+	heart_border_ui.opponent_borders.show()
+	enter_combat()
 
 
 ## ----------------- PLAYER INPUT -----------------

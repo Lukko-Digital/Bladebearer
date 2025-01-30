@@ -7,62 +7,59 @@
 [node name="HeartBorderUI" type="Node3D"]
 script = ExtResource("1_51r5n")
 
-[node name="ShakeOrigin" type="Node3D" parent="."]
+[node name="OpponentBorders" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="OpponentBorders" type="Node3D" parent="ShakeOrigin"]
-unique_name_in_owner = true
-
-[node name="Knight" type="Sprite3D" parent="ShakeOrigin/OpponentBorders"]
+[node name="Knight" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 0, 0, 0)
 visible = false
 texture_filter = 0
 texture = ExtResource("2_aw3sc")
 
-[node name="Kingsguard" type="Sprite3D" parent="ShakeOrigin/OpponentBorders"]
+[node name="Kingsguard" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 0, 0, 0)
 visible = false
 modulate = Color(1, 0.53, 0.53, 1)
 texture_filter = 0
 texture = ExtResource("2_aw3sc")
 
-[node name="Footsoldier" type="Sprite3D" parent="ShakeOrigin/OpponentBorders"]
+[node name="Footsoldier" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(2, 0, 0, 0, -2, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 modulate = Color(1, 0.51, 0.51, 1)
 texture_filter = 0
 texture = ExtResource("3_de3vb")
 
-[node name="Peasant" type="Sprite3D" parent="ShakeOrigin/OpponentBorders"]
+[node name="Peasant" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(2, 0, 0, 0, -2, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
 
-[node name="BearerBorders" type="Node3D" parent="ShakeOrigin"]
+[node name="BearerBorders" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="Knight" type="Sprite3D" parent="ShakeOrigin/BearerBorders"]
+[node name="Knight" type="Sprite3D" parent="BearerBorders"]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 texture_filter = 0
 texture = ExtResource("2_aw3sc")
 
-[node name="Kingsguard" type="Sprite3D" parent="ShakeOrigin/BearerBorders"]
+[node name="Kingsguard" type="Sprite3D" parent="BearerBorders"]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 modulate = Color(1, 0.53, 0.53, 1)
 texture_filter = 0
 texture = ExtResource("2_aw3sc")
 
-[node name="Footsoldier" type="Sprite3D" parent="ShakeOrigin/BearerBorders"]
+[node name="Footsoldier" type="Sprite3D" parent="BearerBorders"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 modulate = Color(1, 0.51, 0.51, 1)
 texture_filter = 0
 texture = ExtResource("3_de3vb")
 
-[node name="Peasant" type="Sprite3D" parent="ShakeOrigin/BearerBorders"]
+[node name="Peasant" type="Sprite3D" parent="BearerBorders"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 texture_filter = 0

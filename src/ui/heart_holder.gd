@@ -1,5 +1,13 @@
+@tool
 extends Node3D
 class_name HeartHolder
+
+## Only used for the editor
+@export var num_hearts: int = 0:
+	set(value):
+		num_hearts = value
+		if Engine.is_editor_hint():
+			set_hearts(value)
 
 # Y position should be set to plus or minus 0.91
 const Z_POSITION = 0
@@ -44,3 +52,13 @@ func break_heart_at_idx(idx: int):
 		push_error("Invalid heart index ", str(idx), " on ", self)
 		return
 	heart_array[idx].break_heart()
+
+# ---------- FADE ----------
+
+func fade_in(time: float):
+	for heart: Heart in heart_array:
+		heart.fade_in(time)
+
+func fade_out(time: float):
+	for heart: Heart in heart_array:
+		heart.fade_out(time)

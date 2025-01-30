@@ -3,7 +3,6 @@ class_name HeartBorderUI
 
 @export var camera: MainCamera
 
-@onready var shake_origin: Node3D = %ShakeOrigin
 @onready var bearer_borders: Node3D = %BearerBorders
 @onready var opponent_borders: Node3D = %OpponentBorders
 
