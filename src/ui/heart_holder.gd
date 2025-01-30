@@ -23,6 +23,7 @@ func clear_hearts():
 		heart_instance.queue_free()
 
 func set_hearts(num_hearts: int):
+	clear_hearts()
 	var start_x = -HEART_OFFSET * (num_hearts - 1) / 2
 	for i in range(num_hearts):
 		var heart_instance: Heart = heart_scene.instantiate()
