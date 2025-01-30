@@ -38,7 +38,7 @@ func slide(slide_out: bool):
 	var end_pos = SLIDE_POSITION if slide_out else 0.0
 
 	var tween = create_tween()
-	tween.tween_property(self, "h_offset", end_pos, 1)
+	tween.tween_property(self, "h_offset", end_pos, 1).set_trans(tween.TRANS_CUBIC).set_ease(tween.EASE_IN_OUT)
 	await tween.finished
 
 	slide_finished.emit()
