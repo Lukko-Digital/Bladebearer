@@ -2,7 +2,7 @@ extends Node3D
 class_name HeartHolder
 
 # Y position should be set to plus or minus 0.91
-const Z_POSITION = -0.071
+const Z_POSITION = 0
 const SCALE = Vector3(0.067, 0.067, 0.067)
 # Offset assumes that scale is 0.067
 const HEART_OFFSET = 1.6
