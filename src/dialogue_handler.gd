@@ -92,11 +92,11 @@ func menu() -> void:
 
 func intro() -> void:
 
-	# Global.sfx_player.pick_music(false,false,false,0)
-	# Global.sfx_player.play("Sword_Hit_Special")
+	Global.sfx_player.pick_music(false,false,false,0)
+	Global.sfx_player.play("Sword_Hit_Special")
 	
-	# light_animation_player.play("Chest Open")
-	# await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
+	light_animation_player.play("Chest Open")
+	await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
 
 	await option_sequence([
 		{"text": "\"i'm okay\"", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, -45)},
