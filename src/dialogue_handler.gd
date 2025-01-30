@@ -76,9 +76,9 @@ func tutorial() -> void:
 func menu() -> void:
 	is_menu = true
 	await option_sequence([
-		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(45, 0, 0)},
-		{"text": "sound down", "effect": func(): print("sound down"), "rotation": Vector3(0, 0, 45)},
-		{"text": "sound up", "effect": func(): print("sound up"), "rotation": Vector3(0, 0, -45)}
+		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(45, 0, 0), "model": "pointer"},
+		{"text": "sound down", "effect": func(): print("sound down"), "rotation": Vector3(0, 0, 45), "model": "pointer"},
+		{"text": "sound up", "effect": func(): print("sound up"), "rotation": Vector3(0, 0, -45), "model": "pointer"}
 		])
 	is_menu = false
 
@@ -110,16 +110,16 @@ func intro() -> void:
 		])
 
 	
-func option_sequence(options: Array[Dictionary], model : String = "pointer", tutorial: bool = false) -> void:
+func option_sequence(options: Array[Dictionary], model : String = "pointer", _tutorial: bool = false) -> void:
 	active_option = true
 
 	for option in options:
 		var option_instance = dialogue_option_scene.instantiate()
 		option_instance.dialogue_handler = self
-		option_instance.model = model
 		add_child(option_instance)
+		option_instance.set_model(model)
 
-		if tutorial:
+		if _tutorial:
 			if option.has("alignment"): option_instance.label.position += option.alignment
 			option_instance.label.position += Vector3(-0.04, 0, 0)
 			option_instance.label.billboard = 1
@@ -130,6 +130,8 @@ func option_sequence(options: Array[Dictionary], model : String = "pointer", tut
 		if option.has("match_effect"):
 				option_instance.set_effect(option["match_effect"], true)
 		option_instance.set_target_rot(option["rotation"])
+		if option.has("model"):
+				option_instance.set_model(option["model"])
 
 	dialogue_options = []
 	for node in get_children():

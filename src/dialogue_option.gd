@@ -7,8 +7,8 @@ var dialogue_handler : DialogueHandler
 @onready var label: Label3D = %Label
 
 @onready var stick_block_effect : GPUParticles3D = %StickBlockEffect
-@onready var stick : Node3D = %Stick
 
+@onready var stick : Node3D = %Stick
 @onready var sword_holo : Node3D = %SwordHolo
 @onready var pointer : Node3D = %Pointer
 
@@ -27,17 +27,24 @@ var shaking: bool = false
 
 var original_position: Vector3
 
+
 func _ready():
+	original_position = position
+
+# WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! 
+# JOSH MAEK SURE TO ADD ANY NEW MODELS TWICE IN BOTH THES E FUCKEARS !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!
+func set_model(_model: String):
 	pointer.hide()
 	stick.hide()
 	sword_holo.hide()
-	if model == "pointer": pointer.show()
-	if model == "stick": stick.show()
-	if model == "sword_holo": sword_holo.show()
-	if model == "sword_holo_shake":
+	if _model == "pointer": pointer.show()
+	if _model == "stick": stick.show()
+	if _model == "sword_holo": sword_holo.show()
+	if _model == "sword_holo_shake":
 		sword_holo.show()
 		shaking = true
-	original_position = position
+# !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!
+
 
 func _process(_delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
