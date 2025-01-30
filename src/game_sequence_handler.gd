@@ -65,6 +65,7 @@ func _ready() -> void:
 	bearer_rank = KINGSGUARD
 	init_bearer_health()
 	enter_location("Rear Guard")
+	locations_wheel.set_location(locations.keys().find("Rear Guard"))
 	enter_combat.call_deferred()
 
 
@@ -205,13 +206,14 @@ func opponent_defeated():
 
 		# FADE IN
 		locations_wheel.show()
-		var fade_in_time = 2
+		var fade_in_time = 1
 		locations_wheel.fade_in(fade_in_time)
 		location_hearts.fade_in(fade_in_time)
 		await get_tree().create_timer(fade_in_time).timeout
 		
 		## LOCATION PROGRESSION
 		await get_tree().create_timer(1).timeout
+		location_hearts.break_heart_at_idx(combatants.size())
 		await get_tree().create_timer(1).timeout
 
 		## SPAWN IN UPGRADE CHOICE
@@ -221,7 +223,7 @@ func opponent_defeated():
 		sword.clear_blood()
 
 		# FADE OUT
-		var fade_out_time = 2
+		var fade_out_time = 1
 		locations_wheel.fade_out(fade_out_time)
 		location_hearts.fade_out(fade_out_time)
 		await get_tree().create_timer(fade_out_time).timeout
