@@ -210,8 +210,9 @@ _data = {
 "RESET": SubResource("Animation_msgln")
 }
 
-[node name="Target" type="Node3D"]
+[node name="Target" type="Node3D" node_paths=PackedStringArray("meshes")]
 script = ExtResource("1_rhyst")
+meshes = [NodePath("HologramBlue/Blade"), NodePath("HologramBlue/Handle"), NodePath("HologramRed/Blade"), NodePath("HologramRed/Handle")]
 
 [node name="BlockEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
