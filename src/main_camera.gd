@@ -34,6 +34,8 @@ func shake(duration: float, amount: float):
 
 ## Used between fights when doing upgrades and so you can see the location wheel
 func slide(slide_out: bool):
+	if slide_out: slid = true
+
 	shake_timer.stop()
 	var end_pos = SLIDE_POSITION if slide_out else 0.0
 
@@ -42,4 +44,5 @@ func slide(slide_out: bool):
 	await tween.finished
 
 	slide_finished.emit()
-	slid = slide_out
+	
+	if not slide_out: slid = false
