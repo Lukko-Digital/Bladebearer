@@ -2,10 +2,12 @@
 extends Node3D
 class_name HeartHolder
 
+## Only used for the editor
 @export var num_hearts: int = 0:
 	set(value):
 		num_hearts = value
-		set_hearts(value)
+		if Engine.is_editor_hint():
+			set_hearts(value)
 
 # Y position should be set to plus or minus 0.91
 const Z_POSITION = 0
