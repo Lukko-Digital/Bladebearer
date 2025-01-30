@@ -3,7 +3,7 @@ class_name DialogueHandler
 
 @export var light_animation_player: AnimationPlayer
 
-@onready var sword: Sword = get_parent().find_child("Sword")
+@onready var sword: Sword = %Sword
 @onready var top_label: Label3D = $TopLabel
 @onready var center_label: Label3D = $CenterLabel
 @onready var bottom_label: Label3D = $BottomLabel
@@ -13,6 +13,8 @@ class_name DialogueHandler
 var dialogue_option_scene: PackedScene = preload("res://src/dialogue_option.tscn")
 var dialogue_options: Array[DialogueOption]
 var active_option = false
+
+var is_menu: bool = false
 
 signal option_selected()
 
@@ -72,30 +74,34 @@ func tutorial() -> void:
 		"sword_holo_shake", false)
 
 func menu() -> void:
+	is_menu = true
 	await option_sequence([
-		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 0)},
+		{"text": "start", "effect": func(): option_selected.emit(), "rotation": Vector3(45, 0, 0)},
 		{"text": "sound down", "effect": func(): print("sound down"), "rotation": Vector3(0, 0, 45)},
 		{"text": "sound up", "effect": func(): print("sound up"), "rotation": Vector3(0, 0, -45)}
 		])
-
-	sword.hide()
+	is_menu = false
 
 func intro() -> void:
-	await text_sequence("Reach the king", 2.0, bottom_label)
-	await text_sequence("Use whomever it takes", 2.0, bottom_label)
 
-	light_animation_player.play("In The Dark")
-	await light_animation_player.animation_finished
-	sword.show()
+	Global.sfx_player.pick_music(false,false,false,0)
+	Global.sfx_player.play("Sword_Hit_Special")
+	# await text_sequence("Reach the king", 2.0, bottom_label)
+	# await text_sequence("Use whomever it takes", 2.0, bottom_label)
 
-	light_animation_player.play("Chest Peak")
+	# light_animation_player.play("In The Dark")
+	# await light_animation_player.animation_finished
+	# sword.show()
 
-	await text_sequence("The hell's that", 2.0, top_label)
+	# light_animation_player.play("Chest Peak")
+
+	# await text_sequence("The hell's that", 2.0, top_label)
 
 	light_animation_player.play("Chest Open")
+	await get_tree().create_timer(14.5).timeout
 
-	await text_sequence("She's bloody shining", 2.0, bottom_label)
-	await text_sequence("Well don't go touching it", 2.0, top_label)
+	# await text_sequence("She's bloody shining", 2.0, bottom_label)
+	# await text_sequence("Well don't go touching it", 2.0, top_label)
 
 	text_sequence("are you algight?", 3.0, top_label)
 	await option_sequence([
@@ -132,7 +138,8 @@ func option_sequence(options: Array[Dictionary], model : String = "pointer", tut
 
 	await option_selected
 	end_option_sequence()
-	await get_tree().create_timer(0.1).timeout
+	if !is_menu:
+		await get_tree().create_timer(0.1).timeout
 
 func text_sequence(text: String, duration: float, allignment: Label3D) -> void:
 	allignment.show() # Make this a fade in
