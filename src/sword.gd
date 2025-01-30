@@ -81,5 +81,15 @@ func add_blood():
 				keep_going = false;
 
 func clear_blood():
+
+	var fade_duration : float = 1
+
+	for blood in blood_array:
+		var tween_fade = create_tween()
+		tween_fade.tween_property(blood, "transparency", 1, fade_duration)
+
+	await get_tree().create_timer(fade_duration).timeout
+	
 	for blood in blood_array:
 		blood.visible = false
+		blood.transparency = 0

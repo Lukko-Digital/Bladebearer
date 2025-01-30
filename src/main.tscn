@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://src/light_container.gd" id="7_pcbq2"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
-[ext_resource type="PackedScene" uid="uid://b5wupy7vivd82" path="res://src/sfx_player.tscn" id="10_gaf0o"]
+[ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -469,9 +469,21 @@ heart_border_ui = NodePath("HeartBorderUI")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0194353, 1.00529)
 
 [node name="Sword" parent="GameSequenceHandler" node_paths=PackedStringArray("blood_array") instance=ExtResource("1_bdv3j")]
-blood_array = [NodePath("Sword/Blood1")]
+blood_array = [NodePath("Sword/Blood1"), NodePath("Sword/Blood1_001"), NodePath("Sword/Blood1_002"), NodePath("Sword/Blood1_003")]
 
 [node name="Blood1" parent="GameSequenceHandler/Sword/Sword" index="2"]
+visible = false
+
+[node name="Blood1_001" parent="GameSequenceHandler/Sword/Sword" index="4"]
+visible = false
+
+[node name="Blood1_002" parent="GameSequenceHandler/Sword/Sword" index="5"]
+visible = false
+
+[node name="Blood1_003" parent="GameSequenceHandler/Sword/Sword" index="6"]
+visible = false
+
+[node name="Stick" parent="GameSequenceHandler/Sword" index="2"]
 visible = false
 
 [node name="Target" parent="GameSequenceHandler" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]

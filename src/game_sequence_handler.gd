@@ -200,9 +200,16 @@ func opponent_defeated():
 		tween_in.tween_property(count_label, "modulate", Color(Color.WHITE, 1), 2)
 		await tween_in.finished
 		
+		## LOCATION PROGRESSION
 		await get_tree().create_timer(1).timeout
 		count_label.text = str(needed_wins - combatants.size()) + "/" + str(needed_wins)
 		await get_tree().create_timer(1).timeout
+
+		## SPAWN IN UPGRADE CHOICE
+		## tbd
+
+		## ON PICK UPGRADE
+		sword.clear_blood()
 
 		var tween_out = create_tween()
 		tween_out.tween_property(count_label, "modulate", Color(Color.WHITE, 0), 2)
