@@ -84,10 +84,9 @@ blood_array = [NodePath("Sword/Blood1")]
 [node name="Blood1" parent="GameSequenceHandler/Sword/Sword" index="2"]
 visible = false
 
-[node name="Target" parent="GameSequenceHandler" node_paths=PackedStringArray("sword", "swing_arm", "meshes") instance=ExtResource("2_54gg4")]
+[node name="Target" parent="GameSequenceHandler" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
 sword = NodePath("../Sword")
 swing_arm = NodePath("../../SwingArm")
-meshes = []
 
 [node name="OmniLight3D" type="OmniLight3D" parent="GameSequenceHandler"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244908, 0.32441, 0.501303)
