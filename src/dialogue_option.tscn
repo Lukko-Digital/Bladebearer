@@ -18,7 +18,7 @@ script = ExtResource("1_6khdy")
 
 [node name="Pointer" parent="." instance=ExtResource("2_fataf")]
 unique_name_in_owner = true
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.596997, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.366611, 0)
 
 [node name="Pointer" parent="Pointer" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.385, 0)
@@ -28,7 +28,7 @@ autoplay = "Pointer_Idle"
 
 [node name="Label" type="Label3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.868542, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.582477, 0)
 billboard = 1
 texture_filter = 0
 text = "Test"
