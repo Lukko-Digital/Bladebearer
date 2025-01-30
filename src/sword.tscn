@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctoxk5ywvn75r"]
+[gd_scene load_steps=8 format=3 uid="uid://ctoxk5ywvn75r"]
 
 [ext_resource type="Script" path="res://src/sword.gd" id="1_a5gxo"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_mq21s"]
+[ext_resource type="PackedScene" uid="uid://bwt5h2gm6ccag" path="res://assets/models/Stick.glb" id="3_uc5po"]
 
 [sub_resource type="Animation" id="Animation_nbqwa"]
 length = 0.001
@@ -174,3 +175,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_e3fsf")
 }
+
+[node name="Stick" parent="." instance=ExtResource("3_uc5po")]
+transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)

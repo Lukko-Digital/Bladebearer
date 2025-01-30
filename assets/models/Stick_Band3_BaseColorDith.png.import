@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dwg70kwi2gkye"
+path.s3tc="res://.godot/imported/Stick_Band3_BaseColorDith.png-c4db28c3a8f59335872861209928dd90.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "f3200b58229656bfc1580ee56e6d750a"
+}
+
+[deps]
+
+source_file="res://assets/models/Stick_Band3_BaseColorDith.png"
+dest_files=["res://.godot/imported/Stick_Band3_BaseColorDith.png-c4db28c3a8f59335872861209928dd90.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

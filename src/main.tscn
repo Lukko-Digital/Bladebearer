@@ -483,6 +483,9 @@ visible = false
 [node name="Blood1_003" parent="GameSequenceHandler/Sword/Sword" index="6"]
 visible = false
 
+[node name="Stick" parent="GameSequenceHandler/Sword" index="2"]
+visible = false
+
 [node name="Target" parent="GameSequenceHandler" node_paths=PackedStringArray("sword", "swing_arm") instance=ExtResource("2_54gg4")]
 sword = NodePath("../Sword")
 swing_arm = NodePath("../../SwingArm")
