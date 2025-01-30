@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcowh6o8mgym4"
-path.s3tc="res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.s3tc.ctex"
+uid="uid://bwh2gbd41mtlk"
+path.s3tc="res://.godot/imported/Sword_Handle_Tex_Dither_Darker.png-b5b36e7b6bd5c899c4a5e76be51c7d13.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "7b9aa52be20b3f880d1054a42e5c4642"
+"md5": "a981b0c4ae17e7d4fbab745b649403ba"
 }
 
 [deps]
 
-source_file="res://assets/models/Sword_Blood_Base.png"
-dest_files=["res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.s3tc.ctex"]
+source_file="res://assets/models/Sword_Handle_Tex_Dither_Darker.png"
+dest_files=["res://.godot/imported/Sword_Handle_Tex_Dither_Darker.png-b5b36e7b6bd5c899c4a5e76be51c7d13.s3tc.ctex"]
 
 [params]
 

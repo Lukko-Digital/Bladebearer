@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcowh6o8mgym4"
-path.s3tc="res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.s3tc.ctex"
+uid="uid://cbygf3s6qjpwe"
+path.s3tc="res://.godot/imported/Stick_Band2_BaseColorDIth.png-4fa1b40a8fefdbbd11fcbb25b0fd7d0d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "7b9aa52be20b3f880d1054a42e5c4642"
+"md5": "a91772f3a7f77c2844b517b6cd9d3646"
 }
 
 [deps]
 
-source_file="res://assets/models/Sword_Blood_Base.png"
-dest_files=["res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.s3tc.ctex"]
+source_file="res://assets/models/Stick_Band2_BaseColorDIth.png"
+dest_files=["res://.godot/imported/Stick_Band2_BaseColorDIth.png-4fa1b40a8fefdbbd11fcbb25b0fd7d0d.s3tc.ctex"]
 
 [params]
 

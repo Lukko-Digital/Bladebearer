@@ -16,3 +16,4 @@ mono_crash.*.json
 
 # vscode settings
 .vscode/
+default_bus_layout.tres

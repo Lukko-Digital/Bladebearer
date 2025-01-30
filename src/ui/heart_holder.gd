@@ -22,14 +22,22 @@ func clear_hearts():
 		remove_child(heart_instance)
 		heart_instance.queue_free()
 
-func set_hearts(num_hearts: int):
-	var start_x = -HEART_OFFSET * (num_hearts - 1) / 2
-	for i in range(num_hearts):
+func set_hearts(max_health: int, starting_health: int = -1):
+	if starting_health == -1:
+		starting_health = max_health
+
+	clear_hearts()
+
+	var start_x = -HEART_OFFSET * (max_health - 1) / 2
+	for i in range(max_health):
 		var heart_instance: Heart = heart_scene.instantiate()
 		heart_instance.position.x = start_x + i * HEART_OFFSET
 		heart_instance.set_rotation_degrees(Vector3(0, 0, randi_range(0, 30)))
 		add_child(heart_instance)
 		heart_array.append(heart_instance)
+
+		if i >= starting_health:
+			heart_instance.break_heart(true)
 
 func break_heart_at_idx(idx: int):
 	if idx < 0 or idx >= heart_array.size():
