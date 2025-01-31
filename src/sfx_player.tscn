@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bn1h8mr7sagxh"]
+[gd_scene load_steps=39 format=3 uid="uid://bn1h8mr7sagxh"]
 
 [ext_resource type="Script" path="res://src/sfx_player.gd" id="1_w3uqv"]
 [ext_resource type="AudioStream" uid="uid://cw2tncm7rcw6l" path="res://assets/music/music_base.wav" id="2_3phsl"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://4lwre4arhhjt" path="res://assets/sfx/Heart_Crush.wav" id="12_2unot"]
 [ext_resource type="AudioStream" uid="uid://c4lnaftsgjhg2" path="res://assets/sfx/Breath_Josh_5.wav" id="12_jieu4"]
 [ext_resource type="AudioStream" uid="uid://qiolmtfoc6kd" path="res://assets/sfx/Heart_Heal.wav" id="13_nqr1v"]
+[ext_resource type="AudioStream" uid="uid://cjqyn6fire7lw" path="res://assets/sfx/snow_walking_loop.wav" id="15_0u2p7"]
 [ext_resource type="AudioStream" uid="uid://274cldych6hc" path="res://assets/intro_sounds/pre_intro_ambience.wav" id="17_s0s7s"]
 [ext_resource type="AudioStream" uid="uid://t1mc07k84051" path="res://assets/sfx/Human_Getting_Hit_2.wav" id="21_ujaq3"]
 [ext_resource type="AudioStream" uid="uid://2oklvwd1nycm" path="res://assets/sfx/Human_Getting_Hit_3.wav" id="22_r5266"]
@@ -91,6 +92,10 @@ volume_db = 3.758
 [node name="Yell" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_af5y6")
 volume_db = -80.0
+
+[node name="Walking" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_0u2p7")
+autoplay = true
 
 [node name="Breathing_Group" type="Node" parent="."]
 

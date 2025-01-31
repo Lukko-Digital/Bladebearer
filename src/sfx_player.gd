@@ -17,7 +17,9 @@ func _ready() -> void:
 	pick_music(false,false,true,0.5,-30)
 
 	transition_volume_db("Nature_Ambience", -80, 0)
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -80, 0)
+	transition_volume_db("Walking", -80, 0)
+	play("Walking")
+	transition_volume_db("PreIntroAmbience", -80, 0)
 
 ## [audio_player_name] must exactly match the name of a child
 ## [AudioStreamPlayer] or [AudioStreamPlayer3D] node.
