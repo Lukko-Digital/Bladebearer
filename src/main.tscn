@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=49 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://qdcije85a7qf" path="res://assets/sfx/Sword_Hit_Person_1.wav" id="19_iqjbk"]
 [ext_resource type="AudioStream" uid="uid://dqyd0j15pm68s" path="res://assets/sfx/execution_1.wav" id="20_l06dm"]
 [ext_resource type="AudioStream" uid="uid://dcg5g11em7dqe" path="res://assets/sfx/king_execution.wav" id="21_bxohf"]
+[ext_resource type="AudioStream" uid="uid://wyk6131emlv0" path="res://assets/intro_sounds/stick_hit.wav" id="22_355yu"]
 [ext_resource type="PackedScene" uid="uid://q3pnwf6oxxrd" path="res://assets/models/Ground.glb" id="29_k3d4t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
@@ -769,6 +770,30 @@ tracks/12/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneSFX:volume_db")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("%Sword:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_b0qqm"]
 resource_name = "kill_him"
@@ -911,12 +936,9 @@ tracks/2/path = NodePath("%GameSequenceHandler/../SfxPlayer")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [false, false, true, 2.0, 0.0],
-"method": &"pick_music"
-}, {
 "args": ["Nature_Ambience", -40.0, 2.0],
 "method": &"transition_volume_db"
 }]
@@ -936,7 +958,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_165d8"]
 resource_name = "king_spared"
-length = 7.0
+length = 8.0
 step = 0.1
 tracks/0/type = "audio"
 tracks/0/imported = false
@@ -1017,16 +1039,16 @@ tracks/5/keys = {
 "times": PackedFloat32Array(2.7, 4.3, 4.5, 6.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": ["but what are you doing?", 1, 0.2],
+"args": ["but what are you doing?", 2, 0.2],
 "method": &"show_text_sequence"
 }, {
-"args": [1, 0.2],
+"args": [2, 0.2],
 "method": &"end_text_sequence"
 }, {
-"args": ["what is happening?", 1, 0.2],
+"args": ["what is happening?", 2, 0.2],
 "method": &"show_text_sequence"
 }, {
-"args": [1, 0.6],
+"args": [2, 0.6],
 "method": &"end_text_sequence"
 }]
 }
@@ -1037,21 +1059,42 @@ tracks/6/path = NodePath("%GameSequenceHandler/../SfxPlayer")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 6.9),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [false, false, false, 0.1, 0.0],
 "method": &"pick_music"
-}, {
-"args": [false, true, false, 6.0, 0.0],
-"method": &"pick_music"
 }]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Snow:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Sword:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_2ejyc"]
 resource_name = "king_execution"
-length = 5.0
-step = 0.1
+length = 6.0
+step = 0.02
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1077,9 +1120,13 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
+"stream": ExtResource("22_355yu")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
 "stream": ExtResource("19_iqjbk")
 }],
-"times": PackedFloat32Array(2.8)
+"times": PackedFloat32Array(0.02, 2.8)
 }
 tracks/1/use_blend = true
 tracks/2/type = "audio"
@@ -1100,13 +1147,10 @@ tracks/3/path = NodePath("%GameSequenceHandler/../SfxPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [false, false, true, 1.0, -10.0],
-"method": &"pick_music"
-}, {
-"args": [false, true, false, 0.1, 0.0],
+"args": [false, false, true, 1.0, -30.0],
 "method": &"pick_music"
 }]
 }
@@ -1121,6 +1165,65 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-17.0, -30.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Snow:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneSFX:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.02, 2.02, 2.30123),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -15.0, -15.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Sword:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SwordGroup/DialogueHandler")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.7, 1.34, 1.44, 2.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["no - no!", 2, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [2, 0.2],
+"method": &"end_text_sequence"
+}, {
+"args": ["i beg of you!", 2, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [2, 0.0],
+"method": &"end_text_sequence"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]

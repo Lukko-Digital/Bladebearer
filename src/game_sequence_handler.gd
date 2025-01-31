@@ -68,21 +68,25 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	# await dialogue_handler.tutorial()
-	# await get_tree().create_timer(1).timeout
+	await dialogue_handler.tutorial()
+	await get_tree().create_timer(1).timeout
 
-	# await dialogue_handler.menu()
+	await dialogue_handler.menu()
+
+	Global.sfx_player.pick_music(1,0,0, 1.0, -30)
+	await dialogue_handler.king_scene()
+	Global.sfx_player.pick_music(0,1,0, 3)
 
 	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
 	# await dialogue_handler.intro()
 
-	$NewBearer.modulate = Color(Color.WHITE, 0)
-	$NewBearer.hide()
-	bearer_rank = PEASANT
-	init_bearer_health()
-	enter_location(6)
-	locations_wheel.set_location(6)
-	enter_combat.call_deferred()
+	# $NewBearer.modulate = Color(Color.WHITE, 0)
+	# $NewBearer.hide()
+	# bearer_rank = PEASANT
+	# init_bearer_health()
+	# enter_location(6)
+	# locations_wheel.set_location(6)
+	# enter_combat.call_deferred()
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
