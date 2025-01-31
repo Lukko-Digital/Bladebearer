@@ -29,7 +29,7 @@ enum Action {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
+var PEASANT = CombatantRank.new(1, 2, 1, 4, CombatantRank.RankName.PEASANT)
 var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
 var KNIGHT = CombatantRank.new(3, 8, 8, 3, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(4, 12, 12, 2, CombatantRank.RankName.KINGSGUARD)
@@ -70,20 +70,20 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	await dialogue_handler.tutorial()
-	await get_tree().create_timer(1).timeout
+	# await dialogue_handler.tutorial()
+	# await get_tree().create_timer(1).timeout
 
-	await dialogue_handler.menu()
+	# await dialogue_handler.menu()
 
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	await dialogue_handler.intro()
+	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	# await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(3)
-	locations_wheel.set_location(3)
+	enter_location(6)
+	locations_wheel.set_location(6)
 	enter_combat.call_deferred()
 
 	# THIS IS WAHT SHOULD HAPPEN WHEN ENDING
@@ -233,10 +233,18 @@ func bearer_defeated():
 	await get_tree().create_timer(fade_in_time).timeout
 	
 	# LOCATION REGRESS !!!!! MAKE THIS NOT WORK IF UR ON THE FIRST LOCATION !!!!!
-	await locations_wheel.advance_location(true)
-	enter_location(current_location + 1)
-	location_hearts.fade_in(1)
-	await get_tree().create_timer(1).timeout
+	if current_location >= locations.size() - 1:
+		# if at first location
+		location_hearts.fade_out(0.5)
+		await get_tree().create_timer(0.5).timeout
+		enter_location(current_location)
+		location_hearts.fade_in(1)
+		await get_tree().create_timer(1).timeout
+	else:
+		await locations_wheel.advance_location(true)
+		enter_location(current_location + 1)
+		location_hearts.fade_in(1)
+		await get_tree().create_timer(1).timeout
 
 	# FADE OUT LOCATION WHEEL
 	var fade_out_time = 1
@@ -248,7 +256,7 @@ func bearer_defeated():
 	# PICKUP
 	bearer_death_animator.play("pickup")
 	await bearer_death_animator.animation_finished
-	ground.show()
+	ground.hide()
 
 	# A NEW BEARER, HEARTS TRANSFER
 	bearer_rank = opponent_rank
