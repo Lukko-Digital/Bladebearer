@@ -68,7 +68,7 @@ func fade_out(time: float):
 func teleport_to_default_pos():
 	position = default_pos
 
-func initial_spindown(x_pos: float, y_pos: float):
+func spindown_spawn(x_pos: float, y_pos: float):
 	position.x = x_pos
 	position.y = y_pos
 
@@ -76,8 +76,15 @@ func initial_spindown(x_pos: float, y_pos: float):
 	focused_location = 0
 	animating = true
 
+func initial_spindown(x_pos: float, y_pos: float):
+	position.x = x_pos
+	position.y = y_pos
+
 	var tween = create_tween()
-	tween.tween_property(self, "focused_location", 6, 1).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "focused_location", 6, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+
+	await get_tree().create_timer(1).timeout
 
 	animating = false
 

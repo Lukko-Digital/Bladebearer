@@ -11,6 +11,10 @@ class_name DialogueHandler
 
 @onready var camera: Camera3D = %MainCamera
 
+@onready var locations_wheel: Node3D = %LocationsWheel
+@onready var location_hearts = %LocationHearts
+@onready var sword_animation_player = %SwordAnimator
+
 var dialogue_option_scene: PackedScene = preload("res://src/dialogue_option.tscn")
 var dialogue_options: Array[DialogueOption]
 var active_option = false
@@ -97,11 +101,49 @@ func menu() -> void:
 
 
 ###### INTRO CUTSCENE ########
+
+func wheel_sequence():
+
+	show_text_sequence("a war wages on in the distance", 2)
+	await get_tree().create_timer(3).timeout
+	end_text_sequence(2)
+	await get_tree().create_timer(0.6).timeout
+
+	Global.sfx_player.play("Heart_Crush")
+	locations_wheel.show()
+	locations_wheel.spindown_spawn(0,0)
+	await get_tree().create_timer(2.5).timeout
+
+	await locations_wheel.initial_spindown(0,0)
+	await get_tree().create_timer(1).timeout
+	
+	show_text_sequence("you must get closer", 3)
+	await get_tree().create_timer(3).timeout
+	end_text_sequence(3, 0.4)
+	await get_tree().create_timer(0.4).timeout
+	show_text_sequence("reach the king", 3)
+	await get_tree().create_timer(3).timeout
+	end_text_sequence(3, 0.4)
+	await get_tree().create_timer(0.4).timeout
+	show_text_sequence("use whomever you must", 3)
+	await get_tree().create_timer(3).timeout
+	end_text_sequence(3, 0.8)
+	await get_tree().create_timer(0.8).timeout
+	
+	locations_wheel.hide()
+	locations_wheel.teleport_to_default_pos()
+	pass
+
 func intro() -> void:
 
 	Global.sfx_player.pick_music(false,false,false,0)
 	Global.sfx_player.play("Sword_Hit_Special")
+	light_animation_player.play("In The Dark")
+	sword_animation_player.play("RESET")
+
+	await wheel_sequence()
 	
+	Global.sfx_player.play("Stick_Break")
 	light_animation_player.play("Chest Open")
 	await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
 
