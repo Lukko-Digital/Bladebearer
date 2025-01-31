@@ -358,12 +358,32 @@ func opponent_defeated():
 	heart_border_ui.opponent_borders.show()
 	enter_combat()
 
+@export var king_begging: AudioStreamPlayer
+@export var kill_king: AudioStreamPlayer
+@export var spare_king: AudioStreamPlayer
+
 func win_sequence():
 	bearer_heart_holder.hide()
 	heart_border_ui.bearer_borders.hide()
+	king_begging.play()
 	Global.sfx_player.pick_music(1, 0, 0, 1.0, -30)
-	await dialogue_handler.king_scene()
+	
+	dialogue_handler.king_scene()
+	dialogue_handler.king_outcome.connect(win_seq2)
+	await dialogue_handler.king_outcome
+
+func win_seq2(killed: bool):
+	snow.hide()
+	sword.hide()
+	if killed:
+		await get_tree().create_timer(0.6).timeout
+		kill_king.play()
+	else:
+		await get_tree().create_timer(2.6).timeout
+		spare_king.play()
+	await dialogue_handler.credits
 	Global.sfx_player.pick_music(0, 1, 0, 3)
+	sword.show()
 	await get_tree().create_timer(1).timeout
 	await camera.slide(true)
 	# -------------------- JOSH CREDITS GO HERE RIGHT HERE PLACE THEM HERE --------------------

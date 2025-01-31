@@ -27,10 +27,10 @@ signal option_selected()
 var breaks_left = -1
 
 func _ready():
-	top_label.modulate = Color(1,1,1,0)
-	bottom_label.modulate = Color(1,1,1,0)
-	center_label.modulate = Color(1,1,1,0)
-	menu_label.modulate = Color(1,1,1,0)
+	top_label.modulate = Color(1, 1, 1, 0)
+	bottom_label.modulate = Color(1, 1, 1, 0)
+	center_label.modulate = Color(1, 1, 1, 0)
+	menu_label.modulate = Color(1, 1, 1, 0)
 
 func _process(_delta: float) -> void:
 	if active_option:
@@ -45,14 +45,11 @@ func _process(_delta: float) -> void:
 		breaks_left = -1
 
 			
-
-
-
 func tutorial() -> void:
 	
 	await option_sequence([
 		{"text": "a", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0)},
-		], 
+		],
 		"stick", true)
 	
 	await option_sequence([
@@ -99,7 +96,6 @@ func menu() -> void:
 	is_menu = false
 
 
-
 ###### INTRO CUTSCENE ########
 
 func wheel_sequence():
@@ -111,10 +107,10 @@ func wheel_sequence():
 
 	Global.sfx_player.play("Heart_Crush")
 	locations_wheel.show()
-	locations_wheel.spindown_spawn(0,0)
+	locations_wheel.spindown_spawn(0, 0)
 	await get_tree().create_timer(2.5).timeout
 
-	await locations_wheel.initial_spindown(0,0)
+	await locations_wheel.initial_spindown(0, 0)
 	await get_tree().create_timer(1).timeout
 	
 	show_text_sequence("you must get closer", 3)
@@ -136,7 +132,7 @@ func wheel_sequence():
 
 func intro() -> void:
 
-	Global.sfx_player.pick_music(false,false,false,0)
+	Global.sfx_player.pick_music(false, false, false, 0)
 	Global.sfx_player.play("Sword_Hit_Special")
 	light_animation_player.play("In The Dark")
 	sword_animation_player.play("RESET")
@@ -165,6 +161,9 @@ func intro_choice(_kill: bool):
 
 var kill_king: bool
 
+signal king_outcome(killed: bool)
+signal credits
+
 func king_scene():
 	pass
 	## STUMBLE IN ON KING, BEGS FOR HIS LIFE
@@ -179,18 +178,22 @@ func king_scene():
 		])
 	
 	if kill_king:
+		king_outcome.emit(true)
 		light_animation_player.play("king_execution")
 		await get_tree().create_timer(5).timeout
+		credits.emit()
 	else:
+		king_outcome.emit(false)
 		light_animation_player.play("king_spared")
 		await get_tree().create_timer(7.2).timeout
+		credits.emit()
 
 func king_choice(_kill_king: bool):
 	kill_king = _kill_king
 	option_selected.emit()
 
 #### ABSOLUTELY HELLISH FUNCTION INCOMING #######
-func option_sequence(options: Array[Dictionary], model : String = "pointer", _tutorial: bool = false) -> void:
+func option_sequence(options: Array[Dictionary], model: String = "pointer", _tutorial: bool = false) -> void:
 	active_option = true
 
 	for option in options:
@@ -234,18 +237,16 @@ func option_sequence(options: Array[Dictionary], model : String = "pointer", _tu
 # 	end_text_sequence()
 
 
-
-
 func show_text_sequence(text: String, allignment: int, dur: float = 0.2) -> void:
 	var _label: Label3D
 	if allignment == 1: _label = top_label
 	elif allignment == 2: _label = center_label
 	elif allignment == 3: _label = bottom_label
-	_label.modulate = Color(0,0,0,0)
+	_label.modulate = Color(0, 0, 0, 0)
 	_label.text = text
 	_label.show()
 	var text_tween = create_tween()
-	text_tween.tween_property(_label, "modulate", Color(1,1,1,1), dur)
+	text_tween.tween_property(_label, "modulate", Color(1, 1, 1, 1), dur)
 	print("labelling")
 
 func end_text_sequence(allignment: int, dur: float = 0.6) -> void:
@@ -254,10 +255,7 @@ func end_text_sequence(allignment: int, dur: float = 0.6) -> void:
 	elif allignment == 2: _label = center_label
 	elif allignment == 3: _label = bottom_label
 	var text_tween = create_tween()
-	text_tween.tween_property(_label, "modulate", Color(0,0,0,0), dur)
-
-
-
+	text_tween.tween_property(_label, "modulate", Color(0, 0, 0, 0), dur)
 
 
 func end_option_sequence() -> void:
@@ -267,8 +265,6 @@ func end_option_sequence() -> void:
 		option.queue_free()
 
 	dialogue_options = []
-
-
 
 
 func alligned_option() -> DialogueOption:
