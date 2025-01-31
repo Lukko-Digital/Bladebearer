@@ -44,7 +44,7 @@ func transition_volume_db(audio_player_name: String, target_db: float, tween_dur
 	var audio_player: AudioStreamPlayer = get_node(audio_player_name)
 	var volume_db_tween = create_tween()
 	volume_db_tween.tween_property(audio_player, "volume_db", target_db, tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
-	print(audio_player, target_db)
+	# print(audio_player, target_db)
 
 func pick_music(calm: bool, fight: bool, bass: bool, dur: float = 2, on_vol: float = music_on_db):
 	if on_vol == 0: on_vol = music_on_db
