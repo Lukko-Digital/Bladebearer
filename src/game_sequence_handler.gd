@@ -422,7 +422,7 @@ func freeze_snow():
 	snow.interpolate = false
 	swing_arm.arm_animation_player.speed_scale = 0
 	var tween = create_tween()
-	tween.tween_property(snow, "speed_scale", 0, 3).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(snow, "speed_scale", 0, 1.2).set_trans(Tween.TRANS_QUAD)
 	await tween.finished
 
 func resume_snow():
