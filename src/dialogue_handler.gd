@@ -41,6 +41,9 @@ func _process(_delta: float) -> void:
 		breaks_left = -1
 
 			
+
+
+
 func tutorial() -> void:
 	
 	await option_sequence([
@@ -91,6 +94,9 @@ func menu() -> void:
 		])
 	is_menu = false
 
+
+
+###### INTRO CUTSCENE ########
 func intro() -> void:
 
 	Global.sfx_player.pick_music(false,false,false,0)
@@ -117,6 +123,8 @@ func intro_choice(_kill: bool):
 	
 
 
+
+#### ABSOLUTELY HELLISH FUNCTION INCOMING #######
 func option_sequence(options: Array[Dictionary], model : String = "pointer", _tutorial: bool = false) -> void:
 	active_option = true
 
