@@ -137,7 +137,7 @@ func intro() -> void:
 	light_animation_player.play("In The Dark")
 	sword_animation_player.play("RESET")
 
-	# await wheel_sequence()
+	await wheel_sequence()
 	
 	Global.sfx_player.play("Stick_Break")
 	light_animation_player.play("Chest Open")
