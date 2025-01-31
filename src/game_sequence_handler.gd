@@ -33,9 +33,9 @@ enum Action {SWING, BLOCK}
 signal sequence_finished
 
 var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 3, CombatantRank.RankName.FOOTSOLDIER)
-var KNIGHT = CombatantRank.new(3, 8, 8, 2, CombatantRank.RankName.KNIGHT)
-var KINGSGUARD = CombatantRank.new(4, 12, 12, 1.5, CombatantRank.RankName.KINGSGUARD)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 4, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(3, 6, 8, 3, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(4, 8, 12, 2, CombatantRank.RankName.KINGSGUARD)
 var KING = CombatantRank.new(0, 0, 1, 999, CombatantRank.RankName.KING)
 
 # P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
@@ -44,10 +44,10 @@ var KING = CombatantRank.new(0, 0, 1, 999, CombatantRank.RankName.KING)
 const locations = {
 	"Royal Tent": "W",
 	"Kingsguard": "G G",
-	"Central Field": "FK FK FK K",
-	"Rear Guard": "PF PF F K",
-	"Straggler's Field": "F PF PF",
-	"Outer Woods": "P P",
+	"Central Field": "FK FK K",
+	"Rear Guard": "F K",
+	"Straggler's Field": "F F",
+	"Outer Woods": "P F",
 	"Deep Woods": "P",
 }
 
