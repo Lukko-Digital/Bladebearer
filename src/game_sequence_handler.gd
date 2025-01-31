@@ -70,20 +70,20 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	# await dialogue_handler.tutorial()
-	# await get_tree().create_timer(1).timeout
+	await dialogue_handler.tutorial()
+	await get_tree().create_timer(1).timeout
 
-	# await dialogue_handler.menu()
+	await dialogue_handler.menu()
 
-	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	# await dialogue_handler.intro()
+	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(0)
-	locations_wheel.set_location(0)
+	enter_location(6)
+	locations_wheel.set_location(6)
 	enter_combat.call_deferred()
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -207,6 +207,7 @@ func bearer_defeated():
 	ground.show()
 	bearer_death_animator.play("drop")
 	await bearer_death_animator.animation_finished
+	# camera.shake(0.2, 15)
 
 	# SLIDE OUT
 	await get_tree().create_timer(1).timeout
@@ -250,6 +251,7 @@ func bearer_defeated():
 	
 	# PICKUP
 	bearer_death_animator.play("pickup")
+	camera.shake(0.1, 10)
 	await bearer_death_animator.animation_finished
 	ground.hide()
 
@@ -328,7 +330,7 @@ func opponent_defeated():
 		location_hearts.fade_in(1)
 		await get_tree().create_timer(1).timeout
 
-	await get_tree().create_timer(1.7).timeout
+	await get_tree().create_timer(0.5).timeout
 
 	## CLEAR BLOOD
 	sword.clear_blood()
