@@ -159,7 +159,7 @@ func break_sword(emit_next: bool = true):
 	sword_holo.hide()
 	label.hide()
 	Global.sfx_player.play("Sword_Hit_Special")
-	dialogue_handler.camera.shake(0.2, 20)
+	dialogue_handler.camera.shake(0.1, 10)
 	dialogue_handler.sword.transform_to_sword()
 	Global.sfx_player.pick_music(false, true, false, 0.2)
 	

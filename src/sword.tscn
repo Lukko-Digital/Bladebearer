@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctoxk5ywvn75r"]
+[gd_scene load_steps=14 format=3 uid="uid://ctoxk5ywvn75r"]
 
 [ext_resource type="Script" path="res://src/sword.gd" id="1_a5gxo"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_mq21s"]
 [ext_resource type="PackedScene" uid="uid://bwt5h2gm6ccag" path="res://assets/models/Stick.glb" id="3_uc5po"]
-[ext_resource type="Material" uid="uid://dymacf1sgawmm" path="res://assets/shaders/sword_transform.tres" id="4_ebh02"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="5_7ok2n"]
 
 [sub_resource type="Animation" id="Animation_nbqwa"]
@@ -156,6 +155,37 @@ _data = {
 "red_flash": SubResource("Animation_fj50y")
 }
 
+[sub_resource type="Curve" id="Curve_txhqh"]
+min_value = -20.0
+max_value = 0.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.173973, -4.66798), -33.0649, -33.0649, 0, 0, Vector2(1, -13.1727), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wya0y"]
+curve = SubResource("Curve_txhqh")
+
+[sub_resource type="Curve" id="Curve_jf0os"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.231884, 0.56044), -2.20579, -2.20579, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pm2sp"]
+curve = SubResource("Curve_jf0os")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6jcd6"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 14.385, 1)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 55.66
+initial_velocity_max = 55.66
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.999998
+linear_accel_max = 0.999998
+linear_accel_curve = SubResource("CurveTexture_wya0y")
+scale_min = 7.05
+scale_max = 9.7
+scale_curve = SubResource("CurveTexture_pm2sp")
+
 [node name="Sword" type="Node3D"]
 script = ExtResource("1_a5gxo")
 
@@ -187,11 +217,11 @@ transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
 unique_name_in_owner = true
 transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
 emitting = false
-amount = 50
-lifetime = 1.72
+amount = 30
+lifetime = 0.7
 one_shot = true
 speed_scale = 1.48
-explosiveness = 0.92
+explosiveness = 0.99
 local_coords = true
-process_material = ExtResource("4_ebh02")
+process_material = SubResource("ParticleProcessMaterial_6jcd6")
 draw_pass_1 = ExtResource("5_7ok2n")

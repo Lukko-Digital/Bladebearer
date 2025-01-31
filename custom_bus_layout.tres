@@ -1,11 +1,17 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cw7jwnq2dbnsc"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cw7jwnq2dbnsc"]
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_v2sk7"]
+resource_name = "Amplify"
+volume_db = 15.0
 
 [sub_resource type="AudioEffectPanner" id="AudioEffectPanner_p2ms8"]
 resource_name = "Panner"
 pan = 0.25
 
 [resource]
-bus/0/volume_db = 4.23351
+bus/0/volume_db = 6.02
+bus/0/effect/0/effect = SubResource("AudioEffectAmplify_v2sk7")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Grunts/Pains"
 bus/1/solo = false
 bus/1/mute = false

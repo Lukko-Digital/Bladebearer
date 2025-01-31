@@ -51,6 +51,7 @@ stream = ExtResource("3_j68kw")
 
 [node name="Music_Fight" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_6npx3")
+volume_db = -5.0
 
 [node name="Stick_Break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_12ndr")
@@ -222,18 +223,22 @@ bus = &"Swing_Grunt_Op"
 [node name="Sword_Hit" type="AudioStreamPlayer" parent="Sword_Hit_Group"]
 stream = ExtResource("5_dpyls")
 volume_db = -15.175
+bus = &"Sword Hit"
 
 [node name="Sword_Hit_2" type="AudioStreamPlayer" parent="Sword_Hit_Group"]
 stream = ExtResource("28_b3kha")
 volume_db = -15.175
+bus = &"Sword Hit"
 
 [node name="Sword_Hit_3" type="AudioStreamPlayer" parent="Sword_Hit_Group"]
 stream = ExtResource("29_0grfk")
 volume_db = -15.175
+bus = &"Sword Hit"
 
 [node name="Sword_Hit_4" type="AudioStreamPlayer" parent="Sword_Hit_Group"]
 stream = ExtResource("30_1xquk")
 volume_db = -15.175
+bus = &"Sword Hit"
 
 [node name="Footsteps_Group" type="Node" parent="."]
 
