@@ -9,6 +9,7 @@ const SWING_ARM_LENGTH = 4
 @export var swing_rotation: float
 
 @onready var arm: Node3D = %Arm
+@onready var arm_animation_player: AnimationPlayer = %ArmAnimationPlayer
 @onready var swing_animation_player: AnimationPlayer = %SwingAnimationPlayer
 @onready var swing_position_animation_player: AnimationPlayer = %SwingPositionAnimationPlayer
 
