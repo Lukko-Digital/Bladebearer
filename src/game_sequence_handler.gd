@@ -492,7 +492,7 @@ func swing_sequence(first_swing: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		target.show()
 	sword.unlock_input()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 4))
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 2))
 	post_sequence()
 
 
@@ -532,7 +532,7 @@ func block_sequence(first_block: bool = false):
 		sword.screen_color_animation.play("red_flash")
 		Global.sfx_player.play_random("Getting_Hit_Group")
 		bearer_loses_health()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 4))
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 2))
 	post_sequence()
 
 
