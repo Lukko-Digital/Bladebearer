@@ -29,6 +29,8 @@ func set_border(rank: CombatantRank, border_parent: Node3D):
 			rank_name = "Knight"
 		CombatantRank.RankName.KINGSGUARD:
 			rank_name = "Kingsguard"
+		CombatantRank.RankName.KING:
+			rank_name = "King"
 	border_parent.get_node(rank_name).show()
 
 func hide_all(border_parent: Node3D):

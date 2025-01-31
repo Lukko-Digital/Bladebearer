@@ -1,7 +1,7 @@
 extends Resource
 class_name CombatantRank
 
-enum RankName {PEASANT, FOOTSOLDIER, KNIGHT, KINGSGUARD}
+enum RankName {PEASANT, FOOTSOLDIER, KNIGHT, KINGSGUARD, KING}
 
 var player_attacks: int
 var num_attacks: int

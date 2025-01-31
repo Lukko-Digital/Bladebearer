@@ -31,18 +31,19 @@ var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
 var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
 var KNIGHT = CombatantRank.new(3, 8, 8, 3, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(4, 12, 12, 2, CombatantRank.RankName.KINGSGUARD)
+var KING = CombatantRank.new(0, 0, 1, 999, CombatantRank.RankName.KING)
 
-# P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard
+# P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
 # Space separated list of combatants in the location
 # If multiple letters are adjacent, it is a randomized selection between them
 const locations = {
-	"Royal Tent": "G G",
-	"Kingsguard": "KG K G",
+	"Royal Tent": "W",
+	"Kingsguard": "G G",
 	"Central Field": "FK FK FK K",
 	"Rear Guard": "PF PF F K",
 	"Straggler's Field": "F PF PF",
 	"Outer Woods": "P P",
-	"Deep Woods": "P P",
+	"Deep Woods": "P",
 }
 
 # Variables that control progress outsie of a single combat
@@ -154,6 +155,8 @@ func create_combatant_list(combatant_string: String, last_n: int = 0):
 				combatants.append(KNIGHT)
 			"G":
 				combatants.append(KINGSGUARD)
+			"W":
+				combatants.append(KING)
 
 
 ## ----------------- SINGLE COMBAT LOGIC -----------------
