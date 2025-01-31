@@ -19,6 +19,7 @@ class_name GameSequenceHandler
 @onready var main: Node3D = get_tree().current_scene
 
 @onready var sword_animator: AnimationPlayer = %SwordAnimator
+@onready var opponent_approach_label: OpponentApproachLabel = %OpponentApproachLabel
 
 enum ACTION {SWING, BLOCK}
 
@@ -245,12 +246,19 @@ func opponent_defeated():
 	## ON PICK UPGRADE
 	sword.clear_blood()
 
-	# FADE OUT
+	# FADE OUT LOCATION WHEEL
 	var fade_out_time = 1
 	locations_wheel.fade_out(fade_out_time)
 	location_hearts.fade_out(fade_out_time)
 	await get_tree().create_timer(fade_out_time).timeout
 	locations_wheel.hide()
+
+	# SHOW OPPONENT APPROACH LABEL
+	var description = opponent_approach_label.randomize_description(opponent_rank.name)
+	await opponent_approach_label.fade_in(1, description)
+	await get_tree().create_timer(1).timeout
+	await opponent_approach_label.fade_out(1)
+
 	
 	# SLIDE IN
 	await camera.slide(false)
