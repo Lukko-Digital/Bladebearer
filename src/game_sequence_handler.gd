@@ -232,19 +232,12 @@ func bearer_defeated():
 	location_hearts.fade_in(fade_in_time)
 	await get_tree().create_timer(fade_in_time).timeout
 	
-	# LOCATION REGRESS !!!!! MAKE THIS NOT WORK IF UR ON THE FIRST LOCATION !!!!!
-	if current_location >= locations.size() - 1:
-		# if at first location
-		location_hearts.fade_out(0.5)
-		await get_tree().create_timer(0.5).timeout
-		enter_location(current_location)
-		location_hearts.fade_in(0.7)
-		await get_tree().create_timer(0.7).timeout
-	else:
-		await locations_wheel.advance_location(true)
-		enter_location(current_location + 1)
-		location_hearts.fade_in(0.7)
-		await get_tree().create_timer(0.7).timeout
+	# RESET LOCATION
+	location_hearts.fade_out(0.5)
+	await get_tree().create_timer(0.5).timeout
+	enter_location(current_location)
+	location_hearts.fade_in(0.7)
+	await get_tree().create_timer(0.7).timeout
 
 	# FADE OUT LOCATION WHEEL
 	var fade_out_time = 0.5
