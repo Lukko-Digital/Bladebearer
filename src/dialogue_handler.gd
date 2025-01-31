@@ -120,9 +120,32 @@ func intro() -> void:
 func intro_choice(_kill: bool):
 	kill = _kill
 	option_selected.emit()
+
+var kill_king: bool
+
+func king_scene():
+	pass
+	## STUMBLE IN ON KING, BEGS FOR HIS LIFE
+
+	light_animation_player.play("king_begging")
+	await get_tree().create_timer(7.5).timeout
+
+	## DECIDE WHETHER YOU WANT TO KILL HIM OR YOURSELF
+	await option_sequence([
+		{"text": "join him", "effect": func(): king_choice(false), "rotation": Vector3(0, 0, 45), "model": "sword_holo_shake"},
+		{"text": "end him", "effect": func(): king_choice(true), "rotation": Vector3(0, 0, -45), "model": "sword_holo_red_shake"}
+		])
 	
+	if kill_king:
+		light_animation_player.play("king_execution")
+		await get_tree().create_timer(5).timeout
+	else:
+		light_animation_player.play("king_spared")
+		await get_tree().create_timer(7.5).timeout
 
-
+func king_choice(_kill_king: bool):
+	kill_king = _kill_king
+	option_selected.emit()
 
 #### ABSOLUTELY HELLISH FUNCTION INCOMING #######
 func option_sequence(options: Array[Dictionary], model : String = "pointer", _tutorial: bool = false) -> void:
