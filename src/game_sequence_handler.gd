@@ -345,7 +345,9 @@ func swing_sequence(first_swing: bool = false):
 
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
+		sword.lock_input()
 		await freeze_snow()
+		sword.unlock_input()
 		tutorial_label.attack()
 		swing_arm.play_animation("windup", 999) # this value does need to be a finite number
 		await swing_arm.swing_animation_player.animation_finished
@@ -389,7 +391,9 @@ func block_sequence(first_block: bool = false):
 
 	if first_block:
 		# Only used on the first ever block of the game
+		sword.lock_input()
 		await freeze_snow()
+		sword.unlock_input()
 		tutorial_label.block()
 		swing_arm.play_animation("block", 999) # this value does need to be a finite number
 		await swing_arm.swing_animation_player.animation_finished
