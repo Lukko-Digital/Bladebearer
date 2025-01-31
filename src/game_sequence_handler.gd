@@ -29,7 +29,7 @@ enum Action {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 1, 4, CombatantRank.RankName.PEASANT)
+var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
 var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
 var KNIGHT = CombatantRank.new(3, 8, 8, 3, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(4, 12, 12, 2, CombatantRank.RankName.KINGSGUARD)
@@ -82,14 +82,9 @@ func _ready() -> void:
 	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(6)
-	locations_wheel.set_location(6)
+	enter_location(0)
+	locations_wheel.set_location(0)
 	enter_combat.call_deferred()
-
-	# THIS IS WAHT SHOULD HAPPEN WHEN ENDING
-	# Global.sfx_player.pick_music(1,0,0, 1.0, -30)
-	# await dialogue_handler.king_scene()
-	# Global.sfx_player.pick_music(0,1,0, 3)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -258,6 +253,9 @@ func bearer_defeated():
 	await bearer_death_animator.animation_finished
 	ground.hide()
 
+	# CLEAR BLOOD
+	sword.clear_blood()
+
 	# A NEW BEARER, HEARTS TRANSFER
 	bearer_rank = opponent_rank
 	init_bearer_health(opponent_health)
@@ -294,6 +292,10 @@ func opponent_defeated():
 	target.holo_red.hide() # Holo red will be showing because you have to win on a hit
 	opponent_heart_holder.hide()
 	heart_border_ui.opponent_borders.hide()
+	
+	if current_location == 0 and combatants.is_empty():
+		win_sequence()
+		return
 
 	# SLIDE OUT
 	await get_tree().create_timer(1).timeout
@@ -321,9 +323,6 @@ func opponent_defeated():
 
 	if combatants.is_empty():
 		# Location completed, go next
-		if current_location == 0:
-			# WIN GAME
-			pass
 		await locations_wheel.advance_location()
 		enter_location(current_location - 1)
 		location_hearts.fade_in(1)
@@ -359,6 +358,15 @@ func opponent_defeated():
 	heart_border_ui.opponent_borders.show()
 	enter_combat()
 
+func win_sequence():
+	bearer_heart_holder.hide()
+	heart_border_ui.bearer_borders.hide()
+	Global.sfx_player.pick_music(1, 0, 0, 1.0, -30)
+	await dialogue_handler.king_scene()
+	Global.sfx_player.pick_music(0, 1, 0, 3)
+	await get_tree().create_timer(1).timeout
+	await camera.slide(true)
+	# -------------------- JOSH CREDITS GO HERE RIGHT HERE PLACE THEM HERE --------------------
 
 ## ----------------- PLAYER INPUT -----------------
 
