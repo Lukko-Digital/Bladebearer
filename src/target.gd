@@ -90,7 +90,7 @@ func knight() -> Vector3:
 	}
 
 	var new_vec = Vector3.ZERO
-	while new_vec == Vector3.ZERO:
+	while not is_valid_new_rotation(new_vec):
 		# Change one feature from previous block
 		match randi() % 3:
 			0:
