@@ -70,20 +70,20 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	await dialogue_handler.tutorial()
-	await get_tree().create_timer(1).timeout
+	# await dialogue_handler.tutorial()
+	# await get_tree().create_timer(1).timeout
 
 	await dialogue_handler.menu()
 
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	await dialogue_handler.intro()
+	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	# await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(6)
-	locations_wheel.set_location(6)
+	enter_location(0)
+	locations_wheel.set_location(0)
 	enter_combat.call_deferred()
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -378,16 +378,21 @@ func win_seq2(killed: bool):
 	snow.hide()
 	sword.hide()
 	if killed:
+		Global.sfx_player.play("Stick_Break")
 		await get_tree().create_timer(0.6).timeout
 		kill_king.play()
+		await get_tree().create_timer(1.6).timeout
+		Global.sfx_player.play("Sword_Hit_Person")
 	else:
+		Global.sfx_player.play("Sword_Hit_Person")
+		Global.sfx_player.play("Human_Getting_Hit_Foreal")
 		await get_tree().create_timer(2.6).timeout
 		spare_king.play()
+	
 	await dialogue_handler.credits
-	Global.sfx_player.pick_music(0, 1, 0, 3)
-	sword.show()
-	await get_tree().create_timer(1).timeout
 	await camera.slide(true)
+	Global.sfx_player.pick_music(0, 1, 0, 0.2)
+	sword.show()
 	# -------------------- JOSH CREDITS GO HERE RIGHT HERE PLACE THEM HERE --------------------
 
 ## ----------------- PLAYER INPUT -----------------

@@ -260,3 +260,7 @@ stream = ExtResource("34_esnq7")
 volume_db = -15.175
 max_polyphony = 3
 bus = &"Footsteps"
+
+[node name="Human_Getting_Hit_Foreal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_cjor0")
+bus = &"Getting_Hit"

@@ -144,8 +144,8 @@ func intro() -> void:
 	await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
 
 	await option_sequence([
-		{"text": "\"i'm okay\"", "effect": func(): intro_choice(false), "rotation": Vector3(0, 0, -45)},
-		{"text": "kill him", "effect": func(): intro_choice(true), "rotation": Vector3(0, 0, 45)}
+		{"text": "\"i'm okay\"", "match_effect": func(): intro_choice(false), "rotation": Vector3(0, 0, -45)},
+		{"text": "kill him", "match_effect": func(): intro_choice(true), "rotation": Vector3(0, 0, 45)}
 		])
 	
 	if kill:
@@ -180,12 +180,12 @@ func king_scene():
 	if kill_king:
 		king_outcome.emit(true)
 		light_animation_player.play("king_execution")
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(4.5).timeout
 		credits.emit()
 	else:
 		king_outcome.emit(false)
 		light_animation_player.play("king_spared")
-		await get_tree().create_timer(7.2).timeout
+		await get_tree().create_timer(6).timeout
 		credits.emit()
 
 func king_choice(_kill_king: bool):
