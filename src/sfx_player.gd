@@ -25,6 +25,12 @@ func play(audio_player_name: String):
 	get_node(audio_player_name).stop()
 	get_node(audio_player_name).play()
 
+func play_random(audio_parent_name: String, delay: float = 0.0):
+	await get_tree().create_timer(delay).timeout
+	var parent = get_node(audio_parent_name)
+	var chosen_number = randi_range(0, parent.get_child_count() - 1)
+	parent.get_child(chosen_number).play()
+
 func stop(audio_player_name: String):
 	get_node(audio_player_name).stop()
 
