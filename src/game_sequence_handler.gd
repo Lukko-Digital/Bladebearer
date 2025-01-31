@@ -23,7 +23,7 @@ class_name GameSequenceHandler
 @onready var opponent_approach_label: OpponentApproachLabel = %OpponentApproachLabel
 @onready var tutorial_label: CombatTutorialLabel = %CombatTutorialLabel
 
-enum ACTION {SWING, BLOCK}
+enum Action {SWING, BLOCK}
 
 signal sequence_finished
 
@@ -52,7 +52,7 @@ var needed_wins: int
 var current_location: int
 
 # Variables that control top level of combat
-var action_queue: Array[ACTION]
+var action_queue: Array[Action]
 var bearer_rank: CombatantRank
 var opponent_rank: CombatantRank
 
@@ -78,7 +78,7 @@ func _ready() -> void:
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
-	bearer_rank = FOOTSOLDIER
+	bearer_rank = PEASANT
 	init_bearer_health()
 	enter_location(6)
 	locations_wheel.set_location(6)
@@ -113,9 +113,9 @@ func enter_combat(first_combat: bool = false):
 	while true:
 		var curr_action = action_queue.pop_front()
 		match curr_action:
-			ACTION.SWING:
+			Action.SWING:
 				swing_sequence()
-			ACTION.BLOCK:
+			Action.BLOCK:
 				block_sequence()
 		await sequence_finished
 		action_queue.append(curr_action)
@@ -181,9 +181,9 @@ func init_opponent():
 func construct_action_queue():
 	action_queue.clear()
 	for _i in range(bearer_rank.player_attacks):
-		action_queue.append(ACTION.SWING)
+		action_queue.append(Action.SWING)
 	for _i in range(opponent_rank.num_attacks):
-		action_queue.append(ACTION.BLOCK)
+		action_queue.append(Action.BLOCK)
 
 
 func bearer_loses_health():
@@ -333,8 +333,12 @@ func resume_snow():
 	swing_arm.arm_animation_player.speed_scale = 1
 
 ## Common actions that are done at the start of both swing and block sequences
-func pre_sequence(predefined_location: Vector3 = Vector3.INF):
-	target.move(predefined_location)
+func pre_sequence(
+	attacker_rank: CombatantRank.RankName,
+	action: Action,
+	predefined_location: Vector3 = Vector3.INF
+):
+	target.move(attacker_rank, action, predefined_location)
 	attach_to_arm()
 	swing_arm.randomize_swing_direction()
 
@@ -350,7 +354,7 @@ func swing_sequence(first_swing: bool = false):
 
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
-		pre_sequence(Vector3(-45, 0, 45))
+		pre_sequence(bearer_rank.name, Action.SWING, Vector3(-45, 0, 45))
 		sword.lock_input()
 		await freeze_snow()
 		sword.unlock_input()
@@ -360,7 +364,7 @@ func swing_sequence(first_swing: bool = false):
 		resume_snow()
 		tutorial_label.hide()
 	else:
-		pre_sequence()
+		pre_sequence(bearer_rank.name, Action.SWING)
 		swing_arm.play_animation("windup", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
 		await swing_arm.swing_animation_player.animation_finished
@@ -394,11 +398,10 @@ func swing_sequence(first_swing: bool = false):
 
 func block_sequence(first_block: bool = false):
 	target.blue()
-	pre_sequence()
 
 	if first_block:
 		# Only used on the first ever block of the game
-		pre_sequence(Vector3(-45, 0, -45))
+		pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(-45, 0, -45))
 		sword.lock_input()
 		await freeze_snow()
 		sword.unlock_input()
@@ -408,7 +411,7 @@ func block_sequence(first_block: bool = false):
 		resume_snow()
 		tutorial_label.hide()
 	else:
-		pre_sequence()
+		pre_sequence(opponent_rank.name, Action.BLOCK)
 		swing_arm.play_animation("block", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
 		await swing_arm.swing_animation_player.animation_finished

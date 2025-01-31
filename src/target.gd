@@ -21,20 +21,103 @@ class_name Target
 
 @onready var target_animation_player: AnimationPlayer = %TargetAnimationPlayer
 
+enum ShiftState {NEVER, RANDOM, ALWAYS}
+
 const ROTATION_LERP_SPEED = 4
 
 var target_rot: Vector3
+var last_action: GameSequenceHandler.Action
 
 func _process(delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
 		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED * delta)
-	
-func move(predefined_location: Vector3 = Vector3.INF):
+
+## Rank is bearer rank if swinging, opponent rank if blocking
+func move(
+	attacker_rank: CombatantRank.RankName,
+	action: GameSequenceHandler.Action,
+	predefined_location: Vector3 = Vector3.INF
+):
 	if predefined_location != Vector3.INF:
 		target_rot = predefined_location
 		swing_arm.move_to_swing_position(target_rot)
 		return
+	
+	if action == GameSequenceHandler.Action.SWING:
+		# ATTACKS
+		if attacker_rank == CombatantRank.RankName.PEASANT:
+			# PEASANTS NO SHIFT ATTACK
+			target_rot = randomize_rotation(ShiftState.NEVER)
+		else:
+			target_rot = randomize_rotation()
+	else:
+		match attacker_rank:
+			CombatantRank.RankName.PEASANT:
+				target_rot = randomize_rotation(ShiftState.NEVER)
+			CombatantRank.RankName.FOOTSOLDIER:
+				target_rot = footsoldier()
+			CombatantRank.RankName.KNIGHT:
+				target_rot = knight()
+			CombatantRank.RankName.KINGSGUARD:
+				target_rot = randomize_rotation()
+			
+	last_action = action
+	swing_arm.move_to_swing_position(target_rot)
 
+
+func footsoldier() -> Vector3:
+	if last_action == GameSequenceHandler.Action.SWING:
+		# START OF NEW BLOCK SEQUENCE
+		return randomize_rotation(ShiftState.RANDOM)
+	if abs(target_rot.x) > 45:
+		return randomize_rotation(ShiftState.ALWAYS)
+	else:
+		return randomize_rotation(ShiftState.NEVER)
+
+
+func knight() -> Vector3:
+	if last_action == GameSequenceHandler.Action.SWING:
+		# START OF NEW BLOCK SEQUENCE
+		return randomize_rotation(ShiftState.RANDOM)
+
+	var change_map = {
+		45: [0],
+		0: [-45, 45],
+		-45: [0],
+		135: [-180],
+		-180: [-135, 135],
+		-135: [-180]
+	}
+
+	var new_vec = Vector3.ZERO
+	while new_vec == Vector3.ZERO:
+		# Change one feature from previous block
+		match randi() % 3:
+			0:
+				# Change left-right
+				new_vec =  Vector3(
+					target_rot.x,
+					0,
+					change_map[int(target_rot.z)].pick_random()
+				)
+			1:
+				# Change forward-backward
+				new_vec =  Vector3(
+					change_map[int(target_rot.x)].pick_random(),
+					0,
+					target_rot.z
+				)
+			2:
+				# Change shift
+				new_vec =  Vector3(
+					wrapf(180 - target_rot.x, -180, 180),
+					0,
+					target_rot.z
+				)
+	return new_vec
+
+
+func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 	var new_rot: Vector3
 	while true:
 		# Loop until rotation satisfies `is_valid_new_rotation`.
@@ -44,17 +127,20 @@ func move(predefined_location: Vector3 = Vector3.INF):
 			randi_range(-1, 1)
 		)
 		new_rot *= 45
-		if randi() % 2:
-			new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+
+		match shift_state:
+			ShiftState.ALWAYS:
+				new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+			ShiftState.RANDOM:
+				if randi() % 2:
+					new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+			ShiftState.NEVER:
+				pass
 
 		if is_valid_new_rotation(new_rot):
-			# Break when I see new rotation
-			target_rot = new_rot
-			break
-	print(target_rot)
-
-	swing_arm.move_to_swing_position(target_rot)
-
+			return new_rot
+	return Vector3.ZERO
+	
 
 # Invalid rotations:
 # 	- (0,0,0)
