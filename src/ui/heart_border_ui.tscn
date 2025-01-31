@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bral7ar8pm8mf"]
+[gd_scene load_steps=8 format=3 uid="uid://bral7ar8pm8mf"]
 
 [ext_resource type="Script" path="res://src/ui/heart_border_ui.gd" id="1_51r5n"]
 [ext_resource type="Texture2D" uid="uid://d4d2146d1g2lj" path="res://assets/ui/knight_healthbar.png" id="2_aw3sc"]
+[ext_resource type="Texture2D" uid="uid://ccx1xd0yl8jgd" path="res://assets/ui/king_healthbar.png" id="2_ikr17"]
 [ext_resource type="Texture2D" uid="uid://bj0p1725ho312" path="res://assets/ui/peasant_healthbar.png" id="3_de3vb"]
+[ext_resource type="Texture2D" uid="uid://bdjm7mnvfnjg0" path="res://assets/ui/kingsguard_healthbar_bearer.png" id="4_fn7t2"]
+[ext_resource type="Texture2D" uid="uid://dj5jx4mba2332" path="res://assets/ui/kingsguard_healthbar_opponent.png" id="5_raas5"]
+[ext_resource type="Texture2D" uid="uid://c0rsw0hb0nvfm" path="res://assets/ui/footsoldier_healthbar.png" id="6_bexj7"]
 
 [node name="HeartBorderUI" type="Node3D"]
 script = ExtResource("1_51r5n")
@@ -10,28 +14,35 @@ script = ExtResource("1_51r5n")
 [node name="OpponentBorders" type="Node3D" parent="."]
 unique_name_in_owner = true
 
+[node name="King" type="Sprite3D" parent="OpponentBorders"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+modulate = Color(1, 1, 1, 0.756863)
+texture_filter = 0
+texture = ExtResource("2_ikr17")
+
 [node name="Knight" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 0, 0, 0)
 visible = false
+modulate = Color(1, 1, 1, 0.756863)
 texture_filter = 0
 texture = ExtResource("2_aw3sc")
 
 [node name="Kingsguard" type="Sprite3D" parent="OpponentBorders"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 0, 0, 0)
 visible = false
-modulate = Color(1, 0.53, 0.53, 1)
+modulate = Color(1, 1, 1, 0.501961)
 texture_filter = 0
-texture = ExtResource("2_aw3sc")
+texture = ExtResource("5_raas5")
 
 [node name="Footsoldier" type="Sprite3D" parent="OpponentBorders"]
-transform = Transform3D(2, 0, 0, 0, -2, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-modulate = Color(1, 0.51, 0.51, 1)
+modulate = Color(1, 1, 1, 0.501961)
 texture_filter = 0
-texture = ExtResource("3_de3vb")
+texture = ExtResource("6_bexj7")
 
 [node name="Peasant" type="Sprite3D" parent="OpponentBorders"]
-transform = Transform3D(2, 0, 0, 0, -2, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
@@ -42,25 +53,23 @@ unique_name_in_owner = true
 [node name="Knight" type="Sprite3D" parent="BearerBorders"]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
+modulate = Color(1, 1, 1, 0.831373)
 texture_filter = 0
 texture = ExtResource("2_aw3sc")
 
 [node name="Kingsguard" type="Sprite3D" parent="BearerBorders"]
-transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-modulate = Color(1, 0.53, 0.53, 1)
+modulate = Color(1, 1, 1, 0.478431)
 texture_filter = 0
-texture = ExtResource("2_aw3sc")
+texture = ExtResource("4_fn7t2")
 
 [node name="Footsoldier" type="Sprite3D" parent="BearerBorders"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-modulate = Color(1, 0.51, 0.51, 1)
+modulate = Color(1, 1, 1, 0.529412)
 texture_filter = 0
-texture = ExtResource("3_de3vb")
+texture = ExtResource("6_bexj7")
 
 [node name="Peasant" type="Sprite3D" parent="BearerBorders"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
