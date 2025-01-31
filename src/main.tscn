@@ -296,9 +296,9 @@ tracks/9/path = NodePath("SwordGroup:position:z")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.8, 0, 0.25, 0, 0.200923, -0.08, 0, 0.169318, 0.00186218, -0.000192588, -0.627, 0, 0.065, 0),
-"times": PackedFloat32Array(11.1224, 12.6027, 13.1076)
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.8, 0, 0.25, 0, 0.200923, -0.08, 0, 0.169318, 0.00186218, -0.000192588, -0.627, 0, 0.065, 0),
+"times": PackedFloat32Array(0, 11.1224, 12.6027, 13.1076)
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -458,6 +458,18 @@ tracks/19/keys = {
 "method": &"pick_music"
 }]
 }
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("%Sword:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_tts51"]
 resource_name = "In The Dark"
@@ -485,7 +497,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(33.1285),
 "update": 0,
-"values": [0.1]
+"values": [0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -497,7 +509,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(4.75684),
 "update": 0,
-"values": [1.0]
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -534,6 +546,30 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(68.5938),
 "update": 0,
 "values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Snow:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Sword:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_uom86"]
@@ -793,6 +829,17 @@ tracks/14/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SwordGroup:position:z")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_b0qqm"]
@@ -1431,10 +1478,12 @@ width = 400.0
 script = ExtResource("18_kdgo5")
 
 [node name="LocationsWheel" parent="GameSequenceHandler" node_paths=PackedStringArray("location_hearts") instance=ExtResource("12_or6h2")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 location_hearts = NodePath("LocationHearts")
 
 [node name="LocationHearts" parent="GameSequenceHandler/LocationsWheel" instance=ExtResource("13_ja52v")]
+unique_name_in_owner = true
 transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, -0.16, 0)
 num_hearts = 4
 
