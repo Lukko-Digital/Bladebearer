@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=47 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -19,10 +19,15 @@
 [ext_resource type="AudioStream" uid="uid://cfcbwqjrgdfiq" path="res://assets/intro_sounds/intro_kill.wav" id="15_4w30t"]
 [ext_resource type="AudioStream" uid="uid://dxqkas3vbfxxc" path="res://assets/intro_sounds/intro_ambience.wav" id="16_nwkfw"]
 [ext_resource type="AudioStream" uid="uid://clv1v04fuu4v8" path="res://assets/intro_sounds/intro_spare.wav" id="16_qcn14"]
+[ext_resource type="AudioStream" uid="uid://b84sa6i0hh0xd" path="res://assets/sfx/king_begging_2.wav" id="17_34kjw"]
 [ext_resource type="Script" path="res://src/opponent_approach_label.gd" id="17_rj23p"]
 [ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="17_t3opm"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="18_372qn"]
 [ext_resource type="Script" path="res://src/combat_tutorial_label.gd" id="18_kdgo5"]
+[ext_resource type="AudioStream" uid="uid://11rgy1f3qtje" path="res://assets/sfx/king_confusion.wav" id="18_y1ro6"]
+[ext_resource type="AudioStream" uid="uid://qdcije85a7qf" path="res://assets/sfx/Sword_Hit_Person_1.wav" id="19_iqjbk"]
+[ext_resource type="AudioStream" uid="uid://dqyd0j15pm68s" path="res://assets/sfx/execution_1.wav" id="20_l06dm"]
+[ext_resource type="AudioStream" uid="uid://dcg5g11em7dqe" path="res://assets/sfx/king_execution.wav" id="21_bxohf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -862,6 +867,261 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_kj0hc"]
+resource_name = "king_begging"
+length = 8.0
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("17_34kjw")
+}],
+"times": PackedFloat32Array(1.4)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordGroup/DialogueHandler")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.6, 7.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["no! no! i have gold! what are you doing?", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.6],
+"method": &"end_text_sequence"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GameSequenceHandler/../SfxPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false, false, true, 2.0, 0.0],
+"method": &"pick_music"
+}, {
+"args": ["Nature_Ambience", -40.0, 2.0],
+"method": &"transition_volume_db"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-17.0, -28.0]
+}
+
+[sub_resource type="Animation" id="Animation_165d8"]
+resource_name = "king_spared"
+length = 7.0
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("18_y1ro6")
+}],
+"times": PackedFloat32Array(2.6)
+}
+tracks/0/use_blend = true
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneSFX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_iqjbk")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneSFX:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneVOX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 1.39594,
+"stream": ExtResource("20_l06dm")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.13515, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-17.0, -25.0]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SwordGroup/DialogueHandler")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.7, 4.3, 4.5, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["but what are you doing?", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.2],
+"method": &"end_text_sequence"
+}, {
+"args": ["what is happening?", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.6],
+"method": &"end_text_sequence"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GameSequenceHandler/../SfxPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 6.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false, false, false, 0.1, 0.0],
+"method": &"pick_music"
+}, {
+"args": [false, true, false, 6.0, 0.0],
+"method": &"pick_music"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2ejyc"]
+resource_name = "king_execution"
+length = 5.0
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("21_bxohf")
+}],
+"times": PackedFloat32Array(0.6)
+}
+tracks/0/use_blend = true
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneSFX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_iqjbk")
+}],
+"times": PackedFloat32Array(2.8)
+}
+tracks/1/use_blend = true
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GameSequenceHandler/../IntroAudio/FinalSceneVOX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/2/use_blend = true
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GameSequenceHandler/../SfxPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false, false, true, 1.0, -10.0],
+"method": &"pick_music"
+}, {
+"args": [false, true, false, 0.1, 0.0],
+"method": &"pick_music"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-17.0, -30.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
 _data = {
 "Chest Open": SubResource("Animation_8ka2i"),
@@ -869,6 +1129,9 @@ _data = {
 "Main": SubResource("Animation_uom86"),
 "RESET": SubResource("Animation_1q5g8"),
 "kill_him": SubResource("Animation_b0qqm"),
+"king_begging": SubResource("Animation_kj0hc"),
+"king_execution": SubResource("Animation_2ejyc"),
+"king_spared": SubResource("Animation_165d8"),
 "spare_him": SubResource("Animation_gj0en")
 }
 
@@ -1079,6 +1342,11 @@ num_hearts = 4
 
 [node name="IntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
 volume_db = -16.7626
+
+[node name="FinalSceneSFX" type="AudioStreamPlayer" parent="IntroAudio"]
+
+[node name="FinalSceneVOX" type="AudioStreamPlayer" parent="IntroAudio"]
+volume_db = -18.548
 
 [node name="TransformEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
