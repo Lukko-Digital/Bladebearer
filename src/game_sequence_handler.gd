@@ -27,10 +27,10 @@ enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 4, CombatantRank.RankName.PEASANT)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
-var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
-var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
+var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(3, 8, 8, 3, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(4, 12, 12, 2, CombatantRank.RankName.KINGSGUARD)
 
 # P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard
 # Space separated list of combatants in the location
@@ -177,7 +177,7 @@ func init_opponent():
 
 func construct_action_queue():
 	action_queue.clear()
-	for _i in range(bearer_rank.num_attacks):
+	for _i in range(bearer_rank.player_attacks):
 		action_queue.append(ACTION.SWING)
 	for _i in range(opponent_rank.num_attacks):
 		action_queue.append(ACTION.BLOCK)
