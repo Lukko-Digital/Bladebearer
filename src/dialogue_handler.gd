@@ -16,6 +16,7 @@ var dialogue_options: Array[DialogueOption]
 var active_option = false
 
 var is_menu: bool = false
+var kill: bool # used to chec k if player chose to kill friend in the start of the game
 
 signal option_selected()
 
@@ -92,18 +93,30 @@ func menu() -> void:
 
 func intro() -> void:
 
-	# Global.sfx_player.pick_music(false,false,false,0)
-	# Global.sfx_player.play("Sword_Hit_Special")
+	Global.sfx_player.pick_music(false,false,false,0)
+	Global.sfx_player.play("Sword_Hit_Special")
 	
-	# light_animation_player.play("Chest Open")
-	# await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
+	light_animation_player.play("Chest Open")
+	await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
 
 	await option_sequence([
-		{"text": "\"i'm okay\"", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, -45)},
-		{"text": "kill him", "effect": func(): option_selected.emit(), "rotation": Vector3(0, 0, 45)}
+		{"text": "\"i'm okay\"", "effect": func(): intro_choice(false), "rotation": Vector3(0, 0, -45)},
+		{"text": "kill him", "effect": func(): intro_choice(true), "rotation": Vector3(0, 0, 45)}
 		])
-
 	
+	if kill:
+		light_animation_player.play("kill_him")
+		await get_tree().create_timer(4.5).timeout
+	else:
+		light_animation_player.play("spare_him")
+		await get_tree().create_timer(6).timeout
+
+func intro_choice(_kill: bool):
+	kill = _kill
+	option_selected.emit()
+	
+
+
 func option_sequence(options: Array[Dictionary], model : String = "pointer", _tutorial: bool = false) -> void:
 	active_option = true
 

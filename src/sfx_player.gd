@@ -3,7 +3,7 @@ class_name SfxPlayer
 
 # Music volumes in decibels
 const music_off_db: float = -80.0
-const music_on_db: float = -22
+const music_on_db: float = -5
 
 @export var music_players: Array[AudioStreamPlayer]
 
@@ -17,6 +17,7 @@ func _ready() -> void:
 	pick_music(false,false,true,0.5,-30)
 
 	transition_volume_db("Nature_Ambience", -80, 0)
+	Global.sfx_player.transition_volume_db("PreIntroAmbience", -80, 0)
 
 ## [audio_player_name] must exactly match the name of a child
 ## [AudioStreamPlayer] or [AudioStreamPlayer3D] node.
@@ -36,17 +37,20 @@ func transition_volume_db(audio_player_name: String, target_db: float, tween_dur
 	if !get_node(audio_player_name): return
 	var audio_player: AudioStreamPlayer = get_node(audio_player_name)
 	var volume_db_tween = create_tween()
-	volume_db_tween.tween_property(audio_player, "volume_db", target_db, tween_duration)
+	volume_db_tween.tween_property(audio_player, "volume_db", target_db, tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	print(audio_player, target_db)
 
-func pick_music(calm: bool, fight: bool, bass: bool, dur: float = 5, on_vol: float = music_on_db):
+func pick_music(calm: bool, fight: bool, bass: bool, dur: float = 2, on_vol: float = music_on_db):
+	if on_vol == 0: on_vol = music_on_db
 
 	var calm_vol: float = on_vol if calm else music_off_db
 	var fight_vol: float = on_vol if fight else music_off_db
 	var bass_vol: float = on_vol if bass else music_off_db
-	
-	transition_volume_db("Music_Calm", calm_vol, dur)
+
 	transition_volume_db("Music_Fight", fight_vol, dur)
+	if fight: await get_tree().create_timer(dur).timeout
+	transition_volume_db("Music_Calm", calm_vol, dur)
+	
 	transition_volume_db("Music_BassOnly", bass_vol, dur)
 
 func start_music():

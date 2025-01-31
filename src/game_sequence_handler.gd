@@ -58,17 +58,18 @@ var bearer_health: int
 var opponent_health: int
 
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
+
 	locations_wheel.hide()
 	target.hide()
 
 	# await dialogue_handler.tutorial()
-
 	# await get_tree().create_timer(1).timeout
-	
-	# await dialogue_handler.menu()
-	
+
+	await dialogue_handler.menu()
+
+	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
 	await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
@@ -79,8 +80,12 @@ func _ready() -> void:
 	locations_wheel.set_location(6)
 	enter_combat.call_deferred()
 
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 func enter_combat():
+
+	Global.sfx_player.pick_music(false, true, false, 0.5)
+
 	target.show()
 	init_opponent()
 	construct_action_queue()
@@ -96,9 +101,11 @@ func enter_combat():
 
 		if opponent_health <= 0:
 			opponent_defeated()
+			Global.sfx_player.pick_music(true, false, false, 0.5)
 			break
 		if bearer_health <= 0:
 			bearer_defeated()
+			Global.sfx_player.pick_music(true, false, false, 0.5)
 			break
 
 
@@ -305,11 +312,12 @@ func swing_sequence():
 		# Successful swing
 		swing_arm.play_animation("swing")
 		
-		Global.sfx_player.play("Yell")
+		Global.sfx_player.play("Swing_Grunt_1")
 		Global.sfx_player.play_timed("Woosh", 0.1)
 
 		await swing_arm.swing_animation_player.animation_finished
-		Global.sfx_player.play("Sword_Hit")
+		Global.sfx_player.play("Sword_Hit_Person")
+		Global.sfx_player.play("Human_Getting_Hit")
 		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()

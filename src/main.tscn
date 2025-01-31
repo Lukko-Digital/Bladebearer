@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=37 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -14,10 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 [ext_resource type="PackedScene" uid="uid://dp1fkp3wyiu7k" path="res://src/ui/locations_wheel.tscn" id="12_or6h2"]
-[ext_resource type="AudioStream" uid="uid://274cldych6hc" path="res://assets/intro_sounds/pre_intro_ambience.wav" id="13_1xs1o"]
 [ext_resource type="AudioStream" uid="uid://bplrxdq1vcurf" path="res://assets/intro_sounds/intro_start.wav" id="13_fudk4"]
 [ext_resource type="PackedScene" uid="uid://bedv3wcguauho" path="res://src/ui/heart_holder.tscn" id="13_ja52v"]
+[ext_resource type="AudioStream" uid="uid://cfcbwqjrgdfiq" path="res://assets/intro_sounds/intro_kill.wav" id="15_4w30t"]
 [ext_resource type="AudioStream" uid="uid://dxqkas3vbfxxc" path="res://assets/intro_sounds/intro_ambience.wav" id="16_nwkfw"]
+[ext_resource type="AudioStream" uid="uid://clv1v04fuu4v8" path="res://assets/intro_sounds/intro_spare.wav" id="16_qcn14"]
 [ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="17_t3opm"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="18_372qn"]
 
@@ -314,76 +315,49 @@ tracks/11/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 1.005), Vector3(0.02, 0.02, 1.005), Vector3(-0.02, -0.02, 1.005), Vector3(0, 0, 1.005), Vector3(0, 0, 1.005), Vector3(0.06, 0.02, 1.005), Vector3(-0.06, -0.02, 1.005), Vector3(0, 0, 1.005)]
 }
-tracks/12/type = "audio"
+tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience")
+tracks/12/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volume_db")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"clips": [{
-"end_offset": 13.9282,
-"start_offset": 0.0,
-"stream": ExtResource("13_1xs1o")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/12/use_blend = true
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience:volume_db")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
 "times": PackedFloat32Array(2, 4, 9.9, 10.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-20.0, -16.7626, -16.7626, -80.0]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2, 3.7, 4.1, 5.3, 5.6, 7.9, 8, 8.9, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-17.0, -17.0, -8.0, -8.0, -10.0, -10.0, 0.0, 0.0, -10.0]
+}
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience:volume_db")
+tracks/14/path = NodePath("%Sword/Sword/Blade:visible")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(2, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-16.0, -20.0]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(2, 3.7, 4.1, 5.3, 5.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [-17.0, -17.0, -8.0, -8.0, -10.0]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("%Sword/Sword/Blade:visible")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
-tracks/17/type = "method"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("SwordGroup/DialogueHandler")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SwordGroup/DialogueHandler")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(2.3, 4.67, 7.08, 8.89),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
@@ -400,13 +374,13 @@ tracks/17/keys = {
 "method": &"end_text_sequence"
 }]
 }
-tracks/18/type = "method"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("SwordGroup/DialogueHandler")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("SwordGroup/DialogueHandler")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(4.2, 6.13, 8.02751, 9.56751, 13.6966, 16),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
@@ -429,24 +403,24 @@ tracks/18/keys = {
 "method": &"end_text_sequence"
 }]
 }
-tracks/19/type = "bezier"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("SwordGroup:position:y")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
+tracks/17/type = "bezier"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("SwordGroup:position:y")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/20/type = "audio"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
+tracks/18/type = "audio"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroAmbience")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -454,21 +428,24 @@ tracks/20/keys = {
 }],
 "times": PackedFloat32Array(1.9)
 }
-tracks/20/use_blend = true
-tracks/21/type = "method"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("%GameSequenceHandler/../SfxPlayer")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/keys = {
-"times": PackedFloat32Array(9.9, 11),
-"transitions": PackedFloat32Array(1, 1),
+tracks/18/use_blend = true
+tracks/19/type = "method"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("%GameSequenceHandler/../SfxPlayer")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(1.9, 9.7, 11),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": ["Nature_Ambience", 0.0, 0.2],
+"args": ["PreIntroAmbience", -80.0, 2.0],
 "method": &"transition_volume_db"
 }, {
-"args": [true, false, false, 8.0, 0.0],
+"args": ["Nature_Ambience", 5.0, 0.2],
+"method": &"transition_volume_db"
+}, {
+"args": [true, false, false, 3.0, 0.0],
 "method": &"pick_music"
 }]
 }
@@ -752,7 +729,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%GameSequenceHandler/../IntroAudio/PreIntroAmbience:volume_db")
+tracks/10/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -764,37 +741,123 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart:volume_db")
+tracks/11/path = NodePath("%Sword/Sword/Blade:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("%Sword/Sword/Blade:visible")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/13/type = "bezier"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("SwordGroup:position:y")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SwordGroup:position:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_b0qqm"]
+resource_name = "kill_him"
+length = 5.0
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.925611,
+"start_offset": 0.0,
+"stream": ExtResource("15_4w30t")
+}],
+"times": PackedFloat32Array(0.3)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordGroup/DialogueHandler")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 2.7, 3.2, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["hey, come over here", 3, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": ["ah! stop it!", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [3, 0.6],
+"method": &"end_text_sequence"
+}, {
+"args": [1, 0.6],
+"method": &"end_text_sequence"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gj0en"]
+resource_name = "spare_him"
+length = 6.5
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GameSequenceHandler/../IntroAudio/IntroStart")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("16_qcn14")
+}],
+"times": PackedFloat32Array(0.3)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordGroup/DialogueHandler")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 1.7, 1.9, 2.6, 2.8, 4, 4.6, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["i'm alright", 3, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [3, 0.6],
+"method": &"end_text_sequence"
+}, {
+"args": ["hey!", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.2],
+"method": &"end_text_sequence"
+}, {
+"args": ["give me that.", 1, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": ["huh? seriously?", 3, 0.2],
+"method": &"show_text_sequence"
+}, {
+"args": [1, 0.6],
+"method": &"end_text_sequence"
+}, {
+"args": [3, 0.6],
+"method": &"end_text_sequence"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
@@ -802,7 +865,9 @@ _data = {
 "Chest Open": SubResource("Animation_8ka2i"),
 "In The Dark": SubResource("Animation_tts51"),
 "Main": SubResource("Animation_uom86"),
-"RESET": SubResource("Animation_1q5g8")
+"RESET": SubResource("Animation_1q5g8"),
+"kill_him": SubResource("Animation_b0qqm"),
+"spare_him": SubResource("Animation_gj0en")
 }
 
 [node name="Main" type="Node3D"]
@@ -993,8 +1058,6 @@ num_hearts = 4
 
 [node name="IntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
 volume_db = -16.7626
-
-[node name="PreIntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
 
 [node name="TransformEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true

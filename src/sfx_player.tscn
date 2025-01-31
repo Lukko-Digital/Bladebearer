@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn1h8mr7sagxh"]
+[gd_scene load_steps=21 format=3 uid="uid://bn1h8mr7sagxh"]
 
 [ext_resource type="Script" path="res://src/sfx_player.gd" id="1_w3uqv"]
 [ext_resource type="AudioStream" uid="uid://cw2tncm7rcw6l" path="res://assets/music/music_base.wav" id="2_3phsl"]
@@ -12,10 +12,14 @@
 [ext_resource type="AudioStream" uid="uid://yubd88bi0a7f" path="res://assets/sfx/Swing_Yell_2.wav" id="7_af5y6"]
 [ext_resource type="AudioStream" uid="uid://xbo4f006w7xa" path="res://assets/sfx/Sword_Hit_Special.wav" id="7_yots1"]
 [ext_resource type="AudioStream" uid="uid://ckmi44hoqaiqk" path="res://assets/sfx/Breath_Josh_1.wav" id="8_c16o2"]
+[ext_resource type="AudioStream" uid="uid://qdcije85a7qf" path="res://assets/sfx/Sword_Hit_Person_1.wav" id="9_4qxh3"]
 [ext_resource type="AudioStream" uid="uid://brab1j6ybrd28" path="res://assets/sfx/Breath_Josh_2.wav" id="9_kn5em"]
+[ext_resource type="AudioStream" uid="uid://xwimaw72d8tj" path="res://assets/sfx/Human_Getting_Hit_Seamus.wav" id="10_bl1kt"]
 [ext_resource type="AudioStream" uid="uid://c3j5ec5mrwcr3" path="res://assets/sfx/Breath_Josh_3.wav" id="10_y1tfg"]
+[ext_resource type="AudioStream" uid="uid://yqlcpsn1lcfr" path="res://assets/sfx/Swing_Grunt_1.wav" id="11_obehm"]
 [ext_resource type="AudioStream" uid="uid://dvnsqdcqmhmfv" path="res://assets/sfx/Breath_Josh_4.wav" id="11_xttyo"]
 [ext_resource type="AudioStream" uid="uid://c4lnaftsgjhg2" path="res://assets/sfx/Breath_Josh_5.wav" id="12_jieu4"]
+[ext_resource type="AudioStream" uid="uid://274cldych6hc" path="res://assets/intro_sounds/pre_intro_ambience.wav" id="17_s0s7s"]
 
 [node name="SfxPlayer" type="Node" node_paths=PackedStringArray("music_players")]
 script = ExtResource("1_w3uqv")
@@ -46,11 +50,23 @@ volume_db = -2.72
 
 [node name="Sword_Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dpyls")
-volume_db = -7.175
+volume_db = -15.175
+
+[node name="Sword_Hit_Person" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4qxh3")
+volume_db = 13.582
+
+[node name="Human_Getting_Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_bl1kt")
+volume_db = 3.699
+
+[node name="Swing_Grunt_1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_obehm")
+volume_db = 3.699
 
 [node name="Sword_Hit_Special" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_yots1")
-volume_db = -13.198
+volume_db = -17.434
 
 [node name="Woosh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hvck8")
@@ -76,3 +92,8 @@ stream = ExtResource("11_xttyo")
 
 [node name="Breath_5" type="AudioStreamPlayer" parent="Breathing"]
 stream = ExtResource("12_jieu4")
+
+[node name="PreIntroAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_s0s7s")
+volume_db = -16.0
+autoplay = true
