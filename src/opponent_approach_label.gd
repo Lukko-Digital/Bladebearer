@@ -37,7 +37,10 @@ var win_messages = [
 ]
 
 var lose_messages = [
-	"tough loss"
+	"a brutal loss",
+	"a part of the process",
+	"swordsmen aren't meant to last",
+	"an unlucky soul"
 ]
 
 func _ready() -> void:
