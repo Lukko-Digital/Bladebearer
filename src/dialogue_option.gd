@@ -10,6 +10,7 @@ var dialogue_handler : DialogueHandler
 
 @onready var stick : Node3D = %Stick
 @onready var sword_holo : Node3D = %SwordHolo
+@onready var sword_holo_red : Node3D = %SwordHoloRed
 @onready var pointer : Node3D = %Pointer
 
 @onready var volume_up : Node3D = %VolumeUp
@@ -47,6 +48,7 @@ func set_model(_model: String):
 	sword_holo.hide()
 	volume_up.hide()
 	volume_down.hide()
+	sword_holo_red.hide()
 	start.hide()
 	if _model == "pointer": pointer.show()
 	if _model == "stick": stick.show()
@@ -54,8 +56,13 @@ func set_model(_model: String):
 	if _model == "volume_up": volume_up.show()
 	if _model == "volume_down": volume_down.show()
 	if _model == "start": start.show()
+	if _model == "sword_holo": sword_holo.show()
+	if _model == "sword_holo_red": sword_holo_red.show()
 	if _model == "sword_holo_shake":
 		sword_holo.show()
+		shaking = true
+	if _model == "sword_holo_red_shake":
+		sword_holo_red.show()
 		shaking = true
 # !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!
 
