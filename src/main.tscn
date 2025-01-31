@@ -434,7 +434,7 @@ tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "clips": [{
-"end_offset": 0.0,
+"end_offset": 75.9639,
 "start_offset": 0.0,
 "stream": ExtResource("16_nwkfw")
 }],
@@ -454,7 +454,7 @@ tracks/19/keys = {
 "args": ["PreIntroAmbience", -80.0, 2.0],
 "method": &"transition_volume_db"
 }, {
-"args": ["Nature_Ambience", 0.0, 0.2],
+"args": ["Nature_Ambience", 8.0, 0.2],
 "method": &"transition_volume_db"
 }, {
 "args": [true, false, false, 3.0, 0.0],
