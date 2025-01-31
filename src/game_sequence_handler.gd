@@ -74,8 +74,8 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	# await dialogue_handler.tutorial()
-	# await get_tree().create_timer(1).timeout
+	await dialogue_handler.tutorial()
+	await get_tree().create_timer(1).timeout
 
 	await dialogue_handler.menu()
 
