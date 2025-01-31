@@ -43,6 +43,7 @@ texture = ExtResource("6_bexj7")
 
 [node name="Peasant" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
 
@@ -69,5 +70,6 @@ texture_filter = 0
 texture = ExtResource("6_bexj7")
 
 [node name="Peasant" type="Sprite3D" parent="BearerBorders"]
+visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
