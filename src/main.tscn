@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=48 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://qdcije85a7qf" path="res://assets/sfx/Sword_Hit_Person_1.wav" id="19_iqjbk"]
 [ext_resource type="AudioStream" uid="uid://dqyd0j15pm68s" path="res://assets/sfx/execution_1.wav" id="20_l06dm"]
 [ext_resource type="AudioStream" uid="uid://dcg5g11em7dqe" path="res://assets/sfx/king_execution.wav" id="21_bxohf"]
+[ext_resource type="PackedScene" uid="uid://q3pnwf6oxxrd" path="res://assets/models/Ground.glb" id="29_k3d4t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -1359,6 +1360,10 @@ explosiveness = 0.61
 local_coords = true
 process_material = ExtResource("17_t3opm")
 draw_pass_1 = ExtResource("18_372qn")
+
+[node name="Ground" parent="." instance=ExtResource("29_k3d4t")]
+transform = Transform3D(-0.00407682, -3.56407e-10, -3.1158e-17, -3.56407e-10, 0.00407682, 3.56407e-10, 0, 3.56407e-10, -0.00407682, 0, -3.35442, 0)
+visible = false
 
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]
