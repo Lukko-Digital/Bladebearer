@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=59 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://qlhlxo35efaj" path="res://assets/sfx/Sword_Into_Snow.wav" id="27_2hpyb"]
 [ext_resource type="AudioStream" uid="uid://klgxq1sjw2bu" path="res://assets/sfx/Sword_Out_Of_Snow.wav" id="28_ucmue"]
 [ext_resource type="PackedScene" uid="uid://q3pnwf6oxxrd" path="res://assets/models/Ground.glb" id="29_k3d4t"]
+[ext_resource type="Texture2D" uid="uid://b5y4g0pnyxeo8" path="res://assets/ui/logo_dither.png" id="33_5yt52"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -1570,6 +1571,104 @@ _data = {
 "pickup": SubResource("Animation_cv4ud")
 }
 
+[sub_resource type="Animation" id="Animation_j6by2"]
+resource_name = "new_animation"
+length = 26.0
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameSequenceHandler/MainCamera:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 5.7, 0, 0, -0.25, 0, 5.7, 0, -3.6, -1.015, 0, 0.25, 0, -3.6, -1.015, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.36126, 20, 25.0005, 25.0026)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameSequenceHandler/Snow:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameSequenceHandler/Snow:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SfxPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false, false, false, 0.0, 0.0],
+"method": &"pick_music"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0n5g4"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameSequenceHandler/MainCamera:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameSequenceHandler/Snow:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameSequenceHandler/Snow:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_111ko"]
+_data = {
+"RESET": SubResource("Animation_0n5g4"),
+"new_animation": SubResource("Animation_j6by2")
+}
+
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLights" type="Node3D" parent="." node_paths=PackedStringArray("lights")]
@@ -1588,7 +1687,7 @@ shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "king_begging", "kill_king", "spare_king")]
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "credits", "king_begging", "kill_king", "spare_king")]
 unique_name_in_owner = true
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
@@ -1601,6 +1700,7 @@ heart_border_ui = NodePath("HeartUI/HeartBorderUI")
 dialogue_handler = NodePath("SwordGroup/DialogueHandler")
 locations_wheel = NodePath("LocationsWheel")
 location_hearts = NodePath("LocationsWheel/LocationHearts")
+credits = NodePath("../Credits")
 king_begging = NodePath("../OutroAudio/KingBegging")
 kill_king = NodePath("../OutroAudio/KillKing")
 spare_king = NodePath("../OutroAudio/SpareKing")
@@ -1608,6 +1708,7 @@ spare_king = NodePath("../OutroAudio/SpareKing")
 [node name="Snow" type="GPUParticles3D" parent="GameSequenceHandler"]
 unique_name_in_owner = true
 transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0, 0, 0)
+visible = false
 amount = 27410
 lifetime = 4.35
 trail_lifetime = 1.75
@@ -1828,6 +1929,48 @@ draw_pass_1 = ExtResource("18_372qn")
 unique_name_in_owner = true
 transform = Transform3D(-0.00407682, -3.56407e-10, -3.1158e-17, -3.56407e-10, 0.00407682, 3.56407e-10, 0, 3.56407e-10, -0.00407682, 0, -1.98239, 0)
 visible = false
+
+[node name="Credits" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.09, 0, 0, 0, 1.09, 0, 0, 0, 1.09, 0, 0, 0)
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="Credits"]
+transform = Transform3D(1.19, 0, 0, 0, 1.19, 0, 0, 0, 1.19, 0, 0, -0.989135)
+texture = ExtResource("33_5yt52")
+
+[node name="Label3D" type="Label3D" parent="Credits"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.36113, -0.320568)
+text = "a game by lukko digital"
+font = ExtResource("7_d73xt")
+outline_size = 0
+
+[node name="Label3D3" type="Label3D" parent="Credits"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.65559, -0.320568)
+text = "thanks for
+playing!"
+font = ExtResource("7_d73xt")
+outline_size = 0
+
+[node name="Label3D2" type="Label3D" parent="Credits"]
+transform = Transform3D(0.775, 0, 0, 0, 0.775, 0, 0, 0, 0.775, 0, -1.61826, -0.554679)
+text = "ian lum
+
+joshua ehrlich
+
+eli smirin
+
+miles frank
+
+jonathan han"
+font = ExtResource("7_d73xt")
+vertical_alignment = 0
+
+[node name="FinalCameraAnimator" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_111ko")
+}
 
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]

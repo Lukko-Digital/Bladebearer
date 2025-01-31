@@ -15,6 +15,9 @@ class_name GameSequenceHandler
 @export var dialogue_handler: DialogueHandler
 @export var locations_wheel: LocationsWheel
 @export var location_hearts: HeartHolder
+@export var credits: Node3D
+
+@onready var cam_anim: AnimationPlayer = %FinalCameraAnimator
 
 @onready var main: Node3D = get_tree().current_scene
 
@@ -70,21 +73,21 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	# await dialogue_handler.tutorial()
-	# await get_tree().create_timer(1).timeout
+	await dialogue_handler.tutorial()
+	await get_tree().create_timer(1).timeout
 
 	await dialogue_handler.menu()
 
-	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	# await dialogue_handler.intro()
+	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(0)
-	locations_wheel.set_location(0)
-	enter_combat.call_deferred()
+	enter_location(6)
+	locations_wheel.set_location(6)
+	enter_combat.call_deferred(true)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -390,11 +393,12 @@ func win_seq2(killed: bool):
 		spare_king.play()
 	
 	await dialogue_handler.credits
-	await camera.slide(true)
+	# await camera.slide(true)
 	Global.sfx_player.pick_music(0, 1, 0, 0.2)
 	sword.show()
 	# -------------------- JOSH CREDITS GO HERE RIGHT HERE PLACE THEM HERE --------------------
-
+	credits.show()
+	cam_anim.play("new_animation")
 ## ----------------- PLAYER INPUT -----------------
 
 
@@ -492,7 +496,7 @@ func swing_sequence(first_swing: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		target.show()
 	sword.unlock_input()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 2))
+	# Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 2))
 	post_sequence()
 
 
@@ -532,7 +536,7 @@ func block_sequence(first_block: bool = false):
 		sword.screen_color_animation.play("red_flash")
 		Global.sfx_player.play_random("Getting_Hit_Group")
 		bearer_loses_health()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 2))
+	# Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 2))
 	post_sequence()
 
 
