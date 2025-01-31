@@ -246,6 +246,9 @@ func opponent_defeated():
 	await get_tree().create_timer(1).timeout
 	await opponent_approach_label.fade_out(1)
 
+  # indicate player walking to new location
+	Global.sfx_player.transition_volume_db("Walking", -25, 1)
+
 	# FADE IN
 	locations_wheel.show()
 	var fade_in_time = 2
@@ -256,6 +259,7 @@ func opponent_defeated():
 	## LOCATION PROGRESSION
 	await get_tree().create_timer(1).timeout
 	location_hearts.break_heart_at_idx(combatants.size())
+
 	if combatants.is_empty():
 		# Location completed, go next
 		if current_location == 0:
@@ -266,10 +270,12 @@ func opponent_defeated():
 		location_hearts.fade_in(1)
 		await get_tree().create_timer(1).timeout
 
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(1.7).timeout
 
 	## CLEAR BLOOD
 	sword.clear_blood()
+
+	
 
 	# FADE OUT LOCATION WHEEL
 	var fade_out_time = 1
@@ -284,6 +290,8 @@ func opponent_defeated():
 	await get_tree().create_timer(1).timeout
 	await opponent_approach_label.fade_out(1)
 
+	# Player has arrived
+	Global.sfx_player.transition_volume_db("Walking", -80.0, 3)
 	
 	# SLIDE IN
 	await camera.slide(false)
