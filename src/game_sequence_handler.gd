@@ -33,9 +33,9 @@ enum Action {SWING, BLOCK}
 signal sequence_finished
 
 var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
-var KNIGHT = CombatantRank.new(3, 8, 8, 3, CombatantRank.RankName.KNIGHT)
-var KINGSGUARD = CombatantRank.new(4, 12, 12, 2, CombatantRank.RankName.KINGSGUARD)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 3, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(3, 8, 8, 2, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(4, 12, 12, 1.5, CombatantRank.RankName.KINGSGUARD)
 var KING = CombatantRank.new(0, 0, 1, 999, CombatantRank.RankName.KING)
 
 # P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
@@ -66,6 +66,7 @@ var swinging = false
 var bearer_health: int
 var opponent_health: int
 
+var shift_taught = false
 
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
