@@ -22,6 +22,8 @@ class_name GameSequenceHandler
 @onready var snow: GPUParticles3D = %Snow
 @onready var opponent_approach_label: OpponentApproachLabel = %OpponentApproachLabel
 @onready var tutorial_label: CombatTutorialLabel = %CombatTutorialLabel
+@onready var bearer_death_animator: AnimationPlayer = %BearerDeathAnimator
+@onready var ground: Node3D = %Ground
 
 enum Action {SWING, BLOCK}
 
@@ -80,8 +82,8 @@ func _ready() -> void:
 	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(6)
-	locations_wheel.set_location(6)
+	enter_location(3)
+	locations_wheel.set_location(3)
 	enter_combat.call_deferred()
 
 	# THIS IS WAHT SHOULD HAPPEN WHEN ENDING
@@ -202,34 +204,78 @@ func opponent_loses_health():
 
 
 func bearer_defeated():
-	# Change hands, lose one location win, regen combatants
-	var label = $NewBearer
+	target.holo_blue.hide() # Holo blue will be showing because you have to lose missing a block
+	bearer_heart_holder.hide()
+	heart_border_ui.bearer_borders.hide()
 
-	label.show()
-	var tween_in = create_tween()
-	tween_in.tween_property(label, "modulate", Color(Color.WHITE, 1), 2)
-	await tween_in.finished
+	# DROP ANIMATION
+	ground.show()
+	bearer_death_animator.play("drop")
+	await bearer_death_animator.animation_finished
+
+	# SLIDE OUT
+	await get_tree().create_timer(1).timeout
+	await camera.slide(true)
+
+	# LOSE MESSSAGE
+	var lose_message = opponent_approach_label.randomize_lose_message()
+	await opponent_approach_label.fade_in(1, lose_message)
+	await get_tree().create_timer(1).timeout
+	await opponent_approach_label.fade_out(1)
+
+	# LOCATION TICK BACK
+
+	# FADE IN LOCATION
+	locations_wheel.show()
+	var fade_in_time = 2
+	locations_wheel.fade_in(fade_in_time)
+	location_hearts.fade_in(fade_in_time)
+	await get_tree().create_timer(fade_in_time).timeout
 	
+	# LOCATION REGRESS !!!!! MAKE THIS NOT WORK IF UR ON THE FIRST LOCATION !!!!!
+	await locations_wheel.advance_location(true)
+	enter_location(current_location + 1)
+	location_hearts.fade_in(1)
 	await get_tree().create_timer(1).timeout
 
-	var tween_out = create_tween()
-	tween_out.tween_property(label, "modulate", Color(Color.WHITE, 0), 2)
-	await tween_out.finished
-	label.hide()
+	# FADE OUT LOCATION WHEEL
+	var fade_out_time = 1
+	locations_wheel.fade_out(fade_out_time)
+	location_hearts.fade_out(fade_out_time)
+	await get_tree().create_timer(fade_out_time).timeout
+	locations_wheel.hide()
+	
+	# PICKUP
+	bearer_death_animator.play("pickup")
+	await bearer_death_animator.animation_finished
+	ground.show()
 
-
+	# A NEW BEARER, HEARTS TRANSFER
 	bearer_rank = opponent_rank
 	init_bearer_health(opponent_health)
-	create_combatant_list(
-		locations[current_location],
-		max( # Make sure it doesn't go negative
-			# -2 because the size of combatants is one less that the number
-			# of remaining fights, as combantants is popped at the start of
-			# combat. Then we subtract 1 more because of the bearer defeat.
-			needed_wins - combatants.size() - 2,
-			0
-		)
-	)
+	await opponent_heart_holder.transfer_hearts(bearer_heart_holder.position.y)
+
+	opponent_heart_holder.hide()
+	opponent_heart_holder.reset_y()
+	bearer_heart_holder.show()
+
+	heart_border_ui.bearer_borders.show()
+	heart_border_ui.opponent_borders.hide()
+
+	await opponent_approach_label.fade_in(1, "a new bearer claims the sword")
+	await get_tree().create_timer(1).timeout
+	await opponent_approach_label.fade_out(1)
+
+	await opponent_approach_label.fade_in(1, "the battle rages on")
+	await get_tree().create_timer(1).timeout
+	await opponent_approach_label.fade_out(1)
+	
+	# SLIDE IN
+	await camera.slide(false)
+	await get_tree().create_timer(1).timeout
+
+	opponent_heart_holder.show()
+	heart_border_ui.opponent_borders.show()
 	enter_combat()
 
 
@@ -279,8 +325,6 @@ func opponent_defeated():
 
 	## CLEAR BLOOD
 	sword.clear_blood()
-
-	
 
 	# FADE OUT LOCATION WHEEL
 	var fade_out_time = 1

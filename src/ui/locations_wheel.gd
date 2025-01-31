@@ -88,7 +88,7 @@ func initial_spindown(x_pos: float, y_pos: float):
 
 	animating = false
 
-func advance_location():
+func advance_location(regress: bool = false):
 	var tween_time = 0.7
 	animating = true
 
@@ -102,7 +102,8 @@ func advance_location():
 	await heart_space_tween_close.finished
 
 	var location_tween = create_tween()
-	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	var idx = focused_location - 1 if not regress else focused_location + 1
+	location_tween.tween_property(self, "focused_location", idx, tween_time).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	Global.sfx_player.play("Wheel_Tick")
 	await location_tween.finished
 
