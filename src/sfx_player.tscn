@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://c4lnaftsgjhg2" path="res://assets/sfx/Breath_Josh_5.wav" id="12_jieu4"]
 [ext_resource type="AudioStream" uid="uid://qiolmtfoc6kd" path="res://assets/sfx/Heart_Heal.wav" id="13_nqr1v"]
 [ext_resource type="AudioStream" uid="uid://cjqyn6fire7lw" path="res://assets/sfx/snow_walking_loop.wav" id="15_0u2p7"]
-[ext_resource type="AudioStream" uid="uid://274cldych6hc" path="res://assets/intro_sounds/pre_intro_ambience.wav" id="17_s0s7s"]
+[ext_resource type="AudioStream" uid="uid://cm25eisvouqkw" path="res://assets/intro_sounds/pre_intro_ambience-1.wav" id="21_qnfxe"]
 [ext_resource type="AudioStream" uid="uid://t1mc07k84051" path="res://assets/sfx/Human_Getting_Hit_2.wav" id="21_ujaq3"]
 [ext_resource type="AudioStream" uid="uid://2oklvwd1nycm" path="res://assets/sfx/Human_Getting_Hit_3.wav" id="22_r5266"]
 [ext_resource type="AudioStream" uid="uid://di54dgmwv2j3c" path="res://assets/sfx/Human_Getting_Hit_4.wav" id="23_cjor0"]
@@ -83,7 +83,7 @@ volume_db = -8.509
 
 [node name="Heart_Crush" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_2unot")
-volume_db = 10.425
+volume_db = 1.993
 
 [node name="Heart_Heal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_nqr1v")
@@ -120,7 +120,7 @@ stream = ExtResource("12_jieu4")
 bus = &"Breathing"
 
 [node name="PreIntroAmbience" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_s0s7s")
+stream = ExtResource("21_qnfxe")
 volume_db = -16.0
 autoplay = true
 
