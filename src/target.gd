@@ -30,7 +30,8 @@ var last_action: GameSequenceHandler.Action
 
 func _process(delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
-		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED * delta)
+		rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rot.x), ROTATION_LERP_SPEED * delta), -PI, PI)
+		rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rot.z), ROTATION_LERP_SPEED * delta), -PI, PI)
 
 ## Rank is bearer rank if swinging, opponent rank if blocking
 func move(
