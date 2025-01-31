@@ -61,7 +61,7 @@ func reset_y():
 
 func transfer_hearts(bearer_holder_y: float):
 	var tween = create_tween()
-	tween.tween_property(self, "position", Vector3(0, bearer_holder_y, 0), 1.5)
+	tween.tween_property(self, "position", Vector3(0, bearer_holder_y, 0), 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
 func fade_in(time: float):
