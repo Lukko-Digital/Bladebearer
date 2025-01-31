@@ -23,6 +23,7 @@ const MAX_HEART_SPACE = 0.7
 	set(value):
 		focused_location = value
 		update_labels.call_deferred()
+				
 
 @export var location_hearts: HeartHolder
 
@@ -77,15 +78,18 @@ func advance_location():
 	var tween_time = 0.7
 	animating = true
 
-	location_hearts.fade_out(0.3)
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.5).timeout
+
+	location_hearts.fade_out(0.5)
+	await get_tree().create_timer(0.5).timeout
 
 	var heart_space_tween_close = create_tween()
 	heart_space_tween_close.tween_property(self, "heart_space", 0, tween_time).set_trans(Tween.TRANS_CUBIC)
 	await heart_space_tween_close.finished
 
 	var location_tween = create_tween()
-	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time).set_trans(Tween.TRANS_CUBIC)
+	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	Global.sfx_player.play("Wheel_Tick")
 	await location_tween.finished
 
 	var heart_space_tween_open = create_tween()

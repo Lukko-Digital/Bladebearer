@@ -256,6 +256,7 @@ func opponent_defeated():
 	## LOCATION PROGRESSION
 	await get_tree().create_timer(1).timeout
 	location_hearts.break_heart_at_idx(combatants.size())
+
 	if combatants.is_empty():
 		# Location completed, go next
 		if current_location == 0:
@@ -266,7 +267,7 @@ func opponent_defeated():
 		location_hearts.fade_in(1)
 		await get_tree().create_timer(1).timeout
 
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(1.7).timeout
 
 	## CLEAR BLOOD
 	sword.clear_blood()
