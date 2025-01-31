@@ -92,13 +92,23 @@ func enter_combat(first_combat: bool = false):
 	target.show()
 	init_opponent()
 	construct_action_queue()
+
 	if first_combat:
 		# Only happens on the first ever combat
-		swing_sequence(true)
-		await sequence_finished
-		block_sequence(true)
-		await sequence_finished
-	
+		if dialogue_handler.kill:
+			# If you choose "kill him"
+			swing_sequence(true)
+			await sequence_finished
+			block_sequence(true)
+			await sequence_finished
+		else:
+			# If you choose "im okay"
+			block_sequence(true)
+			await sequence_finished
+			swing_sequence(true)
+			await sequence_finished
+			action_queue.reverse() # flip action queue so you block first
+			
 	while true:
 		var curr_action = action_queue.pop_front()
 		match curr_action:
@@ -369,7 +379,7 @@ func swing_sequence(first_swing: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		target.show()
 	sword.unlock_input()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0,4))
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 4))
 	post_sequence()
 
 
@@ -394,7 +404,7 @@ func block_sequence(first_block: bool = false):
 		# Successful block
 		Global.sfx_player.play_random("Swing_Grunt_Group_Opp")
 		Global.sfx_player.play_random("Sword_Hit_Group")
-		Global.sfx_player.play_random("Breathing_Group", randi_range(0,2))
+		Global.sfx_player.play_random("Breathing_Group", randi_range(0, 2))
 		camera.shake(0.2, 15)
 		swing_arm.play_animation("land_block", 0, true)
 		sword_animator.stop()
@@ -406,7 +416,7 @@ func block_sequence(first_block: bool = false):
 		sword.screen_color_animation.play("red_flash")
 		Global.sfx_player.play_random("Getting_Hit_Group")
 		bearer_loses_health()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0,4))
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 4))
 	post_sequence()
 
 
