@@ -68,13 +68,13 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	await dialogue_handler.tutorial()
-	await get_tree().create_timer(1).timeout
+	# await dialogue_handler.tutorial()
+	# await get_tree().create_timer(1).timeout
 
-	await dialogue_handler.menu()
+	# await dialogue_handler.menu()
 
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	await dialogue_handler.intro()
+	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	# await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
@@ -82,7 +82,7 @@ func _ready() -> void:
 	init_bearer_health()
 	enter_location(6)
 	locations_wheel.set_location(6)
-	enter_combat.call_deferred(true)
+	enter_combat.call_deferred()
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -240,9 +240,15 @@ func opponent_defeated():
 	await get_tree().create_timer(1).timeout
 	await camera.slide(true)
 
+	# SHOW WIN MESSAGE AFTER BATTLE
+	var win_message = opponent_approach_label.randomize_win_message()
+	await opponent_approach_label.fade_in(1, win_message)
+	await get_tree().create_timer(1).timeout
+	await opponent_approach_label.fade_out(1)
+
 	# FADE IN
 	locations_wheel.show()
-	var fade_in_time = 1
+	var fade_in_time = 2
 	locations_wheel.fade_in(fade_in_time)
 	location_hearts.fade_in(fade_in_time)
 	await get_tree().create_timer(fade_in_time).timeout
@@ -262,10 +268,7 @@ func opponent_defeated():
 
 	await get_tree().create_timer(1).timeout
 
-	## SPAWN IN UPGRADE CHOICE
-	## tbd
-
-	## ON PICK UPGRADE
+	## CLEAR BLOOD
 	sword.clear_blood()
 
 	# FADE OUT LOCATION WHEEL
