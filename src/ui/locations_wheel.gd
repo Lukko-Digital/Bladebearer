@@ -69,7 +69,7 @@ func initial_spindown():
 	animating = true
 
 	var tween = create_tween()
-	tween.tween_property(self, "focused_location", 6, 1)
+	tween.tween_property(self, "focused_location", 6, 1).set_trans(Tween.TRANS_CUBIC)
 
 	animating = false
 
@@ -81,15 +81,15 @@ func advance_location():
 	await get_tree().create_timer(0.3).timeout
 
 	var heart_space_tween_close = create_tween()
-	heart_space_tween_close.tween_property(self, "heart_space", 0, tween_time)
+	heart_space_tween_close.tween_property(self, "heart_space", 0, tween_time).set_trans(Tween.TRANS_CUBIC)
 	await heart_space_tween_close.finished
 
 	var location_tween = create_tween()
-	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time)
+	location_tween.tween_property(self, "focused_location", focused_location - 1, tween_time).set_trans(Tween.TRANS_CUBIC)
 	await location_tween.finished
 
 	var heart_space_tween_open = create_tween()
-	heart_space_tween_open.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time)
+	heart_space_tween_open.tween_property(self, "heart_space", MAX_HEART_SPACE, tween_time).set_trans(Tween.TRANS_CUBIC)
 	await heart_space_tween_open.finished
 
 	animating = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ccb8dq5qk5vev"]
+[gd_scene load_steps=22 format=3 uid="uid://ccb8dq5qk5vev"]
 
 [ext_resource type="Script" path="res://src/target.gd" id="1_rhyst"]
 [ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram_blue.tres" id="3_c2dso"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://bem5q58rwh8x4" path="res://assets/materials/hologram_red.tres" id="4_11lmb"]
 [ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="5_js7o1"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="6_ier27"]
+[ext_resource type="Material" uid="uid://pixua3jo433j" path="res://assets/materials/hologram_red_FX.tres" id="7_uh3ws"]
 
 [sub_resource type="Curve" id="Curve_txhqh"]
 min_value = -20.0
@@ -113,6 +114,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blade:surface_material_override/0:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.537255, 0.470588, 0.466667)]
+}
 
 [sub_resource type="Animation" id="Animation_kit2k"]
 resource_name = "Sword_Aligned"
@@ -164,6 +177,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blade:surface_material_override/0:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.0717937, 1),
+"update": 0,
+"values": [Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a8cii"]
@@ -265,10 +290,10 @@ unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
 
 [node name="Blade" parent="HologramRedFX" index="0"]
-surface_material_override/0 = ExtResource("4_11lmb")
+surface_material_override/0 = ExtResource("7_uh3ws")
 
 [node name="Handle" parent="HologramRedFX" index="1"]
-surface_material_override/0 = ExtResource("4_11lmb")
+surface_material_override/0 = ExtResource("7_uh3ws")
 
 [node name="AlignEffect" type="AnimationPlayer" parent="HologramRedFX"]
 unique_name_in_owner = true

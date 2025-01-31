@@ -3,7 +3,7 @@ class_name SfxPlayer
 
 # Music volumes in decibels
 const music_off_db: float = -80.0
-const music_on_db: float = -15
+const music_on_db: float = -22
 
 @export var music_players: Array[AudioStreamPlayer]
 
