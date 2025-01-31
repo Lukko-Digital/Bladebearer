@@ -16,6 +16,7 @@ const SCALE = Vector3(0.067, 0.067, 0.067)
 const HEART_OFFSET = 1.6
 
 @onready var heart_scene = preload("res://src/ui/heart.tscn")
+@onready var default_y = position.y
 
 # heart_array[0] is the leftmost heart
 var heart_array: Array[Heart]
@@ -54,6 +55,14 @@ func break_heart_at_idx(idx: int):
 	heart_array[idx].break_heart()
 
 # ---------- FADE ----------
+
+func reset_y():
+	position.y = default_y
+
+func transfer_hearts(bearer_holder_y: float):
+	var tween = create_tween()
+	tween.tween_property(self, "position", Vector3(0, bearer_holder_y, 0), 1.5)
+	await tween.finished
 
 func fade_in(time: float):
 	for heart: Heart in heart_array:

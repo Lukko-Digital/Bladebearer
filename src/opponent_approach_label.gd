@@ -36,12 +36,19 @@ var win_messages = [
 	"the battlefield beckons"
 ]
 
+var lose_messages = [
+	"tough loss"
+]
+
 func _ready() -> void:
 	hide()
 	modulate = Color(Color.WHITE, 0)
 
 func randomize_win_message() -> String:
 	return win_messages.pick_random()
+
+func randomize_lose_message() -> String:
+	return lose_messages.pick_random()
 
 func randomize_description(rank: CombatantRank.RankName) -> String:
 	return description_map[rank].pick_random()
