@@ -312,12 +312,12 @@ func swing_sequence():
 		# Successful swing
 		swing_arm.play_animation("swing")
 		
-		Global.sfx_player.play("Swing_Grunt_1")
+		Global.sfx_player.play_random("Swing_Grunt_Group")
 		Global.sfx_player.play_timed("Woosh", 0.1)
 
 		await swing_arm.swing_animation_player.animation_finished
 		Global.sfx_player.play("Sword_Hit_Person")
-		Global.sfx_player.play("Human_Getting_Hit")
+		Global.sfx_player.play_random("Getting_Hit_Group_Opp")
 		swinging = false
 		camera.shake(0.2, 15)
 		target.hit_effect.restart()
@@ -330,6 +330,7 @@ func swing_sequence():
 		await swing_arm.swing_animation_player.animation_finished
 		target.show()
 	sword.unlock_input()
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0,4))
 	post_sequence()
 
 
@@ -341,7 +342,9 @@ func block_sequence():
 	await swing_arm.swing_animation_player.animation_finished
 	if sword.is_correct_rotation():
 		# Successful block
-		Global.sfx_player.play("Sword_Hit")
+		Global.sfx_player.play_random("Swing_Grunt_Group_Opp")
+		Global.sfx_player.play_random("Sword_Hit_Group")
+		Global.sfx_player.play_random("Breathing_Group", randi_range(0,2))
 		camera.shake(0.2, 15)
 		swing_arm.play_animation("land_block", 0, true)
 		sword_animator.stop()
@@ -351,7 +354,9 @@ func block_sequence():
 		# Failed block
 		camera.shake(0.1, 6)
 		sword.screen_color_animation.play("red_flash")
+		Global.sfx_player.play_random("Getting_Hit_Group")
 		bearer_loses_health()
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0,4))
 	post_sequence()
 
 
