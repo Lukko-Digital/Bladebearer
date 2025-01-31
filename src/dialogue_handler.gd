@@ -132,7 +132,7 @@ func king_scene():
 
 	## DECIDE WHETHER YOU WANT TO KILL HIM OR YOURSELF
 	await option_sequence([
-		{"text": "join him", "effect": func(): king_choice(false), "rotation": Vector3(0, 0, 45), "model": "sword_holo_shake"},
+		{"text": "end it", "effect": func(): king_choice(false), "rotation": Vector3(0, 0, 45), "model": "sword_holo_shake"},
 		{"text": "end him", "effect": func(): king_choice(true), "rotation": Vector3(0, 0, -45), "model": "sword_holo_red_shake"}
 		])
 	
@@ -141,7 +141,7 @@ func king_scene():
 		await get_tree().create_timer(5).timeout
 	else:
 		light_animation_player.play("king_spared")
-		await get_tree().create_timer(7.5).timeout
+		await get_tree().create_timer(7.2).timeout
 
 func king_choice(_kill_king: bool):
 	kill_king = _kill_king
