@@ -515,6 +515,17 @@ func block_sequence(first_block: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		resume_snow()
 		tutorial_label.hide()
+	elif opponent_rank == FOOTSOLDIER and not shift_taught:
+		pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(135, 0, 45))
+		sword.lock_input()
+		await freeze_snow()
+		sword.unlock_input()
+		tutorial_label.shift()
+		swing_arm.play_animation("block", 999) # this value does need to be a finite number
+		await swing_arm.swing_animation_player.animation_finished
+		resume_snow()
+		tutorial_label.hide()
+		shift_taught = true
 	else:
 		pre_sequence(opponent_rank.name, Action.BLOCK)
 		swing_arm.play_animation("block", opponent_rank.time_to_react)
