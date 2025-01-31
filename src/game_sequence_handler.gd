@@ -70,16 +70,16 @@ var opponent_health: int
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
 
-	locations_wheel.hide()
-	target.hide()
+	# locations_wheel.hide()
+	# target.hide()
 
-	await dialogue_handler.tutorial()
-	await get_tree().create_timer(1).timeout
+	# await dialogue_handler.tutorial()
+	# await get_tree().create_timer(1).timeout
 
-	await dialogue_handler.menu()
+	# await dialogue_handler.menu()
 
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	await dialogue_handler.intro()
+	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	# await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
@@ -213,20 +213,20 @@ func bearer_defeated():
 	# camera.shake(0.2, 15)
 
 	# SLIDE OUT
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	await camera.slide(true)
 
 	# LOSE MESSSAGE
 	var lose_message = opponent_approach_label.randomize_lose_message()
-	await opponent_approach_label.fade_in(1, lose_message)
-	await get_tree().create_timer(1).timeout
-	await opponent_approach_label.fade_out(1)
+	await opponent_approach_label.fade_in(0.6, lose_message)
+	await get_tree().create_timer(0.8).timeout
+	await opponent_approach_label.fade_out(0.6)
 
 	# LOCATION TICK BACK
 
 	# FADE IN LOCATION
 	locations_wheel.show()
-	var fade_in_time = 2
+	var fade_in_time = 0.5
 	locations_wheel.fade_in(fade_in_time)
 	location_hearts.fade_in(fade_in_time)
 	await get_tree().create_timer(fade_in_time).timeout
@@ -237,16 +237,16 @@ func bearer_defeated():
 		location_hearts.fade_out(0.5)
 		await get_tree().create_timer(0.5).timeout
 		enter_location(current_location)
-		location_hearts.fade_in(1)
-		await get_tree().create_timer(1).timeout
+		location_hearts.fade_in(0.7)
+		await get_tree().create_timer(0.7).timeout
 	else:
 		await locations_wheel.advance_location(true)
 		enter_location(current_location + 1)
-		location_hearts.fade_in(1)
-		await get_tree().create_timer(1).timeout
+		location_hearts.fade_in(0.7)
+		await get_tree().create_timer(0.7).timeout
 
 	# FADE OUT LOCATION WHEEL
-	var fade_out_time = 1
+	var fade_out_time = 0.5
 	locations_wheel.fade_out(fade_out_time)
 	location_hearts.fade_out(fade_out_time)
 	await get_tree().create_timer(fade_out_time).timeout
