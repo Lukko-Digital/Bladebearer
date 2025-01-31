@@ -1738,6 +1738,7 @@ draw_pass_1 = ExtResource("18_372qn")
 [node name="Ground" parent="." instance=ExtResource("29_k3d4t")]
 unique_name_in_owner = true
 transform = Transform3D(-0.00407682, -3.56407e-10, -3.1158e-17, -3.56407e-10, 0.00407682, 3.56407e-10, 0, 3.56407e-10, -0.00407682, 0, -1.98239, 0)
+visible = false
 
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]
