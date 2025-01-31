@@ -30,20 +30,19 @@ texture = ExtResource("2_aw3sc")
 
 [node name="Kingsguard" type="Sprite3D" parent="OpponentBorders"]
 visible = false
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.337255)
 texture_filter = 0
 texture = ExtResource("5_raas5")
 
 [node name="Footsoldier" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.337255)
 texture_filter = 0
 texture = ExtResource("6_bexj7")
 
 [node name="Peasant" type="Sprite3D" parent="OpponentBorders"]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
 
@@ -59,17 +58,16 @@ texture = ExtResource("2_aw3sc")
 
 [node name="Kingsguard" type="Sprite3D" parent="BearerBorders"]
 visible = false
-modulate = Color(1, 1, 1, 0.478431)
+modulate = Color(1, 1, 1, 0.337255)
 texture_filter = 0
 texture = ExtResource("4_fn7t2")
 
 [node name="Footsoldier" type="Sprite3D" parent="BearerBorders"]
 visible = false
-modulate = Color(1, 1, 1, 0.529412)
+modulate = Color(1, 1, 1, 0.337255)
 texture_filter = 0
 texture = ExtResource("6_bexj7")
 
 [node name="Peasant" type="Sprite3D" parent="BearerBorders"]
-visible = false
 texture_filter = 0
 texture = ExtResource("3_de3vb")
