@@ -3,6 +3,7 @@ class_name CombatTutorialLabel
 
 @onready var sword = %Sword
 
+var x_pos = position.x
 var attack_tutorial: bool = false
 
 func _ready() -> void:
@@ -22,12 +23,12 @@ func fade_in():
 	await tween.finished
 
 func attack():
+	position.x = x_pos
 	attack_tutorial = true
-	text = "attack"
 	fade_in()
 
 func block():
-	position.x *= -1
+	position.x = -x_pos
 	attack_tutorial = false
 	text = "match to block"
 	fade_in()

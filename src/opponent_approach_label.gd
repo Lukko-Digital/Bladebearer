@@ -8,9 +8,16 @@ var description_map = {
 	CombatantRank.RankName.KINGSGUARD: ["a figure in regal armor blocks the way"],
 }
 
+var win_messages = [
+	"an easy victory"
+]
+
 func _ready() -> void:
 	hide()
 	modulate = Color(Color.WHITE, 0)
+
+func randomize_win_message() -> String:
+	return win_messages.pick_random()
 
 func randomize_description(rank: CombatantRank.RankName) -> String:
 	return description_map[rank].pick_random()

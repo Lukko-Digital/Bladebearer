@@ -1055,8 +1055,8 @@ script = ExtResource("17_rj23p")
 
 [node name="CombatTutorialLabel" type="Label3D" parent="GameSequenceHandler"]
 unique_name_in_owner = true
-transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0.691258, 0.053, 0.2)
-text = "tutorial"
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0.756713, 0.053, 0.2)
+text = "match to attack"
 font = ExtResource("7_d73xt")
 outline_size = 0
 autowrap_mode = 3
@@ -1079,7 +1079,6 @@ num_hearts = 4
 
 [node name="IntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
 volume_db = -16.7626
-bus = &"IntroDialogue"
 
 [node name="TransformEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true

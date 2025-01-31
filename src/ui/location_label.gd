@@ -21,7 +21,7 @@ func update_wheel_visuals():
 	modulate = Color(Color.WHITE, alpha)
 
 func fade_in(time: float):
-	transparency = 1
+	modulate = Color(Color.WHITE, 0)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(Color.WHITE, target_alpha), time)
 

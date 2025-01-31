@@ -27,22 +27,23 @@ enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 4, CombatantRank.RankName.PEASANT)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
-var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
-var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
+var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(3, 8, 8, 3, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(4, 12, 12, 2, CombatantRank.RankName.KINGSGUARD)
+var KING = CombatantRank.new(0, 0, 1, 999, CombatantRank.RankName.KING)
 
-# P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard
+# P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
 # Space separated list of combatants in the location
 # If multiple letters are adjacent, it is a randomized selection between them
 const locations = {
-	"Royal Tent": "G G",
-	"Kingsguard": "KG K G",
+	"Royal Tent": "W",
+	"Kingsguard": "G G",
 	"Central Field": "FK FK FK K",
 	"Rear Guard": "PF PF F K",
 	"Straggler's Field": "F PF PF",
 	"Outer Woods": "P P",
-	"Deep Woods": "P P",
+	"Deep Woods": "P",
 }
 
 # Variables that control progress outsie of a single combat
@@ -67,13 +68,13 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 
-	await dialogue_handler.tutorial()
-	await get_tree().create_timer(1).timeout
+	# await dialogue_handler.tutorial()
+	# await get_tree().create_timer(1).timeout
 
-	await dialogue_handler.menu()
+	# await dialogue_handler.menu()
 
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	await dialogue_handler.intro()
+	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	# await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
@@ -81,7 +82,7 @@ func _ready() -> void:
 	init_bearer_health()
 	enter_location(6)
 	locations_wheel.set_location(6)
-	enter_combat.call_deferred(true)
+	enter_combat.call_deferred()
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -92,13 +93,23 @@ func enter_combat(first_combat: bool = false):
 	target.show()
 	init_opponent()
 	construct_action_queue()
+
 	if first_combat:
 		# Only happens on the first ever combat
-		swing_sequence(true)
-		await sequence_finished
-		block_sequence(true)
-		await sequence_finished
-	
+		if dialogue_handler.kill:
+			# If you choose "kill him"
+			swing_sequence(true)
+			await sequence_finished
+			block_sequence(true)
+			await sequence_finished
+		else:
+			# If you choose "im okay"
+			block_sequence(true)
+			await sequence_finished
+			swing_sequence(true)
+			await sequence_finished
+			action_queue.reverse() # flip action queue so you block first
+			
 	while true:
 		var curr_action = action_queue.pop_front()
 		match curr_action:
@@ -144,6 +155,8 @@ func create_combatant_list(combatant_string: String, last_n: int = 0):
 				combatants.append(KNIGHT)
 			"G":
 				combatants.append(KINGSGUARD)
+			"W":
+				combatants.append(KING)
 
 
 ## ----------------- SINGLE COMBAT LOGIC -----------------
@@ -167,7 +180,7 @@ func init_opponent():
 
 func construct_action_queue():
 	action_queue.clear()
-	for _i in range(bearer_rank.num_attacks):
+	for _i in range(bearer_rank.player_attacks):
 		action_queue.append(ACTION.SWING)
 	for _i in range(opponent_rank.num_attacks):
 		action_queue.append(ACTION.BLOCK)
@@ -227,9 +240,15 @@ func opponent_defeated():
 	await get_tree().create_timer(1).timeout
 	await camera.slide(true)
 
+	# SHOW WIN MESSAGE AFTER BATTLE
+	var win_message = opponent_approach_label.randomize_win_message()
+	await opponent_approach_label.fade_in(1, win_message)
+	await get_tree().create_timer(1).timeout
+	await opponent_approach_label.fade_out(1)
+
 	# FADE IN
 	locations_wheel.show()
-	var fade_in_time = 1
+	var fade_in_time = 2
 	locations_wheel.fade_in(fade_in_time)
 	location_hearts.fade_in(fade_in_time)
 	await get_tree().create_timer(fade_in_time).timeout
@@ -249,10 +268,7 @@ func opponent_defeated():
 
 	await get_tree().create_timer(1).timeout
 
-	## SPAWN IN UPGRADE CHOICE
-	## tbd
-
-	## ON PICK UPGRADE
+	## CLEAR BLOOD
 	sword.clear_blood()
 
 	# FADE OUT LOCATION WHEEL
@@ -317,8 +333,8 @@ func resume_snow():
 	swing_arm.arm_animation_player.speed_scale = 1
 
 ## Common actions that are done at the start of both swing and block sequences
-func pre_sequence():
-	target.move()
+func pre_sequence(predefined_location: Vector3 = Vector3.INF):
+	target.move(predefined_location)
 	attach_to_arm()
 	swing_arm.randomize_swing_direction()
 
@@ -331,17 +347,20 @@ func post_sequence():
 
 func swing_sequence(first_swing: bool = false):
 	target.red()
-	pre_sequence()
 
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
+		pre_sequence(Vector3(-45, 0, 45))
+		sword.lock_input()
 		await freeze_snow()
+		sword.unlock_input()
 		tutorial_label.attack()
 		swing_arm.play_animation("windup", 999) # this value does need to be a finite number
 		await swing_arm.swing_animation_player.animation_finished
 		resume_snow()
 		tutorial_label.hide()
 	else:
+		pre_sequence()
 		swing_arm.play_animation("windup", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
 		await swing_arm.swing_animation_player.animation_finished
@@ -369,7 +388,7 @@ func swing_sequence(first_swing: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		target.show()
 	sword.unlock_input()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0,4))
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 4))
 	post_sequence()
 
 
@@ -379,13 +398,17 @@ func block_sequence(first_block: bool = false):
 
 	if first_block:
 		# Only used on the first ever block of the game
+		pre_sequence(Vector3(-45, 0, -45))
+		sword.lock_input()
 		await freeze_snow()
+		sword.unlock_input()
 		tutorial_label.block()
 		swing_arm.play_animation("block", 999) # this value does need to be a finite number
 		await swing_arm.swing_animation_player.animation_finished
 		resume_snow()
 		tutorial_label.hide()
 	else:
+		pre_sequence()
 		swing_arm.play_animation("block", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
 		await swing_arm.swing_animation_player.animation_finished
@@ -394,7 +417,7 @@ func block_sequence(first_block: bool = false):
 		# Successful block
 		Global.sfx_player.play_random("Swing_Grunt_Group_Opp")
 		Global.sfx_player.play_random("Sword_Hit_Group")
-		Global.sfx_player.play_random("Breathing_Group", randi_range(0,2))
+		Global.sfx_player.play_random("Breathing_Group", randi_range(0, 2))
 		camera.shake(0.2, 15)
 		swing_arm.play_animation("land_block", 0, true)
 		sword_animator.stop()
@@ -406,7 +429,7 @@ func block_sequence(first_block: bool = false):
 		sword.screen_color_animation.play("red_flash")
 		Global.sfx_player.play_random("Getting_Hit_Group")
 		bearer_loses_health()
-	Global.sfx_player.play_random("Footsteps_Group", randi_range(0,4))
+	Global.sfx_player.play_random("Footsteps_Group", randi_range(0, 4))
 	post_sequence()
 
 
