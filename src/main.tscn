@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=60 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://wyk6131emlv0" path="res://assets/intro_sounds/stick_hit.wav" id="22_355yu"]
 [ext_resource type="AudioStream" uid="uid://qlhlxo35efaj" path="res://assets/sfx/Sword_Into_Snow.wav" id="27_2hpyb"]
 [ext_resource type="AudioStream" uid="uid://klgxq1sjw2bu" path="res://assets/sfx/Sword_Out_Of_Snow.wav" id="28_ucmue"]
+[ext_resource type="Script" path="res://src/pause_screen.gd" id="29_5yhh5"]
 [ext_resource type="PackedScene" uid="uid://q3pnwf6oxxrd" path="res://assets/models/Ground.glb" id="29_k3d4t"]
 [ext_resource type="Texture2D" uid="uid://b5y4g0pnyxeo8" path="res://assets/ui/logo_dither.png" id="33_5yt52"]
 
@@ -1880,6 +1881,35 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_m0s10")
 }
+
+[node name="PauseScreen" type="CanvasLayer" parent="GameSequenceHandler"]
+process_mode = 3
+script = ExtResource("29_5yhh5")
+
+[node name="ColorRect" type="ColorRect" parent="GameSequenceHandler/PauseScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.305882)
+
+[node name="Label" type="Label" parent="GameSequenceHandler/PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.5
+offset_top = -24.5
+offset_right = 66.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_d73xt")
+theme_override_font_sizes/font_size = 40
+text = "paused"
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
