@@ -1,21 +1,21 @@
 extends Node3D
 class_name DialogueOption
 
-var dialogue_handler : DialogueHandler
+var dialogue_handler: DialogueHandler
 
 @onready var animation_player: AnimationPlayer = %Pointer/AnimationPlayer
 @onready var label: Label3D = %Label
 
-@onready var stick_block_effect : GPUParticles3D = %StickBlockEffect
+@onready var stick_block_effect: GPUParticles3D = %StickBlockEffect
 
-@onready var stick : Node3D = %Stick
-@onready var sword_holo : Node3D = %SwordHolo
-@onready var sword_holo_red : Node3D = %SwordHoloRed
-@onready var pointer : Node3D = %Pointer
+@onready var stick: Node3D = %Stick
+@onready var sword_holo: Node3D = %SwordHolo
+@onready var sword_holo_red: Node3D = %SwordHoloRed
+@onready var pointer: Node3D = %Pointer
 
-@onready var volume_up : Node3D = %VolumeUp
-@onready var volume_down : Node3D = %VolumeDown
-@onready var start : Node3D = %Start
+@onready var volume_up: Node3D = %VolumeUp
+@onready var volume_down: Node3D = %VolumeDown
+@onready var start: Node3D = %Start
 
 
 const ROTATION_LERP_SPEED = 0.07
@@ -33,7 +33,7 @@ var shaking: bool = false
 
 var original_position: Vector3
 
-var target_menu_label_transparency: Color = Color(1,1,1,0)
+var target_menu_label_transparency: Color = Color(1, 1, 1, 0)
 
 var original_vol_db: float = -10
 var target_vol_db: float
@@ -45,7 +45,7 @@ func _ready():
 	dialogue_handler.menu_label.transparency = 1.0
 	target_vol_db = original_vol_db
 
-	var main_index= AudioServer.get_bus_index("Master")
+	var main_index = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(main_index, original_vol_db)
 
 # WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! 
@@ -81,17 +81,16 @@ func _process(_delta: float) -> void:
 	if shaking == true:
 		position = original_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
 	
-	scale = scale.lerp(target_scale, ROTATION_LERP_SPEED*2)
+	scale = scale.lerp(target_scale, ROTATION_LERP_SPEED * 2)
 	target_scale = target_scale.lerp(Vector3.ONE, ROTATION_LERP_SPEED)
 
 	dialogue_handler.menu_label.modulate = lerp(dialogue_handler.menu_label.modulate, target_menu_label_transparency, ROTATION_LERP_SPEED)
-	target_menu_label_transparency = lerp(target_menu_label_transparency, Color(1,1,1,0), ROTATION_LERP_SPEED)
-
+	target_menu_label_transparency = lerp(target_menu_label_transparency, Color(1, 1, 1, 0), ROTATION_LERP_SPEED)
 
 
 func select():
-	target_scale = lerp(target_scale, Vector3.ONE * 1.1, ROTATION_LERP_SPEED*3)
-	target_menu_label_transparency = Color(1,1,1,1)
+	target_scale = lerp(target_scale, Vector3.ONE * 1.1, ROTATION_LERP_SPEED * 3)
+	target_menu_label_transparency = Color(1, 1, 1, 1)
 
 func menu_option(opt: String):
 	target_scale = Vector3.ONE * 1.6
@@ -99,17 +98,14 @@ func menu_option(opt: String):
 		dialogue_handler.option_selected.emit()
 		dialogue_handler.menu_label.hide() # TO NEVEAR BE SEEN AGAIN!!! (UNTIL MAYBE ONE DAY)
 	elif opt == "volume_up":
-		target_vol_db += VOLUME_INCREMENT_DB
+		target_vol_db = -5
 		Global.sfx_player.play("Stick_Break")
-		print("vol down")
 	elif opt == "volume_down":
-		target_vol_db -= VOLUME_INCREMENT_DB
+		target_vol_db = -15
 		Global.sfx_player.play("Stick_Break")
-		print("vol up")
 
-	var main_index= AudioServer.get_bus_index("Master")
+	var main_index = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(main_index, target_vol_db)
-
 
 
 func set_text(text: String):
@@ -165,7 +161,7 @@ func break_sword(emit_next: bool = true):
 	Global.sfx_player.play("Sword_Hit_Special")
 	dialogue_handler.camera.shake(0.2, 20)
 	dialogue_handler.sword.transform_to_sword()
-	Global.sfx_player.pick_music(false,true,false,0.2)
+	Global.sfx_player.pick_music(false, true, false, 0.2)
 	
 
 	if emit_next:
