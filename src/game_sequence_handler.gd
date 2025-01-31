@@ -19,13 +19,15 @@ class_name GameSequenceHandler
 @onready var main: Node3D = get_tree().current_scene
 
 @onready var sword_animator: AnimationPlayer = %SwordAnimator
+@onready var snow: GPUParticles3D = %Snow
 @onready var opponent_approach_label: OpponentApproachLabel = %OpponentApproachLabel
+@onready var tutorial_label: CombatTutorialLabel = %CombatTutorialLabel
 
 enum ACTION {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 2, CombatantRank.RankName.PEASANT)
+var PEASANT = CombatantRank.new(1, 2, 4, CombatantRank.RankName.PEASANT)
 var FOOTSOLDIER = CombatantRank.new(2, 4, 2, CombatantRank.RankName.FOOTSOLDIER)
 var KNIGHT = CombatantRank.new(4, 8, 3, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(6, 12, 2, CombatantRank.RankName.KINGSGUARD)
@@ -79,17 +81,24 @@ func _ready() -> void:
 	init_bearer_health()
 	enter_location(6)
 	locations_wheel.set_location(6)
-	enter_combat.call_deferred()
+	enter_combat.call_deferred(true)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-func enter_combat():
+func enter_combat(first_combat: bool = false):
 
 	Global.sfx_player.pick_music(false, true, false, 0.5)
 
 	target.show()
 	init_opponent()
 	construct_action_queue()
+	if first_combat:
+		# Only happens on the first ever combat
+		swing_sequence(true)
+		await sequence_finished
+		block_sequence(true)
+		await sequence_finished
+	
 	while true:
 		var curr_action = action_queue.pop_front()
 		match curr_action:
@@ -294,6 +303,18 @@ func sword_entered_correct_rotation():
 
 ## ----------------- SEQUENCES -----------------
 
+## Slow snow to a stop
+func freeze_snow():
+	snow.interpolate = false
+	swing_arm.arm_animation_player.speed_scale = 0
+	var tween = create_tween()
+	tween.tween_property(snow, "speed_scale", 0, 3).set_trans(Tween.TRANS_QUAD)
+	await tween.finished
+
+func resume_snow():
+	snow.interpolate = true
+	snow.speed_scale = 1
+	swing_arm.arm_animation_player.speed_scale = 1
 
 ## Common actions that are done at the start of both swing and block sequences
 func pre_sequence():
@@ -308,13 +329,23 @@ func post_sequence():
 	sequence_finished.emit()
 
 
-func swing_sequence():
+func swing_sequence(first_swing: bool = false):
 	target.red()
 	pre_sequence()
-	swing_arm.play_animation("windup", opponent_rank.time_to_react)
-	target.play_animation("Blink", opponent_rank.time_to_react)
-	await swing_arm.swing_animation_player.animation_finished
-	
+
+	if first_swing:
+		# Only used on the first ever swing of the game, plays swing tutorial
+		await freeze_snow()
+		tutorial_label.attack()
+		swing_arm.play_animation("windup", 999) # this value does need to be a finite number
+		await swing_arm.swing_animation_player.animation_finished
+		resume_snow()
+		tutorial_label.hide()
+	else:
+		swing_arm.play_animation("windup", opponent_rank.time_to_react)
+		target.play_animation("Blink", opponent_rank.time_to_react)
+		await swing_arm.swing_animation_player.animation_finished
+
 	sword.lock_input()
 	if swinging:
 		# Successful swing
@@ -341,12 +372,23 @@ func swing_sequence():
 	post_sequence()
 
 
-func block_sequence():
+func block_sequence(first_block: bool = false):
 	target.blue()
 	pre_sequence()
-	swing_arm.play_animation("block", opponent_rank.time_to_react)
-	target.play_animation("Blink", opponent_rank.time_to_react)
-	await swing_arm.swing_animation_player.animation_finished
+
+	if first_block:
+		# Only used on the first ever block of the game
+		await freeze_snow()
+		tutorial_label.block()
+		swing_arm.play_animation("block", 999) # this value does need to be a finite number
+		await swing_arm.swing_animation_player.animation_finished
+		resume_snow()
+		tutorial_label.hide()
+	else:
+		swing_arm.play_animation("block", opponent_rank.time_to_react)
+		target.play_animation("Blink", opponent_rank.time_to_react)
+		await swing_arm.swing_animation_player.animation_finished
+
 	if sword.is_correct_rotation():
 		# Successful block
 		Global.sfx_player.play("Sword_Hit")

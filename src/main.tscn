@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=39 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://src/opponent_approach_label.gd" id="17_rj23p"]
 [ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="17_t3opm"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="18_372qn"]
+[ext_resource type="Script" path="res://src/combat_tutorial_label.gd" id="18_kdgo5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -1052,10 +1053,18 @@ autowrap_mode = 3
 width = 400.0
 script = ExtResource("17_rj23p")
 
+[node name="CombatTutorialLabel" type="Label3D" parent="GameSequenceHandler"]
+unique_name_in_owner = true
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0.691258, 0.053, 0.2)
+text = "tutorial"
+font = ExtResource("7_d73xt")
+outline_size = 0
+autowrap_mode = 3
+width = 400.0
+script = ExtResource("18_kdgo5")
+
 [node name="LocationsWheel" parent="GameSequenceHandler" node_paths=PackedStringArray("location_hearts") instance=ExtResource("12_or6h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
-visible = false
-focused_location = 4.0
 location_hearts = NodePath("LocationHearts")
 
 [node name="LocationHearts" parent="GameSequenceHandler/LocationsWheel" instance=ExtResource("13_ja52v")]
