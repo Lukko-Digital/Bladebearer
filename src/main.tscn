@@ -170,7 +170,7 @@ dof_blur_far_distance = 4.23
 
 [sub_resource type="Animation" id="Animation_8ka2i"]
 resource_name = "Chest Open"
-length = 16.0
+length = 17.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1055,7 +1055,6 @@ script = ExtResource("17_rj23p")
 [node name="LocationsWheel" parent="GameSequenceHandler" node_paths=PackedStringArray("location_hearts") instance=ExtResource("12_or6h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 visible = false
-focused_location = 4.0
 location_hearts = NodePath("LocationHearts")
 
 [node name="LocationHearts" parent="GameSequenceHandler/LocationsWheel" instance=ExtResource("13_ja52v")]
@@ -1070,6 +1069,7 @@ num_hearts = 4
 
 [node name="IntroAmbience" type="AudioStreamPlayer" parent="IntroAudio"]
 volume_db = -16.7626
+bus = &"IntroDialogue"
 
 [node name="TransformEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
