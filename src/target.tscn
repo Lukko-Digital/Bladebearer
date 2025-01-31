@@ -247,7 +247,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0964219, 0.189266, 0.278531, 0.36243, 0.444539, 0.521281, 0.589078, 0.662242, 0.72825, 0.778156, 0.826648, 0.872976, 0.90662, 0.935363, 0.95689, 0.973774, 0.988544, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667)]
+"values": [Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0.168627), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0.117647), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0.0862745), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667), Color(1, 0.540667, 0.47, 0), Color(1, 0.537255, 0.470588, 0.466667)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -259,7 +259,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(2.98023e-08, 0.0964219, 0.189266, 0.278531, 0.36243, 0.444539, 0.521281, 0.589078, 0.662242, 0.72825, 0.778156, 0.826648, 0.872976, 0.90662, 0.935363, 0.95689, 0.973774, 0.988544, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784)]
+"values": [Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0.117647), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0.101961), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0.0745098), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784), Color(1, 1, 1, 0), Color(1, 1, 1, 0.160784)]
 }
 
 [sub_resource type="Animation" id="Animation_msgln"]
@@ -339,6 +339,7 @@ draw_pass_1 = SubResource("SphereMesh_rmi4m")
 [node name="HologramBlue" parent="." instance=ExtResource("4_3bsy8")]
 unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
+visible = false
 
 [node name="Blade" parent="HologramBlue" index="0"]
 surface_material_override/0 = ExtResource("3_c2dso")
@@ -349,7 +350,6 @@ surface_material_override/0 = ExtResource("3_c2dso")
 [node name="HologramRed" parent="." instance=ExtResource("4_3bsy8")]
 unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
-visible = false
 
 [node name="Blade" parent="HologramRed" index="0"]
 surface_material_override/0 = ExtResource("4_11lmb")
