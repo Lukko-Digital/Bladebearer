@@ -8,11 +8,17 @@
 [ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="6_8ejul"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="7_h4535"]
 [ext_resource type="PackedScene" uid="uid://dim435f67rted" path="res://assets/models/SwordHologram.glb" id="8_y3d0x"]
-[ext_resource type="Material" uid="uid://tsinud1571qe" path="res://assets/materials/hologram_blue.tres" id="9_hj4re"]
-[ext_resource type="Material" uid="uid://bem5q58rwh8x4" path="res://assets/materials/hologram_red.tres" id="10_4e3tr"]
 [ext_resource type="PackedScene" uid="uid://ck0hexebmoy8g" path="res://assets/models/VolumeDown.glb" id="10_y5qae"]
 [ext_resource type="PackedScene" uid="uid://doqx8wqgxbv5h" path="res://assets/models/VolumeUp.glb" id="11_kiyr2"]
 [ext_resource type="PackedScene" uid="uid://g43h16cfbsb" path="res://assets/models/Tutorial_Pointer.glb" id="12_6qhue"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prcaq"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.188235)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkfs1"]
+transparency = 1
+albedo_color = Color(1, 0.540667, 0.47, 0.27451)
 
 [node name="DialogueOption" type="Node3D"]
 script = ExtResource("1_6khdy")
@@ -40,6 +46,7 @@ outline_size = 0
 [node name="Stick" parent="." instance=ExtResource("4_5dcfl")]
 unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, 0, 0)
+visible = false
 
 [node name="Band1_001" parent="Stick" index="0"]
 material_override = ExtResource("5_bo0up")
@@ -93,12 +100,13 @@ draw_pass_1 = ExtResource("7_h4535")
 [node name="SwordHolo" parent="." instance=ExtResource("8_y3d0x")]
 unique_name_in_owner = true
 transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
+visible = false
 
 [node name="Blade" parent="SwordHolo" index="0"]
-surface_material_override/0 = ExtResource("9_hj4re")
+surface_material_override/0 = SubResource("StandardMaterial3D_prcaq")
 
 [node name="Handle" parent="SwordHolo" index="1"]
-surface_material_override/0 = ExtResource("9_hj4re")
+surface_material_override/0 = SubResource("StandardMaterial3D_prcaq")
 
 [node name="SwordHoloRed" parent="." instance=ExtResource("8_y3d0x")]
 unique_name_in_owner = true
@@ -106,10 +114,10 @@ transform = Transform3D(0.16, 0, 0, 0, 0.17, 0, 0, 0, 0.16, 0, -0.0154119, 0)
 visible = false
 
 [node name="Blade" parent="SwordHoloRed" index="0"]
-surface_material_override/0 = ExtResource("10_4e3tr")
+surface_material_override/0 = SubResource("StandardMaterial3D_bkfs1")
 
 [node name="Handle" parent="SwordHoloRed" index="1"]
-surface_material_override/0 = ExtResource("10_4e3tr")
+surface_material_override/0 = SubResource("StandardMaterial3D_bkfs1")
 
 [node name="VolumeDown" parent="." instance=ExtResource("10_y5qae")]
 unique_name_in_owner = true
