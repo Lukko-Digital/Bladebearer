@@ -327,8 +327,8 @@ func resume_snow():
 	swing_arm.arm_animation_player.speed_scale = 1
 
 ## Common actions that are done at the start of both swing and block sequences
-func pre_sequence():
-	target.move()
+func pre_sequence(predefined_location: Vector3 = Vector3.INF):
+	target.move(predefined_location)
 	attach_to_arm()
 	swing_arm.randomize_swing_direction()
 
@@ -341,10 +341,10 @@ func post_sequence():
 
 func swing_sequence(first_swing: bool = false):
 	target.red()
-	pre_sequence()
 
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
+		pre_sequence(Vector3(-45, 0, 45))
 		sword.lock_input()
 		await freeze_snow()
 		sword.unlock_input()
@@ -354,6 +354,7 @@ func swing_sequence(first_swing: bool = false):
 		resume_snow()
 		tutorial_label.hide()
 	else:
+		pre_sequence()
 		swing_arm.play_animation("windup", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
 		await swing_arm.swing_animation_player.animation_finished
@@ -391,6 +392,7 @@ func block_sequence(first_block: bool = false):
 
 	if first_block:
 		# Only used on the first ever block of the game
+		pre_sequence(Vector3(-45, 0, -45))
 		sword.lock_input()
 		await freeze_snow()
 		sword.unlock_input()
@@ -400,6 +402,7 @@ func block_sequence(first_block: bool = false):
 		resume_snow()
 		tutorial_label.hide()
 	else:
+		pre_sequence()
 		swing_arm.play_animation("block", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
 		await swing_arm.swing_animation_player.animation_finished

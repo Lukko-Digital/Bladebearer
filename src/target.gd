@@ -29,7 +29,12 @@ func _process(delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
 		rotation_degrees = rotation_degrees.lerp(target_rot, ROTATION_LERP_SPEED * delta)
 	
-func move():
+func move(predefined_location: Vector3 = Vector3.INF):
+	if predefined_location != Vector3.INF:
+		target_rot = predefined_location
+		swing_arm.move_to_swing_position(target_rot)
+		return
+
 	var new_rot: Vector3
 	while true:
 		# Loop until rotation satisfies `is_valid_new_rotation`.
