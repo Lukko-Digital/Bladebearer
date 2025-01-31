@@ -10,7 +10,7 @@ const MAX_HEART_SPACE = 0.7
 @export var play_spindown: bool = false:
 	set(value):
 		if value:
-			initial_spindown()
+			initial_spindown(1.5, 0)
 			play_spindown = false
 
 @export var play_advance_location: bool = false:
@@ -28,6 +28,7 @@ const MAX_HEART_SPACE = 0.7
 @export var location_hearts: HeartHolder
 
 @onready var labels_node: Node3D = %Labels
+@onready var default_pos: Vector3 = position
 
 var heart_space: float = 0.5
 var animating = false
@@ -64,7 +65,13 @@ func fade_out(time: float):
 
 # ---------- SPECIFIC ANIMATIONS ----------
 
-func initial_spindown():
+func teleport_to_default_pos():
+	position = default_pos
+
+func initial_spindown(x_pos: float, y_pos: float):
+	position.x = x_pos
+	position.y = y_pos
+
 	heart_space = 0.0
 	focused_location = 0
 	animating = true
