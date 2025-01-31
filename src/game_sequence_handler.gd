@@ -73,20 +73,21 @@ func _ready() -> void:
 
 	await dialogue_handler.menu()
 
-	Global.sfx_player.pick_music(1,0,0, 1.0, -30)
-	await dialogue_handler.king_scene()
-	Global.sfx_player.pick_music(0,1,0, 3)
+	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	await dialogue_handler.intro()
 
-	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	# await dialogue_handler.intro()
+	$NewBearer.modulate = Color(Color.WHITE, 0)
+	$NewBearer.hide()
+	bearer_rank = PEASANT
+	init_bearer_health()
+	enter_location(6)
+	locations_wheel.set_location(6)
+	enter_combat.call_deferred()
 
-	# $NewBearer.modulate = Color(Color.WHITE, 0)
-	# $NewBearer.hide()
-	# bearer_rank = PEASANT
-	# init_bearer_health()
-	# enter_location(6)
-	# locations_wheel.set_location(6)
-	# enter_combat.call_deferred()
+	# THIS IS WAHT SHOULD HAPPEN WHEN ENDING
+	# Global.sfx_player.pick_music(1,0,0, 1.0, -30)
+	# await dialogue_handler.king_scene()
+	# Global.sfx_player.pick_music(0,1,0, 3)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
