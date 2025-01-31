@@ -1588,7 +1588,7 @@ shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
-[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts")]
+[node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "king_begging", "kill_king", "spare_king")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_ngyv0")
@@ -1602,6 +1602,9 @@ heart_border_ui = NodePath("HeartUI/HeartBorderUI")
 dialogue_handler = NodePath("SwordGroup/DialogueHandler")
 locations_wheel = NodePath("LocationsWheel")
 location_hearts = NodePath("LocationsWheel/LocationHearts")
+king_begging = NodePath("../OutroAudio/KingBegging")
+kill_king = NodePath("../OutroAudio/KillKing")
+spare_king = NodePath("../OutroAudio/SpareKing")
 
 [node name="Snow" type="GPUParticles3D" parent="GameSequenceHandler"]
 unique_name_in_owner = true
@@ -1792,6 +1795,17 @@ volume_db = -16.7626
 
 [node name="FinalSceneVOX" type="AudioStreamPlayer" parent="IntroAudio"]
 volume_db = -18.548
+
+[node name="OutroAudio" type="Node" parent="."]
+
+[node name="KingBegging" type="AudioStreamPlayer" parent="OutroAudio"]
+stream = ExtResource("17_34kjw")
+
+[node name="KillKing" type="AudioStreamPlayer" parent="OutroAudio"]
+stream = ExtResource("21_bxohf")
+
+[node name="SpareKing" type="AudioStreamPlayer" parent="OutroAudio"]
+stream = ExtResource("18_y1ro6")
 
 [node name="TransformEffect" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
