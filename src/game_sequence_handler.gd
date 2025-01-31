@@ -71,16 +71,16 @@ var shift_taught = false
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
 
-	# locations_wheel.hide()
-	# target.hide()
+	locations_wheel.hide()
+	target.hide()
 
-	# await dialogue_handler.tutorial()
-	# await get_tree().create_timer(1).timeout
+	await dialogue_handler.tutorial()
+	await get_tree().create_timer(1).timeout
 
-	# await dialogue_handler.menu()
+	await dialogue_handler.menu()
 
-	# Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	# await dialogue_handler.intro()
+	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+	await dialogue_handler.intro()
 
 	$NewBearer.modulate = Color(Color.WHITE, 0)
 	$NewBearer.hide()
