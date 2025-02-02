@@ -70,23 +70,24 @@ var shift_taught = false
 
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
-
 	locations_wheel.hide()
 	target.hide()
+	var play_tutorial = true
 
-	await dialogue_handler.tutorial()
-	await get_tree().create_timer(1).timeout
+	if play_tutorial:
+		await dialogue_handler.tutorial()
+		await get_tree().create_timer(1).timeout
 
-	await dialogue_handler.menu()
+		await dialogue_handler.menu()
 
-	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
-	await dialogue_handler.intro()
+		Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
+		await dialogue_handler.intro()
 
 	bearer_rank = PEASANT
 	init_bearer_health()
 	enter_location(6)
 	locations_wheel.set_location(6)
-	enter_combat.call_deferred(true)
+	enter_combat.call_deferred(play_tutorial)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
