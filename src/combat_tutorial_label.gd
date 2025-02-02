@@ -33,8 +33,14 @@ func block():
 	text = "match to block"
 	fade_in()
 
+func shift_first_block():
+	position.x = x_pos
+	attack_tutorial = false
+	text = "match to block"
+	fade_in()
+
 func shift():
 	position.x = x_pos
 	attack_tutorial = false
-	text = "shift to invert"
+	text = "shift to lower"
 	fade_in()

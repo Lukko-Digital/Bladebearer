@@ -27,6 +27,8 @@ const ROTATION_LERP_SPEED = 4
 
 var target_rot: Vector3
 var last_action: GameSequenceHandler.Action
+# Control variable for footsoldier and knight to decide if they should invert and generate a new position
+var flip_previous: bool = false
 
 func _process(delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
@@ -80,10 +82,10 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 
 		match shift_state:
 			ShiftState.ALWAYS:
-				new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+				new_rot = apply_shift(new_rot)
 			ShiftState.RANDOM:
 				if randi() % 2:
-					new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+					new_rot = apply_shift(new_rot)
 			ShiftState.NEVER:
 				pass
 
@@ -94,57 +96,34 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 ## -------------------------- BY RANK --------------------------
 
 func footsoldier() -> Vector3:
-	if last_action == GameSequenceHandler.Action.SWING:
-		# START OF NEW BLOCK SEQUENCE
-		return randomize_rotation(ShiftState.RANDOM)
-	if rotation_uses_shift(target_rot):
-		return randomize_rotation(ShiftState.ALWAYS)
-	else:
+	if not flip_previous or last_action == GameSequenceHandler.Action.SWING: # <-- if new block sequence
+		flip_previous = true
 		return randomize_rotation(ShiftState.NEVER)
+	else:
+		flip_previous = false
+		return apply_shift(target_rot)
 
 
 func knight() -> Vector3:
-	if last_action == GameSequenceHandler.Action.SWING:
-		# START OF NEW BLOCK SEQUENCE
+	if not flip_previous or last_action == GameSequenceHandler.Action.SWING: # <-- if new block sequence
+		flip_previous = true
 		return randomize_rotation(ShiftState.RANDOM)
-
-	var change_map = {
-		45: [0],
-		0: [-45, 45],
-		-45: [0],
-		135: [-180],
-		-180: [-135, 135],
-		-135: [-180]
-	}
-
-	var new_vec = Vector3.ZERO
-	while not is_valid_new_rotation(new_vec):
-		# Change one feature from previous block
-		match randi() % 3:
-			0:
-				# Change left-right
-				new_vec =  Vector3(
-					target_rot.x,
-					0,
-					change_map[int(target_rot.z)].pick_random()
-				)
-			1:
-				# Change forward-backward
-				new_vec =  Vector3(
-					change_map[int(target_rot.x)].pick_random(),
-					0,
-					target_rot.z
-				)
-			2:
-				# Change shift
-				new_vec =  Vector3(
-					wrapf(180 - target_rot.x, -180, 180),
-					0,
-					target_rot.z
-				)
-	return new_vec
+	else:
+		flip_previous = false
+		return Vector3(
+			wrapf(target_rot.x - 180, -180, 180),
+			0,
+			-target_rot.z
+		)
 
 ## -------------------------- HELPERS --------------------------
+
+func apply_shift(rot_degrees: Vector3) -> Vector3:
+	return Vector3(
+		wrapf(180 - rot_degrees.x, -180, 180),
+		rot_degrees.y,
+		rot_degrees.z
+	)
 
 # Randomly returns -1 or 1
 func rand_sign() -> int:

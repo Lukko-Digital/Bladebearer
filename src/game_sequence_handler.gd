@@ -70,7 +70,12 @@ var swinging = false
 var bearer_health: int
 var opponent_health: int
 
-var shift_taught = false
+enum ShiftTutorial {NOSHIFT, SHIFT, DONE}
+
+## NOSHIFT: play a normal preset no shift attack
+## SHIFT: play the shift version of the previous attack
+## DONE: the tutorial has been completed
+var shift_tutorial_state = ShiftTutorial.NOSHIFT
 
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -84,7 +89,7 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 	# CHANGE TO FALSE WHEN TESTING AND YOU WANT TO GO STRAIGHT TO COMBAT
-	var play_tutorial = true
+	var play_tutorial = false
 
 	if play_tutorial:
 		await dialogue_handler.tutorial()
@@ -503,7 +508,8 @@ func swing_sequence(first_swing: bool = false):
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
 		pre_sequence(bearer_rank.name, Action.SWING, Vector3(-45, 0, 45))
-		sword.lock_input()
+		sword.lock_input(Vector3(0, 0, 0))
+		target.target_animation_player.stop()
 		await freeze_snow()
 		sword.unlock_input()
 		tutorial_label.attack()
@@ -550,7 +556,8 @@ func block_sequence(first_block: bool = false):
 	if first_block:
 		# Only used on the first ever block of the game
 		pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(-45, 0, -45))
-		sword.lock_input()
+		sword.lock_input(Vector3(0, 0, 0))
+		target.target_animation_player.stop()
 		await freeze_snow()
 		sword.unlock_input()
 		tutorial_label.block()
@@ -558,17 +565,32 @@ func block_sequence(first_block: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		resume_snow()
 		tutorial_label.hide()
-	elif opponent_rank == FOOTSOLDIER and not shift_taught:
-		pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(135, 0, 45))
-		sword.lock_input()
-		await freeze_snow()
-		sword.unlock_input()
-		tutorial_label.shift()
-		swing_arm.play_animation("block", 999) # this value does need to be a finite number
-		await swing_arm.swing_animation_player.animation_finished
-		resume_snow()
-		tutorial_label.hide()
-		shift_taught = true
+	elif opponent_rank == FOOTSOLDIER and shift_tutorial_state < 2:
+		match shift_tutorial_state:
+			ShiftTutorial.NOSHIFT:
+				pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(45, 0, 45))
+				sword.lock_input(Vector3(0, 0, 0))
+				target.target_animation_player.stop()
+				await freeze_snow()
+				sword.unlock_input()
+				tutorial_label.shift_first_block()
+				swing_arm.play_animation("block", 999) # this value does need to be a finite number
+				await swing_arm.swing_animation_player.animation_finished
+				resume_snow()
+				tutorial_label.hide()
+				shift_tutorial_state = ShiftTutorial.SHIFT
+			ShiftTutorial.SHIFT:
+				pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(135, 0, 45))
+				sword.lock_input(Vector3(0, 0, 0))
+				target.target_animation_player.stop()
+				await freeze_snow()
+				sword.unlock_input()
+				tutorial_label.shift()
+				swing_arm.play_animation("block", 999) # this value does need to be a finite number
+				await swing_arm.swing_animation_player.animation_finished
+				resume_snow()
+				tutorial_label.hide()
+				shift_tutorial_state = ShiftTutorial.DONE
 	else:
 		pre_sequence(opponent_rank.name, Action.BLOCK)
 		swing_arm.play_animation("block", opponent_rank.time_to_react)
