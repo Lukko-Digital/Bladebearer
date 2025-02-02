@@ -82,8 +82,6 @@ func _ready() -> void:
 	Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
 	await dialogue_handler.intro()
 
-	$NewBearer.modulate = Color(Color.WHITE, 0)
-	$NewBearer.hide()
 	bearer_rank = PEASANT
 	init_bearer_health()
 	enter_location(6)
