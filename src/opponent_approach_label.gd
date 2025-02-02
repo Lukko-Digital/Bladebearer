@@ -34,6 +34,7 @@ var description_map = {
 		"a man as tall as a tree levels his blade at you",
 		"a kingsguard towers over you"
 	],
+	CombatantRank.RankName.KING: ["the king cowers before you"]
 }
 
 var win_messages = [
