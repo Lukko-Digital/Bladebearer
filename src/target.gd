@@ -27,6 +27,8 @@ const ROTATION_LERP_SPEED = 4
 
 var target_rot: Vector3
 var last_action: GameSequenceHandler.Action
+# Control variable for footsoldier and knight to decide if they should invert and generate a new position
+var flip_previous: bool = false
 
 func _process(delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
@@ -80,10 +82,10 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 
 		match shift_state:
 			ShiftState.ALWAYS:
-				new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+				new_rot = apply_shift(new_rot)
 			ShiftState.RANDOM:
 				if randi() % 2:
-					new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+					new_rot = apply_shift(new_rot)
 			ShiftState.NEVER:
 				pass
 
@@ -137,14 +139,17 @@ func knight() -> Vector3:
 				)
 			2:
 				# Change shift
-				new_vec =  Vector3(
-					wrapf(180 - target_rot.x, -180, 180),
-					0,
-					target_rot.z
-				)
+				new_vec =  apply_shift(target_rot)
 	return new_vec
 
 ## -------------------------- HELPERS --------------------------
+
+func apply_shift(rot_degrees: Vector3) -> Vector3:
+	return Vector3(
+		wrapf(180 - rot_degrees.x, -180, 180),
+		rot_degrees.y,
+		rot_degrees.z
+	)
 
 # Randomly returns -1 or 1
 func rand_sign() -> int:
