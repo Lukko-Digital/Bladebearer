@@ -1693,7 +1693,6 @@ shadow_enabled = true
 
 [node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "credits", "king_begging", "kill_king", "spare_king")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_ngyv0")
 swing_arm = NodePath("../SwingArm")
 sword = NodePath("SwordGroup/Sword")

@@ -73,6 +73,13 @@ var opponent_health: int
 var shift_taught = false
 
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
@@ -213,6 +220,9 @@ func bearer_defeated():
 	bearer_heart_holder.hide()
 	heart_border_ui.bearer_borders.hide()
 
+	heart_border_ui.hide()
+	opponent_heart_holder.hide()
+
 	# DROP ANIMATION
 	sword.lock_input(Vector3.ZERO)
 	ground.show()
@@ -234,6 +244,11 @@ func bearer_defeated():
 	await opponent_approach_label.fade_out(0.6)
 
 	# LOCATION TICK BACK
+
+
+	heart_border_ui.show()
+	opponent_heart_holder.show()
+
 
 	# FADE IN LOCATION
 	locations_wheel.show()
@@ -268,15 +283,40 @@ func bearer_defeated():
 
 	# A NEW BEARER, HEARTS TRANSFER
 	bearer_rank = opponent_rank
-	init_bearer_health(opponent_health)
 	await opponent_heart_holder.transfer_hearts(bearer_heart_holder.position.y)
 
 	opponent_heart_holder.hide()
 	opponent_heart_holder.reset_y()
 	bearer_heart_holder.show()
 
+	# THEIUTHIOEWJGHIORWEJHGTIO#  THEIUTHIOEWJGHIORWEJHGTIO# THEIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#  THEIUTHIOEWJGHIORWEJHGTIO#                  # THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#                            # THHIORWEJHGTIO#                           # THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#                            # THHIORWEJHGTIO#                           # THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#  THEIUTHIOEWJGHIORWEJHGTIO#                 THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#                            # THHIORWEJHGTIO#                           # THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#                            # THHIORWEJHGTIO#                           # THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#  THEIUTHIOEWJGHIORWEJHGTIO#                  # THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUTHIOEWJGHIORWEJHGTIO#  THEIUTHIOEWJGHIORWEJHGTIO# THEIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	
+	init_bearer_health(opponent_health)
+	
 	heart_border_ui.bearer_borders.show()
-	heart_border_ui.opponent_borders.hide()
+	heart_border_ui.fade_out(false)
+	
+	
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT                                                                                             THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT                                                                                             THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT                                   dadadadadadadadadadadadd                                  THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT                                                                                             THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT                                                                                             THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
+	# THEIUT THEIUTHIOEWJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO# THEIUTHIOEWJGHIORWEJHGTIO
 
 	await opponent_approach_label.fade_in(1, "a new bearer claims the sword")
 	await get_tree().create_timer(1).timeout
@@ -301,7 +341,7 @@ func opponent_defeated():
 	# Hide combat stuff
 	target.holo_red.hide() # Holo red will be showing because you have to win on a hit
 	opponent_heart_holder.hide()
-	heart_border_ui.opponent_borders.hide()
+	heart_border_ui.fade_out(false, 0.5)
 	
 	if current_location == 0 and combatants.is_empty():
 		win_sequence()
