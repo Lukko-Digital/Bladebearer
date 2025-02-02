@@ -303,43 +303,42 @@ func opponent_defeated():
 		return
 
 	# SLIDE OUT
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.6).timeout
 	await camera.slide(true)
 
 	# SHOW WIN MESSAGE AFTER BATTLE
 	var win_message = opponent_approach_label.randomize_win_message()
-	await opponent_approach_label.fade_in(1, win_message)
-	await get_tree().create_timer(1).timeout
-	await opponent_approach_label.fade_out(1)
+	await opponent_approach_label.fade_in(0.4, win_message)
+	await get_tree().create_timer(1.1).timeout
+	await opponent_approach_label.fade_out(0.25)
 
   # indicate player walking to new location
 	Global.sfx_player.transition_volume_db("Walking", -25, 1)
 
 	# FADE IN
 	locations_wheel.show()
-	var fade_in_time = 2
+	var fade_in_time = 0.3
 	locations_wheel.fade_in(fade_in_time)
 	location_hearts.fade_in(fade_in_time)
 	await get_tree().create_timer(fade_in_time).timeout
 	
 	## LOCATION PROGRESSION
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	location_hearts.break_heart_at_idx(combatants.size())
 
 	if combatants.is_empty():
 		# Location completed, go next
 		await locations_wheel.advance_location()
 		enter_location(current_location - 1)
-		location_hearts.fade_in(1)
-		await get_tree().create_timer(1).timeout
+		location_hearts.fade_in(0.2)
 
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.2).timeout
 
 	## CLEAR BLOOD
 	sword.clear_blood()
 
 	# FADE OUT LOCATION WHEEL
-	var fade_out_time = 1
+	var fade_out_time = 0.3
 	locations_wheel.fade_out(fade_out_time)
 	location_hearts.fade_out(fade_out_time)
 	await get_tree().create_timer(fade_out_time).timeout
@@ -347,16 +346,16 @@ func opponent_defeated():
 
 	# SHOW OPPONENT APPROACH LABEL
 	var description = opponent_approach_label.randomize_description(combatants.front().name)
-	await opponent_approach_label.fade_in(1, description)
-	await get_tree().create_timer(1).timeout
-	await opponent_approach_label.fade_out(1)
+	await opponent_approach_label.fade_in(0.25, description)
+	await get_tree().create_timer(1.4).timeout
+	await opponent_approach_label.fade_out(0.4)
 
 	# Player has arrived
 	Global.sfx_player.transition_volume_db("Walking", -80.0, 3)
 	
 	# SLIDE IN
 	await camera.slide(false)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.6).timeout
 
 	# Show combat stuff
 	opponent_heart_holder.show()
