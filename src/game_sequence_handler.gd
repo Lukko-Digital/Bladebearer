@@ -342,7 +342,7 @@ func opponent_defeated():
 	locations_wheel.hide()
 
 	# SHOW OPPONENT APPROACH LABEL
-	var description = opponent_approach_label.randomize_description(opponent_rank.name)
+	var description = opponent_approach_label.randomize_description(combatants.front().name)
 	await opponent_approach_label.fade_in(1, description)
 	await get_tree().create_timer(1).timeout
 	await opponent_approach_label.fade_out(1)
