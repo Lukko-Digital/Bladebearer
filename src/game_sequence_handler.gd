@@ -99,7 +99,7 @@ func _ready() -> void:
 	init_bearer_health()
 	enter_location(6)
 	locations_wheel.set_location(6)
-	enter_combat.call_deferred(true)
+	enter_combat.call_deferred(play_tutorial)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
