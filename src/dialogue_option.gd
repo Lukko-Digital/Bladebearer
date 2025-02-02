@@ -35,18 +35,12 @@ var original_position: Vector3
 
 var target_menu_label_transparency: Color = Color(1, 1, 1, 0)
 
-var original_vol_db: float = -10
-var target_vol_db: float
 const VOLUME_INCREMENT_DB: float = 2
 
 func _ready():
 	original_position = position
 	target_scale = Vector3.ONE
 	dialogue_handler.menu_label.transparency = 1.0
-	target_vol_db = original_vol_db
-
-	var main_index = AudioServer.get_bus_index("Master")
-	AudioServer.set_bus_volume_db(main_index, original_vol_db)
 
 # WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! WELCO(ME TO THE DANGER ZONE ! 
 # JOSH MAEK SURE TO ADD ANY NEW MODELS TWICE IN BOTH THES E FUCKEARS !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!
@@ -94,18 +88,20 @@ func select():
 
 func menu_option(opt: String):
 	target_scale = Vector3.ONE * 1.6
+	var main_index = AudioServer.get_bus_index("Master")
+	var volume = AudioServer.get_bus_volume_db(main_index)
 	if opt == "play":
 		dialogue_handler.option_selected.emit()
 		dialogue_handler.menu_label.hide() # TO NEVEAR BE SEEN AGAIN!!! (UNTIL MAYBE ONE DAY)
 	elif opt == "volume_up":
-		target_vol_db = -5
+		volume += 2
 		Global.sfx_player.play("Stick_Break")
 	elif opt == "volume_down":
-		target_vol_db = -15
+		volume -= 2
 		Global.sfx_player.play("Stick_Break")
 
-	var main_index = AudioServer.get_bus_index("Master")
-	AudioServer.set_bus_volume_db(main_index, target_vol_db)
+	volume = clamp(volume, -16, 6)
+	AudioServer.set_bus_volume_db(main_index, volume)
 
 
 func set_text(text: String):
