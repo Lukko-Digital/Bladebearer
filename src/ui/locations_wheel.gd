@@ -92,10 +92,10 @@ func advance_location(regress: bool = false):
 	var tween_time = 0.7
 	animating = true
 
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.2).timeout
 
-	location_hearts.fade_out(0.5)
-	await get_tree().create_timer(0.5).timeout
+	location_hearts.fade_out(0.4)
+	await get_tree().create_timer(0.2).timeout
 
 	var heart_space_tween_close = create_tween()
 	heart_space_tween_close.tween_property(self, "heart_space", 0, tween_time).set_trans(Tween.TRANS_CUBIC)

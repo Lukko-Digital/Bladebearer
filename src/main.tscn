@@ -1170,13 +1170,13 @@ tracks/5/keys = {
 "times": PackedFloat32Array(2.7, 4.3, 4.5, 6.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": ["but what are you doing?", 2, 0.2],
+"args": ["i don't understand...", 2, 0.2],
 "method": &"show_text_sequence"
 }, {
 "args": [2, 0.2],
 "method": &"end_text_sequence"
 }, {
-"args": ["what is happening?", 2, 0.2],
+"args": ["what have you done?", 2, 0.2],
 "method": &"show_text_sequence"
 }, {
 "args": [2, 0.6],

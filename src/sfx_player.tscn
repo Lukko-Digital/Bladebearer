@@ -198,22 +198,22 @@ bus = &"Grunts/Pains"
 
 [node name="Swing_Grunt_1" type="AudioStreamPlayer" parent="Swing_Grunt_Group_Opp"]
 stream = ExtResource("11_obehm")
-volume_db = -12.174
+volume_db = -2.174
 bus = &"Swing_Grunt_Op"
 
 [node name="Swing_Grunt_2" type="AudioStreamPlayer" parent="Swing_Grunt_Group_Opp"]
 stream = ExtResource("25_4rxne")
-volume_db = -32.154
+volume_db = -22.154
 bus = &"Swing_Grunt_Op"
 
 [node name="Swing_Grunt_3" type="AudioStreamPlayer" parent="Swing_Grunt_Group_Opp"]
 stream = ExtResource("26_an7rb")
-volume_db = -26.879
+volume_db = -21.401
 bus = &"Swing_Grunt_Op"
 
 [node name="Swing_Grunt_4" type="AudioStreamPlayer" parent="Swing_Grunt_Group_Opp"]
 stream = ExtResource("27_0mmqd")
-volume_db = -34.147
+volume_db = -24.147
 bus = &"Swing_Grunt_Op"
 
 [node name="Sword_Hit_Group" type="Node" parent="."]
