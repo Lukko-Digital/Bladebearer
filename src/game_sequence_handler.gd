@@ -70,7 +70,14 @@ var swinging = false
 var bearer_health: int
 var opponent_health: int
 
-var shift_taught = false
+enum ShiftTutorial {NOSHIFT, SHIFT, DONE}
+
+## NOSHIFT: play a normal preset no shift attack
+## 		^ there's a chance that someone dies to this attack, in which case we
+##		  need to set `shift_tutorial_state` back to NOSHIFT 
+## SHIFT: play the shift version of the previous attack
+## DONE: the tutorial has been completed
+var shift_tutorial_state = ShiftTutorial.NOSHIFT
 
 # Called when the node enters the scene tree for the first time. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 func _ready() -> void:
@@ -513,17 +520,26 @@ func block_sequence(first_block: bool = false):
 		await swing_arm.swing_animation_player.animation_finished
 		resume_snow()
 		tutorial_label.hide()
-	elif opponent_rank == FOOTSOLDIER and not shift_taught:
-		pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(135, 0, 45))
-		sword.lock_input()
-		await freeze_snow()
-		sword.unlock_input()
-		tutorial_label.shift()
-		swing_arm.play_animation("block", 999) # this value does need to be a finite number
-		await swing_arm.swing_animation_player.animation_finished
-		resume_snow()
-		tutorial_label.hide()
-		shift_taught = true
+	elif opponent_rank == FOOTSOLDIER and shift_tutorial_state < 2:
+		match shift_tutorial_state:
+			ShiftTutorial.NOSHIFT:
+				pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(45, 0, 45))
+				swing_arm.play_animation("block", opponent_rank.time_to_react)
+				target.play_animation("Blink", opponent_rank.time_to_react)
+				await swing_arm.swing_animation_player.animation_finished
+				shift_tutorial_state = ShiftTutorial.SHIFT
+			ShiftTutorial.SHIFT:
+				pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(135, 0, 45))
+				sword.lock_input()
+				target.target_animation_player.stop()
+				await freeze_snow()
+				sword.unlock_input()
+				tutorial_label.shift()
+				swing_arm.play_animation("block", 999) # this value does need to be a finite number
+				await swing_arm.swing_animation_player.animation_finished
+				resume_snow()
+				tutorial_label.hide()
+				shift_tutorial_state = ShiftTutorial.DONE
 	else:
 		pre_sequence(opponent_rank.name, Action.BLOCK)
 		swing_arm.play_animation("block", opponent_rank.time_to_react)
