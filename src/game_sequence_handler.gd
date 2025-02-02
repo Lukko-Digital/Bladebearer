@@ -465,7 +465,8 @@ func swing_sequence(first_swing: bool = false):
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
 		pre_sequence(bearer_rank.name, Action.SWING, Vector3(-45, 0, 45))
-		sword.lock_input()
+		sword.lock_input(Vector3(0, 0, 0))
+		target.target_animation_player.stop()
 		await freeze_snow()
 		sword.unlock_input()
 		tutorial_label.attack()
@@ -512,7 +513,8 @@ func block_sequence(first_block: bool = false):
 	if first_block:
 		# Only used on the first ever block of the game
 		pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(-45, 0, -45))
-		sword.lock_input()
+		sword.lock_input(Vector3(0, 0, 0))
+		target.target_animation_player.stop()
 		await freeze_snow()
 		sword.unlock_input()
 		tutorial_label.block()
@@ -530,7 +532,7 @@ func block_sequence(first_block: bool = false):
 				shift_tutorial_state = ShiftTutorial.SHIFT
 			ShiftTutorial.SHIFT:
 				pre_sequence(opponent_rank.name, Action.BLOCK, Vector3(135, 0, 45))
-				sword.lock_input()
+				sword.lock_input(Vector3(0, 0, 0))
 				target.target_animation_player.stop()
 				await freeze_snow()
 				sword.unlock_input()
