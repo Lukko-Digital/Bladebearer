@@ -96,13 +96,12 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 ## -------------------------- BY RANK --------------------------
 
 func footsoldier() -> Vector3:
-	if last_action == GameSequenceHandler.Action.SWING:
-		# START OF NEW BLOCK SEQUENCE
-		return randomize_rotation(ShiftState.RANDOM)
-	if rotation_uses_shift(target_rot):
-		return randomize_rotation(ShiftState.ALWAYS)
-	else:
+	if not flip_previous:
+		flip_previous = true
 		return randomize_rotation(ShiftState.NEVER)
+	else:
+		flip_previous = false
+		return apply_shift(target_rot)
 
 
 func knight() -> Vector3:
