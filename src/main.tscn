@@ -1889,7 +1889,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0.305882)
 
-[node name="Label" type="Label" parent="GameSequenceHandler/PauseScreen"]
+[node name="Paused" type="Label" parent="GameSequenceHandler/PauseScreen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1904,6 +1904,24 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("7_d73xt")
 theme_override_font_sizes/font_size = 40
 text = "paused"
+horizontal_alignment = 1
+
+[node name="ButtonsToPress" type="Label" parent="GameSequenceHandler/PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.5
+offset_top = 82.5
+offset_right = 66.5
+offset_bottom = 131.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_d73xt")
+theme_override_font_sizes/font_size = 12
+text = "tab to unpause"
+horizontal_alignment = 1
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
