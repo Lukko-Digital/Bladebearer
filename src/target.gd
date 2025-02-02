@@ -96,7 +96,7 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 ## -------------------------- BY RANK --------------------------
 
 func footsoldier() -> Vector3:
-	if not flip_previous:
+	if not flip_previous or last_action == GameSequenceHandler.Action.SWING: # <-- if new block sequence
 		flip_previous = true
 		return randomize_rotation(ShiftState.NEVER)
 	else:
@@ -105,41 +105,16 @@ func footsoldier() -> Vector3:
 
 
 func knight() -> Vector3:
-	if last_action == GameSequenceHandler.Action.SWING:
-		# START OF NEW BLOCK SEQUENCE
+	if not flip_previous or last_action == GameSequenceHandler.Action.SWING: # <-- if new block sequence
+		flip_previous = true
 		return randomize_rotation(ShiftState.RANDOM)
-
-	var change_map = {
-		45: [0],
-		0: [-45, 45],
-		-45: [0],
-		135: [-180],
-		-180: [-135, 135],
-		-135: [-180]
-	}
-
-	var new_vec = Vector3.ZERO
-	while not is_valid_new_rotation(new_vec):
-		# Change one feature from previous block
-		match randi() % 3:
-			0:
-				# Change left-right
-				new_vec =  Vector3(
-					target_rot.x,
-					0,
-					change_map[int(target_rot.z)].pick_random()
-				)
-			1:
-				# Change forward-backward
-				new_vec =  Vector3(
-					change_map[int(target_rot.x)].pick_random(),
-					0,
-					target_rot.z
-				)
-			2:
-				# Change shift
-				new_vec =  apply_shift(target_rot)
-	return new_vec
+	else:
+		flip_previous = false
+		return Vector3(
+			wrapf(target_rot.x - 180, -180, 180),
+			0,
+			-target_rot.z
+		)
 
 ## -------------------------- HELPERS --------------------------
 
