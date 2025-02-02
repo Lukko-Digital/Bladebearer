@@ -36,15 +36,6 @@ func _ready():
 	sword_model.hide()
 	stick_model.show()
 
-func transform_to_sword():
-	sword_model.show()
-	stick_model.hide()
-	transform_effect.restart()
-	sword_animator.play("transform")
-	handling_inputs = false
-	await get_tree().create_timer(1.5).timeout
-	handling_inputs = true
-
 func _process(delta: float) -> void:
 	handle_rotation(delta)
 	handle_check_rotation()
@@ -54,6 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("space"):
 		game_sequence_handler.lock_swing()
 
+## ------------------------ ROTATION ------------------------
 
 func handle_rotation(delta: float):
 	if !handling_inputs:
@@ -90,6 +82,8 @@ func lock_input(set_target_rotation: Vector3 = Vector3.INF):
 func unlock_input():
 	input_locked = false
 
+## ------------------------ VISUALS ------------------------
+
 ## Handling adding blood to sword on impact
 func add_blood():
 
@@ -120,3 +114,12 @@ func clear_blood():
 	for blood in blood_array:
 		blood.visible = false
 		blood.transparency = 0
+
+func transform_to_sword():
+	sword_model.show()
+	stick_model.hide()
+	transform_effect.restart()
+	sword_animator.play("transform")
+	handling_inputs = false
+	await get_tree().create_timer(1.5).timeout
+	handling_inputs = true
