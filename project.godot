@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://assets/lukko-splash.png"
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://custom_bus_layout.tres"
+
 [autoload]
 
 Global="*res://src/autoload/global.gd"

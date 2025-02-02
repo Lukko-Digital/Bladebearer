@@ -7,7 +7,13 @@ const music_on_db: float = -5
 
 @export var music_players: Array[AudioStreamPlayer]
 
+const HEARABLE_HZ: float = 20000
+const HIT_HZ: float = 500
+var lowpass_hz: float
+
 func _ready() -> void:
+	lowpass_hz = HEARABLE_HZ
+
 	Global.sfx_player = self
 	
 	for player in music_players:
@@ -21,11 +27,19 @@ func _ready() -> void:
 	play("Walking")
 	transition_volume_db("PreIntroAmbience", -80, 0)
 
+func _process(delta):
+
+	AudioServer.get_bus_effect(1,0).set_cutoff(lowpass_hz)
+	lowpass_hz = lerp(lowpass_hz, HEARABLE_HZ, delta/3)
+	
 ## [audio_player_name] must exactly match the name of a child
 ## [AudioStreamPlayer] or [AudioStreamPlayer3D] node.
 func play(audio_player_name: String):
 	get_node(audio_player_name).stop()
 	get_node(audio_player_name).play()
+
+func get_hit():
+	lowpass_hz = HIT_HZ
 
 func play_random(audio_parent_name: String, delay: float = 0.0):
 	await get_tree().create_timer(delay).timeout

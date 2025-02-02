@@ -45,13 +45,16 @@ music_players = [NodePath("Music_Calm"), NodePath("Music_BassOnly"), NodePath("M
 
 [node name="Music_Calm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3phsl")
+bus = &"Music"
 
 [node name="Music_BassOnly" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_j68kw")
+bus = &"Music"
 
 [node name="Music_Fight" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_6npx3")
 volume_db = -5.0
+bus = &"Music"
 
 [node name="Stick_Break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_12ndr")
@@ -60,7 +63,6 @@ max_polyphony = 5
 
 [node name="Nature_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rt8ug")
-autoplay = true
 
 [node name="Battle_Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7panh")
@@ -153,10 +155,6 @@ volume_db = -31.942
 bus = &"Getting_Hit_Opp"
 
 [node name="Getting_Hit_Group" type="Node" parent="."]
-
-[node name="Human_Getting_Hit" type="AudioStreamPlayer" parent="Getting_Hit_Group"]
-stream = ExtResource("10_bl1kt")
-bus = &"Getting_Hit"
 
 [node name="Human_Getting_Hit_2" type="AudioStreamPlayer" parent="Getting_Hit_Group"]
 stream = ExtResource("21_ujaq3")

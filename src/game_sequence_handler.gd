@@ -543,7 +543,9 @@ func block_sequence(first_block: bool = false):
 		# Global.sfx_player.play("Test")
 	else:
 		# Failed block
-		camera.shake(0.1, 6)
+		camera.shake(0.2, 25)
+		Global.sfx_player.get_hit()
+		Global.sfx_player.play("Sword_Hit_Person")
 		sword.screen_color_animation.play("red_flash")
 		Global.sfx_player.play_random("Getting_Hit_Group")
 		bearer_loses_health()
