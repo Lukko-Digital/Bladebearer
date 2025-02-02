@@ -7,14 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
-[ext_resource type="Material" uid="uid://b20y23qkf0iqq" path="res://assets/materials/blood2.tres" id="7_egatl"]
+[ext_resource type="Material" path="res://assets/materials/blood2.tres" id="7_egatl"]
 [ext_resource type="Environment" uid="uid://cos2fdybsuq2b" path="res://assets/environments/main.tres" id="7_knhja"]
 [ext_resource type="Script" path="res://src/light_container.gd" id="7_pcbq2"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
-[ext_resource type="Material" uid="uid://d124pgcl5e2vo" path="res://assets/materials/blood3.tres" id="8_rtvup"]
+[ext_resource type="Material" path="res://assets/materials/blood3.tres" id="8_rtvup"]
 [ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
-[ext_resource type="Material" uid="uid://bnao16ur46h5s" path="res://assets/materials/blood4.tres" id="9_k71lx"]
+[ext_resource type="Material" path="res://assets/materials/blood4.tres" id="9_k71lx"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 [ext_resource type="PackedScene" uid="uid://dp1fkp3wyiu7k" path="res://src/ui/locations_wheel.tscn" id="12_or6h2"]
 [ext_resource type="AudioStream" uid="uid://bplrxdq1vcurf" path="res://assets/intro_sounds/intro_start.wav" id="13_fudk4"]
@@ -1930,6 +1930,11 @@ theme_override_fonts/font = ExtResource("7_d73xt")
 theme_override_font_sizes/font_size = 12
 text = "tab to unpause"
 horizontal_alignment = 1
+
+[node name="CoyoteTimer" type="Timer" parent="GameSequenceHandler"]
+unique_name_in_owner = true
+editor_description = "Timer to give the player a brief grace period where they can't lock the wrong rotation on a swing"
+one_shot = true
 
 [node name="SfxPlayer" parent="." instance=ExtResource("10_gaf0o")]
 
