@@ -59,8 +59,8 @@ func handle_rotation(delta: float):
 		target_rotation *= 45
 		if Input.is_action_pressed("shift"):
 			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
-	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * delta), -PI, PI)
-	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * delta), -PI, PI)
+	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
+	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
 
 
 ## Check if sword is just placed into correct rotation
