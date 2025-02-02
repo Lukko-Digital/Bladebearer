@@ -85,5 +85,5 @@ bus/10/name = &"Sword Hit"
 bus/10/solo = false
 bus/10/mute = false
 bus/10/bypass_fx = false
-bus/10/volume_db = 4.43349
+bus/10/volume_db = -0.723771
 bus/10/send = &"SFX"
