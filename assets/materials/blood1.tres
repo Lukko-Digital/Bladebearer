@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dmiw0hwrco32w"]
+
+[ext_resource type="Texture2D" uid="uid://bcowh6o8mgym4" path="res://assets/models/Sword_Blood_Base.png" id="1_wck0f"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_wck0f")
