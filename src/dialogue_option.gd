@@ -18,7 +18,7 @@ var dialogue_handler: DialogueHandler
 @onready var start: Node3D = %Start
 
 const MAX_VOLUME = 6
-const MIN_VOLUME = -16
+const MIN_VOLUME = -32
 const VOLUME_INCREMENT_DB = 2
 
 const ROTATION_LERP_SPEED = 0.07
