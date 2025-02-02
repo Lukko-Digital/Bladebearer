@@ -53,6 +53,7 @@ var bearer_health: int
 var opponent_health: int
 
 
+var array_of_times: Array[float] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$WinCount.modulate = Color(Color.WHITE, 0)
@@ -60,13 +61,21 @@ func _ready() -> void:
 	# bearer_rank = PEASANT
 	# init_bearer_health()
 	# enter_location("Rear Guard")
+	await get_tree().create_timer(1).timeout
 	enter_combat.call_deferred()
+	
 
 
 func enter_combat():
-	for i in range(30):
+	for i in range(15):
 		block_sequence()
 		await sequence_finished
+	var total_time = 0
+	for value in array_of_times:
+		total_time += value
+	print(total_time/15)
+	sword.hide()
+	await get_tree().create_timer(1).timeout
 	get_tree().quit()
 
 	# init_opponent()
@@ -301,6 +310,8 @@ func swing_sequence():
 	post_sequence()
 
 
+
+
 func block_sequence():
 	target.blue()
 	pre_sequence()
@@ -312,7 +323,8 @@ func block_sequence():
 		# Successful block
 		Global.sfx_player.play("Sword_Hit")
 		camera.shake(0.2, 15)
-		print(Time.get_ticks_msec() - start_time)
+		# print(Time.get_ticks_msec() - start_time)
+		array_of_times.append(Time.get_ticks_msec() - start_time)
 		# Global.sfx_player.play("Test")
 	else:
 		# Failed block

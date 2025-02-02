@@ -1,7 +1,7 @@
 extends Node3D
 class_name Sword
 
-const ROTATION_LERP_SPEED = 10
+const ROTATION_LERP_SPEED = 50
 ## Threshold for determining correct sword angle. In degrees.
 const CORRECT_ROTATION_THRESHOLD = 2
 
