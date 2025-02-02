@@ -172,8 +172,8 @@ func init_bearer_health(starting_health: int = -1):
 	if starting_health == -1:
 		starting_health = bearer_rank.health
 
-	bearer_health = bearer_rank.health
-	bearer_heart_holder.set_hearts(bearer_health, starting_health)
+	bearer_health = starting_health
+	bearer_heart_holder.set_hearts(bearer_rank.health, starting_health)
 	heart_border_ui.set_bearer_border(bearer_rank)
 
 
