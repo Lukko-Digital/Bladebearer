@@ -11,7 +11,7 @@ const CORRECT_ROTATION_THRESHOLD = 2
 
 @onready var screen_color_animation: AnimationPlayer = %ScreenColorAnimation
 
-@onready var transform_effect : GPUParticles3D = %TransformEffect
+@onready var transform_effect: GPUParticles3D = %TransformEffect
 
 @export var blood_array: Array[MeshInstance3D]
 
@@ -57,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func handle_rotation(delta: float):
 	if !handling_inputs:
-		target_rotation = Vector3(0,0,0)
+		target_rotation = Vector3(0, 0, 0)
 	else:
 		# Handles WASD and Shift
 		target_rotation = Vector3()
@@ -82,7 +82,9 @@ func is_correct_rotation(to: Node3D = target):
 	var zdiff = angle_difference(rotation.z, deg_to_rad(to.target_rot.z))
 	return (abs(xdiff) + abs(zdiff)) < deg_to_rad(CORRECT_ROTATION_THRESHOLD)
 
-func lock_input():
+func lock_input(set_target_rotation: Vector3 = Vector3.INF):
+	if set_target_rotation != Vector3.INF:
+		target_rotation = set_target_rotation
 	input_locked = true
 
 func unlock_input():

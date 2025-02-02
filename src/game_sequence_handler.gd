@@ -208,6 +208,7 @@ func bearer_defeated():
 	heart_border_ui.bearer_borders.hide()
 
 	# DROP ANIMATION
+	sword.lock_input(Vector3.ZERO)
 	ground.show()
 	bearer_death_animator.play("drop")
 	await bearer_death_animator.animation_finished
@@ -254,6 +255,7 @@ func bearer_defeated():
 
 	# CLEAR BLOOD
 	sword.clear_blood()
+	sword.unlock_input()
 
 	# A NEW BEARER, HEARTS TRANSFER
 	bearer_rank = opponent_rank
