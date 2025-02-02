@@ -101,31 +101,33 @@ func menu() -> void:
 func wheel_sequence():
 
 	show_text_sequence("a war wages on in the distance", 2)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(2.5).timeout
 	end_text_sequence(2)
 	await get_tree().create_timer(0.6).timeout
 
-	Global.sfx_player.play("Heart_Crush")
-	locations_wheel.show()
+	Global.sfx_player.play("Heart_Heal")
+	await get_tree().create_timer(0.13).timeout
 	locations_wheel.spindown_spawn(0, 0)
-	await get_tree().create_timer(2.5).timeout
+	locations_wheel.show()
+	await get_tree().create_timer(2).timeout
 
 	await locations_wheel.initial_spindown(0, 0)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.3).timeout
 	
-	show_text_sequence("you must get closer", 3)
-	await get_tree().create_timer(3).timeout
-	end_text_sequence(3, 0.4)
-	await get_tree().create_timer(0.4).timeout
+	# show_text_sequence("you must get closer", 3)
+	# await get_tree().create_timer(2).timeout
+	# end_text_sequence(3, 0.4)
+	# await get_tree().create_timer(0.4).timeout
 	show_text_sequence("reach the king", 3)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(2).timeout
 	end_text_sequence(3, 0.4)
 	await get_tree().create_timer(0.4).timeout
 	show_text_sequence("use whomever you must", 3)
-	await get_tree().create_timer(3).timeout
-	end_text_sequence(3, 0.8)
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(2.3).timeout
+
+	Global.sfx_player.play("Heart_Crush")
 	
+	end_text_sequence(3, 0)
 	locations_wheel.hide()
 	locations_wheel.teleport_to_default_pos()
 	pass
@@ -139,7 +141,6 @@ func intro() -> void:
 
 	await wheel_sequence()
 	
-	Global.sfx_player.play("Stick_Break")
 	light_animation_player.play("Chest Open")
 	await get_tree().create_timer(14.5).timeout ## OPENING CUTSCENE LENGTH
 
