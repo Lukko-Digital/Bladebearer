@@ -33,6 +33,8 @@ var input_locked = false
 var handling_inputs: bool = true
 var lerp_speed_multiplier: float = 1.0
 
+
+
 func _ready():
 	sword_model.hide()
 	stick_model.show()
@@ -107,17 +109,17 @@ func add_blood():
 
 func clear_blood():
 
-	var fade_duration: float = 1
+	var fade_duration: float = 1.5
 
 	for blood in blood_array:
 		var tween_fade = create_tween()
-		tween_fade.tween_property(blood, "transparency", 1, fade_duration)
+		tween_fade.tween_property(blood.material_override, "albedo_color", Color(1,1,1,0), fade_duration)
 
 	await get_tree().create_timer(fade_duration).timeout
 	
 	for blood in blood_array:
 		blood.visible = false
-		blood.transparency = 0
+		blood.material_override.albedo_color = Color(1,1,1,1)
 
 func transform_to_sword():
 	sword_model.show()
@@ -127,3 +129,7 @@ func transform_to_sword():
 	handling_inputs = false
 	await get_tree().create_timer(1.5).timeout
 	handling_inputs = true
+
+func transform_to_sword_dev():
+	sword_model.show()
+	stick_model.hide()

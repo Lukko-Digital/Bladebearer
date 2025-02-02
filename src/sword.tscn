@@ -1,9 +1,56 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctoxk5ywvn75r"]
+[gd_scene load_steps=22 format=4 uid="uid://ctoxk5ywvn75r"]
 
 [ext_resource type="Script" path="res://src/sword.gd" id="1_a5gxo"]
 [ext_resource type="PackedScene" uid="uid://b54kilyopkprm" path="res://assets/models/Sword.glb" id="3_mq21s"]
 [ext_resource type="PackedScene" uid="uid://bwt5h2gm6ccag" path="res://assets/models/Stick.glb" id="3_uc5po"]
+[ext_resource type="Material" uid="uid://dmiw0hwrco32w" path="res://assets/materials/blood1.tres" id="3_uvt5g"]
+[ext_resource type="Material" uid="uid://b20y23qkf0iqq" path="res://assets/materials/blood2.tres" id="4_jda46"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="5_7ok2n"]
+[ext_resource type="Material" uid="uid://d124pgcl5e2vo" path="res://assets/materials/blood3.tres" id="5_8768i"]
+[ext_resource type="Material" uid="uid://bnao16ur46h5s" path="res://assets/materials/blood4.tres" id="6_4qim6"]
+[ext_resource type="Texture2D" uid="uid://b33tiordletyb" path="res://assets/models/Sword_Blood_Base_6.png" id="7_mqubf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqite"]
+resource_name = "Material.017"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("7_mqubf")
+roughness = 0.322857
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l8yvh"]
+_surfaces = [{
+"aabb": AABB(-0.304823, -1.49029, -0.138416, 0.609257, 4.42879, 0.275568),
+"format": 34896613377,
+"index_count": 258,
+"index_data": PackedByteArray("AwAeAAsAAwAWAB4AAgAHAAYAAgADAAcABQAbAAgABQAaABsABAABAAAABAAFAAEAFAADAAIAFAAWAAMAHAAPACEAHAAJAA8ACwAfAA0ACwAeAB8ACQANAA8ACQALAA0ADgAhAA8AFQAKAB0AFQABAAoAHQASACAAHQAKABIACgAQABIACgAIABAADAAjAA4ADAARACMADAAPAA0ADAAOAA8AIwASABAAIwARABIADAANAB8AIwAQACIAEQAgABIAAQAIAAoAAQAFAAgACAAiABAACAAbACIABwALAAkABwADAAsAGQAJABwAGQAHAAkAJAAuACkAJAAnAC4AFgATABUAFgAUABMAIgAcACEAIgAbABwAFQAeABYAFQAdAB4AIAAMAB8AIAARAAwAIQAjACIAIQAOACMAHQAfAB4AHQAgAB8AGwAZABwAGwAaABkAAAAVABMAAAABABUAGgAvABkAGgAoAC8AJgAqAC0AJgAlACoAKwAXACwAKwAYABcAJAAmACcAJAAlACYABwAXAAYAFwAtACwAFwAmAC0ALwAHABkAJwAvAC4AFwAnACYAJwAHAC8AFwAHACcALgAoACkALgAvACgAKgAsAC0AKgArACwAKwAEABgABQAoABoAKAAkACkAJQArACoABQAkACgAJQAEACsABQAlACQABAAlAAUA"),
+"lods": [0.0833925, PackedByteArray("AwAeAAsAAwAWAB4AFAAWAAMAFAADAAIAAgADAAcABwADAAsABwALAAkAAgAHAAYABwAXAAYAFwAHACYAJgAHABkAGQAHAAkAGQAJABwABQAbAAgABQAaABsABQAkABoABAAkAAUAJAAEABgABAAFAAEAAQAFAAgAAQAIAAoABAABAAAAAAABABUAAAAVABMAFQABAAoAFQAKAB0AHQAKABIACgAQABIACgAIABAACAAiABAACAAbACIAHQASACAAIAASABAAIAAQACIAIQAgACIAIQAPAB8AIAAhAB8AHAAPACEAHAAJAA8ACQALAA8ACwAfAA8ACwAeAB8AFgATABUAFgAUABMAFQAeABYAFQAdAB4AIgAcACEAIgAbABwAHQAfAB4AHQAgAB8AGwAZABwAGwAaABkAGgAmABkAJAAXACYAGgAkACYAJAAYABcA")],
+"name": "Material.017",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("2nYAABYMAAB7duTZAAAAANp2AAAU9QAAdnbm2f//AABOiQAAFgwAAPeI4dnxAAAATokAABT1AADziOPZOv8AAKqIEN3YBAAApogS3UL7AADGdhPd7wMAAMF2Fd37+wAA4X7//wyHAAAjf7D/c4wAAEeB//8MhwAABYGw/3OMAAAFgbD/t3QAAOF+//8eegAAI3+w/7d0AAApAAAAOncAACkAAADwiQAAAADS2Yp2AAAAANLZT4oAAP//AADwiQAA//8AADp3AAD8/8TZCooAAPz/xNkgdwAAgvvz3BJ3AACC+/PcF4oAAHMEAt1ydgAAcwQC3VOKAABkfLD/+okAAGR8sP8wdwAAxIOw//qJAADEg7D/MHcAAEeB//8eegAAANwfqmpTAAC73RqpIlUAAF7aa6k4rQAAgNhzqveuAAD9/9qwJXcAANv8qq8JdAAAmPt0p8lyAAD9/4+mJncAAP3/lqYEigAAl/t/pyGOAADb/Oev84wAAP3/CbEFigAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ohor8"]
+resource_name = "Sword_Cube_014"
+_surfaces = [{
+"aabb": AABB(-0.304823, -1.49029, -0.138416, 0.609257, 4.42879, 0.275568),
+"attribute_data": PackedByteArray("cRH7/3ER+/9xEccocRHHKHERxyhxEccodzr7/3c6+/93OscodzrHKHc6xyh3Osco8xP7//MT+//zE8co8xPHKPMTxyjzE8co9Tf7//U3+//1N8co9TfHKPU3xyj1N8co0BN1JekToCXQE3UlABSgJSsvzhT/N6AlKy/OFOg3oCVkEaAlexGgJWQRoCVkEaAlbjC6Em06oCVuMLoShDqgJaUP/AGlD/wBpQ/8AaUP/AGCD40BDxKGAYIPjQEPEoYB2A/QAdkP0AHYD9AB2Q/QAcYPdwHtEb0Bxg93Ae0RvQFBEKUCTxC6AkEQpQJPELoC4Q9jAuEPYwLhD2MC4Q9jAg0QvgINEL4CDRC+Ag0QvgIDAPv/DE37/+VL+//lS/v/AwDHKAMAxygHTZMoDE3HKOVLxyjlS8co5UvHKOVLxyiHJvv/hyb7/2El+/9hJfv/hybHKIcmxyiHJscohybHKGElxyhhJccoZSWTKGElxyh4JCEj0SSgJXgkISP1JWwldCWHIhgnoCV0JYciGCegJZMAoCWTAKAlOzikAnhMbCUnOMoDVUugJSc4ygNVS6AlIw/dAT8SKgEjD90BPxIqAaYPvwKmD78Cpg+/AlMSAwAaEIQBshESAhoQhAGyERIChBBlArUQrAKEEGUCtRCsAhkQSgIZEEoCGRBKAhkQSgIXIONXFyDjVxcg41dYIORYWCDkWFgg5FgDLJVYAyyVWAMslVhJLJFXSSyRV0kskVdhJTZRYSU2UWElNlHrJGNS6yRjUuskY1K7JIBauySAWrskgFphJWJbYSViW2ElYluHJltbhyZbW4cmW1srJ3ZaKyd2Wisndlr8JiZS/CYmUvwmJlKHJghRhyYIUYcmCFENEL4Chyb7/4cm+/9hJfv/hybHKGElxyhhJccoIw/dAaYPvwKmD78CGhCEAYQQZQIXIONXFyDjVwMslVgDLJVY"),
+"format": 34896613399,
+"index_count": 258,
+"index_data": PackedByteArray("CwBpACcACwBNAGkABgAUABIABgAIABQAEQBdABsAEQBZAF0ADAACAAAADAAOAAIARgAKAAcARgBMAAoAYAA3AHUAYAAeADcAJgBtAC8AJgBoAG0AHAAtADUAHAAkAC0AMgB0ADYASQAjAGUASQAFACMAZABDAHEAZAAiAEMAIAA5AEEAIAAYADkAKQB9ADEAKQA9AH0AKAA0ACwAKAAwADQAfABAADgAfAA8AEAAKgAuAGwAfgA6AHgAPgBwAEIAAwAZACEAAwAPABkAGgB5ADsAGgBcAHkAFQAlAB0AFQAJACUAVQAfAGEAVQAXAB8AgQCfAJAAgQCKAJ8ATwBFAEsATwBHAEUAewBiAHcAewBeAGIASgBrAE4ASgBnAGsAcgArAG4AcgA/ACsAdgB/AHoAdgAzAH8AZgBvAGoAZgBzAG8AXwBWAGMAXwBaAFYAAQBIAEQAAQAEAEgAWwCjAFcAWwCOAKMAhgCSAJsAhgCDAJIAlwBRAJoAlwBTAFEAggCIAIsAggCFAIgAFgBQABMAUACcAJgAUACHAJwAoQAWAFQAiQChAJ4AUACJAIcAiQAWAKEAUAAWAIkAoACNAJEAoACiAI0AlACZAJ0AlACWAJkAlQANAFIAEACMAFgAjACAAI8AhACVAJMAEACAAIwAhAANAJUAEACEAIAADQCEABAA"),
+"lods": [0.0833925, PackedByteArray("CABpACcACABMAGkARgBMAAgARgAIAAYABgAIABQAFAAIACUAFAAlAB0ABgAUABIAFABQABIAUAAUAIcAhwAUAFQAVAAUAB8AVAAfAGEADgBdABsADgBYAF0ADgCAAFgADACAAA4AgAAMAFIADAAOAAIAAgAOABkAAgAZACEADAACAAAAAAACAEgAAABIAEQASAACACAASAAgAGQAZAAgAKQAIAA5AKQAIAAYADkAGAB5ADkAGABcAHkAZABAAHAAcACkADgAcAA4AK8ArgCtAK8ArgA0AGwArACuAKsAYAA1AHUAYAAcADUAHAAkADUAJABtADUAJABoAG0ATgBFAEsATgBHAEUASgBrAE4ASgBnAGsAewBiAHcAewBeAGIAZgBvAGoAZgBzAG8AXwBWAGMAXwBaAFYAqQCyAKgAsQClALIAqgCwALMAsACnAKYA")],
+"material": SubResource("StandardMaterial3D_tqite"),
+"name": "Material.017",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 180,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_l8yvh")
 
 [sub_resource type="Animation" id="Animation_nbqwa"]
 length = 0.001
@@ -186,12 +233,36 @@ scale_min = 7.05
 scale_max = 9.7
 scale_curve = SubResource("CurveTexture_pm2sp")
 
-[node name="Sword" type="Node3D"]
+[node name="Sword" type="Node3D" node_paths=PackedStringArray("blood_array")]
 script = ExtResource("1_a5gxo")
+blood_array = [NodePath("Sword/Blood1_001"), NodePath("Sword/Blood1_002"), NodePath("Sword/Blood1_003"), NodePath("Sword/Blood1_004")]
 
 [node name="Sword" parent="." instance=ExtResource("3_mq21s")]
 unique_name_in_owner = true
 transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
+
+[node name="Blade" parent="Sword" index="0"]
+visible = false
+
+[node name="Blood1" parent="Sword" index="2"]
+visible = false
+surface_material_override/0 = ExtResource("4_jda46")
+
+[node name="Blood1_001" parent="Sword" index="4"]
+material_override = ExtResource("3_uvt5g")
+
+[node name="Blood1_002" parent="Sword" index="5"]
+material_override = ExtResource("5_8768i")
+
+[node name="Blood1_003" parent="Sword" index="6"]
+material_override = ExtResource("6_4qim6")
+
+[node name="Blood1_004" type="MeshInstance3D" parent="Sword"]
+transform = Transform3D(1.09275, 0, 0, 0, 1, 0, 0, 0, 1.09275, 0, 0.0343581, 0)
+material_override = ExtResource("6_4qim6")
+mesh = SubResource("ArrayMesh_ohor8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_jda46")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -225,3 +296,5 @@ explosiveness = 0.99
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6jcd6")
 draw_pass_1 = ExtResource("5_7ok2n")
+
+[editable path="Sword"]

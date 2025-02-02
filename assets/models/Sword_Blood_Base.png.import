@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcowh6o8mgym4"
-path.s3tc="res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.s3tc.ctex"
+path="res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "7b9aa52be20b3f880d1054a42e5c4642"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/Sword_Blood_Base.png"
-dest_files=["res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sword_Blood_Base.png-7c686c9708516f954f1a91fd1960c877.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -30,7 +29,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
