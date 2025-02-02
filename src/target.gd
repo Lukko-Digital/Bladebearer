@@ -65,12 +65,39 @@ func move(
 	last_action = action
 	swing_arm.move_to_swing_position(target_rot)
 
+## -------------------------- MAIN RANDOMIZE --------------------------
+
+func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
+	var new_rot: Vector3
+	while true:
+		# Loop until rotation satisfies `is_valid_new_rotation`.
+		new_rot = Vector3(
+			randi_range(-1, 1),
+			0,
+			rand_sign() # Require left or right rotation
+		)
+		new_rot *= 45
+
+		match shift_state:
+			ShiftState.ALWAYS:
+				new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+			ShiftState.RANDOM:
+				if randi() % 2:
+					new_rot.x = wrapf(180 - new_rot.x, -180, 180)
+			ShiftState.NEVER:
+				pass
+
+		if is_valid_new_rotation(new_rot):
+			return new_rot
+	return Vector3.ZERO
+
+## -------------------------- BY RANK --------------------------
 
 func footsoldier() -> Vector3:
 	if last_action == GameSequenceHandler.Action.SWING:
 		# START OF NEW BLOCK SEQUENCE
 		return randomize_rotation(ShiftState.RANDOM)
-	if abs(target_rot.x) > 45:
+	if rotation_uses_shift(target_rot):
 		return randomize_rotation(ShiftState.ALWAYS)
 	else:
 		return randomize_rotation(ShiftState.NEVER)
@@ -117,36 +144,16 @@ func knight() -> Vector3:
 				)
 	return new_vec
 
+## -------------------------- HELPERS --------------------------
 
-func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
-	var new_rot: Vector3
-	while true:
-		# Loop until rotation satisfies `is_valid_new_rotation`.
-		new_rot = Vector3(
-			randi_range(-1, 1),
-			0,
-			rand_sign() # Require left or right rotation
-		)
-		new_rot *= 45
-
-		match shift_state:
-			ShiftState.ALWAYS:
-				new_rot.x = wrapf(180 - new_rot.x, -180, 180)
-			ShiftState.RANDOM:
-				if randi() % 2:
-					new_rot.x = wrapf(180 - new_rot.x, -180, 180)
-			ShiftState.NEVER:
-				pass
-
-		if is_valid_new_rotation(new_rot):
-			return new_rot
-	return Vector3.ZERO
-	
 # Randomly returns -1 or 1
 func rand_sign() -> int:
 	if randi() % 2:
 		return -1
 	return 1
+
+func rotation_uses_shift(rot: Vector3) -> bool:
+	return abs(rot.x) > 45
 
 # Invalid rotations:
 # 	- (0,0,0)
@@ -158,6 +165,8 @@ func is_valid_new_rotation(new_rot: Vector3) -> bool:
 		new_rot != Vector3.ZERO and
 		(target_rot.z != 0 or new_rot.z != 0)
 	)
+
+## -------------------------- VISUALS --------------------------
 
 func red():
 	holo_red.show()
