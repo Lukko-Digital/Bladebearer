@@ -17,6 +17,9 @@ var dialogue_handler: DialogueHandler
 @onready var volume_down: Node3D = %VolumeDown
 @onready var start: Node3D = %Start
 
+const MAX_VOLUME = 6
+const MIN_VOLUME = -16
+const VOLUME_INCREMENT_DB = 2
 
 const ROTATION_LERP_SPEED = 0.07
 const SELECTION_OFFSET = 0.1
@@ -34,8 +37,6 @@ var shaking: bool = false
 var original_position: Vector3
 
 var target_menu_label_transparency: Color = Color(1, 1, 1, 0)
-
-const VOLUME_INCREMENT_DB: float = 2
 
 func _ready():
 	original_position = position
@@ -94,13 +95,13 @@ func menu_option(opt: String):
 		dialogue_handler.option_selected.emit()
 		dialogue_handler.menu_label.hide() # TO NEVEAR BE SEEN AGAIN!!! (UNTIL MAYBE ONE DAY)
 	elif opt == "volume_up":
-		volume += 2
+		volume += VOLUME_INCREMENT_DB
 		Global.sfx_player.play("Stick_Break")
 	elif opt == "volume_down":
-		volume -= 2
+		volume -= VOLUME_INCREMENT_DB
 		Global.sfx_player.play("Stick_Break")
 
-	volume = clamp(volume, -16, 6)
+	volume = clamp(volume, MIN_VOLUME, MAX_VOLUME)
 	AudioServer.set_bus_volume_db(main_index, volume)
 
 
