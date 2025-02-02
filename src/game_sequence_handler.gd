@@ -27,6 +27,7 @@ class_name GameSequenceHandler
 @onready var tutorial_label: CombatTutorialLabel = %CombatTutorialLabel
 @onready var bearer_death_animator: AnimationPlayer = %BearerDeathAnimator
 @onready var ground: Node3D = %Ground
+@onready var coyote_timer: Timer = %CoyoteTimer
 
 enum Action {SWING, BLOCK}
 
@@ -38,6 +39,9 @@ var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 4, 1.3, CombatantRank.RankName.FOOT
 var KNIGHT = CombatantRank.new(3, 6, 8, 3, 1.6, CombatantRank.RankName.KNIGHT)
 var KINGSGUARD = CombatantRank.new(4, 8, 12, 2, 2, CombatantRank.RankName.KINGSGUARD)
 var KING = CombatantRank.new(0, 0, 1, 999, 0, CombatantRank.RankName.KING)
+
+## Brief grace period where the player can't lock the wrong rotation on a swing
+const COYOTE_TIMING = 0.5
 
 # P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
 # Space separated list of combatants in the location
@@ -89,7 +93,7 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 	# CHANGE TO FALSE WHEN TESTING AND YOU WANT TO GO STRAIGHT TO COMBAT
-	var play_tutorial = true
+	var play_tutorial = false
 
 	if play_tutorial:
 		await dialogue_handler.tutorial()
@@ -448,14 +452,21 @@ func win_seq2(killed: bool):
 	# -------------------- JOSH CREDITS GO HERE RIGHT HERE PLACE THEM HERE --------------------
 	credits.show()
 	cam_anim.play("new_animation")
+
+
 ## ----------------- PLAYER INPUT -----------------
 
 
 func lock_swing():
 	if not swing_arm.is_animation_playing("windup"):
 		return
+	var is_correct_alignment = sword.target_rotation == target.target_rot
+	# If coyote timer is going and player tries to lock the wrong swing, do nothing
+	if not coyote_timer.is_stopped() and not is_correct_alignment:
+		return
+	coyote_timer.stop() # I don't think this is necessary but just in case
 	# Check if inputs are correct
-	swinging = sword.target_rotation == target.target_rot
+	swinging = is_correct_alignment
 	# Skip windup animation
 	swing_arm.swing_animation_player.advance(INF)
 
@@ -507,6 +518,7 @@ func swing_sequence(first_swing: bool = false):
 
 	if first_swing:
 		# Only used on the first ever swing of the game, plays swing tutorial
+		coyote_timer.start(INF) # Make it so you can't miss the first swing
 		pre_sequence(bearer_rank.name, Action.SWING, Vector3(-45, 0, 45))
 		sword.lock_input(Vector3(0, 0, 0))
 		target.target_animation_player.stop()
@@ -518,6 +530,7 @@ func swing_sequence(first_swing: bool = false):
 		resume_snow()
 		tutorial_label.hide()
 	else:
+		coyote_timer.start(COYOTE_TIMING)
 		pre_sequence(bearer_rank.name, Action.SWING)
 		swing_arm.play_animation("windup", opponent_rank.time_to_react)
 		target.play_animation("Blink", opponent_rank.time_to_react)
