@@ -36,5 +36,5 @@ func block():
 func shift():
 	position.x = x_pos
 	attack_tutorial = false
-	text = "shift to invert"
+	text = "shift to lower"
 	fade_in()
