@@ -89,7 +89,7 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 	# CHANGE TO FALSE WHEN TESTING AND YOU WANT TO GO STRAIGHT TO COMBAT
-	var play_tutorial = false
+	var play_tutorial = true
 
 	if play_tutorial:
 		await dialogue_handler.tutorial()
