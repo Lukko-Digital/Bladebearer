@@ -125,7 +125,7 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 		new_rot = Vector3(
 			randi_range(-1, 1),
 			0,
-			randi_range(-1, 1)
+			rand_sign() # Require left or right rotation
 		)
 		new_rot *= 45
 
@@ -142,6 +142,11 @@ func randomize_rotation(shift_state: ShiftState = ShiftState.RANDOM) -> Vector3:
 			return new_rot
 	return Vector3.ZERO
 	
+# Randomly returns -1 or 1
+func rand_sign() -> int:
+	if randi() % 2:
+		return -1
+	return 1
 
 # Invalid rotations:
 # 	- (0,0,0)
