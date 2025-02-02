@@ -87,6 +87,8 @@ func _ready() -> void:
 
 		Global.sfx_player.transition_volume_db("PreIntroAmbience", -16, 0.5)
 		await dialogue_handler.intro()
+	else:
+		sword.transform_to_sword_dev()
 
 	bearer_rank = PEASANT
 	init_bearer_health()
@@ -215,6 +217,9 @@ func bearer_defeated():
 	sword.lock_input(Vector3.ZERO)
 	ground.show()
 	bearer_death_animator.play("drop")
+	await get_tree().create_timer(1.5).timeout
+	Global.sfx_player.play("Sword_Into_Snow")
+	camera.shake(0.2, 15)
 	await bearer_death_animator.animation_finished
 	# camera.shake(0.2, 15)
 
