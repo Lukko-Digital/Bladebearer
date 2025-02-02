@@ -32,11 +32,12 @@ enum Action {SWING, BLOCK}
 
 signal sequence_finished
 
-var PEASANT = CombatantRank.new(1, 2, 2, 4, CombatantRank.RankName.PEASANT)
-var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 4, CombatantRank.RankName.FOOTSOLDIER)
-var KNIGHT = CombatantRank.new(3, 6, 8, 3, CombatantRank.RankName.KNIGHT)
-var KINGSGUARD = CombatantRank.new(4, 8, 12, 2, CombatantRank.RankName.KINGSGUARD)
-var KING = CombatantRank.new(0, 0, 1, 999, CombatantRank.RankName.KING)
+# (player attacks, opponent attacks, opponent health, time to react, sword speed multipler, name)
+var PEASANT = CombatantRank.new(1, 2, 2, 4, 1, CombatantRank.RankName.PEASANT)
+var FOOTSOLDIER = CombatantRank.new(2, 4, 4, 4, 1.3, CombatantRank.RankName.FOOTSOLDIER)
+var KNIGHT = CombatantRank.new(3, 6, 8, 3, 1.6, CombatantRank.RankName.KNIGHT)
+var KINGSGUARD = CombatantRank.new(4, 8, 12, 2, 2, CombatantRank.RankName.KINGSGUARD)
+var KING = CombatantRank.new(0, 0, 1, 999, 0, CombatantRank.RankName.KING)
 
 # P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
 # Space separated list of combatants in the location
@@ -58,7 +59,10 @@ var current_location: int
 
 # Variables that control top level of combat
 var action_queue: Array[Action]
-var bearer_rank: CombatantRank
+var bearer_rank: CombatantRank:
+	set(value):
+		bearer_rank = value
+		sword.set_lerp_speed_multiplier(bearer_rank.sword_speed_multiplier)
 var opponent_rank: CombatantRank
 
 # Variables that actively change during combat

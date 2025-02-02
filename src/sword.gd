@@ -31,6 +31,7 @@ var blocking = false
 var input_locked = false
 
 var handling_inputs: bool = true
+var lerp_speed_multiplier: float = 1.0
 
 func _ready():
 	sword_model.hide()
@@ -81,6 +82,9 @@ func lock_input(set_target_rotation: Vector3 = Vector3.INF):
 
 func unlock_input():
 	input_locked = false
+
+func set_lerp_speed_multiplier(speed: float):
+	lerp_speed_multiplier = speed
 
 ## ------------------------ VISUALS ------------------------
 
