@@ -48,9 +48,9 @@ const COYOTE_TIMING = 0.5
 # If multiple letters are adjacent, it is a randomized selection between them
 const locations = {
 	"Royal Tent": "W",
-	"Kingsguard": "G G",
-	"Central Field": "FK FK K",
-	"Rear Guard": "F K",
+	"Kingsguard": "K G",
+	"Central Field": "F K G",
+	"Rear Guard": "K F",
 	"Straggler's Field": "F F",
 	"Outer Woods": "P F",
 	"Deep Woods": "P",
