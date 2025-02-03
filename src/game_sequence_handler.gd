@@ -42,6 +42,8 @@ var KING = CombatantRank.new(0, 0, 1, 999, 0, CombatantRank.RankName.KING)
 
 ## Brief grace period where the player can't lock the wrong rotation on a swing
 const COYOTE_TIMING = 0.5
+## Speed multiplier increases by this much each location advance
+const SPEED_MULTIPLIER_INCREASE = 0.16
 
 # P = Peasant, F = Footsoldier, K = Knight, G = Kingsguard, W = King (for Win and 王)
 # Space separated list of combatants in the location
@@ -63,10 +65,10 @@ var current_location: int
 
 # Variables that control top level of combat
 var action_queue: Array[Action]
-var bearer_rank: CombatantRank:
-	set(value):
-		bearer_rank = value
-		sword.set_lerp_speed_multiplier(bearer_rank.sword_speed_multiplier)
+var bearer_rank: CombatantRank
+	# set(value):
+	# 	bearer_rank = value
+	# 	sword.set_lerp_speed_multiplier(bearer_rank.sword_speed_multiplier)
 var opponent_rank: CombatantRank
 
 # Variables that actively change during combat
@@ -108,8 +110,9 @@ func _ready() -> void:
 
 	bearer_rank = PEASANT
 	init_bearer_health()
-	enter_location(6)
-	locations_wheel.set_location(6)
+	var starting_location = 0
+	enter_location(starting_location)
+	locations_wheel.set_location(starting_location)
 	enter_combat.call_deferred(play_tutorial)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -162,6 +165,7 @@ func enter_combat(first_combat: bool = false):
 
 
 func enter_location(location_idx: int):
+	sword.set_lerp_speed_multiplier(1 + SPEED_MULTIPLIER_INCREASE * (7 - location_idx))
 	current_location = location_idx
 	create_combatant_list(locations[locations.keys()[location_idx]])
 	needed_wins = combatants.size()
