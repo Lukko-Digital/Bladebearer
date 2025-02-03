@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cc5bbradac3vl"]
+[gd_scene load_steps=16 format=3 uid="uid://cc5bbradac3vl"]
 
 [ext_resource type="Script" path="res://src/dialogue_option.gd" id="1_6khdy"]
 [ext_resource type="PackedScene" uid="uid://bvgn8m4a5hhy8" path="res://assets/models/Pointer.glb" id="2_fataf"]
@@ -23,6 +23,11 @@ albedo_color = Color(1, 1, 1, 0.188235)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkfs1"]
 transparency = 1
 albedo_color = Color(1, 0.540667, 0.47, 0.27451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlp0g"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.76
 
 [node name="DialogueOption" type="Node3D"]
 script = ExtResource("1_6khdy")
@@ -142,6 +147,9 @@ autoplay = "Pulse"
 unique_name_in_owner = true
 transform = Transform3D(0.0951817, 0, 0, 0, 0.0678068, -0.0667966, 0, 0.0667966, 0.0678068, 0, 0.534555, 0.304163)
 
+[node name="TutPointer" parent="Start" index="0"]
+material_override = SubResource("StandardMaterial3D_vlp0g")
+
 [connection signal="animation_finished" from="Pointer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
 [editable path="Pointer"]
@@ -150,3 +158,4 @@ transform = Transform3D(0.0951817, 0, 0, 0, 0.0678068, -0.0667966, 0, 0.0667966,
 [editable path="SwordHoloRed"]
 [editable path="VolumeDown"]
 [editable path="VolumeUp"]
+[editable path="Start"]
