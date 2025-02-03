@@ -50,8 +50,8 @@ const SPEED_MULTIPLIER_INCREASE = 0.16
 # If multiple letters are adjacent, it is a randomized selection between them
 const locations = {
 	"Royal Tent": "W",
-	"Kingsguard": "K G",
-	"Central Field": "F K G",
+	"Kingsguard": "G G",
+	"Central Field": "K F K",
 	"Rear Guard": "K F",
 	"Straggler's Field": "F F",
 	"Outer Woods": "P F",
