@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=64 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
@@ -7,14 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
-[ext_resource type="Material" path="res://assets/materials/blood2.tres" id="7_egatl"]
+[ext_resource type="Material" uid="uid://b20y23qkf0iqq" path="res://assets/materials/blood2.tres" id="7_egatl"]
 [ext_resource type="Environment" uid="uid://cos2fdybsuq2b" path="res://assets/environments/main.tres" id="7_knhja"]
 [ext_resource type="Script" path="res://src/light_container.gd" id="7_pcbq2"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
-[ext_resource type="Material" path="res://assets/materials/blood3.tres" id="8_rtvup"]
+[ext_resource type="Material" uid="uid://d124pgcl5e2vo" path="res://assets/materials/blood3.tres" id="8_rtvup"]
 [ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
-[ext_resource type="Material" path="res://assets/materials/blood4.tres" id="9_k71lx"]
+[ext_resource type="Material" uid="uid://bnao16ur46h5s" path="res://assets/materials/blood4.tres" id="9_k71lx"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
 [ext_resource type="PackedScene" uid="uid://dp1fkp3wyiu7k" path="res://src/ui/locations_wheel.tscn" id="12_or6h2"]
 [ext_resource type="AudioStream" uid="uid://bplrxdq1vcurf" path="res://assets/intro_sounds/intro_start.wav" id="13_fudk4"]
@@ -36,7 +36,8 @@
 [ext_resource type="AudioStream" uid="uid://klgxq1sjw2bu" path="res://assets/sfx/Sword_Out_Of_Snow.wav" id="28_ucmue"]
 [ext_resource type="Script" path="res://src/pause_screen.gd" id="29_5yhh5"]
 [ext_resource type="PackedScene" uid="uid://q3pnwf6oxxrd" path="res://assets/models/Ground.glb" id="29_k3d4t"]
-[ext_resource type="Texture2D" uid="uid://b5y4g0pnyxeo8" path="res://assets/ui/logo_dither.png" id="33_5yt52"]
+[ext_resource type="Texture2D" uid="uid://by8li68yrrnq4" path="res://assets/title_clean.png" id="38_tukuj"]
+[ext_resource type="Texture2D" uid="uid://dmuv51vbwh0d0" path="res://assets/recarved.png" id="39_sak8w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
 transparency = 1
@@ -93,6 +94,66 @@ tracks/2/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GameSequenceHandler/../TitleScreen:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GameSequenceHandler/../TitleScreen/Title:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.152)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%GameSequenceHandler/../TitleScreen/Recarved:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.37, -1.117)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GameSequenceHandler/../TitleScreen/Recarved:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%GameSequenceHandler/../TitleScreen/Title:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_g124h"]
 resource_name = "come_forward"
@@ -137,7 +198,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_lg101"]
 resource_name = "transform"
-length = 3.0
+length = 5.0
+step = 0.1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -168,8 +230,82 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.1, -2.1, 0.0160091, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -2.1, 0.0160091, 0.25, 0),
 "times": PackedFloat32Array(0, 3)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GameSequenceHandler/../TitleScreen:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GameSequenceHandler/../TitleScreen/Title:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6, 2),
+"transitions": PackedFloat32Array(0.297302, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%GameSequenceHandler/../TitleScreen/Recarved:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.4, 3.9),
+"transitions": PackedFloat32Array(0.060371, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GameSequenceHandler/../TitleScreen/Title:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6, 2),
+"transitions": PackedFloat32Array(0.307786, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.692), Vector3(0, 0, -0.152)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%GameSequenceHandler/../TitleScreen/Recarved:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.4, 3.9),
+"transitions": PackedFloat32Array(0.060371, 1),
+"update": 0,
+"values": [Vector3(0, 1.045, 3.078), Vector3(0, -1.37, -1.117)]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%GameSequenceHandler/../SfxPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Woosh"],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0016m"]
@@ -578,6 +714,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%GameSequenceHandler/../TitleScreen:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_uom86"]
 resource_name = "Main"
@@ -847,6 +995,18 @@ tracks/15/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("%GameSequenceHandler/../TitleScreen:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_b0qqm"]
@@ -1577,40 +1737,17 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_0n5g4"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GameSequenceHandler/MainCamera:position:y")
+tracks/0/path = NodePath("Credits:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GameSequenceHandler/Snow:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GameSequenceHandler/Snow:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_j6by2"]
@@ -1624,9 +1761,9 @@ tracks/0/path = NodePath("GameSequenceHandler/MainCamera:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 5.7, 0, 0, -0.25, 0, 5.7, 0, -3.6, -1.015, 0, 0.25, 0, -3.6, -1.015, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 2.36126, 20, 25.0005, 25.0026)
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 5.7, 0, 0, -0.25, 0, 5.7, 0, -3.5, -8.465, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.36126, 20)
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1665,6 +1802,18 @@ tracks/3/keys = {
 "args": [false, false, false, 0.0, 0.0],
 "method": &"pick_music"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Credits:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_111ko"]
@@ -1712,7 +1861,6 @@ spare_king = NodePath("../OutroAudio/SpareKing")
 [node name="Snow" type="GPUParticles3D" parent="GameSequenceHandler"]
 unique_name_in_owner = true
 transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0, 0, 0)
-visible = false
 amount = 27410
 lifetime = 4.35
 trail_lifetime = 1.75
@@ -1722,7 +1870,6 @@ draw_pass_1 = SubResource("SphereMesh_2egrx")
 [node name="MainCamera" parent="GameSequenceHandler" node_paths=PackedStringArray("heart_ui") instance=ExtResource("2_vb7ep")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.005)
-h_offset = 0.7
 heart_ui = NodePath("../HeartUI")
 
 [node name="SwordGroup" type="Node3D" parent="GameSequenceHandler"]
@@ -1789,7 +1936,7 @@ font_size = 26
 outline_size = 0
 
 [node name="MenuLabel" type="Label3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler"]
-transform = Transform3D(0.667017, 0, 0, 0, 0.667017, 0, 0, 0, 0.667017, 0, -0.579735, 0.2)
+transform = Transform3D(0.667017, 0, 0, 0, 0.667017, 0, 0, 0, 0.667017, 0, -0.92, 0.2)
 text = "press space to select"
 font = ExtResource("7_d73xt")
 font_size = 35
@@ -1988,24 +2135,25 @@ transform = Transform3D(1.09, 0, 0, 0, 1.09, 0, 0, 0, 1.09, 0, 0, 0)
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="Credits"]
-transform = Transform3D(1.19, 0, 0, 0, 1.19, 0, 0, 0, 1.19, 0, 0, -0.989135)
-texture = ExtResource("33_5yt52")
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, -0.04, 0, -0.989)
+texture_filter = 0
+texture = ExtResource("38_tukuj")
 
 [node name="Label3D" type="Label3D" parent="Credits"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.36113, -0.320568)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.01204, -0.989)
 text = "a game by lukko digital"
 font = ExtResource("7_d73xt")
 outline_size = 0
 
 [node name="Label3D3" type="Label3D" parent="Credits"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.65559, -0.320568)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3065, -0.989)
 text = "thanks for
 playing!"
 font = ExtResource("7_d73xt")
 outline_size = 0
 
 [node name="Label3D2" type="Label3D" parent="Credits"]
-transform = Transform3D(0.775, 0, 0, 0, 0.775, 0, 0, 0, 0.775, 0, -1.61826, -0.554679)
+transform = Transform3D(0.775, 0, 0, 0, 0.775, 0, 0, 0, 0.775, 0, -2.26917, -0.989)
 text = "ian lum
 
 joshua ehrlich
@@ -2018,11 +2166,30 @@ jonathan han"
 font = ExtResource("7_d73xt")
 vertical_alignment = 0
 
+[node name="Recarved" type="Sprite3D" parent="Credits"]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, -0.905, -0.989)
+modulate = Color(1, 1, 1, 0.419608)
+texture_filter = 0
+texture = ExtResource("39_sak8w")
+
 [node name="FinalCameraAnimator" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_111ko")
 }
+
+[node name="TitleScreen" type="Node3D" parent="."]
+visible = false
+
+[node name="Title" type="Sprite3D" parent="TitleScreen"]
+transform = Transform3D(0.199617, 0, 0, 0, 0.199617, 0, 0, 0, 0.199617, 0, 0, -0.152)
+texture_filter = 0
+texture = ExtResource("38_tukuj")
+
+[node name="Recarved" type="Sprite3D" parent="TitleScreen"]
+transform = Transform3D(0.37, 0, 0, 0, 0.37, 0, 0, 0, 0.37, 0, -1.37, -1.117)
+texture_filter = 0
+texture = ExtResource("39_sak8w")
 
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]
