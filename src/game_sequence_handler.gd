@@ -110,7 +110,7 @@ func _ready() -> void:
 
 	bearer_rank = PEASANT
 	init_bearer_health()
-	var starting_location = 0
+	var starting_location = 6
 	enter_location(starting_location)
 	locations_wheel.set_location(starting_location)
 	enter_combat.call_deferred(play_tutorial)
