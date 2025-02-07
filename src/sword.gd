@@ -60,7 +60,13 @@ func handle_rotation(delta: float):
 		target_rotation.z = Input.get_axis("right", "left")
 		target_rotation *= 45
 		if Input.is_action_pressed("shift"):
-			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
+			## OLD SHIFT
+			# target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
+			target_rotation = Vector3(
+				wrapf(target_rotation.x - 180, -180, 180),
+				0,
+				-target_rotation.z
+			)
 	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
 	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
 
