@@ -10,9 +10,6 @@ const SCALE_COEF = -0.7
 ## Expect to be an immediate child of DialogueOption
 @onready var option_origin: DialogueOption = get_parent()
 
-@onready var left_stick_x = updown.position.x
-@onready var right_stick_x = leftright.position.x
-
 func _process(_delta: float) -> void:
 	global_rotation = Vector3.ZERO
 	scale = Vector3.ONE * (1 + (global_position - option_origin.global_position).z * SCALE_COEF)
@@ -53,7 +50,5 @@ func two_dir(target_rot: Vector3):
 	if target_rot.z < 0:
 		# point right
 		leftright.flip_h = true
-	else:
-		# point left
-		leftright.position.x = left_stick_x
-		updown.position.x = right_stick_x
+		leftright.position.x *= -1
+		updown.position.x *= -1

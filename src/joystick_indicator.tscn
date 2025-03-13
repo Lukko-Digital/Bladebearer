@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cg4dp221u0lg1"]
 
-[ext_resource type="Script" path="res://src/joystick_indicator.gd" id="1_q66dn"]
+[ext_resource type="Script" uid="uid://cof3gb7b74eek" path="res://src/joystick_indicator.gd" id="1_q66dn"]
 [ext_resource type="Texture2D" uid="uid://b1qpn87j2pd8r" path="res://assets/ui/tutorial/joystick_down.png" id="2_boqef"]
 [ext_resource type="Texture2D" uid="uid://qpq1bvnqowxv" path="res://assets/ui/tutorial/joystick_left.png" id="3_365tt"]
 [ext_resource type="Texture2D" uid="uid://bkknry35a8p5v" path="res://assets/ui/tutorial/joystick_up.png" id="4_42vdg"]
@@ -75,14 +75,14 @@ animation = &"down"
 
 [node name="UpDown" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, -0.161583, 0, 0)
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0.139819, 0, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_qm7t6")
 animation = &"down"
 
 [node name="LeftRight" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0.190754, 0, 0)
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, -0.140753, 0, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_aea32")
 animation = &"left"
