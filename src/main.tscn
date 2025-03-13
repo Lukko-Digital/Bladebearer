@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
-[ext_resource type="Script" path="res://src/game_sequence_handler.gd" id="2_ngyv0"]
+[ext_resource type="Script" uid="uid://edid3h32yekl" path="res://src/game_sequence_handler.gd" id="2_ngyv0"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
 [ext_resource type="SphereMesh" uid="uid://bt4j4vrdbjpcm" path="res://assets/shaders/snow_particle.tres" id="4_c7mps"]
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
@@ -12,10 +12,10 @@
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
 [ext_resource type="Material" uid="uid://b20y23qkf0iqq" path="res://assets/materials/blood2.tres" id="7_egatl"]
 [ext_resource type="Environment" uid="uid://cos2fdybsuq2b" path="res://assets/environments/main.tres" id="7_knhja"]
-[ext_resource type="Script" path="res://src/light_container.gd" id="7_pcbq2"]
+[ext_resource type="Script" uid="uid://dsgp816kbjhxm" path="res://src/light_container.gd" id="7_pcbq2"]
 [ext_resource type="PackedScene" uid="uid://cl6edab4xqatr" path="res://src/ui/both_heart_holders.tscn" id="8_c1nmu"]
 [ext_resource type="Material" uid="uid://d124pgcl5e2vo" path="res://assets/materials/blood3.tres" id="8_rtvup"]
-[ext_resource type="Script" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
+[ext_resource type="Script" uid="uid://722hn5jkvo1q" path="res://src/dialogue_handler.gd" id="9_5pvxm"]
 [ext_resource type="PackedScene" uid="uid://bral7ar8pm8mf" path="res://src/ui/heart_border_ui.tscn" id="9_41gh3"]
 [ext_resource type="Material" uid="uid://bnao16ur46h5s" path="res://assets/materials/blood4.tres" id="9_k71lx"]
 [ext_resource type="PackedScene" uid="uid://bn1h8mr7sagxh" path="res://src/sfx_player.tscn" id="10_gaf0o"]
@@ -26,10 +26,10 @@
 [ext_resource type="AudioStream" uid="uid://dxqkas3vbfxxc" path="res://assets/intro_sounds/intro_ambience.wav" id="16_nwkfw"]
 [ext_resource type="AudioStream" uid="uid://clv1v04fuu4v8" path="res://assets/intro_sounds/intro_spare.wav" id="16_qcn14"]
 [ext_resource type="AudioStream" uid="uid://b84sa6i0hh0xd" path="res://assets/sfx/king_begging_2.wav" id="17_34kjw"]
-[ext_resource type="Script" path="res://src/opponent_approach_label.gd" id="17_rj23p"]
+[ext_resource type="Script" uid="uid://bhurm00ms1h0a" path="res://src/opponent_approach_label.gd" id="17_rj23p"]
 [ext_resource type="Material" uid="uid://blvo34061pfym" path="res://assets/shaders/block.tres" id="17_t3opm"]
 [ext_resource type="SphereMesh" uid="uid://d2veyvl8b24jm" path="res://assets/shaders/block_drawpass.tres" id="18_372qn"]
-[ext_resource type="Script" path="res://src/combat_tutorial_label.gd" id="18_kdgo5"]
+[ext_resource type="Script" uid="uid://mvtu7ikd1a8r" path="res://src/combat_tutorial_label.gd" id="18_kdgo5"]
 [ext_resource type="AudioStream" uid="uid://11rgy1f3qtje" path="res://assets/sfx/king_confusion.wav" id="18_y1ro6"]
 [ext_resource type="AudioStream" uid="uid://qdcije85a7qf" path="res://assets/sfx/Sword_Hit_Person_1.wav" id="19_iqjbk"]
 [ext_resource type="AudioStream" uid="uid://dqyd0j15pm68s" path="res://assets/sfx/execution_1.wav" id="20_l06dm"]
@@ -37,7 +37,7 @@
 [ext_resource type="AudioStream" uid="uid://wyk6131emlv0" path="res://assets/intro_sounds/stick_hit.wav" id="22_355yu"]
 [ext_resource type="AudioStream" uid="uid://qlhlxo35efaj" path="res://assets/sfx/Sword_Into_Snow.wav" id="27_2hpyb"]
 [ext_resource type="AudioStream" uid="uid://klgxq1sjw2bu" path="res://assets/sfx/Sword_Out_Of_Snow.wav" id="28_ucmue"]
-[ext_resource type="Script" path="res://src/pause_screen.gd" id="29_5yhh5"]
+[ext_resource type="Script" uid="uid://woo3ab72wjnm" path="res://src/pause_screen.gd" id="29_5yhh5"]
 [ext_resource type="PackedScene" uid="uid://q3pnwf6oxxrd" path="res://assets/models/Ground.glb" id="29_k3d4t"]
 [ext_resource type="Texture2D" uid="uid://by8li68yrrnq4" path="res://assets/title_clean.png" id="38_tukuj"]
 [ext_resource type="Texture2D" uid="uid://dmuv51vbwh0d0" path="res://assets/recarved.png" id="39_sak8w"]
@@ -50,7 +50,7 @@ resource_name = "Snowy"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aysdu"]
 _data = {
-"Snowy": SubResource("Animation_kxprd")
+&"Snowy": SubResource("Animation_kxprd")
 }
 
 [sub_resource type="Animation" id="Animation_yb54g"]
@@ -304,10 +304,10 @@ tracks/8/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0016m"]
 _data = {
-"RESET": SubResource("Animation_yb54g"),
-"come_forward": SubResource("Animation_g124h"),
-"land_block": SubResource("Animation_a12m2"),
-"transform": SubResource("Animation_lg101")
+&"RESET": SubResource("Animation_yb54g"),
+&"come_forward": SubResource("Animation_g124h"),
+&"land_block": SubResource("Animation_a12m2"),
+&"transform": SubResource("Animation_lg101")
 }
 
 [sub_resource type="Animation" id="Animation_8ka2i"]
@@ -1433,15 +1433,15 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4m25b"]
 _data = {
-"Chest Open": SubResource("Animation_8ka2i"),
-"In The Dark": SubResource("Animation_tts51"),
-"Main": SubResource("Animation_uom86"),
-"RESET": SubResource("Animation_1q5g8"),
-"kill_him": SubResource("Animation_b0qqm"),
-"king_begging": SubResource("Animation_kj0hc"),
-"king_execution": SubResource("Animation_2ejyc"),
-"king_spared": SubResource("Animation_165d8"),
-"spare_him": SubResource("Animation_gj0en")
+&"Chest Open": SubResource("Animation_8ka2i"),
+&"In The Dark": SubResource("Animation_tts51"),
+&"Main": SubResource("Animation_uom86"),
+&"RESET": SubResource("Animation_1q5g8"),
+&"kill_him": SubResource("Animation_b0qqm"),
+&"king_begging": SubResource("Animation_kj0hc"),
+&"king_execution": SubResource("Animation_2ejyc"),
+&"king_spared": SubResource("Animation_165d8"),
+&"spare_him": SubResource("Animation_gj0en")
 }
 
 [sub_resource type="Animation" id="Animation_if6x6"]
@@ -1721,9 +1721,9 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m0s10"]
 _data = {
-"RESET": SubResource("Animation_if6x6"),
-"drop": SubResource("Animation_3b3pg"),
-"pickup": SubResource("Animation_cv4ud")
+&"RESET": SubResource("Animation_if6x6"),
+&"drop": SubResource("Animation_3b3pg"),
+&"pickup": SubResource("Animation_cv4ud")
 }
 
 [sub_resource type="Animation" id="Animation_0n5g4"]
@@ -1809,8 +1809,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_111ko"]
 _data = {
-"RESET": SubResource("Animation_0n5g4"),
-"new_animation": SubResource("Animation_j6by2")
+&"RESET": SubResource("Animation_0n5g4"),
+&"new_animation": SubResource("Animation_j6by2")
 }
 
 [node name="Main" type="Node3D"]
@@ -1858,7 +1858,7 @@ camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
 [node name="EnvironmentAnimator" type="AnimationPlayer" parent="Environment"]
 libraries = {
-"": SubResource("AnimationLibrary_aysdu")
+&"": SubResource("AnimationLibrary_aysdu")
 }
 
 [node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "credits", "king_begging", "kill_king", "spare_king")]
@@ -1919,7 +1919,7 @@ swing_arm = NodePath("../../../SwingArm")
 [node name="SwordAnimator" type="AnimationPlayer" parent="GameSequenceHandler/SwordGroup"]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_0016m")
+&"": SubResource("AnimationLibrary_0016m")
 }
 
 [node name="DialogueHandler" type="Node3D" parent="GameSequenceHandler/SwordGroup" node_paths=PackedStringArray("light_animation_player")]
@@ -2000,7 +2000,7 @@ spot_angle_attenuation = 1.36604e-05
 
 [node name="LightingAnimator" type="AnimationPlayer" parent="GameSequenceHandler"]
 libraries = {
-"": SubResource("AnimationLibrary_4m25b")
+&"": SubResource("AnimationLibrary_4m25b")
 }
 autoplay = "RESET"
 
@@ -2037,7 +2037,7 @@ num_hearts = 4
 [node name="BearerDeathAnimator" type="AnimationPlayer" parent="GameSequenceHandler"]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_m0s10")
+&"": SubResource("AnimationLibrary_m0s10")
 }
 
 [node name="PauseScreen" type="CanvasLayer" parent="GameSequenceHandler"]
@@ -2184,7 +2184,7 @@ texture = ExtResource("39_sak8w")
 [node name="FinalCameraAnimator" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_111ko")
+&"": SubResource("AnimationLibrary_111ko")
 }
 
 [node name="TitleScreen" type="Node3D" parent="."]
