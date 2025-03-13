@@ -1,11 +1,14 @@
-[gd_scene load_steps=64 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=67 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
 [ext_resource type="Script" path="res://src/game_sequence_handler.gd" id="2_ngyv0"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
+[ext_resource type="SphereMesh" uid="uid://bt4j4vrdbjpcm" path="res://assets/shaders/snow_particle.tres" id="4_c7mps"]
 [ext_resource type="PackedScene" uid="uid://xcrmvdctjdpk" path="res://src/swing_arm.tscn" id="5_0705i"]
+[ext_resource type="Material" uid="uid://d27rql3bny0ic" path="res://assets/shaders/rain.tres" id="5_sp7r4"]
 [ext_resource type="Material" uid="uid://c0gn2yap5lfrv" path="res://assets/shaders/snow.tres" id="5_tv00s"]
+[ext_resource type="SphereMesh" uid="uid://eyc5fjahflkh" path="res://assets/shaders/rain_particle.tres" id="6_yqxer"]
 [ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="7_d73xt"]
 [ext_resource type="Material" uid="uid://b20y23qkf0iqq" path="res://assets/materials/blood2.tres" id="7_egatl"]
 [ext_resource type="Environment" uid="uid://cos2fdybsuq2b" path="res://assets/environments/main.tres" id="7_knhja"]
@@ -39,25 +42,16 @@
 [ext_resource type="Texture2D" uid="uid://by8li68yrrnq4" path="res://assets/title_clean.png" id="38_tukuj"]
 [ext_resource type="Texture2D" uid="uid://dmuv51vbwh0d0" path="res://assets/recarved.png" id="39_sak8w"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsayv"]
-transparency = 1
-depth_draw_mode = 1
-albedo_color = Color(1, 1, 1, 0.0941176)
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 3.02
-disable_receive_shadows = true
-proximity_fade_distance = 0.01
-distance_fade_mode = 1
-distance_fade_min_distance = 1.75
-distance_fade_max_distance = 0.0
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
+dof_blur_far_distance = 4.23
 
-[sub_resource type="SphereMesh" id="SphereMesh_2egrx"]
-material = SubResource("StandardMaterial3D_tsayv")
-radius = 0.01
-height = 0.02
-radial_segments = 4
-rings = 1
+[sub_resource type="Animation" id="Animation_kxprd"]
+resource_name = "Snowy"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aysdu"]
+_data = {
+"Snowy": SubResource("Animation_kxprd")
+}
 
 [sub_resource type="Animation" id="Animation_yb54g"]
 length = 0.001
@@ -316,9 +310,6 @@ _data = {
 "transform": SubResource("Animation_lg101")
 }
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
-dof_blur_far_distance = 4.23
-
 [sub_resource type="Animation" id="Animation_8ka2i"]
 resource_name = "Chest Open"
 length = 17.0
@@ -374,7 +365,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Snow:emitting")
+tracks/4/path = NodePath("../Environment/Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -446,7 +437,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%Snow:visible")
+tracks/10/path = NodePath("../Environment/Snow:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -669,7 +660,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Snow:emitting")
+tracks/4/path = NodePath("../Environment/Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -693,7 +684,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("%Snow:visible")
+tracks/6/path = NodePath("../Environment/Snow:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -782,7 +773,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Snow:emitting")
+tracks/4/path = NodePath("../Environment/Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -857,7 +848,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Snow:emitting")
+tracks/4/path = NodePath("../Environment/Snow:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -893,7 +884,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("%Snow:visible")
+tracks/7/path = NodePath("../Environment/Snow:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1193,7 +1184,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Snow:visible")
+tracks/5/path = NodePath("../Environment/Snow:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1363,7 +1354,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("%Snow:visible")
+tracks/7/path = NodePath("../Environment/Snow:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1768,7 +1759,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GameSequenceHandler/Snow:visible")
+tracks/1/path = NodePath("Environment/Snow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1780,7 +1771,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GameSequenceHandler/Snow:emitting")
+tracks/2/path = NodePath("Environment/Snow:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1840,6 +1831,36 @@ shadow_enabled = true
 
 [node name="SwingArm" parent="." instance=ExtResource("5_0705i")]
 
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Snow" type="GPUParticles3D" parent="Environment"]
+unique_name_in_owner = true
+transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0, 0, 0)
+amount = 27410
+lifetime = 4.35
+trail_lifetime = 1.75
+process_material = ExtResource("5_tv00s")
+draw_pass_1 = ExtResource("4_c7mps")
+
+[node name="Rain" type="GPUParticles3D" parent="Environment"]
+unique_name_in_owner = true
+transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0, 3.14326, 0)
+visible = false
+amount = 27410
+lifetime = 1.47
+trail_lifetime = 1.75
+process_material = ExtResource("5_sp7r4")
+draw_pass_1 = ExtResource("6_yqxer")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = ExtResource("7_knhja")
+camera_attributes = SubResource("CameraAttributesPractical_y77hc")
+
+[node name="EnvironmentAnimator" type="AnimationPlayer" parent="Environment"]
+libraries = {
+"": SubResource("AnimationLibrary_aysdu")
+}
+
 [node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "credits", "king_begging", "kill_king", "spare_king")]
 unique_name_in_owner = true
 script = ExtResource("2_ngyv0")
@@ -1857,15 +1878,6 @@ credits = NodePath("../Credits")
 king_begging = NodePath("../OutroAudio/KingBegging")
 kill_king = NodePath("../OutroAudio/KillKing")
 spare_king = NodePath("../OutroAudio/SpareKing")
-
-[node name="Snow" type="GPUParticles3D" parent="GameSequenceHandler"]
-unique_name_in_owner = true
-transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0, 0, 0)
-amount = 27410
-lifetime = 4.35
-trail_lifetime = 1.75
-process_material = ExtResource("5_tv00s")
-draw_pass_1 = SubResource("SphereMesh_2egrx")
 
 [node name="MainCamera" parent="GameSequenceHandler" node_paths=PackedStringArray("heart_ui") instance=ExtResource("2_vb7ep")]
 unique_name_in_owner = true
@@ -1895,6 +1907,7 @@ surface_material_override/0 = ExtResource("9_k71lx")
 
 [node name="Blood1_004" parent="GameSequenceHandler/SwordGroup/Sword/Sword" index="7"]
 visible = false
+surface_material_override/0 = null
 
 [node name="Stick" parent="GameSequenceHandler/SwordGroup/Sword" index="2"]
 visible = false
@@ -1984,10 +1997,6 @@ spot_range = 0.765
 spot_attenuation = 1.25
 spot_angle = 0.0
 spot_angle_attenuation = 1.36604e-05
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="GameSequenceHandler"]
-environment = ExtResource("7_knhja")
-camera_attributes = SubResource("CameraAttributesPractical_y77hc")
 
 [node name="LightingAnimator" type="AnimationPlayer" parent="GameSequenceHandler"]
 libraries = {
