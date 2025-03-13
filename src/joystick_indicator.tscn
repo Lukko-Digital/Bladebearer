@@ -138,7 +138,7 @@ unique_name_in_owner = true
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.125, 0, 0)
 sprite_frames = SubResource("SpriteFrames_qm7t6")
 animation = &"down"
-frame_progress = 0.0908464
+frame_progress = 0.395813
 
 [node name="LeftRight" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true

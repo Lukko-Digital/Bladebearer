@@ -5,6 +5,9 @@ class_name JoystickIndicator
 @onready var updown: AnimatedSprite3D = %UpDown
 @onready var leftright: AnimatedSprite3D = %LeftRight
 
+func _process(_delta: float) -> void:
+	global_rotation = Vector3.ZERO
+
 func play_animation(target_rot: Vector3):
 	print(target_rot)
 	if target_rot.x == 0 or target_rot.z == 0:
