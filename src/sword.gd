@@ -34,7 +34,6 @@ var handling_inputs: bool = true
 var lerp_speed_multiplier: float = 1.0
 
 
-
 func _ready():
 	sword_model.hide()
 	stick_model.show()
@@ -56,8 +55,8 @@ func handle_rotation(delta: float):
 	else:
 		# Handles WASD and Shift
 		target_rotation = Vector3()
-		target_rotation.x = Input.get_axis("forward", "backward")
-		target_rotation.z = Input.get_axis("right", "left")
+		target_rotation.x = round(Input.get_axis("forward", "backward"))
+		target_rotation.z = round(Input.get_axis("right", "left"))
 		target_rotation *= 45
 		if Input.is_action_pressed("shift"):
 			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
@@ -92,12 +91,10 @@ func set_lerp_speed_multiplier(speed: float):
 
 ## Handling adding blood to sword on impact
 func add_blood():
-
 	var keep_going: bool = true
 	var blood_index: int = 0
 
 	while keep_going:
-
 		if !blood_array[blood_index].visible:
 			blood_array[blood_index].visible = true
 			keep_going = false;
@@ -108,18 +105,17 @@ func add_blood():
 				keep_going = false;
 
 func clear_blood():
-
 	var fade_duration: float = 1.5
 
 	for blood in blood_array:
 		var tween_fade = create_tween()
-		tween_fade.tween_property(blood.material_override, "albedo_color", Color(1,1,1,0), fade_duration)
+		tween_fade.tween_property(blood.material_override, "albedo_color", Color(1, 1, 1, 0), fade_duration)
 
 	await get_tree().create_timer(fade_duration).timeout
 	
 	for blood in blood_array:
 		blood.visible = false
-		blood.material_override.albedo_color = Color(1,1,1,1)
+		blood.material_override.albedo_color = Color(1, 1, 1, 1)
 
 func transform_to_sword():
 	sword_model.show()
