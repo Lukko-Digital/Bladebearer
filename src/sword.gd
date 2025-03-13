@@ -1,6 +1,8 @@
 extends Node3D
 class_name Sword
 
+## In degrees
+const ROTATION_ANGLE = 45.0
 const ROTATION_LERP_SPEED = 10
 ## Threshold for determining correct sword angle. In degrees.
 const CORRECT_ROTATION_THRESHOLD = 2
@@ -57,7 +59,7 @@ func handle_rotation(delta: float):
 		target_rotation = Vector3()
 		target_rotation.x = round(Input.get_axis("forward", "backward"))
 		target_rotation.z = round(Input.get_axis("right", "left"))
-		target_rotation *= 45
+		target_rotation *= ROTATION_ANGLE
 		if Input.is_action_pressed("shift"):
 			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
 	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
