@@ -1,0 +1,21 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://d27rql3bny0ic"]
+
+[sub_resource type="Curve" id="Curve_oiwi7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.294118, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_03pvo"]
+curve = SubResource("Curve_oiwi7")
+
+[resource]
+emission_shape = 3
+emission_box_extents = Vector3(3, 3, 3)
+gravity = Vector3(0, -9.08, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_03pvo")
+turbulence_enabled = true
+turbulence_noise_strength = 0.43
+turbulence_noise_scale = 9.01
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.083
