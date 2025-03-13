@@ -51,14 +51,20 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## ------------------------ ROTATION ------------------------
 
+func round_with_threshold(value: float, threshold: float):
+	if abs(value) < threshold:
+		return 0
+	return value * sign(value)
+
 func handle_rotation(delta: float):
 	if !handling_inputs:
 		target_rotation = Vector3(0, 0, 0)
 	else:
 		# Handles WASD and Shift
 		target_rotation = Vector3()
-		target_rotation.x = round(Input.get_axis("forward", "backward"))
-		target_rotation.z = round(Input.get_axis("right", "left"))
+		var THRESHOLD = 0.3
+		target_rotation.x = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
+		target_rotation.z = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
 		target_rotation *= ROTATION_ANGLE
 		if Input.is_action_pressed("shift"):
 			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
