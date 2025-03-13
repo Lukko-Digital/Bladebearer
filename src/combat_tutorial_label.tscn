@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://4xn208sia8ry"]
+
+[ext_resource type="FontFile" uid="uid://jlvsk3howg0g" path="res://assets/fonts/RINGM___.TTF" id="1_0oe8j"]
+[ext_resource type="Script" uid="uid://mvtu7ikd1a8r" path="res://src/combat_tutorial_label.gd" id="1_o303u"]
+[ext_resource type="Texture2D" uid="uid://bxwyf4u8ythch" path="res://assets/sprites/right_trigger.png" id="3_gfp5j"]
+[ext_resource type="Texture2D" uid="uid://de60dmbngda44" path="res://assets/sprites/left_trigger.png" id="3_jc444"]
+
+[node name="CombatTutorialLabel" type="Node3D"]
+script = ExtResource("1_o303u")
+
+[node name="MainLabel" type="Label3D" parent="."]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, 0)
+visible = false
+text = "match to attack"
+font = ExtResource("1_0oe8j")
+outline_size = 0
+autowrap_mode = 3
+width = 400.0
+
+[node name="Swing" type="Node3D" parent="."]
+visible = false
+
+[node name="RightTrigger" type="Sprite3D" parent="Swing"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.2182, 0, 0)
+texture = ExtResource("3_gfp5j")
+
+[node name="Label" type="Label3D" parent="Swing"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0.0818536, 0, 0)
+text = "to swing"
+font = ExtResource("1_0oe8j")
+outline_size = 0
+autowrap_mode = 3
+width = 400.0
+
+[node name="Invert" type="Node3D" parent="."]
+
+[node name="LeftTrigger" type="Sprite3D" parent="Invert"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.2182, 0, 0)
+texture = ExtResource("3_jc444")
+
+[node name="Label" type="Label3D" parent="Invert"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0.0818536, 0, 0)
+text = "to lower"
+font = ExtResource("1_0oe8j")
+outline_size = 0
+autowrap_mode = 3
+width = 400.0

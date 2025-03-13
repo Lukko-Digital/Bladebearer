@@ -1,20 +1,31 @@
-extends Label3D
+extends Node3D
 class_name CombatTutorialLabel
 
-@onready var sword = %Sword
+@onready var sword: Sword = %Sword
+@onready var main_label: Label3D = $MainLabel
+@onready var swing: Node3D = $Swing
+@onready var invert: Node3D = $Invert
 
-var x_pos = position.x
+@onready var x_pos = position.x
 var attack_tutorial: bool = false
 
 func _ready() -> void:
+	print("asdf", x_pos)
 	hide()
 
 func _process(_delta: float) -> void:
 	if attack_tutorial:
 		if sword.is_correct_rotation():
-			text = "space to swing"
+			show_label(swing)
 		else:
-			text = "match to attack"
+			show_label(main_label)
+			main_label.text = "match to attack"
+
+# Show the given node and hide the others
+func show_label(node_to_show: Node3D) -> void:
+	for node in [main_label, swing, invert]:
+		node.hide()
+	node_to_show.show()
 
 func fade_in():
 	show()
@@ -28,19 +39,21 @@ func attack():
 	fade_in()
 
 func block():
-	position.x = -x_pos
+	position.x = - x_pos
 	attack_tutorial = false
-	text = "match to block"
+	show_label(main_label)
+	main_label.text = "match to block"
 	fade_in()
 
 func shift_first_block():
 	position.x = x_pos
 	attack_tutorial = false
-	text = "match to block"
+	show_label(main_label)
+	main_label.text = "match to block"
 	fade_in()
 
 func shift():
 	position.x = x_pos
 	attack_tutorial = false
-	text = "shift to lower"
+	show_label(invert)
 	fade_in()
