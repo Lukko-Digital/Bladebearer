@@ -1,48 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg4dp221u0lg1"]
+[gd_scene load_steps=8 format=3 uid="uid://cg4dp221u0lg1"]
 
 [ext_resource type="Script" path="res://src/joystick_indicator.gd" id="1_q66dn"]
-[ext_resource type="Texture2D" uid="uid://s00aasf1p5mg" path="res://assets/sprites/bh_player_ingame-sheet.png" id="1_tvpad"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wix2o"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 4000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nffeb"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 4500, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_keyxr"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 1000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ool57"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 1500, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ex3og"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 2000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mbjqa"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 2500, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7n5s8"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 3000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0t6pa"]
-atlas = ExtResource("1_tvpad")
-region = Rect2(0, 3500, 500, 500)
+[ext_resource type="Texture2D" uid="uid://b1qpn87j2pd8r" path="res://assets/ui/tutorial/joystick_down.png" id="2_boqef"]
+[ext_resource type="Texture2D" uid="uid://qpq1bvnqowxv" path="res://assets/ui/tutorial/joystick_left.png" id="3_365tt"]
+[ext_resource type="Texture2D" uid="uid://bkknry35a8p5v" path="res://assets/ui/tutorial/joystick_up.png" id="4_42vdg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u00t0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wix2o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nffeb")
+"texture": ExtResource("2_boqef")
 }],
 "loop": true,
 "name": &"down",
@@ -50,16 +17,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_keyxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ool57")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ex3og")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mbjqa")
+"texture": ExtResource("3_365tt")
 }],
 "loop": true,
 "name": &"left",
@@ -67,10 +25,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7n5s8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0t6pa")
+"texture": ExtResource("4_42vdg")
 }],
 "loop": true,
 "name": &"up",
@@ -81,10 +36,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wix2o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nffeb")
+"texture": ExtResource("2_boqef")
 }],
 "loop": true,
 "name": &"down",
@@ -92,10 +44,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7n5s8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0t6pa")
+"texture": ExtResource("4_42vdg")
 }],
 "loop": true,
 "name": &"up",
@@ -106,16 +55,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_keyxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ool57")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ex3og")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mbjqa")
+"texture": ExtResource("3_365tt")
 }],
 "loop": true,
 "name": &"left",
@@ -123,26 +63,27 @@ animations = [{
 }]
 
 [node name="JoystickIndicator" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_q66dn")
 
 [node name="Single" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0, 0)
 visible = false
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_u00t0")
-animation = &"left"
+animation = &"down"
 
 [node name="UpDown" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.125, 0, 0)
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, -0.161583, 0, 0)
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_qm7t6")
 animation = &"down"
-frame_progress = 0.395813
 
 [node name="LeftRight" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.176, 0, 0)
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0.190754, 0, 0)
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_aea32")
 animation = &"left"
 autoplay = "left"
