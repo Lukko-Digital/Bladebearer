@@ -17,7 +17,7 @@ var dialogue_handler: DialogueHandler
 @onready var volume_down: Node3D = %VolumeDown
 @onready var start: Node3D = %Start
 
-@onready var joystick_one_dir: AnimatedSprite3D = %JoystickOneDir
+@onready var joystick_indicator: JoystickIndicator = %JoystickIndicator
 
 const MAX_VOLUME = 6
 const MIN_VOLUME = -32
@@ -55,7 +55,7 @@ func set_model(_model: String):
 	volume_down.hide()
 	sword_holo_red.hide()
 	start.hide()
-	joystick_one_dir.hide()
+	joystick_indicator.hide()
 	if _model == "pointer": pointer.show()
 	if _model == "stick": stick.show()
 	if _model == "sword_holo": sword_holo.show()
@@ -73,14 +73,8 @@ func set_model(_model: String):
 	if _model.begins_with("joy"):
 		# ALWAYS SHOW STICK WITH JOYSTICK
 		stick.show()
-		joystick_one_dir.show()
-		for dir in ["up", "down", "left"]:
-			if _model.ends_with(dir):
-				joystick_one_dir.play(dir)
-				break
-		if _model.ends_with("right"):
-			joystick_one_dir.play("left")
-			joystick_one_dir.flip_h = true
+		joystick_indicator.show()
+		joystick_indicator.play_animation(target_rot)
 # !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!!
 func _process(_delta: float) -> void:
 	if round(rotation_degrees) != target_rot:
@@ -151,7 +145,7 @@ func break_stick(emit_next: bool = true):
 	sword_holo.hide()
 	pointer.hide()
 	label.hide()
-	joystick_one_dir.hide()
+	joystick_indicator.hide()
 	stick_block_effect.restart()
 	Global.sfx_player.play("Stick_Break")
 	dialogue_handler.camera.shake(0.1, 10)

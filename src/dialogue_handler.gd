@@ -47,36 +47,36 @@ func _process(_delta: float) -> void:
 			
 func tutorial() -> void:
 	await option_sequence([
-		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0), "model": "joy_left"},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0), "model": "joy"},
 		],
 		"stick", true)
 	
 	await option_sequence([
-		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45), "model": "joy_right"}
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45), "model": "joy"}
 		],
 		"stick", true)
 	
 	await option_sequence([
-		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0), "model": "joy_down"},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0), "model": "joy"},
 		],
 		"stick", true)
 
 	await option_sequence([
-		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1.5, 0), "model": "joy_up"},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1.5, 0), "model": "joy"},
 		],
 		"stick", true)
 	
 	breaks_left = 2
 	await option_sequence([
-		{"text": "a s", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45)},
-		{"text": "w d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45)}
+		{"text": "", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, 45), "model": "joy"},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, -45), "model": "joy"}
 		],
 		"stick", true)
 
 	breaks_left = 2
 	await option_sequence([
-		{"text": "a w", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45)},
-		{"text": "s d", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45)}
+		{"text": "", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(-45, 0, 45), "model": "joy"},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(false), "rotation": Vector3(45, 0, -45), "model": "joy"}
 		],
 		"stick", true)
 	
@@ -214,6 +214,7 @@ func option_sequence(options: Array[Dictionary], model: String = "pointer", _tut
 			option_instance.set_effect(option["effect"])
 		if option.has("match_effect"):
 				option_instance.set_match_effect(option["match_effect"])
+		# SET ROTATION NEEEDS TO BE CALLED BEFORE SET MODEL
 		option_instance.set_target_rot(option["rotation"])
 		if option.has("model"):
 				option_instance.set_model(option["model"])

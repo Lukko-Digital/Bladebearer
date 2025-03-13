@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cc5bbradac3vl"]
+[gd_scene load_steps=17 format=3 uid="uid://cc5bbradac3vl"]
 
 [ext_resource type="Script" path="res://src/dialogue_option.gd" id="1_6khdy"]
 [ext_resource type="PackedScene" uid="uid://bvgn8m4a5hhy8" path="res://assets/models/Pointer.glb" id="2_fataf"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ck0hexebmoy8g" path="res://assets/models/VolumeDown.glb" id="10_y5qae"]
 [ext_resource type="PackedScene" uid="uid://doqx8wqgxbv5h" path="res://assets/models/VolumeUp.glb" id="11_kiyr2"]
 [ext_resource type="PackedScene" uid="uid://g43h16cfbsb" path="res://assets/models/Tutorial_Pointer.glb" id="12_6qhue"]
-[ext_resource type="Texture2D" uid="uid://s00aasf1p5mg" path="res://assets/sprites/bh_player_ingame-sheet.png" id="12_qcq4j"]
+[ext_resource type="PackedScene" uid="uid://cg4dp221u0lg1" path="res://src/joystick_indicator.tscn" id="12_tsd20"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fh0lb"]
 transparency = 1
@@ -29,80 +29,6 @@ albedo_color = Color(1, 0.540667, 0.47, 0.27451)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.76
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wix2o"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 4000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nffeb"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 4500, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_keyxr"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 1000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ool57"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 1500, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ex3og"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 2000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mbjqa"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 2500, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7n5s8"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 3000, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0t6pa"]
-atlas = ExtResource("12_qcq4j")
-region = Rect2(0, 3500, 500, 500)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_u00t0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wix2o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nffeb")
-}],
-"loop": true,
-"name": &"down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_keyxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ool57")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ex3og")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mbjqa")
-}],
-"loop": true,
-"name": &"left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7n5s8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0t6pa")
-}],
-"loop": true,
-"name": &"up",
-"speed": 5.0
-}]
 
 [node name="DialogueOption" type="Node3D"]
 script = ExtResource("1_6khdy")
@@ -225,12 +151,9 @@ transform = Transform3D(0.0951817, 0, 0, 0, 0.0678068, -0.0667966, 0, 0.0667966,
 [node name="TutPointer" parent="Start" index="0"]
 material_override = SubResource("StandardMaterial3D_vlp0g")
 
-[node name="JoystickOneDir" type="AnimatedSprite3D" parent="."]
+[node name="JoystickIndicator" parent="." instance=ExtResource("12_tsd20")]
 unique_name_in_owner = true
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.581357, 0)
-sprite_frames = SubResource("SpriteFrames_u00t0")
-animation = &"left"
-frame_progress = 0.517577
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.626368, 0)
 
 [connection signal="animation_finished" from="Pointer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
