@@ -41,9 +41,9 @@ func two_dir(target_rot: Vector3):
 	updown.show()
 	leftright.show()
 	match target_rot.x:
-		float(Sword.ROTATION_ANGLE):
-			updown.play("up")
 		float(-Sword.ROTATION_ANGLE):
+			updown.play("up")
+		float(Sword.ROTATION_ANGLE):
 			updown.play("down")
 
 	leftright.play("left")
