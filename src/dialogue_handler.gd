@@ -46,24 +46,23 @@ func _process(_delta: float) -> void:
 
 			
 func tutorial() -> void:
-	
 	await option_sequence([
-		{"text": "a", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0)},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, 45), "alignment": Vector3(0, 0.1, 0), "model": "joy_left"},
 		],
 		"stick", true)
 	
 	await option_sequence([
-		{"text": "d", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45)}
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(0, 0, -45), "model": "joy_right"}
 		],
 		"stick", true)
 	
 	await option_sequence([
-		{"text": "s", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0)},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(45, 0, 0), "model": "joy_down"},
 		],
 		"stick", true)
 
 	await option_sequence([
-		{"text": "w", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1.5, 0)},
+		{"text": "", "match_effect": func(): alligned_option().break_stick(), "rotation": Vector3(-45, 0, 0), "alignment": Vector3(0, 1.5, 0), "model": "joy_up"},
 		],
 		"stick", true)
 	
@@ -99,7 +98,6 @@ func menu() -> void:
 ###### INTRO CUTSCENE ########
 
 func wheel_sequence():
-
 	show_text_sequence("a war wages on in the distance", 2)
 	await get_tree().create_timer(2.5).timeout
 	end_text_sequence(2)
@@ -133,7 +131,6 @@ func wheel_sequence():
 	pass
 
 func intro() -> void:
-
 	Global.sfx_player.pick_music(false, false, false, 0)
 	Global.sfx_player.play("Sword_Hit_Special")
 	light_animation_player.play("In The Dark")
