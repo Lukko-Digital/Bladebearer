@@ -58,7 +58,7 @@ func round_with_threshold(value: float, threshold: float):
 
 func handle_input() -> Vector3:
 	target_rotation = Vector3()
-	var THRESHOLD = 0.05
+	var THRESHOLD = 0.0
 	# Standard
 	print(Vector2(Input.get_axis("forward", "backward"), Input.get_axis("right", "left")))
 	target_rotation.x = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
