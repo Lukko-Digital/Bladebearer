@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ces3sbtfx0qjt"
+uid="uid://cep57jmowwuie"
 path.s3tc="res://.godot/imported/Stick_Band4_BaseColorDith.png-d82a51bdffadb6c5f4eed7a1843d10b9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "6be17197134528a88c1d6a59a6ed9977"
 }
 
 [deps]

@@ -10,7 +10,7 @@ curve = SubResource("Curve_oiwi7")
 [resource]
 emission_shape_scale = Vector3(1, 0.845, 1)
 emission_shape = 3
-emission_box_extents = Vector3(5.3, 0.735, 5.76)
+emission_box_extents = Vector3(6.545, 1.22, 6.525)
 gravity = Vector3(0, -10.75, 0)
 scale_min = 0.7
 scale_max = 0.7
