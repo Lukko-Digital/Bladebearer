@@ -1,15 +1,15 @@
 [gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://c0gn2yap5lfrv"]
 
-[sub_resource type="Curve" id="Curve_oiwi7"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_38j5j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.504202, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_03pvo"]
-curve = SubResource("Curve_oiwi7")
+curve = SubResource("Curve_38j5j")
 
 [resource]
 emission_shape = 3
-emission_box_extents = Vector3(3, 3, 3)
+emission_box_extents = Vector3(4, 4, 4)
 gravity = Vector3(0, -0.405, 0)
 scale_min = 0.7
 scale_max = 0.7
