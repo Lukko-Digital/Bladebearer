@@ -58,27 +58,27 @@ func round_with_threshold(value: float, threshold: float):
 
 func handle_input() -> Vector3:
 	target_rotation = Vector3()
-	var THRESHOLD = 0.2
+	var THRESHOLD = 0.05
 	# Standard
-	# print(Vector2(Input.get_axis("forward", "backward"), Input.get_axis("right", "left")))
-	# target_rotation.x = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
-	# target_rotation.z = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
+	print(Vector2(Input.get_axis("forward", "backward"), Input.get_axis("right", "left")))
+	target_rotation.x = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
+	target_rotation.z = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
 
-	var left_v_input = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
-	var left_h_input = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
-	print(Vector2(left_h_input, left_v_input))
-	if abs(left_h_input) > abs(left_v_input):
-		target_rotation.z += left_h_input
-	else:
-		target_rotation.x += left_v_input
+	# var left_v_input = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
+	# var left_h_input = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
+	# print(Vector2(left_h_input, left_v_input))
+	# if abs(left_h_input) > abs(left_v_input):
+	# 	target_rotation.z += left_h_input
+	# else:
+	# 	target_rotation.x += left_v_input
 
 
-	var right_v_input = round_with_threshold(Input.get_axis("forward2", "backward2"), THRESHOLD)
-	var right_h_input = round_with_threshold(Input.get_axis("right2", "left2"), THRESHOLD)
-	if abs(right_h_input) > abs(right_v_input):
-		target_rotation.z += right_h_input
-	else:
-		target_rotation.x += right_v_input
+	# var right_v_input = round_with_threshold(Input.get_axis("forward2", "backward2"), THRESHOLD)
+	# var right_h_input = round_with_threshold(Input.get_axis("right2", "left2"), THRESHOLD)
+	# if abs(right_h_input) > abs(right_v_input):
+	# 	target_rotation.z += right_h_input
+	# else:
+	# 	target_rotation.x += right_v_input
 
 	return target_rotation.clamp(Vector3(-1, 0, -1), Vector3(1, 0, 1))
 
