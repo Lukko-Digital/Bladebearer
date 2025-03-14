@@ -35,6 +35,8 @@ var input_locked = false
 var handling_inputs: bool = true
 var lerp_speed_multiplier: float = 1.0
 
+var last_diagonal: Vector3 = Vector3(-1, 0, 1)
+
 
 func _ready():
 	sword_model.hide()
@@ -61,9 +63,24 @@ func handle_input() -> Vector3:
 	var THRESHOLD = 0.0
 	# Standard
 	print(Vector2(Input.get_axis("forward", "backward"), Input.get_axis("right", "left")))
-	target_rotation.x = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
-	target_rotation.z = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
+	var v_axis = Input.get_axis("forward", "backward")
+	var h_axis = Input.get_axis("right", "left")
 
+	target_rotation.x = round_with_threshold(v_axis, THRESHOLD)
+	target_rotation.z = round_with_threshold(h_axis, THRESHOLD)
+
+	# === HANDLE DIAGONAL LOCK ===
+	if Input.is_action_pressed("lock_diagonal"):
+		if v_axis == 0:
+			target_rotation.x = last_diagonal.x
+		if h_axis == 0:
+			target_rotation.z = last_diagonal.z
+
+	if target_rotation.x != 0 and target_rotation.z != 0:
+		last_diagonal = target_rotation
+	# ============================
+
+	# print(target_rotation, last_diagonal)
 	# var left_v_input = round_with_threshold(Input.get_axis("forward", "backward"), THRESHOLD)
 	# var left_h_input = round_with_threshold(Input.get_axis("right", "left"), THRESHOLD)
 	# print(Vector2(left_h_input, left_v_input))
