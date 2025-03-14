@@ -86,6 +86,7 @@ func _process(_delta: float) -> void:
 	target_scale = target_scale.lerp(Vector3.ONE, ROTATION_LERP_SPEED)
 
 	dialogue_handler.menu_label.modulate = lerp(dialogue_handler.menu_label.modulate, target_menu_label_transparency, ROTATION_LERP_SPEED)
+	dialogue_handler.menu_label.get_child(0).modulate = lerp(dialogue_handler.menu_label.modulate, target_menu_label_transparency, ROTATION_LERP_SPEED)
 	target_menu_label_transparency = lerp(target_menu_label_transparency, Color(1, 1, 1, 0), ROTATION_LERP_SPEED)
 
 
