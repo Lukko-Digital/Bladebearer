@@ -62,7 +62,7 @@ func handle_input() -> Vector3:
 	target_rotation = Vector3()
 	var THRESHOLD = 0.0
 	# Standard
-	print(Vector2(Input.get_axis("forward", "backward"), Input.get_axis("right", "left")))
+	#print(Vector2(Input.get_axis("forward", "backward"), Input.get_axis("right", "left")))
 	var v_axis = Input.get_axis("forward", "backward")
 	var h_axis = Input.get_axis("right", "left")
 
