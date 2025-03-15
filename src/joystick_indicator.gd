@@ -15,11 +15,10 @@ func _process(_delta: float) -> void:
 	scale = Vector3.ONE * (1 + (global_position - option_origin.global_position).z * SCALE_COEF)
 
 func play_animation(target_rot: Vector3):
-	print(target_rot)
-	if target_rot.x == 0 or target_rot.z == 0:
-		single_dir(target_rot)
-	else:
-		two_dir(target_rot)
+	#if target_rot.x == 0 or target_rot.z == 0:
+	single_dir(target_rot)
+	#else:
+		#two_dir(target_rot)
 
 func single_dir(target_rot: Vector3):
 	single.show()
@@ -35,6 +34,16 @@ func single_dir(target_rot: Vector3):
 			single.play("down")
 		Vector3(-1, 0, 0) * Sword.ROTATION_ANGLE:
 			single.play("up")
+		Vector3(1, 0, 1) * Sword.ROTATION_ANGLE:
+			single.play("down_left")
+		Vector3(-1, 0, 1) * Sword.ROTATION_ANGLE:
+			single.play("up_left")
+		Vector3(-1, 0, -1) * Sword.ROTATION_ANGLE:
+			single.play("up_left")
+			single.flip_h = true
+		Vector3(1, 0, -1) * Sword.ROTATION_ANGLE:
+			single.play("down_left")
+			single.flip_h = true
 
 func two_dir(target_rot: Vector3):
 	single.hide()
