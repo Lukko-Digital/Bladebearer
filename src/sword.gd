@@ -90,12 +90,10 @@ func handle_rotation(delta: float):
 	else:
 		# Handles WASD and Shift
 		target_rotation = handle_input() * ROTATION_ANGLE
+		target_position = target_rotation / ROTATION_ANGLE
 		#print(target_rotation)
 		if Input.is_action_pressed("shift"):
 			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
-			target_position = target_rotation / (ROTATION_ANGLE*3)
-		else:
-			target_position = target_rotation / ROTATION_ANGLE
 	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
 	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
 	

@@ -31,8 +31,13 @@ var last_action: GameSequenceHandler.Action
 var flip_previous: bool = false
 
 func _process(delta: float) -> void:
-	var target_position : Vector3 = target_rot / Sword.ROTATION_ANGLE
-	if (target_rot.x > 45 || target_rot.z > 45 || target_rot.x < -45 || target_rot.z < -45): target_position = target_rot / (Sword.ROTATION_ANGLE*3)
+	var target_position : Vector3
+	var usable_rot : Vector3 = target_rot
+	if (target_rot.x > 45 || target_rot.z > 45 || target_rot.x < -45 || target_rot.z < -45):
+		usable_rot.x = wrapf(180 + target_rot.x, -180, 180)
+		target_position = usable_rot / Sword.ROTATION_ANGLE
+		target_position.x = -1 * target_position.x
+	else: target_position = usable_rot / Sword.ROTATION_ANGLE
 	if round(rotation_degrees) != target_rot:
 		rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rot.x), ROTATION_LERP_SPEED * delta), -PI, PI)
 		rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rot.z), ROTATION_LERP_SPEED * delta), -PI, PI)

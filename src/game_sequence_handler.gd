@@ -95,7 +95,7 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 	# CHANGE TO FALSE WHEN TESTING AND YOU WANT TO GO STRAIGHT TO COMBAT
-	var play_tutorial = true
+	var play_tutorial = false
 
 	if play_tutorial:
 		await dialogue_handler.tutorial()
@@ -110,7 +110,7 @@ func _ready() -> void:
 
 	bearer_rank = PEASANT
 	init_bearer_health()
-	var starting_location = 6
+	var starting_location = 5
 	enter_location(starting_location)
 	locations_wheel.set_location(starting_location)
 	enter_combat.call_deferred(play_tutorial)
