@@ -84,15 +84,24 @@ func handle_input() -> Vector3:
 
 	
 func handle_rotation(delta: float):
+	var target_position : Vector3
 	if !handling_inputs:
 		target_rotation = Vector3(0, 0, 0)
 	else:
 		# Handles WASD and Shift
 		target_rotation = handle_input() * ROTATION_ANGLE
+		#print(target_rotation)
 		if Input.is_action_pressed("shift"):
 			target_rotation.x = wrapf(180 - target_rotation.x, -180, 180)
+			target_position = target_rotation / (ROTATION_ANGLE*3)
+		else:
+			target_position = target_rotation / ROTATION_ANGLE
 	rotation.x = wrapf(lerp_angle(rotation.x, deg_to_rad(target_rotation.x), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
 	rotation.z = wrapf(lerp_angle(rotation.z, deg_to_rad(target_rotation.z), ROTATION_LERP_SPEED * lerp_speed_multiplier * delta), -PI, PI)
+	
+	# COMMENT THIS OUT TO DISABLE SWORD REPOSITIONING
+	position.x = lerp(position.x, target_position.z * -0.4, ROTATION_LERP_SPEED * lerp_speed_multiplier * delta)
+	position.z = lerp(position.z, target_position.x * 0.3, ROTATION_LERP_SPEED * lerp_speed_multiplier * delta)
 
 
 ## Check if sword is just placed into correct rotation
