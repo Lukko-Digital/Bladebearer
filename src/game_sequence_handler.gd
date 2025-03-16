@@ -28,6 +28,7 @@ class_name GameSequenceHandler
 @onready var bearer_death_animator: AnimationPlayer = %BearerDeathAnimator
 @onready var ground: Node3D = %Ground
 @onready var coyote_timer: Timer = %CoyoteTimer
+@onready var biome_animator : AnimationPlayer = %BiomeAnimator
 
 enum Action {SWING, BLOCK}
 
@@ -95,7 +96,7 @@ func _ready() -> void:
 	locations_wheel.hide()
 	target.hide()
 	# CHANGE TO FALSE WHEN TESTING AND YOU WANT TO GO STRAIGHT TO COMBAT
-	var play_tutorial = true
+	var play_tutorial = false
 
 	if play_tutorial:
 		await dialogue_handler.tutorial()
@@ -170,6 +171,12 @@ func enter_location(location_idx: int):
 	create_combatant_list(locations[locations.keys()[location_idx]])
 	needed_wins = combatants.size()
 	location_hearts.set_hearts(needed_wins)
+	
+	#print("entering location ", current_location)
+	#if (current_location < 5):
+		#biome_animator.play("rainy")
+	#elif (current_location < 3):
+		#biome_animator.play("cruxy")
 
 
 ## last_n is used when the player changes bearer and is set back one combat,
