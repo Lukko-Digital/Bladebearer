@@ -1,0 +1,22 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://du7616q6vnbo1"]
+
+[sub_resource type="Curve" id="Curve_bgybm"]
+_limits = [0.0, 61.83, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.285714, 37.5148), 0.0, 0.0, 0, 0, Vector2(0.534694, 0), 0.0, 0.0, 0, 0, Vector2(0.62449, 1), 0.0, 0.0, 0, 0, Vector2(0.644898, 0), 0.0, 0.0, 0, 0, Vector2(0.755102, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ogu5"]
+curve = SubResource("Curve_bgybm")
+
+[resource]
+emission_shape = 3
+emission_box_extents = Vector3(4, 4, 4)
+gravity = Vector3(0, -0.05, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_6ogu5")
+turbulence_enabled = true
+turbulence_noise_strength = 0.03
+turbulence_noise_scale = 2.779
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.034

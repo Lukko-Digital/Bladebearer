@@ -1,0 +1,20 @@
+[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://bwmvfi85t5ndl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7k05"]
+transparency = 1
+depth_draw_mode = 1
+albedo_color = Color(0, 0, 0, 0.0313726)
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.02
+disable_receive_shadows = true
+proximity_fade_distance = 0.01
+distance_fade_mode = 1
+distance_fade_min_distance = 1.75
+distance_fade_max_distance = 0.0
+
+[resource]
+material = SubResource("StandardMaterial3D_h7k05")
+radius = 0.01
+height = 0.02
+radial_segments = 4
+rings = 1
