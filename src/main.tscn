@@ -1,6 +1,7 @@
-[gd_scene load_steps=83 format=3 uid="uid://p423tqksuch1"]
+[gd_scene load_steps=85 format=3 uid="uid://p423tqksuch1"]
 
 [ext_resource type="PackedScene" uid="uid://ctoxk5ywvn75r" path="res://src/sword.tscn" id="1_bdv3j"]
+[ext_resource type="PackedScene" uid="uid://etkg2sxw0j1c" path="res://assets/models/environmental/Skinny_Trees.fbx" id="1_imvhg"]
 [ext_resource type="PackedScene" uid="uid://ccb8dq5qk5vev" path="res://src/target.tscn" id="2_54gg4"]
 [ext_resource type="Script" uid="uid://edid3h32yekl" path="res://src/game_sequence_handler.gd" id="2_ngyv0"]
 [ext_resource type="PackedScene" uid="uid://dkue1bq4ffn1r" path="res://src/main_camera.tscn" id="2_vb7ep"]
@@ -135,7 +136,8 @@ radial_segments = 4
 rings = 0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y77hc"]
-dof_blur_far_distance = 4.23
+dof_blur_far_distance = 2.42
+dof_blur_amount = 0.36
 
 [sub_resource type="Animation" id="Animation_imvhg"]
 resource_name = "Ash"
@@ -437,6 +439,14 @@ _data = {
 &"cruxy": SubResource("Animation_ui33j"),
 &"rainy": SubResource("Animation_m07h4")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m07h4"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+proximity_fade_distance = 25.16
+distance_fade_mode = 1
+distance_fade_min_distance = 5.5
+distance_fade_max_distance = 0.0
 
 [sub_resource type="Animation" id="Animation_yb54g"]
 length = 0.001
@@ -2215,6 +2225,7 @@ draw_pass_1 = SubResource("SphereMesh_22fb3")
 [node name="Crux" type="GPUParticles3D" parent="Environment"]
 unique_name_in_owner = true
 transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0, 0, 0)
+visible = false
 amount = 506045
 lifetime = 1.74
 randomness = 0.46
@@ -2225,6 +2236,7 @@ draw_pass_1 = SubResource("SphereMesh_k5x6j")
 [node name="Rain" type="GPUParticles3D" parent="Environment"]
 unique_name_in_owner = true
 transform = Transform3D(0.64466, 0, 0, 0, 0.64466, 0, 0, 0, 0.64466, 0.0126218, 4.74571, -1.77622e-05)
+visible = false
 amount = 137720
 lifetime = 2.01
 visibility_aabb = AABB(-6, -13, -6, 12, 13, 12)
@@ -2243,6 +2255,386 @@ libraries = {
 &"": SubResource("AnimationLibrary_aysdu")
 }
 autoplay = "Snowy"
+
+[node name="Skinny_Trees" parent="Environment" instance=ExtResource("1_imvhg")]
+transform = Transform3D(0.0844862, 0.000221042, 3.70867e-05, -0.000224072, 0.0836223, 0.0120507, -5.17901e-06, -0.0120508, 0.0836226, 0, 0, 0)
+
+[node name="Cube_002" parent="Environment/Skinny_Trees" index="0"]
+transform = Transform3D(190.254, 40.096, 22.5649, -19.2358, -17.8865, 193.967, 41.7953, -190.75, -13.445, 14.1819, -24.1149, 12.8675)
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_003" parent="Environment/Skinny_Trees" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_004" parent="Environment/Skinny_Trees" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_005" parent="Environment/Skinny_Trees" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_006" parent="Environment/Skinny_Trees" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_007" parent="Environment/Skinny_Trees" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_008" parent="Environment/Skinny_Trees" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_009" parent="Environment/Skinny_Trees" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_010" parent="Environment/Skinny_Trees" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_011" parent="Environment/Skinny_Trees" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_012" parent="Environment/Skinny_Trees" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_013" parent="Environment/Skinny_Trees" index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_014" parent="Environment/Skinny_Trees" index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_015" parent="Environment/Skinny_Trees" index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_016" parent="Environment/Skinny_Trees" index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_017" parent="Environment/Skinny_Trees" index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_018" parent="Environment/Skinny_Trees" index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_019" parent="Environment/Skinny_Trees" index="17"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_020" parent="Environment/Skinny_Trees" index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_021" parent="Environment/Skinny_Trees" index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_022" parent="Environment/Skinny_Trees" index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_023" parent="Environment/Skinny_Trees" index="21"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_024" parent="Environment/Skinny_Trees" index="22"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_025" parent="Environment/Skinny_Trees" index="23"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_026" parent="Environment/Skinny_Trees" index="24"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_028" parent="Environment/Skinny_Trees" index="25"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_029" parent="Environment/Skinny_Trees" index="26"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_030" parent="Environment/Skinny_Trees" index="27"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_031" parent="Environment/Skinny_Trees" index="28"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_032" parent="Environment/Skinny_Trees" index="29"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_033" parent="Environment/Skinny_Trees" index="30"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_034" parent="Environment/Skinny_Trees" index="31"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_035" parent="Environment/Skinny_Trees" index="32"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_036" parent="Environment/Skinny_Trees" index="33"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_037" parent="Environment/Skinny_Trees" index="34"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_038" parent="Environment/Skinny_Trees" index="35"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_039" parent="Environment/Skinny_Trees" index="36"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_040" parent="Environment/Skinny_Trees" index="37"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_041" parent="Environment/Skinny_Trees" index="38"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_042" parent="Environment/Skinny_Trees" index="39"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_043" parent="Environment/Skinny_Trees" index="40"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_044" parent="Environment/Skinny_Trees" index="41"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_045" parent="Environment/Skinny_Trees" index="42"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_046" parent="Environment/Skinny_Trees" index="43"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_047" parent="Environment/Skinny_Trees" index="44"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_048" parent="Environment/Skinny_Trees" index="45"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_049" parent="Environment/Skinny_Trees" index="46"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_050" parent="Environment/Skinny_Trees" index="47"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_051" parent="Environment/Skinny_Trees" index="48"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_052" parent="Environment/Skinny_Trees" index="49"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_053" parent="Environment/Skinny_Trees" index="50"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_054" parent="Environment/Skinny_Trees" index="51"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_055" parent="Environment/Skinny_Trees" index="52"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_056" parent="Environment/Skinny_Trees" index="53"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_057" parent="Environment/Skinny_Trees" index="54"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_058" parent="Environment/Skinny_Trees" index="55"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_059" parent="Environment/Skinny_Trees" index="56"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_060" parent="Environment/Skinny_Trees" index="57"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_061" parent="Environment/Skinny_Trees" index="58"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_062" parent="Environment/Skinny_Trees" index="59"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_063" parent="Environment/Skinny_Trees" index="60"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_064" parent="Environment/Skinny_Trees" index="61"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Skinny_Trees2" parent="Environment" instance=ExtResource("1_imvhg")]
+transform = Transform3D(-0.0272441, 0.000797044, 0.0799693, -0.00932955, 0.0838738, -0.00401437, -0.0794272, -0.0101252, -0.0269585, 0, 0, 0)
+
+[node name="Cube_002" parent="Environment/Skinny_Trees2" index="0"]
+transform = Transform3D(190.254, 40.096, 22.5649, -19.2358, -17.8865, 193.967, 41.7953, -190.75, -13.445, 14.1819, -24.1149, 12.8675)
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_003" parent="Environment/Skinny_Trees2" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_004" parent="Environment/Skinny_Trees2" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_005" parent="Environment/Skinny_Trees2" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_006" parent="Environment/Skinny_Trees2" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_007" parent="Environment/Skinny_Trees2" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_008" parent="Environment/Skinny_Trees2" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_009" parent="Environment/Skinny_Trees2" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_010" parent="Environment/Skinny_Trees2" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_011" parent="Environment/Skinny_Trees2" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_012" parent="Environment/Skinny_Trees2" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_013" parent="Environment/Skinny_Trees2" index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_014" parent="Environment/Skinny_Trees2" index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_015" parent="Environment/Skinny_Trees2" index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_016" parent="Environment/Skinny_Trees2" index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_017" parent="Environment/Skinny_Trees2" index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_018" parent="Environment/Skinny_Trees2" index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_019" parent="Environment/Skinny_Trees2" index="17"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_020" parent="Environment/Skinny_Trees2" index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_021" parent="Environment/Skinny_Trees2" index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_022" parent="Environment/Skinny_Trees2" index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_023" parent="Environment/Skinny_Trees2" index="21"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_024" parent="Environment/Skinny_Trees2" index="22"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_025" parent="Environment/Skinny_Trees2" index="23"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_026" parent="Environment/Skinny_Trees2" index="24"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_028" parent="Environment/Skinny_Trees2" index="25"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_029" parent="Environment/Skinny_Trees2" index="26"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_030" parent="Environment/Skinny_Trees2" index="27"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_031" parent="Environment/Skinny_Trees2" index="28"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_032" parent="Environment/Skinny_Trees2" index="29"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_033" parent="Environment/Skinny_Trees2" index="30"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_034" parent="Environment/Skinny_Trees2" index="31"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_035" parent="Environment/Skinny_Trees2" index="32"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_036" parent="Environment/Skinny_Trees2" index="33"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_037" parent="Environment/Skinny_Trees2" index="34"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_038" parent="Environment/Skinny_Trees2" index="35"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_039" parent="Environment/Skinny_Trees2" index="36"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_040" parent="Environment/Skinny_Trees2" index="37"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_041" parent="Environment/Skinny_Trees2" index="38"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_042" parent="Environment/Skinny_Trees2" index="39"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_043" parent="Environment/Skinny_Trees2" index="40"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_044" parent="Environment/Skinny_Trees2" index="41"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_045" parent="Environment/Skinny_Trees2" index="42"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_046" parent="Environment/Skinny_Trees2" index="43"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_047" parent="Environment/Skinny_Trees2" index="44"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_048" parent="Environment/Skinny_Trees2" index="45"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_049" parent="Environment/Skinny_Trees2" index="46"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_050" parent="Environment/Skinny_Trees2" index="47"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_051" parent="Environment/Skinny_Trees2" index="48"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_052" parent="Environment/Skinny_Trees2" index="49"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_053" parent="Environment/Skinny_Trees2" index="50"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_054" parent="Environment/Skinny_Trees2" index="51"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_055" parent="Environment/Skinny_Trees2" index="52"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_056" parent="Environment/Skinny_Trees2" index="53"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_057" parent="Environment/Skinny_Trees2" index="54"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_058" parent="Environment/Skinny_Trees2" index="55"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_059" parent="Environment/Skinny_Trees2" index="56"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_060" parent="Environment/Skinny_Trees2" index="57"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_061" parent="Environment/Skinny_Trees2" index="58"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_062" parent="Environment/Skinny_Trees2" index="59"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_063" parent="Environment/Skinny_Trees2" index="60"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
+
+[node name="Cube_064" parent="Environment/Skinny_Trees2" index="61"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m07h4")
 
 [node name="GameSequenceHandler" type="Node3D" parent="." node_paths=PackedStringArray("swing_arm", "sword", "target", "camera", "bearer_heart_holder", "opponent_heart_holder", "heart_border_ui", "dialogue_handler", "locations_wheel", "location_hearts", "credits", "king_begging", "kill_king", "spare_king")]
 unique_name_in_owner = true
@@ -2341,7 +2733,7 @@ outline_size = 0
 [node name="RightTrigger" type="Sprite3D" parent="GameSequenceHandler/SwordGroup/DialogueHandler/MenuLabel"]
 transform = Transform3D(0.305462, 0, 0, 0, 0.305462, 0, 0, 0, 0.305462, -0.255618, 0, 0)
 flip_h = true
-modulate = Color(1, 1, 1, 0.498039)
+modulate = Color(1, 1, 1, 0)
 texture_filter = 0
 texture = ExtResource("17_ain63")
 
@@ -2584,6 +2976,8 @@ transform = Transform3D(0.37, 0, 0, 0, 0.37, 0, 0, 0, 0.37, 0, -1.37, -1.117)
 texture_filter = 0
 texture = ExtResource("39_sak8w")
 
+[editable path="Environment/Skinny_Trees"]
+[editable path="Environment/Skinny_Trees2"]
 [editable path="GameSequenceHandler/SwordGroup/Sword"]
 [editable path="GameSequenceHandler/SwordGroup/Sword/Sword"]
 [editable path="GameSequenceHandler/HeartUI/BothHeartHolders"]
